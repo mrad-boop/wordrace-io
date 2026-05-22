@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WordRace Admin — Restricted</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0F1117;--surface:#1A1B23;--surface2:#22232E;--surface3:#2A2B38;
+  --border:rgba(255,255,255,0.07);--lime:#9FE870;--limeD:#7DD45A;--limeBg:rgba(159,232,112,0.1);
+  --gold:#F5C842;--goldBg:rgba(245,200,66,0.1);
+  --red:#EF4444;--redBg:rgba(239,68,68,0.1);
+  --blue:#3B82F6;--blueBg:rgba(59,130,246,0.1);
+  --purple:#A855F7;--purpleBg:rgba(168,85,247,0.1);
+  --orange:#F97316;--orangeBg:rgba(249,115,22,0.1);
+  --text:#E8EDF2;--muted:#6B7280;--forest:#163300;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+
+/* LOGIN */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem}
+.login-card{background:var(--surface);border:1px solid var(--border);border-radius:1.2rem;padding:2.5rem 2rem;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.5)}
+.login-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text);text-align:center;margin-bottom:.2rem}
+.login-logo span{color:var(--lime)}
+.login-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2rem}
+.login-label{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;display:block}
+.login-input{width:100%;padding:.75rem 1rem;border-radius:.6rem;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.85rem;outline:none;margin-bottom:1rem;transition:border .2s}
+.login-input:focus{border-color:var(--lime)}
+.login-btn{width:100%;padding:.85rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .2s}
+.login-btn:hover{background:var(--limeD)}
+.login-error{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--red);text-align:center;margin-top:.6rem;display:none}
+.login-shield{font-size:2.5rem;text-align:center;margin-bottom:1rem}
+
+/* ADMIN LAYOUT */
+#admin-screen{display:none;min-height:100vh}
+.admin-sidebar{position:fixed;top:0;left:0;bottom:0;width:220px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:50;transition:transform .3s}
+.sidebar-logo{padding:1.2rem 1.4rem;border-bottom:1px solid var(--border)}
+.sidebar-logo .logo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text)}
+.sidebar-logo .logo span{color:var(--lime)}
+.sidebar-logo .badge{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--red);background:var(--redBg);border:1px solid var(--red);border-radius:100px;padding:.14rem .45rem;display:inline-block;margin-top:.2rem;letter-spacing:.1em}
+.nav-section{padding:.8rem .8rem .3rem;font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.nav-item{display:flex;align-items:center;gap:.65rem;padding:.6rem .9rem;margin:.1rem .5rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted);cursor:pointer;transition:all .18s;border:1px solid transparent}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item.active{background:var(--limeBg);color:var(--lime);border-color:rgba(159,232,112,0.2)}
+.nav-item .ni{font-size:.95rem}
+.sidebar-footer{margin-top:auto;padding:1rem;border-top:1px solid var(--border)}
+.logout-btn{width:100%;padding:.55rem;border-radius:.5rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer;transition:all .2s}
+.logout-btn:hover{background:var(--redBg);border-color:var(--red);color:var(--red)}
+.admin-main{margin-left:220px;padding:1.5rem;min-height:100vh}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.8rem}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--text);letter-spacing:.03em}
+.page-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.08em}
+.topbar-right{display:flex;align-items:center;gap:.7rem}
+.admin-badge{font-family:'Space Mono',monospace;font-size:.58rem;background:var(--redBg);color:var(--red);border:1px solid var(--red);border-radius:100px;padding:.2rem .55rem;letter-spacing:.09em}
+
+/* PANELS */
+.admin-panel{display:none}
+.admin-panel.active{display:block}
+
+/* STAT CARDS */
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.75rem;margin-bottom:1.5rem}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem 1.2rem;transition:border .2s}
+.stat-card:hover{border-color:rgba(255,255,255,0.14)}
+.stat-card-icon{font-size:1.4rem;margin-bottom:.5rem}
+.stat-card-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;margin-bottom:.15rem}
+.stat-card-label{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.stat-card-trend{font-family:'Space Mono',monospace;font-size:.58rem;margin-top:.3rem}
+
+/* TABLE */
+.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;margin-bottom:1.2rem}
+.table-header{padding:.85rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.table-title{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text);letter-spacing:.06em}
+.table-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.t-search{padding:.38rem .7rem;border-radius:.45rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.65rem;outline:none;width:160px}
+.t-search::placeholder{color:var(--muted)}
+.t-btn{padding:.38rem .75rem;border-radius:.45rem;font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;border:none;cursor:pointer;transition:all .18s}
+.t-btn-lime{background:var(--lime);color:var(--forest)}.t-btn-lime:hover{background:var(--limeD)}
+.t-btn-red{background:var(--redBg);color:var(--red);border:1px solid var(--red)}.t-btn-red:hover{background:var(--red);color:#fff}
+.t-btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}.t-btn-ghost:hover{background:var(--surface2);color:var(--text)}
+.t-btn-blue{background:var(--blueBg);color:var(--blue);border:1px solid var(--blue)}
+.data-table{width:100%;border-collapse:collapse}
+.data-table th{padding:.6rem 1rem;font-family:'Space Mono',monospace;font-size:.57rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);text-align:left;background:var(--surface)}
+.data-table td{padding:.65rem 1rem;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text);border-bottom:1px solid rgba(255,255,255,0.04)}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:hover td{background:var(--surface2)}
+.pill{display:inline-block;font-family:'Space Mono',monospace;font-size:.54rem;font-weight:700;letter-spacing:.08em;padding:.15rem .45rem;border-radius:100px}
+.pill-green{background:rgba(22,163,74,.15);color:#4ade80;border:1px solid rgba(22,163,74,.3)}
+.pill-red{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.pill-gold{background:var(--goldBg);color:var(--gold);border:1px solid rgba(245,200,66,.3)}
+.pill-blue{background:var(--blueBg);color:var(--blue);border:1px solid rgba(59,130,246,.3)}
+.pill-purple{background:var(--purpleBg);color:var(--purple);border:1px solid rgba(168,85,247,.3)}
+.pill-muted{background:var(--surface3);color:var(--muted);border:1px solid var(--border)}
+.action-btns{display:flex;gap:.3rem}
+.action-btn{padding:.2rem .45rem;border-radius:.3rem;font-family:'Space Mono',monospace;font-size:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.action-btn:hover{background:var(--surface2);color:var(--text)}
+.action-btn.danger:hover{background:var(--redBg);border-color:var(--red);color:var(--red)}
+
+/* ZONE CARDS */
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:.85rem;margin-bottom:1.2rem}
+.zone-card{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.3rem}
+.zone-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.zone-name{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text);letter-spacing:.04em}
+.toggle-wrap{display:flex;align-items:center;gap:.5rem}
+.toggle{width:40px;height:22px;border-radius:100px;border:none;cursor:pointer;position:relative;transition:background .2s}
+.toggle.on{background:var(--lime)}.toggle.off{background:var(--surface3)}
+.toggle::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:left .2s}
+.toggle.on::after{left:21px}.toggle.off::after{left:3px}
+.toggle-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
+.zone-setting{display:flex;align-items:center;justify-content:space-between;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.zone-setting:last-child{border-bottom:none;padding-bottom:0}
+.zone-setting-label{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted)}
+.zone-setting-val{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text)}
+.zone-input{padding:.32rem .55rem;border-radius:.38rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.68rem;width:90px;text-align:right;outline:none}
+.zone-input:focus{border-color:var(--lime)}
+.save-zone-btn{width:100%;margin-top:1rem;padding:.6rem;border-radius:.5rem;border:none;background:var(--limeBg);color:var(--lime);font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;cursor:pointer;border:1px solid rgba(159,232,112,.2);transition:all .2s}
+.save-zone-btn:hover{background:var(--lime);color:var(--forest)}
+
+/* DICT EDITOR */
+.dict-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.75rem;margin-bottom:1.2rem}
+.dict-cat-card{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;overflow:hidden}
+.dict-cat-header{padding:.7rem 1rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.dict-cat-name{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;color:var(--text)}
+.dict-cat-count{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--lime);line-height:1}
+.dict-word-list{padding:.6rem .8rem;max-height:160px;overflow-y:auto;display:flex;flex-wrap:wrap;gap:.3rem}
+.dict-word{font-family:'Space Mono',monospace;font-size:.6rem;background:var(--surface2);color:var(--muted);padding:.18rem .45rem;border-radius:.3rem;border:1px solid var(--border);cursor:pointer;transition:all .15s}
+.dict-word:hover{background:var(--redBg);border-color:var(--red);color:var(--red)}
+.dict-add-row{padding:.6rem .8rem;border-top:1px solid var(--border);display:flex;gap:.4rem}
+.dict-add-input{flex:1;padding:.38rem .55rem;border-radius:.38rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.65rem;outline:none}
+.dict-add-input:focus{border-color:var(--lime)}
+.dict-add-btn{padding:.38rem .65rem;border-radius:.38rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer}
+
+/* WALLET PANEL */
+.wallet-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.75rem;margin-bottom:1.2rem}
+.wallet-card{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1.1rem}
+.wallet-card-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:.3rem}
+.wallet-card-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--lime);line-height:1}
+.wallet-card-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.2rem}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.show{display:flex}
+.modal-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.8rem;max-width:460px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.6);max-height:88vh;overflow-y:auto}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--text);margin-bottom:1.2rem;letter-spacing:.04em}
+.form-group{margin-bottom:.9rem}
+.form-label{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.3rem}
+.form-input{width:100%;padding:.65rem .85rem;border-radius:.52rem;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;outline:none;transition:border .2s}
+.form-input:focus{border-color:var(--lime)}
+.form-select{width:100%;padding:.65rem .85rem;border-radius:.52rem;border:1.5px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;outline:none;cursor:pointer}
+.modal-footer{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1.2rem}
+
+/* TOAST */
+#admin-toast{display:none;position:fixed;bottom:1.8rem;right:1.5rem;background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;box-shadow:0 8px 20px rgba(0,0,0,.4);animation:su .3s ease}
+@keyframes su{from{opacity:0;transform:translateY(8px)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .admin-sidebar{transform:translateX(-100%);width:200px}
+  .admin-sidebar.open{transform:translateX(0)}
+  .admin-main{margin-left:0}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+}
+.menu-toggle{display:none;padding:.5rem;border:1px solid var(--border);border-radius:.4rem;background:transparent;color:var(--text);cursor:pointer;font-size:1rem}
+@media(max-width:768px){.menu-toggle{display:block}}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:4px;height:4px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:4px}
+
+/* CHARTS */
+.chart-bar-wrap{display:flex;align-items:flex-end;gap:.3rem;height:80px;margin-top:.5rem}
+.chart-bar{flex:1;border-radius:.25rem .25rem 0 0;transition:height .4s ease;min-height:4px;cursor:default}
+.chart-label{font-family:'Space Mono',monospace;font-size:.45rem;color:var(--muted);text-align:center;margin-top:.2rem}
+</style>
+</head>
+<body>
+
+<!-- ═══════════ LOGIN ═══════════ -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-shield">🛡️</div>
+    <div class="login-logo">WORD<span>RACE</span>.IO</div>
+    <div class="login-sub">Admin Panel · Accès Restreint</div>
+    <label class="login-label">Mot de passe admin</label>
+    <input class="login-input" id="pwd-input" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')tryLogin()"/>
+    <button class="login-btn" onclick="tryLogin()">🔐 Accéder au Panel</button>
+    <div class="login-error" id="login-error">❌ Mot de passe incorrect</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);text-align:center;margin-top:1.2rem;opacity:.5">URL secrète + mot de passe requis · Sessions non persistantes</div>
+  </div>
+</div>
+
+<!-- ═══════════ ADMIN ═══════════ -->
+<div id="admin-screen">
+
+  <!-- SIDEBAR -->
+  <div class="admin-sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo">WORD<span>RACE</span></div>
+      <div class="badge">⚡ ADMIN</div>
+    </div>
+
+    <div class="nav-section">Dashboard</div>
+    <div class="nav-item active" onclick="showPanel('dashboard',this)"><span class="ni">📊</span>Vue Globale</div>
+
+    <div class="nav-section">Utilisateurs</div>
+    <div class="nav-item" onclick="showPanel('users',this)"><span class="ni">👥</span>Tous les Users</div>
+    <div class="nav-item" onclick="showPanel('wallet-mgmt',this)"><span class="ni">💰</span>Wallets & USDT</div>
+
+    <div class="nav-section">Jeu</div>
+    <div class="nav-item" onclick="showPanel('rooms',this)"><span class="ni">🎮</span>Rooms & Sessions</div>
+    <div class="nav-item" onclick="showPanel('leaderboard',this)"><span class="ni">🏆</span>Leaderboard</div>
+    <div class="nav-item" onclick="showPanel('transactions',this)"><span class="ni">💸</span>Transactions</div>
+
+    <div class="nav-section">Contenu</div>
+    <div class="nav-item" onclick="showPanel('dictionary',this)"><span class="ni">📚</span>Dictionnaire</div>
+    <div class="nav-item" onclick="showPanel('validation-config',this)"><span class="ni">✅</span>Validation Rules</div>
+
+    <div class="nav-section">Configuration</div>
+    <div class="nav-item" onclick="showPanel('zones',this)"><span class="ni">⚙️</span>Zones Free/P2E</div>
+    <div class="nav-item" onclick="showPanel('platform',this)"><span class="ni">🔧</span>Paramètres Plateforme</div>
+
+    <div class="sidebar-footer">
+      <button class="logout-btn" onclick="logout()">🚪 Déconnexion</button>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div>
+        <button class="menu-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+        <div class="page-title" id="panel-title">Vue Globale</div>
+        <div class="page-sub" id="panel-sub">Aperçu complet de la plateforme WordRace.io</div>
+      </div>
+      <div class="topbar-right">
+        <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)" id="admin-time"></span>
+        <span class="admin-badge">🛡️ ADMIN</span>
+      </div>
+    </div>
+
+    <!-- ── DASHBOARD ── -->
+    <div class="admin-panel active" id="panel-dashboard">
+      <div class="stat-grid">
+        <div class="stat-card" style="border-left:3px solid var(--lime)">
+          <div class="stat-card-icon">👥</div>
+          <div class="stat-card-val" style="color:var(--lime)">12,847</div>
+          <div class="stat-card-label">Total Users</div>
+          <div class="stat-card-trend" style="color:var(--lime)">▲ +342 cette semaine</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--gold)">
+          <div class="stat-card-icon">💰</div>
+          <div class="stat-card-val" style="color:var(--gold)">$48,210</div>
+          <div class="stat-card-label">Volume USDT Total</div>
+          <div class="stat-card-trend" style="color:var(--gold)">▲ +$3,840 aujourd'hui</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--blue)">
+          <div class="stat-card-icon">🎮</div>
+          <div class="stat-card-val" style="color:var(--blue)">2,341</div>
+          <div class="stat-card-label">Rooms Actives</div>
+          <div class="stat-card-trend" style="color:var(--muted)">↔ Stable</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--purple)">
+          <div class="stat-card-icon">📅</div>
+          <div class="stat-card-val" style="color:var(--purple)">$2,840</div>
+          <div class="stat-card-label">Prize Pool Daily</div>
+          <div class="stat-card-trend" style="color:var(--purple)">▲ +180 entrées</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--red)">
+          <div class="stat-card-icon">🛡️</div>
+          <div class="stat-card-val" style="color:var(--red)">23</div>
+          <div class="stat-card-label">Alertes Anti-Cheat</div>
+          <div class="stat-card-trend" style="color:var(--red)">▲ +5 dernière heure</div>
+        </div>
+        <div class="stat-card" style="border-left:3px solid var(--orange)">
+          <div class="stat-card-icon">💎</div>
+          <div class="stat-card-val" style="color:var(--orange)">$2,410</div>
+          <div class="stat-card-label">Rake Plateforme</div>
+          <div class="stat-card-trend" style="color:var(--orange)">▲ +$340 aujourd'hui</div>
+        </div>
+      </div>
+
+      <!-- Revenue chart -->
+      <div class="table-wrap" style="margin-bottom:1.2rem">
+        <div class="table-header">
+          <div class="table-title">📈 Revenue 7 Derniers Jours</div>
+          <div class="pill pill-green">En direct</div>
+        </div>
+        <div style="padding:1rem 1.5rem 1.2rem">
+          <div class="chart-bar-wrap" id="revenue-chart"></div>
+          <div style="display:flex;justify-content:space-between;margin-top:.2rem" id="revenue-labels"></div>
+        </div>
+      </div>
+
+      <!-- Recent activity -->
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">⚡ Activité Récente</div>
+          <button class="t-btn t-btn-ghost" onclick="showPanel('transactions',document.querySelector('[onclick*=transactions]'))">Voir tout →</button>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Event</th><th>User</th><th>Montant</th><th>Type</th><th>Temps</th></tr></thead>
+          <tbody id="activity-feed"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── USERS ── -->
+    <div class="admin-panel" id="panel-users">
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">👥 Gestion des Utilisateurs</div>
+          <div class="table-actions">
+            <input class="t-search" placeholder="🔍 Rechercher..." oninput="filterUsers(this.value)"/>
+            <select class="t-search" style="width:120px" onchange="filterUserStatus(this.value)">
+              <option value="">Tous</option><option value="active">Actifs</option><option value="suspended">Suspendus</option><option value="banned">Bannis</option>
+            </select>
+            <button class="t-btn t-btn-lime" onclick="openModal('add-user')">+ Ajouter</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>User</th><th>Wallet</th><th>Balance USDT</th><th>Parties</th><th>ELO</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody id="users-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── WALLETS ── -->
+    <div class="admin-panel" id="panel-wallet-mgmt">
+      <div class="wallet-overview">
+        <div class="wallet-card"><div class="wallet-card-label">Dépôts Totaux</div><div class="wallet-card-val">$94,280</div><div class="wallet-card-sub">Polygon + Solana</div></div>
+        <div class="wallet-card"><div class="wallet-card-label">Retraits Totaux</div><div class="wallet-card-val" style="color:var(--red)">$46,070</div><div class="wallet-card-sub">Traités</div></div>
+        <div class="wallet-card"><div class="wallet-card-label">En Escrow</div><div class="wallet-card-val" style="color:var(--gold)">$12,450</div><div class="wallet-card-sub">Smart contracts actifs</div></div>
+        <div class="wallet-card"><div class="wallet-card-label">Rake Collecté</div><div class="wallet-card-val" style="color:var(--purple)">$2,410</div><div class="wallet-card-sub">5% Duel + 10% League</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">💰 Wallets Utilisateurs</div>
+          <div class="table-actions">
+            <input class="t-search" placeholder="🔍 Adresse wallet..."/>
+            <select class="t-search" style="width:130px">
+              <option>Tous réseaux</option><option>Polygon</option><option>Solana</option>
+            </select>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>User</th><th>Adresse Wallet</th><th>Réseau</th><th>Balance</th><th>Dépôts</th><th>Retraits</th><th>Actions</th></tr></thead>
+          <tbody id="wallets-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── ROOMS ── -->
+    <div class="admin-panel" id="panel-rooms">
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">🎮 Rooms & Sessions de Jeu</div>
+          <div class="table-actions">
+            <select class="t-search" style="width:130px" onchange="filterRooms(this.value)">
+              <option value="">Tous modes</option><option value="casual">Casual</option><option value="practice">Practice</option><option value="daily_league">Daily League</option><option value="duel">Duel</option>
+            </select>
+            <select class="t-search" style="width:120px">
+              <option value="">Tous statuts</option><option value="waiting">En attente</option><option value="in_progress">En cours</option><option value="completed">Terminé</option>
+            </select>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Room ID</th><th>Mode</th><th>Joueurs</th><th>Prize Pool</th><th>Lettre</th><th>Statut</th><th>Actions</th></tr></thead>
+          <tbody id="rooms-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── LEADERBOARD ── -->
+    <div class="admin-panel" id="panel-leaderboard">
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">🏆 Leaderboard Global</div>
+          <div class="table-actions">
+            <select class="t-search" style="width:140px">
+              <option>Daily League</option><option>Duel Arena</option><option>All Time</option>
+            </select>
+            <button class="t-btn t-btn-ghost">📤 Export CSV</button>
+            <button class="t-btn t-btn-red" onclick="if(confirm('Reset le leaderboard ?'))adminToast('🔄 Leaderboard réinitialisé')">Reset Daily</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>Rang</th><th>Joueur</th><th>Score</th><th>Parties</th><th>Win Rate</th><th>Gains USDT</th><th>Actions</th></tr></thead>
+          <tbody id="leaderboard-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── TRANSACTIONS ── -->
+    <div class="admin-panel" id="panel-transactions">
+      <div class="table-wrap">
+        <div class="table-header">
+          <div class="table-title">💸 Toutes les Transactions</div>
+          <div class="table-actions">
+            <select class="t-search" style="width:140px">
+              <option>Tous types</option><option>Dépôt</option><option>Retrait</option><option>Entry fee</option><option>Payout</option><option>Rake</option>
+            </select>
+            <select class="t-search" style="width:120px">
+              <option>Tous statuts</option><option>Confirmé</option><option>En attente</option><option>Échoué</option>
+            </select>
+            <button class="t-btn t-btn-ghost">📤 Export CSV</button>
+          </div>
+        </div>
+        <table class="data-table">
+          <thead><tr><th>TX Hash</th><th>User</th><th>Type</th><th>Montant</th><th>Réseau</th><th>Statut</th><th>Date</th></tr></thead>
+          <tbody id="tx-table"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ── DICTIONARY ── -->
+    <div class="admin-panel" id="panel-dictionary">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.6rem">
+        <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">
+          Cliquer sur un mot pour le <span style="color:var(--red)">supprimer</span> · Ajouter des mots par catégorie
+        </div>
+        <div style="display:flex;gap:.5rem">
+          <button class="t-btn t-btn-ghost" onclick="exportDict()">📤 Export JSON</button>
+          <button class="t-btn t-btn-lime" onclick="openModal('batch-import')">📥 Batch Import</button>
+        </div>
+      </div>
+      <div class="dict-grid" id="dict-grid"></div>
+    </div>
+
+    <!-- ── VALIDATION CONFIG ── -->
+    <div class="admin-panel" id="panel-validation-config">
+      <div class="zone-grid">
+        <div class="zone-card">
+          <div class="zone-card-header"><div class="zone-name">🔍 Tier 1 — Exact Match</div><div class="pill pill-green">Actif</div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Response time cible</span><div style="display:flex;align-items:center;gap:.3rem"><input class="zone-input" value="80" type="number"/><span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">ms</span></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Source dictionnaire</span><span class="zone-setting-val">Local DB</span></div>
+          <div class="zone-setting"><span class="zone-setting-label">Mots indexés</span><span class="zone-setting-val" style="color:var(--lime)" id="dict-total">0</span></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card">
+          <div class="zone-card-header"><div class="zone-name">🔧 Tier 2 — Fuzzy</div><div class="pill pill-gold">Actif</div></div>
+          <div class="zone-setting"><span class="zone-setting-label">3–5 lettres (typos)</span><input class="zone-input" value="0" type="number" min="0" max="3"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">6–8 lettres (typos)</span><input class="zone-input" value="1" type="number" min="0" max="3"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">9+ lettres (typos)</span><input class="zone-input" value="2" type="number" min="0" max="4"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Algorithme</span><span class="zone-setting-val">Levenshtein</span></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card">
+          <div class="zone-card-header"><div class="zone-name">🤖 Tier 3 — AI</div>
+            <div class="toggle-wrap"><div class="toggle on" id="ai-toggle" onclick="toggleSwitch(this)"></div><span class="toggle-label" id="ai-toggle-label">ON</span></div>
+          </div>
+          <div class="zone-setting"><span class="zone-setting-label">Modèle</span><select class="zone-input" style="width:auto;font-size:.6rem"><option>claude-sonnet-4</option><option>claude-haiku</option></select></div>
+          <div class="zone-setting"><span class="zone-setting-label">Cache résultats</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Mots en cache</span><span class="zone-setting-val" style="color:var(--purple)">247</span></div>
+          <div class="zone-setting"><span class="zone-setting-label">Coût estimé/jour</span><span class="zone-setting-val">~$0.80</span></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── ZONES CONFIG ── -->
+    <div class="admin-panel" id="panel-zones">
+      <div class="zone-grid">
+        <div class="zone-card" style="border-top:3px solid var(--lime)">
+          <div class="zone-card-header">
+            <div class="zone-name" style="color:var(--lime)">🆓 FREE ZONE</div>
+            <div class="toggle-wrap"><div class="toggle on" onclick="toggleSwitch(this)"></div><span class="toggle-label">ON</span></div>
+          </div>
+          <div class="zone-setting"><span class="zone-setting-label">Mode Casual Training</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Bots disponibles</span><span class="zone-setting-val">Easy · Medium · Hard</span></div>
+          <div class="zone-setting"><span class="zone-setting-label">Max parties/jour</span><input class="zone-input" value="∞" type="text"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Anti-cheat actif</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Users actifs</span><span class="zone-setting-val" style="color:var(--lime)">8,420</span></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card" style="border-top:3px solid var(--gold)">
+          <div class="zone-card-header">
+            <div class="zone-name" style="color:var(--gold)">💎 P2E — PRACTICE</div>
+            <div class="toggle-wrap"><div class="toggle on" onclick="toggleSwitch(this)"></div><span class="toggle-label">ON</span></div>
+          </div>
+          <div class="zone-setting"><span class="zone-setting-label">Hint (USDT)</span><div style="display:flex;align-items:center;gap:.3rem"><input class="zone-input" value="0.05" type="number" step="0.01"/><span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">$</span></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Time Freeze (USDT)</span><div style="display:flex;align-items:center;gap:.3rem"><input class="zone-input" value="0.10" type="number" step="0.01"/><span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">$</span></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Wallet obligatoire</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card" style="border-top:3px solid var(--purple)">
+          <div class="zone-card-header">
+            <div class="zone-name" style="color:var(--purple)">📅 DAILY LEAGUE</div>
+            <div class="toggle-wrap"><div class="toggle on" onclick="toggleSwitch(this)"></div><span class="toggle-label">ON</span></div>
+          </div>
+          <div class="zone-setting"><span class="zone-setting-label">Entry Tier 1 ($)</span><input class="zone-input" value="0.20" type="number" step="0.05"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Entry Tier 2 ($)</span><input class="zone-input" value="0.50" type="number" step="0.05"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Fee plateforme</span><input class="zone-input" value="10" type="number"/>
+            <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">%</span></div>
+          <div class="zone-setting"><span class="zone-setting-label">Reset heure (UTC)</span><input class="zone-input" value="00:00" type="text"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Top N payés</span><input class="zone-input" value="10" type="number"/></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card" style="border-top:3px solid var(--red)">
+          <div class="zone-card-header">
+            <div class="zone-name" style="color:var(--red)">⚔️ DUEL ARENA</div>
+            <div class="toggle-wrap"><div class="toggle on" onclick="toggleSwitch(this)"></div><span class="toggle-label">ON</span></div>
+          </div>
+          <div class="zone-setting"><span class="zone-setting-label">Mise min ($)</span><input class="zone-input" value="1.00" type="number" step="0.50"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Mise max ($)</span><input class="zone-input" value="50.00" type="number" step="5"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Rake plateforme</span><input class="zone-input" value="5" type="number"/>
+            <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">%</span></div>
+          <div class="zone-setting"><span class="zone-setting-label">Max joueurs/room</span><input class="zone-input" value="8" type="number" min="2" max="16"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Smart contract</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── PLATFORM ── -->
+    <div class="admin-panel" id="panel-platform">
+      <div class="zone-grid">
+        <div class="zone-card">
+          <div class="zone-card-header"><div class="zone-name">🌐 Blockchain</div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Réseau principal</span>
+            <select class="zone-input" style="width:auto;font-size:.65rem"><option>Polygon</option><option>Solana</option></select></div>
+          <div class="zone-setting"><span class="zone-setting-label">Confirmations requises</span><input class="zone-input" value="3" type="number"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Token USDT Polygon</span><span class="zone-setting-val" style="font-size:.55rem;color:var(--muted)">0xc213...8e8F</span></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card">
+          <div class="zone-card-header"><div class="zone-name">🛡️ Anti-Cheat</div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Tab switch → Disqualif.</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Keystroke analysis</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Paste blocking</span><div class="toggle on" onclick="toggleSwitch(this)"></div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Seuil bot (WPM)</span><input class="zone-input" value="150" type="number"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Auto-ban après</span><input class="zone-input" value="3" type="number"/>
+            <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">violations</span></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+        <div class="zone-card">
+          <div class="zone-card-header"><div class="zone-name">⏱️ Jeu Global</div></div>
+          <div class="zone-setting"><span class="zone-setting-label">Durée round (s)</span><input class="zone-input" value="40" type="number" min="20" max="120"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Catégories / round</span><input class="zone-input" value="8" type="number" min="4" max="12"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Points / mot unique</span><input class="zone-input" value="10" type="number"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Bonus mot rare</span><input class="zone-input" value="5" type="number"/></div>
+          <div class="zone-setting"><span class="zone-setting-label">Maintenance mode</span><div class="toggle off" onclick="toggleSwitch(this)"></div></div>
+          <button class="save-zone-btn">💾 Sauvegarder</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end admin-main -->
+</div><!-- end admin-screen -->
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card" id="modal-content"></div>
+</div>
+
+<div id="admin-toast"></div>
+
+<script>
+// ─── AUTH ─────────────────────────────────────────────────────
+const ADMIN_PWD = "wordrace2026";
+const SECRET_PATH = "admin-2026";
+
+// Check URL path
+function checkPath(){
+  const path = window.location.pathname + window.location.hash + window.location.search;
+  if(!path.includes(SECRET_PATH) && !sessionStorage.getItem('wr-admin-auth')){
+    // Still show login but note wrong path
+  }
+}
+checkPath();
+
+function tryLogin(){
+  const pwd = document.getElementById('pwd-input').value;
+  if(pwd === ADMIN_PWD){
+    sessionStorage.setItem('wr-admin-auth','1');
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('admin-screen').style.display='block';
+    initAdmin();
+  } else {
+    const err = document.getElementById('login-error');
+    err.style.display='block';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+    setTimeout(()=>err.style.display='none',3000);
+  }
+}
+
+function logout(){
+  sessionStorage.removeItem('wr-admin-auth');
+  document.getElementById('admin-screen').style.display='none';
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('pwd-input').value='';
+}
+
+document.getElementById('pwd-input').addEventListener('keydown', e => { if(e.key==='Enter') tryLogin(); });
+
+// ─── MOCK DATA ────────────────────────────────────────────────
+const DICT_DATA = {
+  Animal:["aigle","baleine","chameau","dauphin","éléphant","faucon","girafe","hippopotame","jaguar","kangourou","léopard","lion","lynx","mamba","narval","ocelot","panthère","requin","serpent","tigre","tortue","zèbre"],
+  Pays:["algérie","allemagne","argentine","australie","brésil","canada","chili","chine","france","inde","italie","japon","maroc","mexique","norvège","portugal","russie","sénégal","suisse","tunisie","turquie"],
+  "Prénom":["alice","benjamin","camille","daniel","emma","fatima","gabriel","hugo","isabelle","julien","kenza","lucas","marie","nicolas","omar","pierre","rachid","sarah","thomas","yasmine"],
+  Aliment:["avocat","banane","carotte","chocolat","datte","fraise","grenade","huile","kiwi","lait","mangue","noix","orange","poire","raisin","saumon","tomate","vanille","yaourt"],
+  Métier:["architecte","boucher","chimiste","dentiste","enseignant","fermier","géographe","hôtelier","ingénieur","journaliste","kinésithérapeute","libraire","médecin","notaire","opticien","pharmacien","radiologue","technicien","vétérinaire"],
+  Marque:["adidas","apple","bmw","canon","disney","emirates","ferrari","google","hermès","intel","jaguar","kfc","lamborghini","mercedes","netflix","openai","porsche","rolex","samsung","tesla","uber","visa","youtube","zoom"],
+  Sport:["athlétisme","badminton","basketball","cyclisme","escalade","football","golf","handball","judo","karaté","lutte","marathon","natation","patinage","rugby","ski","tennis","triathlon","volleyball"],
+};
+
+const MOCK_USERS = [
+  {id:"u001",name:"mrad-boop",email:"usmrad.mo@gmail.com",wallet:"0x1a2b...3c4d",network:"polygon",balance:142.50,games:87,elo:1240,status:"active",joined:"2026-01-15"},
+  {id:"u002",name:"crypto_gamer",email:"cg@example.com",wallet:"0x5e6f...7g8h",network:"polygon",balance:38.20,games:234,elo:1580,status:"active",joined:"2026-02-03"},
+  {id:"u003",name:"wordmaster_99",email:"wm@example.com",wallet:"phantom...xyz",network:"solana",balance:0,games:12,elo:820,status:"suspended",joined:"2026-03-10"},
+  {id:"u004",name:"petit_bac_pro",email:"pb@example.com",wallet:"0xabc...def",network:"polygon",balance:510.00,games:1240,elo:2100,status:"active",joined:"2026-01-20"},
+  {id:"u005",name:"cheat_bot_420",email:"cb@spam.com",wallet:"",network:"none",balance:0,games:3,elo:500,status:"banned",joined:"2026-04-01"},
+  {id:"u006",name:"lexique_queen",email:"lq@example.com",wallet:"phantom...abc",network:"solana",balance:89.75,games:456,elo:1890,status:"active",joined:"2026-02-14"},
+];
+
+const MOCK_ROOMS = [
+  {id:"rm-001",mode:"duel",players:"4/4",prize:"$38.00",letter:"M",status:"in_progress",created:"2 min ago"},
+  {id:"rm-002",mode:"daily_league",players:"128",prize:"$640.00",letter:"A",status:"in_progress",created:"1h ago"},
+  {id:"rm-003",mode:"casual",players:"1/4",prize:"$0",letter:"B",status:"waiting",created:"30s ago"},
+  {id:"rm-004",mode:"duel",players:"2/2",prize:"$9.50",letter:"S",status:"completed",created:"15 min ago"},
+  {id:"rm-005",mode:"practice",players:"3/8",prize:"$0",letter:"T",status:"in_progress",created:"5 min ago"},
+];
+
+const MOCK_TX = [
+  {hash:"0x1a2b...3c4d",user:"crypto_gamer",type:"deposit",amount:"+$50.00",network:"Polygon",status:"confirmed",date:"10:32"},
+  {hash:"0x5e6f...7g8h",user:"petit_bac_pro",type:"payout",amount:"+$38.00",network:"Polygon",status:"confirmed",date:"10:28"},
+  {hash:"0x9i0j...1k2l",user:"lexique_queen",type:"entry_fee",amount:"-$0.50",network:"Solana",status:"confirmed",date:"10:25"},
+  {hash:"0x3m4n...5o6p",user:"mrad-boop",type:"withdrawal",amount:"-$20.00",network:"Polygon",status:"pending",date:"10:20"},
+  {hash:"0x7q8r...9s0t",user:"wordmaster_99",type:"rake",amount:"+$2.00",network:"Polygon",status:"confirmed",date:"10:15"},
+  {hash:"0x1u2v...3w4x",user:"petit_bac_pro",type:"deposit",amount:"+$100.00",network:"Solana",status:"confirmed",date:"09:58"},
+];
+
+const MOCK_LB = [
+  {rank:1,user:"petit_bac_pro",score:48200,games:1240,wr:"78%",earned:"$2,840"},
+  {rank:2,user:"lexique_queen",score:38940,games:456,wr:"71%",earned:"$1,240"},
+  {rank:3,user:"crypto_gamer",score:29100,games:234,wr:"65%",earned:"$890"},
+  {rank:4,user:"mrad-boop",score:18400,games:87,wr:"58%",earned:"$340"},
+  {rank:5,user:"wordmaster_99",score:4200,games:12,wr:"42%",earned:"$0"},
+];
+
+const MOCK_WALLETS = [
+  {user:"petit_bac_pro",addr:"0xabc...def",net:"Polygon",bal:"$510.00",dep:"$1,200",wit:"$690"},
+  {user:"lexique_queen",addr:"phantom...abc",net:"Solana",bal:"$89.75",dep:"$350",wit:"$260"},
+  {user:"crypto_gamer",addr:"0x5e6f...7g8h",net:"Polygon",bal:"$38.20",dep:"$200",wit:"$162"},
+  {user:"mrad-boop",addr:"0x1a2b...3c4d",net:"Polygon",bal:"$142.50",dep:"$300",wit:"$157"},
+];
+
+// ─── INIT ─────────────────────────────────────────────────────
+function initAdmin(){
+  updateClock();
+  setInterval(updateClock, 1000);
+  renderDashboard();
+  renderUsers(MOCK_USERS);
+  renderWallets();
+  renderRooms(MOCK_ROOMS);
+  renderLeaderboard();
+  renderTransactions();
+  renderDict();
+  const total = Object.values(DICT_DATA).reduce((a,b)=>a+b.length,0);
+  document.getElementById('dict-total').textContent = total;
+}
+
+function updateClock(){
+  const el = document.getElementById('admin-time');
+  if(el) el.textContent = new Date().toLocaleTimeString('fr-FR');
+}
+
+// ─── PANELS ───────────────────────────────────────────────────
+function showPanel(name, navEl){
+  document.querySelectorAll('.admin-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  const panel = document.getElementById('panel-'+name);
+  if(panel) panel.classList.add('active');
+  if(navEl) navEl.classList.add('active');
+  const titles = {
+    dashboard:["Vue Globale","Aperçu complet de la plateforme"],
+    users:["Utilisateurs","Gestion & modération des comptes"],
+    'wallet-mgmt':["Wallets & USDT","Gestion des portefeuilles et transactions"],
+    rooms:["Rooms & Sessions","Suivi des parties en temps réel"],
+    leaderboard:["Leaderboard","Classements et distributions de gains"],
+    transactions:["Transactions","Historique complet des mouvements USDT"],
+    dictionary:["Dictionnaire","Gestion des mots par catégorie"],
+    'validation-config':["Règles de Validation","Configuration des 3 tiers"],
+    zones:["Zones Free/P2E","Configuration des modes de jeu"],
+    platform:["Paramètres Plateforme","Configuration globale du système"],
+  };
+  const [title, sub] = titles[name] || ["Admin",""];
+  document.getElementById('panel-title').textContent = title;
+  document.getElementById('panel-sub').textContent = sub;
+  document.getElementById('sidebar').classList.remove('open');
+}
+
+// ─── DASHBOARD ────────────────────────────────────────────────
+function renderDashboard(){
+  const days = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const vals = [280,340,190,420,380,510,340];
+  const max = Math.max(...vals);
+  const chart = document.getElementById('revenue-chart');
+  const labels = document.getElementById('revenue-labels');
+  chart.innerHTML = vals.map((v,i)=>`<div class="chart-bar" style="height:${(v/max*100)}%;background:var(--lime);opacity:${0.5+i*0.07}" title="$${v}"></div>`).join('');
+  labels.innerHTML = days.map(d=>`<div class="chart-label">${d}</div>`).join('');
+
+  const events = [
+    {ev:"💎 Duel terminé",user:"petit_bac_pro",amt:"+$38",type:"payout",t:"2 min"},
+    {ev:"💰 Dépôt",user:"crypto_gamer",amt:"+$50",type:"deposit",t:"10 min"},
+    {ev:"⚔️ Room créée",user:"lexique_queen",amt:"$10 wager",type:"duel",t:"12 min"},
+    {ev:"🚫 Anti-cheat",user:"cheat_bot_420",amt:"Disqualifié",type:"cheat",t:"25 min"},
+    {ev:"📅 League entry",user:"mrad-boop",amt:"-$0.50",type:"entry",t:"31 min"},
+  ];
+  document.getElementById('activity-feed').innerHTML = events.map(e=>`
+    <tr>
+      <td>${e.ev}</td>
+      <td style="color:var(--lime)">${e.user}</td>
+      <td style="font-weight:700;color:${e.amt.startsWith('+')?'var(--lime)':e.amt.startsWith('-')?'var(--red)':'var(--text)'}">${e.amt}</td>
+      <td><span class="pill ${e.type==='payout'||e.type==='deposit'?'pill-green':e.type==='cheat'?'pill-red':'pill-gold'}">${e.type}</span></td>
+      <td style="color:var(--muted)">${e.t} ago</td>
+    </tr>`).join('');
+}
+
+// ─── USERS ────────────────────────────────────────────────────
+function renderUsers(users){
+  document.getElementById('users-table').innerHTML = users.map(u=>`
+    <tr>
+      <td><div style="font-weight:700">${u.name}</div><div style="font-size:.58rem;color:var(--muted)">${u.email}</div></td>
+      <td style="font-size:.6rem;color:var(--muted)">${u.wallet||'—'}</td>
+      <td style="font-weight:700;color:var(--lime)">$${u.balance.toFixed(2)}</td>
+      <td>${u.games}</td>
+      <td><span style="color:${u.elo>=1500?'var(--gold)':u.elo>=1000?'var(--lime)':'var(--muted)'}">${u.elo}</span></td>
+      <td><span class="pill ${u.status==='active'?'pill-green':u.status==='suspended'?'pill-gold':'pill-red'}">${u.status}</span></td>
+      <td><div class="action-btns">
+        <button class="action-btn" onclick="openModal('edit-user','${u.id}')">✏️</button>
+        <button class="action-btn" onclick="adminToast('💰 Balance modifiée pour ${u.name}')">💰</button>
+        <button class="action-btn danger" onclick="if(confirm('${u.status==='banned'?'Débannir':'Bannir'} ${u.name} ?'))adminToast('✅ Statut mis à jour')">${u.status==='banned'?'🔓':'🚫'}</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+function filterUsers(q){
+  const filtered = MOCK_USERS.filter(u=>u.name.includes(q)||u.email.includes(q));
+  renderUsers(filtered);
+}
+function filterUserStatus(s){
+  const filtered = s ? MOCK_USERS.filter(u=>u.status===s) : MOCK_USERS;
+  renderUsers(filtered);
+}
+
+// ─── WALLETS ─────────────────────────────────────────────────
+function renderWallets(){
+  document.getElementById('wallets-table').innerHTML = MOCK_WALLETS.map(w=>`
+    <tr>
+      <td style="font-weight:700;color:var(--lime)">${w.user}</td>
+      <td style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted)">${w.addr}</td>
+      <td><span class="pill ${w.net==='Polygon'?'pill-purple':'pill-blue'}">${w.net}</span></td>
+      <td style="font-weight:700;color:var(--lime)">${w.bal}</td>
+      <td style="color:var(--lime)">▲ ${w.dep}</td>
+      <td style="color:var(--red)">▼ ${w.wit}</td>
+      <td><div class="action-btns">
+        <button class="action-btn" onclick="adminToast('💰 Ajustement manuel ouvert')">💰 Ajuster</button>
+        <button class="action-btn danger" onclick="if(confirm('Geler ce wallet ?'))adminToast('🧊 Wallet gelé')">🧊 Geler</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ─── ROOMS ────────────────────────────────────────────────────
+function renderRooms(rooms){
+  const modeColors = {casual:'pill-green',practice:'pill-blue',daily_league:'pill-purple',duel:'pill-red'};
+  const statusColors = {waiting:'pill-gold',in_progress:'pill-green',completed:'pill-muted'};
+  document.getElementById('rooms-table').innerHTML = rooms.map(r=>`
+    <tr>
+      <td style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted)">${r.id}</td>
+      <td><span class="pill ${modeColors[r.mode]||'pill-muted'}">${r.mode}</span></td>
+      <td>${r.players}</td>
+      <td style="font-weight:700;color:var(--gold)">${r.prize}</td>
+      <td><span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--lime)">${r.letter}</span></td>
+      <td><span class="pill ${statusColors[r.status]}">${r.status}</span></td>
+      <td><div class="action-btns">
+        <button class="action-btn" onclick="adminToast('👁️ Room ${r.id} — ${r.players} joueurs')">👁️ Voir</button>
+        <button class="action-btn danger" onclick="if(confirm('Fermer la room ${r.id} ?'))adminToast('🚫 Room fermée')">🚫 Fermer</button>
+      </div></td>
+    </tr>`).join('');
+}
+function filterRooms(mode){
+  const filtered = mode ? MOCK_ROOMS.filter(r=>r.mode===mode) : MOCK_ROOMS;
+  renderRooms(filtered);
+}
+
+// ─── LEADERBOARD ─────────────────────────────────────────────
+function renderLeaderboard(){
+  const medals = ['🥇','🥈','🥉'];
+  document.getElementById('leaderboard-table').innerHTML = MOCK_LB.map((p,i)=>`
+    <tr>
+      <td style="font-size:1.1rem">${medals[i]||p.rank}</td>
+      <td style="font-weight:700;color:var(--lime)">${p.user}</td>
+      <td style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text)">${p.score.toLocaleString()}</td>
+      <td>${p.games}</td>
+      <td><span style="color:${parseInt(p.wr)>=70?'var(--lime)':parseInt(p.wr)>=50?'var(--gold)':'var(--red)'}">${p.wr}</span></td>
+      <td style="font-weight:700;color:var(--gold)">${p.earned}</td>
+      <td><div class="action-btns">
+        <button class="action-btn" onclick="adminToast('👤 Profil de ${p.user}')">👤</button>
+        <button class="action-btn danger" onclick="if(confirm('Exclure ${p.user} du leaderboard ?'))adminToast('🚫 Exclu du classement')">🚫</button>
+      </div></td>
+    </tr>`).join('');
+}
+
+// ─── TRANSACTIONS ─────────────────────────────────────────────
+function renderTransactions(){
+  const typeColors = {deposit:'pill-green',payout:'pill-green',entry_fee:'pill-blue',withdrawal:'pill-red',rake:'pill-purple'};
+  document.getElementById('tx-table').innerHTML = MOCK_TX.map(tx=>`
+    <tr>
+      <td style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">${tx.hash}</td>
+      <td style="color:var(--lime)">${tx.user}</td>
+      <td><span class="pill ${typeColors[tx.type]||'pill-muted'}">${tx.type}</span></td>
+      <td style="font-weight:700;color:${tx.amount.startsWith('+')?'var(--lime)':'var(--red)'}">${tx.amount}</td>
+      <td><span class="pill ${tx.network==='Polygon'?'pill-purple':'pill-blue'}">${tx.network}</span></td>
+      <td><span class="pill ${tx.status==='confirmed'?'pill-green':tx.status==='pending'?'pill-gold':'pill-red'}">${tx.status}</span></td>
+      <td style="color:var(--muted)">${tx.date}</td>
+    </tr>`).join('');
+}
+
+// ─── DICTIONARY ───────────────────────────────────────────────
+function renderDict(){
+  document.getElementById('dict-grid').innerHTML = Object.entries(DICT_DATA).map(([cat,words])=>`
+    <div class="dict-cat-card">
+      <div class="dict-cat-header">
+        <span class="dict-cat-name">${cat}</span>
+        <span class="dict-cat-count">${words.length}</span>
+      </div>
+      <div class="dict-word-list" id="wl-${cat}">
+        ${words.map(w=>`<span class="dict-word" onclick="removeWord('${cat}','${w}',this)" title="Cliquer pour supprimer">${w}</span>`).join('')}
+      </div>
+      <div class="dict-add-row">
+        <input class="dict-add-input" id="add-${cat}" placeholder="Nouveau mot..." autocomplete="off" onkeydown="if(event.key==='Enter')addWord('${cat}')"/>
+        <button class="dict-add-btn" onclick="addWord('${cat}')">+</button>
+      </div>
+    </div>`).join('');
+}
+
+function addWord(cat){
+  const inp = document.getElementById(`add-${cat}`);
+  const word = inp.value.trim().toLowerCase();
+  if(!word){return}
+  if(DICT_DATA[cat].includes(word)){adminToast('⚠️ Mot déjà présent');return}
+  DICT_DATA[cat].push(word);
+  DICT_DATA[cat].sort();
+  inp.value='';
+  renderDict();
+  const total = Object.values(DICT_DATA).reduce((a,b)=>a+b.length,0);
+  document.getElementById('dict-total').textContent=total;
+  adminToast(`✅ "${word}" ajouté à ${cat}`);
+}
+
+function removeWord(cat, word, el){
+  if(!confirm(`Supprimer "${word}" de ${cat} ?`)){return}
+  DICT_DATA[cat] = DICT_DATA[cat].filter(w=>w!==word);
+  el.remove();
+  adminToast(`🗑️ "${word}" supprimé de ${cat}`);
+}
+
+function exportDict(){
+  const json = JSON.stringify(DICT_DATA, null, 2);
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'wordrace-dictionary.json';
+  a.click();
+  adminToast('📤 Dictionnaire exporté');
+}
+
+// ─── TOGGLES ─────────────────────────────────────────────────
+function toggleSwitch(el){
+  const isOn = el.classList.contains('on');
+  el.classList.toggle('on',!isOn);
+  el.classList.toggle('off',isOn);
+  const label = el.nextElementSibling;
+  if(label && label.classList.contains('toggle-label')) label.textContent = isOn?'OFF':'ON';
+  adminToast(isOn?'🔴 Désactivé':'🟢 Activé');
+}
+
+// ─── MODALS ──────────────────────────────────────────────────
+function openModal(type, id=''){
+  const content = {
+    'add-user':`
+      <div class="modal-title">👤 Ajouter un Utilisateur</div>
+      <div class="form-group"><label class="form-label">Username</label><input class="form-input" placeholder="nom_utilisateur"/></div>
+      <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" placeholder="email@exemple.com"/></div>
+      <div class="form-group"><label class="form-label">Mot de passe initial</label><input class="form-input" type="password" placeholder="••••••••"/></div>
+      <div class="form-group"><label class="form-label">Statut</label><select class="form-select"><option>active</option><option>suspended</option></select></div>
+      <div class="modal-footer"><button class="t-btn t-btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn t-btn-lime" onclick="closeModal();adminToast('✅ Utilisateur créé')">Créer</button></div>`,
+    'edit-user':`
+      <div class="modal-title">✏️ Modifier Utilisateur</div>
+      <div class="form-group"><label class="form-label">Balance USDT</label><input class="form-input" type="number" placeholder="0.00" step="0.01"/></div>
+      <div class="form-group"><label class="form-label">ELO Rating</label><input class="form-input" type="number" placeholder="1000"/></div>
+      <div class="form-group"><label class="form-label">Statut</label><select class="form-select"><option>active</option><option>suspended</option><option>banned</option></select></div>
+      <div class="form-group"><label class="form-label">Note admin (interne)</label><textarea class="form-input" rows="2" placeholder="Raison de modification..."></textarea></div>
+      <div class="modal-footer"><button class="t-btn t-btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn t-btn-lime" onclick="closeModal();adminToast('✅ Utilisateur mis à jour')">Sauvegarder</button></div>`,
+    'batch-import':`
+      <div class="modal-title">📥 Batch Import — Dictionnaire</div>
+      <p style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1rem">Format JSON: {"Catégorie": ["mot1","mot2",...]}</p>
+      <div class="form-group"><label class="form-label">Catégorie cible</label><select class="form-select">${Object.keys(DICT_DATA).map(c=>`<option>${c}</option>`).join('')}</select></div>
+      <div class="form-group"><label class="form-label">Mots (un par ligne)</label><textarea class="form-input" rows="6" placeholder="lion&#10;tigre&#10;panthère&#10;..."></textarea></div>
+      <div class="modal-footer"><button class="t-btn t-btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn t-btn-lime" onclick="closeModal();adminToast('✅ Mots importés avec succès')">Importer</button></div>`,
+  };
+  document.getElementById('modal-content').innerHTML = content[type] || '';
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+
+// ─── TOAST ────────────────────────────────────────────────────
+function adminToast(msg){
+  const t = document.getElementById('admin-toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(()=>t.style.display='none', 3000);
+}
+
+// Save buttons
+document.addEventListener('click', e => {
+  if(e.target.classList.contains('save-zone-btn')){
+    adminToast('💾 Configuration sauvegardée !');
+  }
+});
+</script>
+</body>
+</html>
