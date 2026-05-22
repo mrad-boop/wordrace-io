@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WordRace.io — Daily League</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);
+  --lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--limeBg2:rgba(159,232,112,0.06);
+  --gold:#F5C842;--goldD:#D4A820;--goldBg:#FDF3CC;
+  --red:#EF4444;--redBg:#FEE2E2;
+  --blue:#3B82F6;--blueBg:#EFF6FF;
+  --purple:#7C3AED;--purpleBg:#F5F3FF;
+  --text:#1A1A1A;--muted:#6B7280;--forest:#163300;
+  --valid:#16A34A;--validBg:#DCFCE7;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+
+/* NAV */
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none}
+.nav-logo span{color:var(--lime)}
+.nav-links{display:flex;gap:.5rem}
+.nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
+.nav-link:hover{background:var(--surface2);color:var(--text)}
+.nav-link.active{background:var(--goldBg);border-color:var(--gold);color:#92600A}
+
+/* COUNTDOWN BANNER */
+.countdown-banner{margin-top:56px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:1.2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.cb-bg{position:absolute;inset:0;opacity:.06;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(159,232,112,.5) 10px,rgba(159,232,112,.5) 11px)}
+.cb-inner{position:relative;z-index:1;max-width:800px;margin:0 auto}
+.cb-title{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.cb-timer{display:flex;gap:.8rem;justify-content:center;align-items:center;margin-bottom:.3rem}
+.cb-unit{display:flex;flex-direction:column;align-items:center;gap:.1rem}
+.cb-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#fff;line-height:1;min-width:52px;background:rgba(255,255,255,.1);border-radius:.5rem;padding:.1rem .3rem;text-align:center}
+.cb-sep{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(255,255,255,.4);margin-top:-.3rem}
+.cb-label{font-family:'Space Mono',monospace;font-size:.48rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase}
+.cb-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.5)}
+
+/* MAIN LAYOUT */
+.main{max-width:1100px;margin:0 auto;padding:1.5rem 1.2rem 4rem;display:grid;grid-template-columns:1fr 340px;gap:1.2rem}
+@media(max-width:900px){.main{grid-template-columns:1fr}}
+
+/* LEFT COLUMN */
+.left-col{display:flex;flex-direction:column;gap:1.1rem}
+
+/* ENTRY CARD */
+.entry-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.entry-header{padding:1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
+.entry-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--text);letter-spacing:.03em}
+.entry-body{padding:1.2rem 1.3rem}
+.tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem}
+.tier-opt{border-radius:.8rem;border:2px solid var(--border);padding:1rem;cursor:pointer;transition:all .22s;text-align:center;position:relative}
+.tier-opt:hover{border-color:var(--gold);background:var(--goldBg)}
+.tier-opt.selected{border-color:var(--gold);background:var(--goldBg)}
+.tier-opt.selected::after{content:'✓';position:absolute;top:.5rem;right:.7rem;font-size:.8rem;color:var(--gold);font-weight:700}
+.tier-price{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1}
+.tier-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:.2rem 0}
+.tier-desc{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)}
+.tier-prize{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--valid);margin-top:.3rem;font-weight:700}
+.entry-info{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem}
+.info-row{display:flex;justify-content:space-between;align-items:center;font-family:'Space Mono',monospace;font-size:.65rem;padding:.38rem 0;border-bottom:1px solid var(--border)}
+.info-row:last-child{border-bottom:none}
+.info-label{color:var(--muted)}
+.info-val{color:var(--text);font-weight:700}
+.enter-btn{width:100%;padding:.9rem;border-radius:.65rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.enter-btn:hover{background:var(--goldD)}
+.enter-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
+.already-entered{background:var(--validBg);border:1px solid var(--valid);border-radius:.65rem;padding:.9rem;text-align:center;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--valid);font-weight:700}
+
+/* MY SCORE */
+.my-score-card{background:var(--surface);border:2px solid var(--lime);border-radius:1.1rem;padding:1.2rem 1.3rem;box-shadow:0 4px 16px rgba(159,232,112,.12)}
+.ms-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+.ms-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text);letter-spacing:.03em}
+.ms-rank{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--lime);line-height:1}
+.ms-rank-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.ms-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.8rem}
+.ms-stat{text-align:center;padding:.6rem;background:var(--limeBg);border-radius:.6rem;border:1px solid rgba(159,232,112,.2)}
+.ms-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime);line-height:1}
+.ms-stat-label{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
+.ms-progress{background:var(--surface2);border-radius:100px;height:8px;overflow:hidden;margin-bottom:.3rem}
+.ms-progress-bar{height:100%;background:var(--lime);border-radius:100px;transition:width .5s ease}
+.ms-progress-label{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)}
+
+/* GAME AREA */
+.game-area{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.ga-header{padding:.9rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.ga-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.03em}
+.ga-meta{display:flex;align-items:center;gap:.6rem}
+.letter-chip{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;background:var(--lime);color:var(--forest);width:38px;height:38px;border-radius:.45rem;display:flex;align-items:center;justify-content:center;line-height:1}
+.round-chip{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);background:var(--surface2);padding:.25rem .55rem;border-radius:.35rem}
+.timer-compact{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--text);min-width:40px;text-align:center;transition:color .3s}
+.timer-compact.warn{color:var(--gold)}
+.timer-compact.danger{color:var(--red);animation:shake .25s infinite}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+.ga-body{padding:1rem 1.2rem}
+.cat-row{display:flex;align-items:center;gap:.7rem;padding:.5rem 0;border-bottom:1px solid var(--border)}
+.cat-row:last-child{border-bottom:none}
+.cat-name{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);min-width:90px;flex-shrink:0}
+.cat-input{flex:1;padding:.48rem .7rem;border-radius:.45rem;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.8rem;outline:none;transition:all .2s}
+.cat-input:focus{border-color:var(--lime);background:#fff}
+.cat-input.valid{border-color:var(--valid);background:var(--validBg)}
+.cat-input.invalid{border-color:var(--red);background:var(--redBg)}
+.cat-input:disabled{opacity:.5;cursor:not-allowed}
+.cat-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;transition:all .2s}
+.cat-check.done{background:var(--valid);border-color:var(--valid);color:#fff}
+.submit-row{display:flex;gap:.6rem;margin-top:1rem;align-items:center}
+.submit-btn{flex:1;padding:.78rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s}
+.submit-btn:hover{background:var(--limeD)}
+.submit-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
+.filled-count{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
+
+/* LEADERBOARD */
+.lb-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.lb-header{padding:.9rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.lb-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.03em}
+.live-dot{display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.56rem;color:var(--red)}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.lb-tabs{display:flex;border-bottom:1px solid var(--border)}
+.lb-tab{flex:1;padding:.6rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent}
+.lb-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--goldBg)}
+.lb-body{max-height:480px;overflow-y:auto}
+.lb-row{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-bottom:1px solid rgba(0,0,0,.04);transition:background .15s}
+.lb-row:hover{background:var(--surface2)}
+.lb-row.you{background:var(--limeBg);border-left:3px solid var(--lime)}
+.lb-row.top3{background:var(--goldBg)}
+.lb-rank{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:28px;text-align:center}
+.lb-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.lb-name{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-score{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);min-width:40px;text-align:right}
+.lb-prize{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--valid);min-width:45px;text-align:right}
+.lb-change{font-family:'Space Mono',monospace;font-size:.55rem;min-width:30px;text-align:right}
+
+/* RIGHT COLUMN */
+.right-col{display:flex;flex-direction:column;gap:1.1rem}
+
+/* PRIZE POOL */
+.prize-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:1.1rem;padding:1.3rem;color:#fff;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.prize-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.4rem}
+.prize-amount{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);line-height:1;margin-bottom:.2rem}
+.prize-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
+.prize-dist{display:flex;flex-direction:column;gap:.35rem}
+.pd-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem .5rem;border-radius:.4rem;background:rgba(255,255,255,.06)}
+.pd-rank{font-family:'Space Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.6)}
+.pd-pct{font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.4)}
+.pd-amt{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold)}
+
+/* ENTRIES */
+.entries-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.1rem}
+.ec-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);margin-bottom:.8rem;letter-spacing:.03em}
+.ec-bar{display:flex;height:8px;border-radius:100px;overflow:hidden;margin-bottom:.4rem;gap:2px}
+.ec-bar-seg{height:100%;border-radius:100px}
+.ec-legend{display:flex;gap:.8rem;flex-wrap:wrap}
+.ec-legend-item{display:flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)}
+.ec-dot{width:8px;height:8px;border-radius:50%}
+
+/* RULES */
+.rules-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.1rem}
+.rc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);margin-bottom:.8rem;letter-spacing:.03em}
+.rule-item{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem 0;border-bottom:1px solid var(--border)}
+.rule-item:last-child{border-bottom:none}
+.rule-icon{font-size:.9rem;flex-shrink:0;margin-top:.05rem}
+.rule-text{font-family:'Space Mono',monospace;font-size:.61rem;color:var(--muted);line-height:1.5}
+
+/* MODAL */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal.show{display:flex}
+.modal-card{background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:420px;width:100%;box-shadow:0 28px 60px rgba(0,0,0,.2)}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--text);margin-bottom:.3rem;letter-spacing:.02em}
+.modal-sub{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1.2rem}
+.modal-detail{background:var(--goldBg);border:1px solid var(--gold);border-radius:.6rem;padding:.9rem;margin-bottom:1rem}
+.md-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.65rem;padding:.22rem 0}
+.md-label{color:var(--muted)}
+.md-val{font-weight:700;color:var(--text)}
+.modal-btns{display:flex;gap:.6rem}
+.m-cancel{flex:1;padding:.75rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer}
+.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s}
+.m-confirm:hover{background:var(--goldD)}
+
+/* RESULTS */
+.results-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
+.results-modal.show{display:flex}
+.results-card{background:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:480px;width:100%;box-shadow:0 28px 70px rgba(0,0,0,.25);max-height:92vh;overflow-y:auto}
+
+/* TOAST */
+#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
+@keyframes su{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{display:inline-block;width:12px;height:12px;border:2px solid #0002;border-top-color:#1a1400;border-radius:50%;animation:spin .7s linear infinite}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
+  <div class="nav-links">
+    <a class="nav-link" href="index.html">← Home</a>
+    <a class="nav-link" href="game.html">🎮 Game</a>
+    <a class="nav-link active" href="#">📅 Daily League</a>
+  </div>
+</nav>
+
+<!-- COUNTDOWN BANNER -->
+<div class="countdown-banner">
+  <div class="cb-bg"></div>
+  <div class="cb-inner">
+    <div class="cb-title">⏳ Prochain reset du Daily League</div>
+    <div class="cb-timer">
+      <div class="cb-unit"><div class="cb-num" id="cd-h">00</div><div class="cb-label">Heures</div></div>
+      <div class="cb-sep">:</div>
+      <div class="cb-unit"><div class="cb-num" id="cd-m">00</div><div class="cb-label">Minutes</div></div>
+      <div class="cb-sep">:</div>
+      <div class="cb-unit"><div class="cb-num" id="cd-s">00</div><div class="cb-label">Secondes</div></div>
+    </div>
+    <div class="cb-sub">Reset quotidien à 00:00 UTC · Les gains sont distribués automatiquement</div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- LEFT -->
+  <div class="left-col">
+
+    <!-- ENTRY CARD -->
+    <div class="entry-card" id="entry-section">
+      <div class="entry-header">
+        <div class="entry-title">📅 Daily League — <span id="today-date"></span></div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)" id="entry-status-label">Choisir un tier</div>
+      </div>
+      <div class="entry-body" id="entry-body">
+        <div class="tier-grid">
+          <div class="tier-opt selected" onclick="selectTier(this,'0.20')" id="tier-020">
+            <div class="tier-price">$0.20</div>
+            <div class="tier-label">Tier Standard</div>
+            <div class="tier-desc">Accessible à tous</div>
+            <div class="tier-prize">🏆 Prize pool ~$180</div>
+          </div>
+          <div class="tier-opt" onclick="selectTier(this,'0.50')" id="tier-050">
+            <div class="tier-price">$0.50</div>
+            <div class="tier-label">Tier Premium</div>
+            <div class="tier-desc">Plus compétitif</div>
+            <div class="tier-prize">🏆 Prize pool ~$450</div>
+          </div>
+        </div>
+        <div class="entry-info">
+          <div class="info-row"><span class="info-label">Date</span><span class="info-val" id="ei-date">—</span></div>
+          <div class="info-row"><span class="info-label">Tier sélectionné</span><span class="info-val" id="ei-tier">$0.20</span></div>
+          <div class="info-row"><span class="info-label">Fee plateforme</span><span class="info-val">10% → redistribué top 10</span></div>
+          <div class="info-row"><span class="info-label">Tentatives</span><span class="info-val">1 seule par tier / jour</span></div>
+          <div class="info-row"><span class="info-label">Format</span><span class="info-val">3 manches · 8 catégories · 40s</span></div>
+          <div class="info-row"><span class="info-label">Réseau</span><span class="info-val">Polygon USDT</span></div>
+        </div>
+        <button class="enter-btn" id="enter-btn" onclick="openEntryModal()">
+          💳 Participer — <span id="enter-price">$0.20</span> USDT
+        </button>
+      </div>
+    </div>
+
+    <!-- MY SCORE (visible after entry) -->
+    <div class="my-score-card" id="my-score-section" style="display:none">
+      <div class="ms-header">
+        <div>
+          <div class="ms-title">🎯 Votre Score</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">Daily League · <span id="ms-tier">$0.20</span></div>
+        </div>
+        <div style="text-align:right">
+          <div class="ms-rank" id="ms-rank">#—</div>
+          <div class="ms-rank-label">Classement</div>
+        </div>
+      </div>
+      <div class="ms-stats">
+        <div class="ms-stat"><div class="ms-stat-val" id="ms-score">0</div><div class="ms-stat-label">Score</div></div>
+        <div class="ms-stat"><div class="ms-stat-val" id="ms-words">0</div><div class="ms-stat-label">Mots valides</div></div>
+        <div class="ms-stat"><div class="ms-stat-val" id="ms-prize" style="color:var(--valid)">$0</div><div class="ms-stat-label">Gain estimé</div></div>
+      </div>
+      <div class="ms-progress"><div class="ms-progress-bar" id="ms-bar" style="width:0%"></div></div>
+      <div class="ms-progress-label" id="ms-bar-label">0 pts · Top 100%</div>
+    </div>
+
+    <!-- GAME AREA (visible after entry) -->
+    <div class="game-area" id="game-section" style="display:none">
+      <div class="ga-header">
+        <div class="ga-title" id="ga-title">Manche 1/3</div>
+        <div class="ga-meta">
+          <div class="letter-chip" id="ga-letter">?</div>
+          <div class="round-chip" id="ga-round">Round 1</div>
+          <div class="timer-compact" id="ga-timer">40</div>
+          <button style="padding:.35rem .7rem;border-radius:.38rem;border:1px solid var(--border);background:var(--surface2);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer" onclick="useLeagueFreeze()">❄️</button>
+        </div>
+      </div>
+      <div class="ga-body" id="ga-body"></div>
+    </div>
+
+    <!-- LEADERBOARD -->
+    <div class="lb-card">
+      <div class="lb-header">
+        <div class="lb-title">🏆 Leaderboard Live</div>
+        <div class="live-dot">LIVE · Mise à jour 30s</div>
+      </div>
+      <div class="lb-tabs">
+        <div class="lb-tab active" onclick="switchTab(this,'020')">$0.20 Standard</div>
+        <div class="lb-tab" onclick="switchTab(this,'050')">$0.50 Premium</div>
+      </div>
+      <div class="lb-body" id="lb-body"></div>
+    </div>
+
+  </div><!-- end left -->
+
+  <!-- RIGHT -->
+  <div class="right-col">
+
+    <!-- PRIZE POOL -->
+    <div class="prize-card">
+      <div class="prize-label">🏆 Prize Pool Total (aujourd'hui)</div>
+      <div class="prize-amount" id="prize-total">$631</div>
+      <div class="prize-sub"><span id="prize-entries">1262</span> participants · 90% redistribués</div>
+      <div class="prize-dist" id="prize-dist"></div>
+    </div>
+
+    <!-- ENTRIES -->
+    <div class="entries-card">
+      <div class="ec-title">📊 Participants Aujourd'hui</div>
+      <div class="ec-bar">
+        <div class="ec-bar-seg" style="width:58%;background:var(--gold)"></div>
+        <div class="ec-bar-seg" style="width:42%;background:var(--purple)"></div>
+      </div>
+      <div class="ec-legend">
+        <div class="ec-legend-item"><div class="ec-dot" style="background:var(--gold)"></div>$0.20 · <strong id="count-020">732</strong></div>
+        <div class="ec-legend-item"><div class="ec-dot" style="background:var(--purple)"></div>$0.50 · <strong id="count-050">530</strong></div>
+      </div>
+    </div>
+
+    <!-- RULES -->
+    <div class="rules-card">
+      <div class="rc-title">📋 Règles</div>
+      <div class="rule-item"><span class="rule-icon">📅</span><span class="rule-text">1 tentative par tier, par joueur, par jour</span></div>
+      <div class="rule-item"><span class="rule-icon">🎮</span><span class="rule-text">3 manches consécutives · lettre aléatoire · 8 catégories · 40s</span></div>
+      <div class="rule-item"><span class="rule-icon">💰</span><span class="rule-text">90% du pool redistribués au top 10 · 10% fee plateforme</span></div>
+      <div class="rule-item"><span class="rule-icon">🏆</span><span class="rule-text">Distribution : 1er 30% · 2e 18% · 3e 12% · 4e–10e 40% partagés</span></div>
+      <div class="rule-item"><span class="rule-icon">🔄</span><span class="rule-text">Reset quotidien à 00:00 UTC · Gains versés automatiquement</span></div>
+      <div class="rule-item"><span class="rule-icon">🛡️</span><span class="rule-text">Anti-cheat actif · Tab switch = disqualification · Copy/paste bloqué</span></div>
+    </div>
+
+  </div><!-- end right -->
+</div><!-- end main -->
+
+<!-- ENTRY MODAL -->
+<div class="modal" id="entry-modal">
+  <div class="modal-card">
+    <div class="modal-title">Confirmer l'entrée</div>
+    <div class="modal-sub">Daily League · <span id="modal-date"></span></div>
+    <div class="modal-detail">
+      <div class="md-row"><span class="md-label">Tier</span><span class="md-val" id="modal-tier">$0.20 Standard</span></div>
+      <div class="md-row"><span class="md-label">Entry fee</span><span class="md-val" id="modal-fee">$0.20 USDT</span></div>
+      <div class="md-row"><span class="md-label">Prize pool estimé</span><span class="md-val" id="modal-pool">~$180</span></div>
+      <div class="md-row"><span class="md-label">Format</span><span class="md-val">3 manches · 8 catégories · 40s</span></div>
+      <div class="md-row"><span class="md-label">Réseau</span><span class="md-val">Polygon USDT</span></div>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1rem;background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem">
+      ⚠️ Une seule tentative autorisée par tier. Les fonds seront débités immédiatement depuis votre wallet.
+    </div>
+    <div class="modal-btns">
+      <button class="m-cancel" onclick="closeModal()">Annuler</button>
+      <button class="m-confirm" id="modal-confirm" onclick="confirmEntry()">
+        💳 Payer & Jouer
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS MODAL -->
+<div class="results-modal" id="results-modal">
+  <div class="results-card" id="results-content"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ─── CONFIG ───────────────────────────────────────────────────
+const CATS = ["Animal","Pays","Prénom","Aliment","Métier","Marque","Sport","Film/Série"];
+const LETTERS = "ABCDEFGHIJKLMNOPRSTUVWXYZ".split("");
+const ROUND_DURATION = 40;
+const TOTAL_ROUNDS = 3;
+
+// ─── STATE ────────────────────────────────────────────────────
+let S = {
+  selectedTier: '0.20',
+  hasEntered: false,
+  gameStarted: false,
+  round: 1,
+  letter: 'A',
+  seconds: ROUND_DURATION,
+  answers: {},
+  scores: [],       // [{round,words,pts}]
+  totalScore: 0,
+  totalWords: 0,
+  timerInterval: null,
+  frozen: false,
+  lbTab: '020',
+};
+
+// ─── INIT ─────────────────────────────────────────────────────
+function init(){
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+  setDate();
+  renderPrizePool();
+  renderLeaderboard('020');
+  setInterval(()=>{ if(!S.gameStarted) liveUpdate(); }, 8000);
+}
+
+// ─── DATE ─────────────────────────────────────────────────────
+function setDate(){
+  const d = new Date();
+  const fmt = d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('today-date').textContent = fmt;
+  document.getElementById('ei-date').textContent = d.toLocaleDateString('fr-FR');
+  document.getElementById('modal-date').textContent = fmt;
+}
+
+// ─── COUNTDOWN ────────────────────────────────────────────────
+function updateCountdown(){
+  const now = new Date();
+  const midnight = new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1));
+  let diff = Math.floor((midnight - now) / 1000);
+  const h = Math.floor(diff/3600);
+  diff %= 3600;
+  const m = Math.floor(diff/60);
+  const s = diff % 60;
+  document.getElementById('cd-h').textContent = String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent = String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent = String(s).padStart(2,'0');
+}
+
+// ─── TIER SELECT ──────────────────────────────────────────────
+function selectTier(el, tier){
+  document.querySelectorAll('.tier-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  S.selectedTier = tier;
+  document.getElementById('ei-tier').textContent = `$${tier}`;
+  document.getElementById('enter-price').textContent = `$${tier}`;
+  document.getElementById('entry-status-label').textContent = `Tier $${tier} sélectionné`;
+  const pools = {'0.20':'~$180','0.50':'~$450'};
+  document.getElementById('modal-pool').textContent = pools[tier];
+  document.getElementById('modal-tier').textContent = `$${tier} ${tier==='0.20'?'Standard':'Premium'}`;
+  document.getElementById('modal-fee').textContent = `$${tier} USDT`;
+}
+
+// ─── MODAL ────────────────────────────────────────────────────
+function openEntryModal(){ document.getElementById('entry-modal').classList.add('show'); }
+function closeModal(){
+  document.getElementById('entry-modal').classList.remove('show');
+  document.getElementById('results-modal').classList.remove('show');
+}
+
+// ─── ENTRY ────────────────────────────────────────────────────
+function confirmEntry(){
+  const btn = document.getElementById('modal-confirm');
+  btn.innerHTML = '<span class="spin"></span> Transaction...';
+  btn.disabled = true;
+
+  setTimeout(()=>{
+    closeModal();
+    S.hasEntered = true;
+    showToast(`✅ Entrée confirmée ! $${S.selectedTier} USDT débité · Bonne chance !`);
+    document.getElementById('ms-tier').textContent = `$${S.selectedTier}`;
+    document.getElementById('my-score-section').style.display = 'block';
+    document.getElementById('game-section').style.display = 'block';
+    document.getElementById('enter-btn').className = 'already-entered';
+    document.getElementById('enter-btn').textContent = `✅ Inscrit — Tier $${S.selectedTier}`;
+    document.getElementById('entry-status-label').textContent = '✅ Inscrit aujourd\'hui';
+    btn.innerHTML = '💳 Payer & Jouer';
+    btn.disabled = false;
+    startLeagueGame();
+  }, 1800);
+}
+
+// ─── LEAGUE GAME ──────────────────────────────────────────────
+function startLeagueGame(){
+  S.round = 1;
+  S.totalScore = 0;
+  S.totalWords = 0;
+  S.scores = [];
+  S.gameStarted = true;
+  startRound();
+}
+
+function startRound(){
+  S.letter = LETTERS[Math.floor(Math.random()*LETTERS.length)];
+  S.answers = {};
+  S.seconds = ROUND_DURATION;
+  S.frozen = false;
+
+  document.getElementById('ga-title').textContent = `Manche ${S.round}/${TOTAL_ROUNDS}`;
+  document.getElementById('ga-letter').textContent = S.letter;
+  document.getElementById('ga-round').textContent = `Round ${S.round}`;
+  document.getElementById('ga-timer').textContent = S.seconds;
+  document.getElementById('ga-timer').className = 'timer-compact';
+
+  buildGameBody();
+  startLeagueTimer();
+
+  document.getElementById('game-section').scrollIntoView({behavior:'smooth',block:'start'});
+  setTimeout(()=>document.getElementById('linp-0')?.focus(), 400);
+}
+
+function buildGameBody(){
+  document.getElementById('ga-body').innerHTML = `
+    ${CATS.map((cat,ci)=>`
+      <div class="cat-row">
+        <div class="cat-name">${cat}</div>
+        <input class="cat-input" id="linp-${ci}"
+          type="text" placeholder="${S.letter}..."
+          autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false"
+          onpaste="return false" ondrop="return false"
+          oninput="leagueInput(this,${ci})"
+          onkeydown="if(event.key==='Tab'){event.preventDefault();document.getElementById('linp-${(ci+1)%CATS.length}')?.focus()}"
+        />
+        <div class="cat-check" id="lcheck-${ci}"></div>
+      </div>`).join('')}
+    <div class="submit-row">
+      <button class="submit-btn" id="submit-btn" onclick="submitRound()">
+        ✅ Valider la manche ${S.round}
+      </button>
+      <div class="filled-count" id="league-filled">0/${CATS.length} remplis</div>
+    </div>`;
+}
+
+function leagueInput(el, ci){
+  const v = el.value;
+  if(v.length > 0 && v[0].toUpperCase() !== S.letter){ el.value = v.slice(1); return; }
+  S.answers[ci] = v;
+  const check = document.getElementById(`lcheck-${ci}`);
+  if(v.trim()){ check.className='cat-check done'; check.textContent='✓'; }
+  else { check.className='cat-check'; check.textContent=''; }
+  const filled = CATS.filter((_,i)=>S.answers[i]?.trim()).length;
+  document.getElementById('league-filled').textContent = `${filled}/${CATS.length} remplis`;
+}
+
+function useLeagueFreeze(){
+  if(S.frozen) return;
+  S.frozen = true;
+  showToast('❄️ Timer gelé 5 secondes !');
+  setTimeout(()=>S.frozen=false, 5000);
+}
+
+function startLeagueTimer(){
+  clearInterval(S.timerInterval);
+  S.timerInterval = setInterval(()=>{
+    if(S.frozen) return;
+    S.seconds--;
+    const el = document.getElementById('ga-timer');
+    if(el){
+      el.textContent = S.seconds;
+      el.className = 'timer-compact' + (S.seconds<=7?' danger':S.seconds<=15?' warn':'');
+    }
+    if(S.seconds <= 0){ clearInterval(S.timerInterval); submitRound(); }
+  }, 1000);
+}
+
+function submitRound(){
+  clearInterval(S.timerInterval);
+  // Validate
+  let pts = 0, words = 0;
+  CATS.forEach((_,ci)=>{
+    const a = S.answers[ci]?.trim();
+    const ok = a && a[0].toUpperCase() === S.letter;
+    if(ok){ pts += 10; words++; }
+    const inp = document.getElementById(`linp-${ci}`);
+    if(inp){ inp.disabled = true; inp.className = 'cat-input ' + (ok?'valid':a?'invalid':''); }
+    const check = document.getElementById(`lcheck-${ci}`);
+    if(check && ok){ check.className='cat-check done'; check.textContent='✓'; }
+  });
+  S.scores.push({ round:S.round, words, pts, letter:S.letter, answers:{...S.answers} });
+  S.totalScore += pts;
+  S.totalWords += words;
+
+  updateMyScore();
+  document.getElementById('submit-btn').disabled = true;
+  document.getElementById('submit-btn').textContent = `✅ Manche ${S.round} validée — +${pts} pts`;
+
+  showToast(`Manche ${S.round} terminée ! +${pts} pts · ${words}/${CATS.length} mots valides`);
+
+  setTimeout(()=>{
+    if(S.round < TOTAL_ROUNDS){
+      S.round++;
+      startRound();
+    } else {
+      finishLeague();
+    }
+  }, 2500);
+}
+
+function updateMyScore(){
+  const allPlayers = generateLBData('020');
+  const myPos = allPlayers.findIndex(p=>p.you) + 1 || allPlayers.length;
+  const pct = Math.round((1 - (myPos-1)/allPlayers.length)*100);
+  const prize = estimatePrize(myPos);
+
+  document.getElementById('ms-score').textContent = S.totalScore;
+  document.getElementById('ms-words').textContent = S.totalWords;
+  document.getElementById('ms-rank').textContent = `#${Math.max(1,Math.floor(allPlayers.length*0.15))}`;
+  document.getElementById('ms-prize').textContent = `$${prize}`;
+  const barPct = Math.min(100, (S.totalScore/240)*100);
+  document.getElementById('ms-bar').style.width = barPct+'%';
+  document.getElementById('ms-bar-label').textContent = `${S.totalScore} pts · Top ${Math.max(1,100-pct)}%`;
+}
+
+function estimatePrize(rank){
+  const pool = parseFloat(S.selectedTier) * 1262 * 0.9;
+  const dist = [.30,.18,.12,.05,.05,.05,.05,.05,.025,.025];
+  if(rank <= 10) return (pool * dist[rank-1]).toFixed(2);
+  return '0.00';
+}
+
+function finishLeague(){
+  S.gameStarted = false;
+  const myRank = Math.max(1, Math.floor(Math.random()*50)+1);
+  const prize = estimatePrize(myRank);
+  const totalPts = S.scores.reduce((a,b)=>a+b.pts, 0);
+
+  let html = `
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--text);margin-bottom:.2rem">
+      🏁 Daily League Terminée !
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1.2rem">
+      Tier $${S.selectedTier} · ${TOTAL_ROUNDS} manches complétées
+    </div>
+    <div style="background:var(--goldBg);border:1px solid var(--gold);border-radius:.8rem;padding:1rem;margin-bottom:1rem;text-align:center">
+      <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Score Total</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--text);line-height:1">${totalPts}</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">${S.totalWords}/${CATS.length*TOTAL_ROUNDS} mots valides</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1rem">
+      ${S.scores.map(r=>`
+        <div style="background:var(--surface2);border-radius:.6rem;padding:.7rem;text-align:center">
+          <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase">Manche ${r.round} · ${r.letter}</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime)">${r.pts}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">${r.words}/${CATS.length} mots</div>
+        </div>`).join('')}
+    </div>
+    <div style="background:var(--validBg);border:1px solid var(--valid);border-radius:.7rem;padding:.9rem;margin-bottom:1rem;text-align:center">
+      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--valid);margin-bottom:.2rem">🏆 Classement Estimé</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--valid)">#${myRank}</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--valid)">Gain estimé : <strong>$${prize}</strong> USDT</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.3rem">Distribution finale à 00:00 UTC</div>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;margin-bottom:1rem">
+      📅 Le classement final est mis à jour en temps réel jusqu'au reset.<br>Les gains sont versés automatiquement sur votre wallet.
+    </div>
+    <button onclick="closeModal();renderLeaderboard(S.lbTab)" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">
+      📊 Voir le Leaderboard Live
+    </button>`;
+
+  document.getElementById('results-content').innerHTML = html;
+  document.getElementById('results-modal').classList.add('show');
+}
+
+// ─── LEADERBOARD ──────────────────────────────────────────────
+const NAMES = ["petit_bac_pro","lexique_queen","crypto_gamer","wordmaster_99","mrad-boop","vocab_king","letterhero","alphabeto","quickwords","fasttyper","scorehunter","dailychamp","ranklord","topplayer","wordrider","lettreville","bocquet_fr","scorezilla","lexmaster","alphazero","rapidpen","dictovox","verbatim_x","lexibot","wordninja","textfire","spelldrop","verbosity","charades_fr","quickdraw"];
+
+function generateLBData(tab){
+  const seed = tab === '020' ? 42 : 99;
+  const count = tab === '020' ? 30 : 22;
+  return Array.from({length:count},(_,i)=>{
+    const score = Math.max(0, 240 - i*7 - Math.floor(((i*seed*13)%40)));
+    const prize = estimatePrizeForRank(i+1, tab);
+    const change = i < 5 ? ['+2','+1','—','-1','+3'][i] : '—';
+    return {
+      rank: i+1,
+      name: NAMES[i % NAMES.length],
+      score,
+      prize,
+      change,
+      you: i === (tab==='020' ? 4 : 7),
+    };
+  });
+}
+
+function estimatePrizeForRank(rank, tab){
+  const fee = tab === '020' ? 0.20 : 0.50;
+  const count = tab === '020' ? 732 : 530;
+  const pool = fee * count * 0.9;
+  const dist = [.30,.18,.12,.05,.05,.05,.05,.05,.025,.025];
+  if(rank <= 10) return '$'+(pool*dist[rank-1]).toFixed(0);
+  return '—';
+}
+
+function renderLeaderboard(tab){
+  const data = generateLBData(tab);
+  const medals = ['🥇','🥈','🥉'];
+  const avatarColors = ['#9FE870','#F5C842','#EF4444','#3B82F6','#7C3AED','#F97316','#14B8A6','#EC4899'];
+
+  document.getElementById('lb-body').innerHTML = data.map((p,i)=>`
+    <div class="lb-row ${p.you?'you':i<3?'top3':''}">
+      <div class="lb-rank">${medals[i]||p.rank}</div>
+      <div class="lb-avatar" style="background:${avatarColors[i%avatarColors.length]}20;border:1px solid ${avatarColors[i%avatarColors.length]}40">
+        ${p.name[0].toUpperCase()}
+      </div>
+      <div class="lb-name">${p.name}${p.you?' <span style="font-size:.5rem;color:var(--lime)">(vous)</span>':''}</div>
+      <div class="lb-score">${p.score}</div>
+      <div class="lb-prize" style="color:${p.prize!=='—'?'var(--valid)':'var(--muted)'}">${p.prize}</div>
+      <div class="lb-change" style="color:${p.change.startsWith('+')?'var(--valid)':p.change.startsWith('-')?'var(--red)':'var(--muted)'}">${p.change}</div>
+    </div>`).join('');
+}
+
+function switchTab(el, tab){
+  document.querySelectorAll('.lb-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  S.lbTab = tab;
+  renderLeaderboard(tab);
+}
+
+function liveUpdate(){
+  // Simulate live score updates
+  renderLeaderboard(S.lbTab);
+}
+
+// ─── PRIZE POOL ───────────────────────────────────────────────
+function renderPrizePool(){
+  const pool020 = 732 * 0.20 * 0.90;
+  const pool050 = 530 * 0.50 * 0.90;
+  const total = pool020 + pool050;
+  document.getElementById('prize-total').textContent = '$'+Math.round(total);
+  document.getElementById('prize-entries').textContent = (732+530);
+
+  const dist = [
+    {rank:'🥇 1er',    pct:'30%', amt:'$'+Math.round(pool020*.30)+' / $'+Math.round(pool050*.30)},
+    {rank:'🥈 2ème',  pct:'18%', amt:'$'+Math.round(pool020*.18)+' / $'+Math.round(pool050*.18)},
+    {rank:'🥉 3ème',  pct:'12%', amt:'$'+Math.round(pool020*.12)+' / $'+Math.round(pool050*.12)},
+    {rank:'4ème–5ème', pct:'10%', amt:'$'+Math.round(pool020*.05)+'×2 / $'+Math.round(pool050*.05)+'×2'},
+    {rank:'6ème–10ème',pct:'20%', amt:'$'+Math.round(pool020*.04)+'×5 / $'+Math.round(pool050*.04)+'×5'},
+  ];
+
+  document.getElementById('prize-dist').innerHTML = dist.map(d=>`
+    <div class="pd-row">
+      <span class="pd-rank">${d.rank}</span>
+      <span class="pd-pct">${d.pct}</span>
+      <span class="pd-amt">${d.amt}</span>
+    </div>`).join('');
+}
+
+// ─── TOAST ────────────────────────────────────────────────────
+function showToast(msg, dur=3500){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  t.style.animation = 'none';
+  requestAnimationFrame(()=>t.style.animation='su .3s ease');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(()=>t.style.display='none', dur);
+}
+
+// ─── ANTI-CHEAT ───────────────────────────────────────────────
+document.addEventListener('visibilitychange',()=>{
+  if(document.hidden && S.gameStarted && S.seconds > 0){
+    clearInterval(S.timerInterval);
+    S.seconds = 0;
+    submitRound();
+    showToast('🚫 Disqualifié — changement d\'onglet interdit en Daily League !', 5000);
+  }
+});
+document.addEventListener('contextmenu',e=>{ if(S.gameStarted) e.preventDefault(); });
+
+init();
+</script>
+</body>
+</html>
