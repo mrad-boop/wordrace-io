@@ -773,5 +773,98 @@ document.addEventListener('contextmenu', e=>{
   if(G.phase === 'game') e.preventDefault();
 });
 </script>
+
+<!-- ═══════════ SOCKET.IO MULTIPLAYER ═══════════ -->
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+<script>
+const BACKEND_URL = "https://wordrace-io.onrender.com";
+let socket = null, socketRoom = null, multiplayerActive = false;
+
+function initMultiplayer(username) {
+  socket = io(BACKEND_URL, { transports:["websocket","polling"], reconnection:true });
+
+  socket.on("connect", () => {
+    socket.emit("auth", { username }, (res) => {
+      if (res && res.ok) {
+        showToast("🔗 Serveur connecté — " + username);
+        updateMpBadge(true);
+        createMpRoom();
+      }
+    });
+  });
+
+  socket.on("disconnect", () => { updateMpBadge(false); });
+
+  socket.on("timer:tick", ({ secondsLeft }) => {
+    if (multiplayerActive && Math.abs(G.seconds - secondsLeft) > 2) G.seconds = secondsLeft;
+  });
+
+  socket.on("player:answer", ({ catIdx, word, isBot }) => {
+    if (!isBot) return;
+    const cell = document.getElementById("bot-0-" + catIdx);
+    if (cell && word) cell.innerHTML = '<span class="bot-ans">' + word + '</span>';
+  });
+
+  socket.on("anticheat:disqualified", ({ message }) => {
+    showToast("🚫 " + message, 5000);
+    G.seconds = 0; endRound();
+  });
+
+  socket.on("anticheat:warning", ({ message }) => { showToast("⚠️ " + message, 4000); });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && socket && G.phase === "game")
+      socket.emit("anticheat:tab_switch", { roomId: socketRoom && socketRoom.id });
+  });
+}
+
+function createMpRoom() {
+  if (!socket || !socket.connected) return;
+  socket.emit("room:create", { mode:"casual", options:{} }, (res) => {
+    if (res && res.ok) {
+      socketRoom = res.room; multiplayerActive = true;
+      socket.emit("player:ready", { roomId: res.room.id });
+    }
+  });
+}
+
+function syncAnswer(catIdx, word) {
+  if (!socket || !socket.connected || !socketRoom) return;
+  socket.emit("round:answer", { roomId: socketRoom.id, catIdx: catIdx, word: word }, function(r) {
+    if (r && r.valid && r.tier === 1) {
+      var inp = document.getElementById("inp-" + catIdx);
+      if (inp) inp.classList.add("valid");
+    }
+  });
+}
+
+function updateMpBadge(on) {
+  var b = document.getElementById("mp-badge");
+  if (!b) {
+    b = document.createElement("div"); b.id = "mp-badge";
+    b.style.cssText = "position:fixed;bottom:1rem;right:1rem;font-family:'Space Mono',monospace;font-size:.58rem;padding:.28rem .65rem;border-radius:100px;z-index:999;font-weight:700;letter-spacing:.07em;transition:all .3s";
+    document.body.appendChild(b);
+  }
+  b.textContent = on ? "🟢 LIVE" : "⚪ OFFLINE";
+  b.style.background = on ? "#DCFCE7" : "#F0F2EE";
+  b.style.color = on ? "#16A34A" : "#6B7280";
+  b.style.border = on ? "1px solid #16A34A" : "1px solid rgba(0,0,0,.08)";
+}
+
+// Patch handleInput to sync with server
+(function() {
+  var orig = window.handleInput;
+  window.handleInput = function(el, ci) {
+    if (orig) orig.call(this, el, ci);
+    if (multiplayerActive && el.value.trim()) syncAnswer(ci, el.value.trim());
+  };
+})();
+
+window.addEventListener("load", function() {
+  var u = "Player_" + Math.random().toString(36).slice(2,6).toUpperCase();
+  initMultiplayer(u);
+});
+</script>
+
 </body>
 </html>
