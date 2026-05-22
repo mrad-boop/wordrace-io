@@ -397,7 +397,8 @@ function startGame(){
   buildDesktopGrid();
   buildMobileCards();
   buildProgressDots();
-  updateScoreStrip();
+  // Hide scores during play — revealed after round
+  document.getElementById("score-strip").style.display="none";
   startTimer();
   scheduleBots();
 
@@ -474,8 +475,7 @@ function useHint(){
 function buildDesktopGrid(){
   let html = `<thead><tr>
     <th style="text-align:left">Catégorie</th>
-    <th class="you-col">⭐ Vous</th>
-    ${PLAYERS.slice(1).map(p=>`<th>🤖 ${p}</th>`).join('')}
+    <th class="you-col">⭐ Votre réponse</th>
   </tr></thead><tbody>`;
 
   CATS.forEach((cat,ci)=>{
@@ -490,9 +490,6 @@ function buildDesktopGrid(){
           onkeydown="handleKeyDown(event,${ci})"
         />
       </td>
-      ${PLAYERS.slice(1).map((_,bi)=>`<td style="text-align:center" id="bot-${bi}-${ci}">
-        <div class="bot-typing"><span></span><span></span><span></span></div>
-      </td>`).join('')}
     </tr>`;
   });
 
@@ -614,6 +611,7 @@ function updateProgressDots(){
 
 // ─── SCOREBOARD ───────────────────────────────────────────────
 function updateScoreStrip(){
+  document.getElementById("score-strip").style.display="flex";
   const sorted = Object.entries(G.scores).sort((a,b)=>b[1]-a[1]);
   document.getElementById('score-strip').innerHTML = sorted.map(([p,s],i)=>`
     <div class="score-pill${p==='Vous'?' you':''}">
