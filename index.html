@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WordRace.io — The Competitive Vocabulary Game</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);--lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--gold:#F5C842;--goldD:#D4A820;--goldBg:#FDF3CC;--text:#1A1A1A;--muted:#6B7280;--forest:#163300}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(248,249,247,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:.04em;color:var(--text);text-decoration:none}
+.logo span{color:var(--lime)}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+@media(max-width:640px){.nav-links{display:none}}
+.hero{position:relative;z-index:1;padding:7rem 1.5rem 1.5rem;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.18em;color:var(--forest);text-transform:uppercase;margin-bottom:.9rem;background:var(--limeBg);padding:.3rem .8rem;border-radius:100px;border:1px solid var(--lime)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--lime);animation:pulse 1.6s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.8rem,12vw,9rem);line-height:.88;color:var(--text);margin-bottom:.4rem}
+h1 .acc{color:var(--lime)}
+.sub{font-family:'Space Mono',monospace;font-size:clamp(.68rem,1.8vw,.88rem);color:var(--muted);margin-bottom:2rem;letter-spacing:.04em}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:520px;margin:0 auto 2.5rem;border:1px solid var(--border);border-radius:1rem;overflow:hidden}
+@media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{padding:.9rem .5rem;background:var(--surface);text-align:center;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-v{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--lime);line-height:1}
+.stat-l{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.1rem}
+.cards{display:flex;flex-wrap:wrap;gap:1rem;max-width:980px;margin:0 auto;padding:0 1.2rem 3rem}
+.card{flex:1 1 290px;border-radius:1.1rem;background:var(--surface);border:1.5px solid var(--border);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:hidden}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.10)}
+.card-free:hover{border-color:var(--lime)}
+.card-p2e:hover{border-color:var(--gold)}
+.stripe{height:4px;width:100%}
+.card-body{padding:1.8rem 1.7rem;display:flex;flex-direction:column;gap:.75rem}
+.badge{align-self:flex-start;font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.16em;padding:.2rem .6rem;border-radius:100px;font-weight:700;text-transform:uppercase}
+.badge-free{background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.6)}
+.badge-p2e{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.6)}
+.card-icon{font-size:2rem}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.1rem,5vw,3.1rem);line-height:.9;color:var(--text)}
+.card-desc{font-size:.83rem;color:var(--muted);line-height:1.6;max-width:265px}
+.feats{display:flex;flex-direction:column;gap:.35rem}
+.feat{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted)}
+.btn{display:flex;align-items:center;justify-content:space-between;padding:.78rem 1.4rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.06em;border:none;cursor:pointer;margin-top:.3rem;min-width:170px;transition:background .15s}
+.btn-lime{background:var(--lime);color:var(--forest)}.btn-lime:hover{background:var(--limeD)}
+.btn-gold{background:var(--gold);color:#1a1400}.btn-gold:hover{background:var(--goldD)}
+.card-note{font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)}
+.vs-col{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem .5rem;flex-shrink:0;min-width:44px}
+.vs-line{width:1px;flex:1;background:linear-gradient(to bottom,transparent,var(--border),transparent)}
+.vs-box{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:.1em;background:var(--surface2);padding:.32rem .45rem;border:1px solid var(--border);border-radius:.32rem}
+@media(max-width:680px){.cards{flex-direction:column}.vs-col{flex-direction:row;padding:.5rem 1rem;min-width:auto}.vs-line{width:auto;height:1px;flex:1;background:linear-gradient(to right,transparent,var(--border),transparent)}}
+.modes{max-width:980px;margin:0 auto;padding:0 1.2rem 4rem}
+.modes-title{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.07em;color:var(--muted);margin-bottom:.8rem;text-align:center}
+.modes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.55rem}
+.mode-card{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:.75rem;transition:all .2s;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.mode-card:hover{background:var(--surface2);transform:translateX(3px)}
+.mode-emoji{font-size:1.3rem}
+.mode-name{font-family:'Space Mono',monospace;font-size:.69rem;font-weight:700;color:var(--text);letter-spacing:.02em}
+.mode-sub{font-family:'Space Mono',monospace;font-size:.61rem;color:var(--muted)}
+.mode-tag{margin-left:auto;font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;letter-spacing:.08em;padding:.13rem .4rem;border-radius:100px;color:#fff}
+footer{border-top:1px solid var(--border);text-align:center;padding:1.5rem;font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);letter-spacing:.06em;line-height:2}
+footer a{color:var(--forest);text-decoration:none}
+#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.72rem 1.2rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.68rem;z-index:999;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="logo" href="#">WORD<span>RACE</span>.IO</a>
+  <ul class="nav-links">
+    <li><a href="#">How It Works</a></li>
+    <li><a href="#">Leaderboard</a></li>
+    <li><a href="#">Whitepaper</a></li>
+    <li><a href="#">Community</a></li>
+  </ul>
+</nav>
+<section class="hero">
+  <div class="eyebrow"><span class="dot"></span>Live — Season 1 Now Open</div>
+  <h1>WORD<span class="acc">RACE</span></h1>
+  <p class="sub">The Competitive Vocabulary Game &middot; Free to Play &middot; Play-to-Earn</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-v">12,400+</div><div class="stat-l">Players Online</div></div>
+    <div class="stat"><div class="stat-v">$48,200</div><div class="stat-l">Paid Out</div></div>
+    <div class="stat"><div class="stat-v">40s</div><div class="stat-l">Blitz Timer</div></div>
+    <div class="stat"><div class="stat-v">8</div><div class="stat-l">Categories</div></div>
+  </div>
+</section>
+<div class="cards">
+  <div class="card card-free">
+    <div class="stripe" style="background:#9FE870"></div>
+    <div class="card-body">
+      <span class="badge badge-free">FREE ZONE</span>
+      <div class="card-icon">🎯</div>
+      <div class="card-title">Casual<br>Training</div>
+      <p class="card-desc">No wallet. No fees. Jump straight into the game against AI bots across 3 difficulty levels.</p>
+      <div class="feats">
+        <div class="feat">🤖 AI Opponents (Easy / Medium / Hard)</div>
+        <div class="feat">⚡ Instant Start — No Sign-Up</div>
+        <div class="feat">🔁 Unlimited Replays</div>
+        <div class="feat">🏆 Personal Best Tracking</div>
+      </div>
+      <button class="btn btn-lime" onclick="showToast('Welcome! Loading Casual Training…')"><span>Enter Free Zone</span><span>→</span></button>
+      <p class="card-note">No wallet · No fees · Play instantly</p>
+    </div>
+  </div>
+  <div class="vs-col"><div class="vs-line"></div><div class="vs-box">VS</div><div class="vs-line"></div></div>
+  <div class="card card-p2e">
+    <div class="stripe" style="background:#F5C842"></div>
+    <div class="card-body">
+      <span class="badge badge-p2e">PLAY-TO-EARN</span>
+      <div class="card-icon">💎</div>
+      <div class="card-title">Web3<br>Arena</div>
+      <p class="card-desc">Connect your wallet and enter the competitive ladder. Wager USDT, climb Daily Leagues.</p>
+      <div class="feats">
+        <div class="feat">⚔️ Duel Arena — Real USDT Wagers</div>
+        <div class="feat">📅 Daily League — $0.20–$0.50 Entry</div>
+        <div class="feat">⚡ Power-Ups — Hint · Time Freeze</div>
+        <div class="feat">🔐 Smart Contract Escrow</div>
+      </div>
+      <button class="btn btn-gold" id="walletBtn" onclick="connectWallet()"><span>Connect Wallet</span><span>→</span></button>
+      <div style="font-size:1rem">🦊 👻 🔗</div>
+      <p class="card-note">Polygon & Solana · USDT · 5% rake only</p>
+    </div>
+  </div>
+</div>
+<div class="modes">
+  <div class="modes-title">4 Game Arenas</div>
+  <div class="modes-grid">
+    <div class="mode-card" style="border-left:3px solid #9FE870"><span class="mode-emoji">🆓</span><div><div class="mode-name">Casual Training</div><div class="mode-sub">vs AI bots</div></div><span class="mode-tag" style="background:#9FE870;color:#163300">FREE</span></div>
+    <div class="mode-card" style="border-left:3px solid #3B82F6"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="background:#3B82F6">P2E</span></div>
+    <div class="mode-card" style="border-left:3px solid #F5C842"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="background:#F5C842;color:#1a1400">P2E</span></div>
+    <div class="mode-card" style="border-left:3px solid #EF4444"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="background:#EF4444">P2E</span></div>
+  </div>
+</div>
+<footer>© 2026 WordRace.io — Built on Polygon & Solana · <a href="#">Terms</a> · <a href="#">Privacy</a> · <a href="#">Audit Report</a><br><span style="opacity:.4">WordRace is a skill-based game. Results vary. Play responsibly.</span></footer>
+<div id="toast"></div>
+<script>
+function showToast(msg){const t=document.getElementById('toast');t.textContent='✅ '+msg;t.style.display='block';setTimeout(()=>t.style.display='none',3500)}
+function connectWallet(){const btn=document.getElementById('walletBtn');btn.innerHTML='<span style="display:inline-block;width:12px;height:12px;border:2px solid #0003;border-top-color:#1a1400;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:8px"></span>Connecting...';btn.disabled=true;setTimeout(()=>{btn.innerHTML='<span>Connect Wallet</span><span>→</span>';btn.disabled=false;showToast('Wallet connected! Redirecting…')},1800)}
+</script>
+</body>
+</html>
