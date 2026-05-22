@@ -770,5 +770,100 @@ document.addEventListener('contextmenu',e=>{ if(S.gameStarted) e.preventDefault(
 
 init();
 </script>
+
+<!-- ═══════════ SOCKET.IO MULTIPLAYER ═══════════ -->
+<script src="https://cdn.socket.io/4.7.4/socket.io.min.js"></script>
+<script>
+const BACKEND_URL = "https://wordrace-io.onrender.com";
+let leagueSocket = null, leagueRoom = null;
+
+function initLeagueSocket(username) {
+  leagueSocket = io(BACKEND_URL, { transports:["websocket","polling"], reconnection:true });
+
+  leagueSocket.on("connect", () => {
+    leagueSocket.emit("auth", { username }, (res) => {
+      if (res && res.ok) {
+        updateLiveBadge(true);
+        console.log("[League] Socket connected:", res.user.username);
+      }
+    });
+  });
+
+  leagueSocket.on("disconnect", () => updateLiveBadge(false));
+
+  leagueSocket.on("timer:tick", ({ secondsLeft }) => {
+    if (S.gameStarted && Math.abs(S.seconds - secondsLeft) > 2) S.seconds = secondsLeft;
+  });
+
+  leagueSocket.on("game:end", ({ rankings }) => {
+    console.log("[League] Game ended. Rankings:", rankings);
+  });
+
+  leagueSocket.on("anticheat:disqualified", ({ message }) => {
+    showToast("🚫 " + message, 5000);
+    if (S.gameStarted) { clearInterval(S.timerInterval); submitRound(); }
+  });
+}
+
+function joinLeagueRoom(roomId) {
+  if (!leagueSocket || !leagueSocket.connected) return;
+  leagueSocket.emit("room:join", { roomId }, (res) => {
+    if (res && res.ok) {
+      leagueRoom = res.room;
+      leagueSocket.emit("player:ready", { roomId });
+      console.log("[League] Joined room:", roomId);
+    }
+  });
+}
+
+function syncLeagueAnswer(catIdx, word) {
+  if (!leagueSocket || !leagueSocket.connected || !leagueRoom) return;
+  leagueSocket.emit("round:answer", { roomId: leagueRoom.id, catIdx, word }, function(r) {
+    if (r && r.valid) {
+      var inp = document.getElementById("linp-" + catIdx);
+      if (inp) inp.classList.add("valid");
+    }
+  });
+}
+
+function updateLiveBadge(on) {
+  var dot = document.querySelector(".live-dot");
+  if (dot) {
+    dot.style.color = on ? "#EF4444" : "#6B7280";
+    dot.textContent = on ? "LIVE · Socket.io" : "OFFLINE";
+  }
+}
+
+// Patch leagueInput to sync
+(function() {
+  var orig = window.leagueInput;
+  window.leagueInput = function(el, ci) {
+    if (orig) orig.call(this, el, ci);
+    if (S.gameStarted && el.value.trim()) syncLeagueAnswer(ci, el.value.trim());
+  };
+})();
+
+// Init on load
+window.addEventListener("load", function() {
+  var u = "Player_" + Math.random().toString(36).slice(2,6).toUpperCase();
+  initLeagueSocket(u);
+});
+
+// Expose for confirmEntry
+var _origConfirm = window.confirmEntry;
+window.confirmEntry = function() {
+  if (_origConfirm) {
+    _origConfirm.call(this);
+    // After entry, join the league room via socket
+    setTimeout(function() {
+      fetch(BACKEND_URL + "/api/rooms?mode=daily_league&status=waiting")
+        .then(r => r.json()).then(rooms => {
+          if (rooms.length > 0) joinLeagueRoom(rooms[0].id);
+        }).catch(() => {});
+    }, 2000);
+  }
+};
+</script>
+
 </body>
 </html>
