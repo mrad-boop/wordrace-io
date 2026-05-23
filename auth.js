@@ -332,10 +332,139 @@ window.requireWallet = function(cb){
 };
 
 // ── INIT ──────────────────────────────────────────────────────
+
+// ── MOBILE HAMBURGER ──────────────────────────────────────────
+function buildHamburger(){
+  // Don't build twice
+  if(document.getElementById('wr-hamburger')) return;
+  const nav = document.querySelector('.topnav');
+  if(!nav) return;
+
+  // CSS
+  if(!document.getElementById('wr-ham-css')){
+    const s = document.createElement('style');
+    s.id = 'wr-ham-css';
+    s.textContent = `
+      #wr-hamburger{
+        display:none;flex-direction:column;justify-content:center;
+        align-items:center;gap:4px;width:32px;height:32px;
+        border:1px solid rgba(0,0,0,.1);border-radius:.45rem;
+        background:transparent;cursor:pointer;padding:0;flex-shrink:0;
+        transition:background .15s;
+      }
+      #wr-hamburger:hover{background:rgba(0,0,0,.06)}
+      #wr-hamburger span{display:block;width:16px;height:2px;
+        background:var(--text,#1A1A1A);border-radius:2px;transition:all .2s}
+      #wr-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+      #wr-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+      #wr-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+      @media(max-width:640px){#wr-hamburger{display:flex!important}}
+      @media(min-width:641px){#wr-hamburger{display:none!important}#wr-mobile-menu{display:none!important}}
+      #wr-mobile-menu{
+        display:none;position:fixed;top:48px;left:0;right:0;
+        background:#fff;border-bottom:1px solid rgba(0,0,0,.08);
+        box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:99;
+        padding:.5rem .75rem .75rem;
+      }
+      #wr-mobile-menu.open{display:block;animation:wr-mn-in .18s ease}
+      @keyframes wr-mn-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+      .wr-mn-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+      .wr-mn-item{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;
+        border-radius:.52rem;border:1px solid rgba(0,0,0,.07);
+        background:#F0F2EE;text-decoration:none;color:#1A1A1A;
+        font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;transition:all .15s}
+      .wr-mn-item:hover,.wr-mn-item.active{background:#E8F8DF;border-color:#9FE870;color:#163300}
+      .wr-mn-emoji{font-size:.95rem;flex-shrink:0}
+      .wr-mn-wrc{grid-column:1/-1;display:flex;align-items:center;
+        justify-content:space-between;padding:.52rem .8rem;border-radius:.52rem;
+        background:#E8F8DF;border:1px solid rgba(159,232,112,.35);margin-bottom:.2rem}
+      .wr-mn-wrc-label{font-family:'Space Mono',monospace;font-size:.58rem;color:#6B7280}
+      .wr-mn-wrc-val{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#9FE870}
+      .wr-mn-wrc-btn{font-family:'Space Mono',monospace;font-size:.56rem;font-weight:700;
+        padding:.18rem .5rem;border-radius:.32rem;border:none;
+        background:#9FE870;color:#163300;cursor:pointer}
+    `;
+    document.head.appendChild(s);
+  }
+
+  // Hamburger button
+  const btn = document.createElement('button');
+  btn.id = 'wr-hamburger';
+  btn.setAttribute('aria-label','Menu');
+  btn.innerHTML = '<span></span><span></span><span></span>';
+  btn.onclick = toggleHamburger;
+  nav.appendChild(btn);
+
+  // Menu
+  const cur = window.location.pathname;
+  const links = [
+    {href:'index.html',       emoji:'🏠', label:'Home'},
+    {href:'game.html',        emoji:'🎮', label:'Jouer'},
+    {href:'daily-league.html',emoji:'📅', label:'League'},
+    {href:'duel.html',        emoji:'⚔️', label:'Duel'},
+    {href:'leaderboard.html', emoji:'🏆', label:'Ranks'},
+    {href:'profile.html',     emoji:'👤', label:'Profil'},
+  ];
+
+  const menu = document.createElement('div');
+  menu.id = 'wr-mobile-menu';
+  menu.innerHTML = `
+    <div class="wr-mn-wrc" id="wr-mn-wrc-row" style="display:none">
+      <div>
+        <div class="wr-mn-wrc-label">🪙 WRC Balance</div>
+        <div class="wr-mn-wrc-val" id="wr-mn-wrc-v">—</div>
+      </div>
+      <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup();closeHamburger()">+ Recharger</button>
+    </div>
+    <div class="wr-mn-grid">
+      ${links.map(l => {
+        const active = cur.includes(l.href.replace('.html','')) || 
+                       (l.href==='index.html' && (cur==='/'||cur.endsWith('index.html')||cur.endsWith('wordrace-io/')));
+        return `<a href="${l.href}" class="wr-mn-item${active?' active':''}">
+          <span class="wr-mn-emoji">${l.emoji}</span>${l.label}
+        </a>`;
+      }).join('')}
+    </div>`;
+  document.body.appendChild(menu);
+
+  // Sync WRC in menu
+  function syncMenuWRC(){
+    const bal = parseInt(localStorage.getItem('wrc_balance')||'0');
+    const user = AUTH.user;
+    const row = document.getElementById('wr-mn-wrc-row');
+    const val = document.getElementById('wr-mn-wrc-v');
+    if(row) row.style.display = user ? 'flex' : 'none';
+    if(val) val.textContent = bal.toLocaleString() + ' WRC';
+  }
+  syncMenuWRC();
+  AUTH.subscribe(() => syncMenuWRC());
+  setInterval(syncMenuWRC, 2000);
+
+  // Close on outside click or link click
+  document.addEventListener('click', e => {
+    if(!btn.contains(e.target) && !menu.contains(e.target)) closeHamburger();
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeHamburger));
+}
+
+function toggleHamburger(){
+  const btn  = document.getElementById('wr-hamburger');
+  const menu = document.getElementById('wr-mobile-menu');
+  if(!btn||!menu) return;
+  const open = menu.classList.toggle('open');
+  btn.classList.toggle('open', open);
+}
+function closeHamburger(){
+  document.getElementById('wr-hamburger')?.classList.remove('open');
+  document.getElementById('wr-mobile-menu')?.classList.remove('open');
+}
+window.closeHamburger = closeHamburger;
+
 function init(){
   if(window.location.pathname.includes('admin')||window.location.pathname.includes('cgu-admin')) return;
   buildModals();
   buildNavBadge();
+  buildHamburger();
 
   // Auto-show login if accessing paid page without login
   const isPaidPage = window.location.pathname.includes('duel') || window.location.pathname.includes('daily-league');
