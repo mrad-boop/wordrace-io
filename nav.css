@@ -1,7 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   WORDRACE.IO — nav.css
-   Navigation: topnav, logo, user button, dropdown,
-   hamburger, mobile menu
+   WORDRACE.IO — nav.css v2 (clean)
    ═══════════════════════════════════════════════════════ */
 
 /* ── TOPNAV ─────────────────────────────────────────────── */
@@ -42,8 +40,7 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
   gap: .4rem;
   list-style: none;
   flex-shrink: 0;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
 }
 .nav-link, .nav-links a {
   font-family: 'Space Mono', monospace;
@@ -66,7 +63,7 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
 
 /* ── WRC BADGE ───────────────────────────────────────── */
 #nav-wrc-badge {
-  display: none; /* shown by auth.js after login */
+  display: none;
   align-items: center;
   gap: .3rem;
   font-family: 'Space Mono', monospace;
@@ -82,7 +79,7 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
   flex-shrink: 0;
 }
 
-/* ── USER BUTTON ─────────────────────────────────────── */
+/* ── USER BUTTON — DESKTOP ───────────────────────────── */
 #wr-nav-user {
   display: inline-flex;
   align-items: center;
@@ -100,16 +97,15 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
   flex-shrink: 0;
   position: relative;
   z-index: 10;
-  /* Native button reset */
   appearance: none;
   -webkit-appearance: none;
   outline: none;
-  /* Touch */
   -webkit-tap-highlight-color: rgba(159,232,112,.2);
   touch-action: manipulation;
   user-select: none;
 }
 #wr-nav-user:hover { background: #E8EBE5; }
+
 .user-av {
   width: 22px; height: 22px;
   border-radius: 50%;
@@ -156,11 +152,11 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
   color: #1A1A1A;
   cursor: pointer;
   text-decoration: none;
-  transition: background .12s;
   background: transparent;
   border: none;
   width: 100%;
   text-align: left;
+  transition: background .12s;
 }
 .wrud-item:hover { background: #F0F2EE; }
 .wrud-item.danger:hover { background: #FEE2E2; color: #EF4444; }
@@ -222,34 +218,19 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
 .wr-mn-wrc-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: #9FE870; }
 .wr-mn-wrc-btn {
   font-family: 'Space Mono', monospace;
-  font-size: .56rem;
-  font-weight: 700;
-  padding: .2rem .52rem;
-  border-radius: .32rem;
-  border: none;
-  background: #9FE870;
-  color: #163300;
-  cursor: pointer;
+  font-size: .56rem; font-weight: 700;
+  padding: .2rem .52rem; border-radius: .32rem;
+  border: none; background: #9FE870; color: #163300; cursor: pointer;
 }
-
-.wr-mn-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: .4rem;
-}
+.wr-mn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .4rem; }
 .wr-mn-item {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-  padding: .62rem .8rem;
-  border-radius: .52rem;
+  display: flex; align-items: center; gap: .5rem;
+  padding: .62rem .8rem; border-radius: .52rem;
   border: 1px solid rgba(0,0,0,.07);
   background: #F0F2EE;
-  text-decoration: none;
-  color: #1A1A1A;
+  text-decoration: none; color: #1A1A1A;
   font-family: 'Space Mono', monospace;
-  font-size: .68rem;
-  font-weight: 700;
+  font-size: .68rem; font-weight: 700;
   transition: background .15s;
 }
 .wr-mn-item:hover, .wr-mn-item.active {
@@ -260,39 +241,37 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
 .wr-mn-emoji { font-size: .95rem; flex-shrink: 0; }
 
 /* ══════════════════════════════════════════════════════
-   MOBILE ≤ 640px
+   MOBILE ≤ 640px — ONE clean block, no duplicates
    ══════════════════════════════════════════════════════ */
 @media (max-width: 640px) {
-  /* Nav: Logo + user btn + hamburger only */
-  .nav-links { display: none !important; }
-  #nav-wrc-badge { display: none !important; }
-  #nav-middle-info { display: none !important; }
-  .nav-back { display: none !important; }
-  #mode-label { display: none !important; }
+
+  /* Hide desktop nav items */
+  .nav-links,
+  #nav-wrc-badge,
+  #nav-middle-info,
+  .nav-back,
+  #mode-label,
   .score-strip { display: none !important; }
 
   /* Show hamburger */
   #wr-hamburger { display: flex !important; }
 
-  /* Topnav tight */
-  .topnav {
-    padding: 0 .8rem !important;
-    gap: .4rem !important;
-    height: 50px !important;
+  /* Tight topnav */
+  .topnav { padding: 0 .8rem !important; gap: .4rem !important; height: 50px !important; }
+
+  /* User button — NOT logged in: small text button */
+  #wr-nav-user {
+    font-size: .58rem !important;
+    padding: .22rem .55rem !important;
+    border-radius: 100px !important;
+    width: auto !important;
+    height: auto !important;
+    min-width: unset !important;
+    background: #F0F2EE !important;
+    color: #1A1A1A !important;
   }
 
-  /* User button: compact circle */
-  #wr-nav-user {
-    padding: 0 !important;
-    border-radius: 50% !important;
-    width: 36px !important;
-    height: 36px !important;
-    min-width: 36px !important;
-    justify-content: center !important;
-    gap: 0 !important;
-  }
-  /* When logged in: show only avatar circle */
-  #wr-nav-user.logged-in > span:not(.user-av) { display: none !important; }
+  /* User button — logged in: circle avatar */
   #wr-nav-user.logged-in {
     padding: 0 !important;
     border-radius: 50% !important;
@@ -302,19 +281,14 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
     justify-content: center !important;
     gap: 0 !important;
     background: #9FE870 !important;
+    color: #163300 !important;
   }
+  #wr-nav-user.logged-in > span { display: none !important; }
   #wr-nav-user.logged-in .user-av {
-    width: 26px !important;
-    height: 26px !important;
+    width: 26px !important; height: 26px !important;
     font-size: .72rem !important;
     background: transparent !important;
-  }
-  /* When NOT logged in: show compact sign-in button */
-  #wr-nav-user:not(.logged-in) {
-    font-size: .6rem !important;
-    padding: .25rem .6rem !important;
-    border-radius: 100px !important;
-    width: auto !important;
-    height: auto !important;
+    color: #163300 !important;
+    display: flex !important;
   }
 }
