@@ -312,6 +312,7 @@ function updateNavUser(user){
       ${user.wallet ? `<div class="wrud-wallet">🔗 ${user.wallet.slice(0,16)}...</div>` : `<div class="wrud-wallet" style="color:#F5C842;cursor:pointer" onclick="openWallet()">⚠️ Wallet not connected</div>`}
     </div>
     <a class="wrud-item" href="profile.html">👤 My Profile</a>
+    <a class="wrud-item" href="support.html">🎫 Support</a>
     <a class="wrud-item" href="leaderboard.html">🏆 Leaderboard</a>
     <!-- wallet connect hidden in beta -->
     <div class="wrud-divider"></div>
