@@ -362,8 +362,8 @@ function buildHamburger(){
       @media(min-width:641px){#wr-hamburger{display:none!important}#wr-mobile-menu{display:none!important}}
       #wr-mobile-menu{
         display:none;position:fixed;top:48px;left:0;right:0;
-        backgrornd:#fff;border-bottom:1px solid rgba(0,0,0,.08);
-        box-shadow:0 8px 24px rgba(0,0,0,.12);z-index:99;
+        background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.12);
+        box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:200;
         padding:.5rem .75rem .75rem;
       }
       #wr-mobile-menu.open{display:block;animation:wr-mn-in .18s ease}
@@ -399,7 +399,7 @@ function buildHamburger(){
   const cur = window.location.pathname;
   const links = [
     {href:'index.html',       emoji:'🏠', label:'Home'},
-    {href:'game.html',        emoji:'🎮', label:'Jorer'},
+    {href:'game.html',        emoji:'🎮', label:'Play'},
     {href:'daily-league.html',emoji:'📅', label:'League'},
     {href:'duel.html',        emoji:'⚔️', label:'Duel'},
     {href:'leaderboard.html', emoji:'🏆', label:'Ranks'},
