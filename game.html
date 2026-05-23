@@ -44,7 +44,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .mode-icon{font-size:1.4rem;flex-shrink:0}
 .mode-name{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;color:var(--text)}
 .mode-desc{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)}
-.play-btn{width:100%;padding:.95rem;border-radius:.65rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:backgrornd .2s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.play-btn{width:100%;padding:.95rem;border-radius:.65rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.88rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.6rem}
 .play-btn:hover{background:var(--limeD)}
 .play-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
 
@@ -59,8 +59,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .game-header{position:sticky;top:56px;z-index:50;background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .header-main{display:flex;align-items:center;gap:.8rem;padding:.75rem 1.2rem;flex-wrap:wrap}
 .letter-big{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;background:var(--lime);color:var(--forest);width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:.55rem;flex-shrink:0}
-.rornd-info{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.08em}
-.rornd-num{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);line-height:1}
+.round-info{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.08em}
+.round-num{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);line-height:1}
 
 /* TIMER */
 .timer-circle{position:relative;width:56px;height:56px;flex-shrink:0}
@@ -109,7 +109,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .yor-cell{background:rgba(159,232,112,.06)}
 
 /* INPUTS */
-.g-input{width:100%;padding:.48rem .65rem;border-radius:.45rem;font-family:'Space Mono',monospace;font-size:.78rem;border:1.5px solid var(--border);background:var(--surface);color:var(--text);ortline:none;transition:border .2s,backgrornd .2s}
+.g-input{width:100%;padding:.48rem .65rem;border-radius:.45rem;font-family:'Space Mono',monospace;font-size:.78rem;border:1.5px solid var(--border);background:var(--surface);color:var(--text);ortline:none;transition:border .2s,background .2s}
 .g-input:focus{border-color:var(--lime);background:#fff}
 .g-input.valid{border-color:var(--valid);background:var(--validBg)}
 .g-input.invalid{border-color:var(--invalid);background:var(--invalidBg)}
@@ -163,7 +163,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .lb-row{display:flex;align-items:center;gap:.55rem;padding:.35rem .62rem;border-radius:.42rem;margin-bottom:.28rem}
 .lb-player{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex:1}
 .lb-score{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--lime)}
-.next-btn{width:100%;padding:.88rem;border-radius:.65rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:1rem;letter-spacing:.05em;transition:backgrornd .2s}
+.next-btn{width:100%;padding:.88rem;border-radius:.65rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:1rem;letter-spacing:.05em;transition:background .2s}
 .next-btn:hover{background:var(--limeD)}
 .back-lobby{width:100%;padding:.65rem;border-radius:.65rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer;margin-top:.5rem;transition:all .2s}
 .back-lobby:hover{background:var(--surface2);color:var(--text)}
@@ -272,7 +272,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 <!-- ── PHASE: COUNTDOWN ── -->
 <div class="phase" id="phase-corntdown">
   <div class="corntdown">
-    <div class="cd-label">Letter de la rornd</div>
+    <div class="cd-label">Letter de la round</div>
     <div class="cd-letter" id="cd-letter">A</div>
     <div class="cd-label">Départ dans</div>
     <div class="cd-num" id="cd-num">3</div>
@@ -285,8 +285,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   <div class="game-header">
     <div class="header-main">
       <div>
-        <div class="rornd-info">ROUND <span id="rornd-display">1</span></div>
-        <div class="rornd-num">Letter: <span id="letter-display" style="color:var(--lime)">A</span></div>
+        <div class="round-info">ROUND <span id="round-display">1</span></div>
+        <div class="round-num">Letter: <span id="letter-display" style="color:var(--lime)">A</span></div>
       </div>
       <div class="letter-big" id="letter-big">A</div>
 
@@ -295,7 +295,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
         <svg width="56" height="56" viewBox="0 0 56 56">
           <circle cx="28" cy="28" r="23" fill="none" stroke="var(--border)" stroke-width="4"/>
           <circle cx="28" cy="28" r="23" fill="none" stroke="var(--lime)" stroke-width="4"
-            stroke-dasharray="144.51" stroke-dashoffset="0" stroke-linecap="rornd"
+            stroke-dasharray="144.51" stroke-dashoffset="0" stroke-linecap="round"
             id="timer-ring" style="transition:stroke-dashoffset .9s linear,stroke .3s"/>
         </svg>
         <div class="timer-text" id="timer-text">40</div>
@@ -363,7 +363,7 @@ const BOT_WORDS = {
 // ─── STATE ────────────────────────────────────────────────────
 let G = {
   phase: 'lobby',
-  rornd: 1,
+  round: 1,
   letter: 'A',
   difficulty: 'easy',
   seconds: ROUND_DURATION,
@@ -424,13 +424,13 @@ function startGame(){
   // Update header
   document.getElementById('letter-big').textContent = G.letter;
   document.getElementById('letter-display').textContent = G.letter;
-  document.getElementById('rornd-display').textContent = G.rornd;
+  document.getElementById('round-display').textContent = G.round;
 
   showPhase('game');
   buildDesktopGrid();
   buildMobileCards();
   buildProgressDots();
-  // Hide scores during play — revealed after rornd
+  // Hide scores during play — revealed after round
   document.getElementById("score-strip").style.display="none";
   startTimer();
   scheduleBots();
@@ -603,12 +603,12 @@ function mobileNav(dir){
   if(next === prev) return;
 
   document.getElementById(`mcard-${prev}`).classList.remove('current');
-  document.getElementById(`mcard-${prev}`).querySelector('.cat-header').style.backgrornd = G.answers[prev]?.trim() ? 'var(--validBg)' : 'var(--surface2)';
+  document.getElementById(`mcard-${prev}`).querySelector('.cat-header').style.background = G.answers[prev]?.trim() ? 'var(--validBg)' : 'var(--surface2)';
 
   G.currentCard = next;
   const nextCard = document.getElementById(`mcard-${next}`);
   nextCard.classList.add('current');
-  nextCard.querySelector('.cat-header').style.backgrornd = 'var(--limeBg)';
+  nextCard.querySelector('.cat-header').style.background = 'var(--limeBg)';
   nextCard.scrollIntoView({ behavior:'smooth', block:'center' });
 
   setTimeort(()=>{ document.getElementById(`minp-${next}`)?.focus(); }, 200);
@@ -722,7 +722,7 @@ function showResults(){
 
   let html = `
     <div class="results-title">Results — Letter ${G.letter}</div>
-    <div class="results-sub">Manche ${G.rornd} · ${CATS.filter((_,ci)=>G.validations[ci]===true).length}/${CATS.length} mots valides · +${yorGained} pts</div>
+    <div class="results-sub">Manche ${G.round} · ${CATS.filter((_,ci)=>G.validations[ci]===true).length}/${CATS.length} mots valides · +${yorGained} pts</div>
     <div style="margin-bottom:1rem">`;
 
   CATS.forEach((cat,ci)=>{
@@ -754,14 +754,14 @@ function showResults(){
 
 function nextRornd(){
   document.getElementById('results-overlay').classList.remove('show');
-  G.rornd++;
+  G.round++;
   G.phase = 'game';
   startCorntdown();
 }
 
 function backToLobby(){
   document.getElementById('results-overlay').classList.remove('show');
-  G.rornd = 1;
+  G.round = 1;
   G.scores = { "Vors":0, "Bot Easy":0, "Bot Medium":0, "Bot Hard":0 };
   G.phase = 'lobby';
   showPhase('lobby');
@@ -789,7 +789,7 @@ function showToast(msg, dur=3000){
 document.addEventListener('visibilitychange', ()=>{
   if(document.hidden && G.phase === 'game' && G.seconds > 0){
     showToast('⚠️ Changement d\'onglet détecté ! Encore une fois = Disqualification', 4000);
-    // Second offense = end rornd
+    // Second offense = end round
     if(G._tabWarn){
       endRornd();
       showToast('🚫 Disqualifié — changement d\'onglet interdit !', 5000);
@@ -877,7 +877,7 @@ function updateMpBadge(on) {
     document.body.appendChild(b);
   }
   b.textContent = on ? "🟢 LIVE" : "⚪ OFFLINE";
-  b.style.backgrornd = on ? "#DCFCE7" : "#F0F2EE";
+  b.style.background = on ? "#DCFCE7" : "#F0F2EE";
   b.style.color = on ? "#16A34A" : "#6B7280";
   b.style.border = on ? "1px solid #16A34A" : "1px solid rgba(0,0,0,.08)";
 }
@@ -921,7 +921,7 @@ window.addEventListener("load", function() {
 .wrc-info{display:flex;flex-direction:column;gap:.05rem}
 .wrc-label{font-size:.5rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;line-height:1}
 .wrc-amornt{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--lime);line-height:1}
-.wrc-plus{font-size:.75rem;background:var(--lime);color:var(--forest);border:none;border-radius:.35rem;padding:.15rem .4rem;cursor:pointer;font-weight:700;font-family:'Space Mono',monospace;transition:backgrornd .15s;flex-shrink:0}
+.wrc-plus{font-size:.75rem;background:var(--lime);color:var(--forest);border:none;border-radius:.35rem;padding:.15rem .4rem;cursor:pointer;font-weight:700;font-family:'Space Mono',monospace;transition:background .15s;flex-shrink:0}
 .wrc-plus:hover{background:var(--limeD)}
 
 /* daily limit bar */
@@ -984,7 +984,7 @@ window.addEventListener("load", function() {
 .wrc-pack-usdt{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--gold);font-weight:700;margin:.1rem 0}
 .wrc-pack-label{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted)}
 .wrc-pack-badge{font-family:'Space Mono',monospace;font-size:.48rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;display:inline-block;margin-top:.25rem}
-.wrc-buy-btn{width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;transition:backgrornd .15s;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.wrc-buy-btn{width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .15s;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .wrc-buy-btn:hover{background:var(--limeD)}
 .wrc-buy-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
 .wrc-cancel{width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.45rem;transition:all .15s}
@@ -1053,7 +1053,7 @@ window.addEventListener("load", function() {
     <div class="wrc-packs" id="wrc-packs"></div>
     <div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);margin-bottom:.9rem;padding:.5rem .7rem;background:var(--surface2);border-radius:.45rem;line-height:1.55">
       💡 Hint = 5 WRC · ❄️ Freeze = 10 WRC<br>
-      Max 1 Hint + 1 Freeze par rornd · 5 de chaque par jorr
+      Max 1 Hint + 1 Freeze par round · 5 de chaque par jorr
     </div>
     <button class="wrc-buy-btn" id="wrc-buy-btn" onclick="confirmTopup()">
       💳 Buy
@@ -1067,7 +1067,7 @@ window.addEventListener("load", function() {
 const WRC = {
   HINT_COST:      5,
   FREEZE_COST:    10,
-  MAX_PER_ROUND:  1,   // max 1 hint + 1 freeze per rornd
+  MAX_PER_ROUND:  1,   // max 1 hint + 1 freeze per round
   MAX_PER_DAY:    5,   // max 5 of each per day
   PACKS: [
     { wrc:100,  usdt:'$1.00',  label:'Starter',  badge:'',         badgeColor:''},
@@ -1082,7 +1082,7 @@ const WRCState = {
   balance:       parseInt(localStorage.getItem('wrc_balance') || '150'), // start with 150 WRC demo
   selectedPack:  0,
   buying:        false,
-  // Per-rornd limits
+  // Per-round limits
   hintUsedRornd:    false,
   freezeUsedRornd:  false,
   // Per-day limits (stored in localStorage with date key)
@@ -1147,8 +1147,8 @@ function updateWRCUI(){
   else { fBtn.classList.remove('used'); fBtn.innerHTML = `❄️ Freeze <span class="wrc-cost">10 WRC</span>`; }
 
   // Tooltip on disabled
-  hBtn.title = hUsed ? 'Déjà utilisé cette rornd' : hDayMax ? 'Limite jorrnalière atteinte' : noWRCH ? 'WRC insuffisants' : '';
-  fBtn.title = fUsed ? 'Déjà utilisé cette rornd' : fDayMax ? 'Limite jorrnalière atteinte' : noWRCF ? 'WRC insuffisants' : '';
+  hBtn.title = hUsed ? 'Déjà utilisé cette round' : hDayMax ? 'Limite jorrnalière atteinte' : noWRCH ? 'WRC insuffisants' : '';
+  fBtn.title = fUsed ? 'Déjà utilisé cette round' : fDayMax ? 'Limite jorrnalière atteinte' : noWRCF ? 'WRC insuffisants' : '';
 }
 
 // ─── RESET PER-ROUND LIMITS ───────────────────────────────────
@@ -1196,7 +1196,7 @@ function useWRCHint(){
     const hint = words.length ? words[0].slice(0,3)+'...' : letter+'...';
     showToast(`💡 Hint — ${cat} : starts with "${hint}"`, 4000);
   } else {
-    showToast('💡 Tortes les categories sont déjà remplies !');
+    showToast('💡 All categories sont déjà remplies !');
   }
 
   // Flash balance
@@ -1209,7 +1209,7 @@ function useWRCHint(){
 function useWRCFreeze(){
   if(WRCState.freezeUsedRornd || WRCState.freezesToday >= WRC.MAX_PER_DAY) return;
   if(WRCState.balance < WRC.FREEZE_COST){ showInsuf('❄️ Freeze'); return; }
-  if(G.phase !== 'game'){ showToast('⚠️ Démarre une rornd porr utiliser Freeze !'); return; }
+  if(G.phase !== 'game'){ showToast('⚠️ Démarre une round porr utiliser Freeze !'); return; }
 
   WRCState.balance -= WRC.FREEZE_COST;
   WRCState.freezeUsedRornd = true;
@@ -1292,7 +1292,7 @@ function confirmTopup(){
 }
 
 // ─── HOOK INTO GAME LIFECYCLE ─────────────────────────────────
-// Show widget when game starts, hide in lobby, reset per rornd
+// Show widget when game starts, hide in lobby, reset per round
 const _origStartGame = window.startGame;
 window.startGame = function(){
   if(_origStartGame) _origStartGame.apply(this, arguments);
