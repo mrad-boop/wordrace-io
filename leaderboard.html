@@ -17,37 +17,37 @@
   --text:#1A1A1A;--muted:#6B7280;--forest:#163300;
   --valid:#16A34A;--validBg:#DCFCE7;
 }
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+body{backgrornd:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
 
 /* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04);gap:.6rem;flex-wrap:wrap}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;backgrornd:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04);gap:.6rem;flex-wrap:wrap}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none;text-decoration:none!important;color:var(--text,#1A1A1A)!important}
 .nav-logo span{color:var(--lime)}
 .nav-links{display:flex;gap:.4rem;flex-wrap:wrap}
 .nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.28rem .62rem;border:1px solid var(--border);border-radius:.38rem;transition:all .15s;white-space:nowrap}
-.nav-link:hover{background:var(--surface2);color:var(--text)}
-.nav-link.active{background:var(--limeBg);border-color:var(--lime);color:var(--forest)}
+.nav-link:hover{backgrornd:var(--surface2);color:var(--text)}
+.nav-link.active{backgrornd:var(--limeBg);border-color:var(--lime);color:var(--forest)}
 
 /* HERO */
-.hero{margin-top:56px;background:linear-gradient(135deg,#163300 0%,#1e5200 50%,#163300 100%);padding:2rem 1.5rem 0;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;opacity:.04;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(159,232,112,.8) 20px,rgba(159,232,112,.8) 21px)}
+.hero{margin-top:56px;backgrornd:linear-gradient(135deg,#163300 0%,#1e5200 50%,#163300 100%);padding:2rem 1.5rem 0;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;opacity:.04;backgrornd:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(159,232,112,.8) 20px,rgba(159,232,112,.8) 21px)}
 .hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-bottom:1.2rem}
 .hero-left .hero-badge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);margin-bottom:.4rem}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,3.5rem);color:#fff;line-height:.92;letter-spacing:.03em}
 .hero-title span{color:var(--lime)}
 .hero-sub{font-family:'Space Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.5);margin-top:.3rem}
 .hero-stats{display:flex;gap:.8rem;flex-wrap:wrap}
-.hs{text-align:center;padding:.5rem .8rem;background:rgba(255,255,255,.08);border-radius:.6rem;border:1px solid rgba(255,255,255,.1)}
+.hs{text-align:center;padding:.5rem .8rem;backgrornd:rgba(255,255,255,.08);border-radius:.6rem;border:1px solid rgba(255,255,255,.1)}
 .hs-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime);line-height:1}
 .hs-label{font-family:'Space Mono',monospace;font-size:.5rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-top:.1rem}
 
 /* LIVE DOT */
 .live-dot{display:inline-flex;align-items:center;gap:.35rem;font-family:'Space Mono',monospace;font-size:.58rem;color:var(--red);font-weight:700}
-.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.5s infinite;display:inline-block}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;backgrornd:var(--red);animation:pulse 1.5s infinite;display:inline-block}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 
 /* TABS */
-.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04);position:sticky;top:56px;z-index:50}
+.tabs-bar{backgrornd:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04);position:sticky;top:56px;z-index:50}
 .tabs-inner{max-width:1100px;margin:0 auto;display:flex;padding:0 1.5rem;gap:.15rem;overflow-x:auto}
 .tab{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;padding:.72rem .9rem;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;transition:all .15s;white-space:nowrap;letter-spacing:.04em;display:flex;align-items:center;gap:.35rem}
 .tab:hover{color:var(--text)}
@@ -69,42 +69,42 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .podium-score{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text);line-height:1}
 .podium-prize{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--valid);font-weight:700}
 .podium-base{border-radius:.5rem .5rem 0 0;width:100%;display:flex;align-items:center;justify-content:center;padding:.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#fff}
-.p1 .podium-base{height:70px;background:linear-gradient(135deg,#d4af37,#f5c842)}
-.p2 .podium-base{height:50px;background:linear-gradient(135deg,#9ba5b0,#c0c9d4)}
-.p3 .podium-base{height:38px;background:linear-gradient(135deg,#8b6540,#cd8c52)}
-.p1 .podium-avatar{border-color:var(--gold);background:var(--goldBg)}
-.p2 .podium-avatar{border-color:#c0c9d4;background:#f0f2f5}
-.p3 .podium-avatar{border-color:#cd8c52;background:#fdf0e8}
+.p1 .podium-base{height:70px;backgrornd:linear-gradient(135deg,#d4af37,#f5c842)}
+.p2 .podium-base{height:50px;backgrornd:linear-gradient(135deg,#9ba5b0,#c0c9d4)}
+.p3 .podium-base{height:38px;backgrornd:linear-gradient(135deg,#8b6540,#cd8c52)}
+.p1 .podium-avatar{border-color:var(--gold);backgrornd:var(--goldBg)}
+.p2 .podium-avatar{border-color:#c0c9d4;backgrornd:#f0f2f5}
+.p3 .podium-avatar{border-color:#cd8c52;backgrornd:#fdf0e8}
 
 /* TABLE */
-.lb-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.lb-table-wrap{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .lb-table-head{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 .lbth-title{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);letter-spacing:.04em}
 .lb-controls{display:flex;gap:.4rem;flex-wrap:wrap}
-.lb-sel{padding:.32rem .62rem;border-radius:.4rem;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.62rem;outline:none;cursor:pointer}
-.lb-search{padding:.32rem .65rem;border-radius:.4rem;border:1px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.62rem;outline:none;width:140px;transition:border .15s}
+.lb-sel{padding:.32rem .62rem;border-radius:.4rem;border:1px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.62rem;ortline:none;cursor:pointer}
+.lb-search{padding:.32rem .65rem;border-radius:.4rem;border:1px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.62rem;ortline:none;width:140px;transition:border .15s}
 .lb-search:focus{border-color:var(--lime)}
 .lb-search::placeholder{color:var(--muted)}
 table.lt{width:100%;border-collapse:collapse}
-.lt th{padding:.52rem .95rem;font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);background:var(--surface);text-align:left;white-space:nowrap}
-.lt td{padding:.6rem .95rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text);border-bottom:1px solid rgba(0,0,0,.04);transition:background .12s}
+.lt th{padding:.52rem .95rem;font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);backgrornd:var(--surface);text-align:left;white-space:nowrap}
+.lt td{padding:.6rem .95rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text);border-bottom:1px solid rgba(0,0,0,.04);transition:backgrornd .12s}
 .lt tr:last-child td{border-bottom:none}
-.lt tr:hover td{background:var(--surface2)}
-.lt tr.you td{background:var(--limeBg) !important}
-.lt tr.top3 td{background:var(--goldBg)}
+.lt tr:hover td{backgrornd:var(--surface2)}
+.lt tr.yor td{backgrornd:var(--limeBg) !important}
+.lt tr.top3 td{backgrornd:var(--goldBg)}
 .rank-num{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;line-height:1;min-width:28px;text-align:center}
 .player-cell{display:flex;align-items:center;gap:.6rem}
 .player-av{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;flex-shrink:0}
 .player-name{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:140px}
-.player-country{font-size:.58rem;color:var(--muted)}
+.player-corntry{font-size:.58rem;color:var(--muted)}
 .pill{display:inline-block;font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;letter-spacing:.07em;padding:.12rem .4rem;border-radius:100px}
-.p-green{background:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
-.p-gold{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.35)}
-.p-lime{background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.35)}
-.p-red{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
-.p-blue{background:var(--blueBg);color:var(--blue);border:1px solid rgba(59,130,246,.25)}
-.p-purple{background:var(--purpleBg);color:var(--purple);border:1px solid rgba(124,58,237,.25)}
-.p-muted{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.p-green{backgrornd:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
+.p-gold{backgrornd:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.35)}
+.p-lime{backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.35)}
+.p-red{backgrornd:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+.p-blue{backgrornd:var(--blueBg);color:var(--blue);border:1px solid rgba(59,130,246,.25)}
+.p-purple{backgrornd:var(--purpleBg);color:var(--purple);border:1px solid rgba(124,58,237,.25)}
+.p-muted{backgrornd:var(--surface2);color:var(--muted);border:1px solid var(--border)}
 .change-up{color:var(--valid);font-weight:700}
 .change-dn{color:var(--red);font-weight:700}
 .change-eq{color:var(--muted)}
@@ -113,16 +113,16 @@ table.lt{width:100%;border-collapse:collapse}
 .pagination{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.1rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:.5rem}
 .page-info{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
 .page-btns{display:flex;gap:.35rem}
-.page-btn{padding:.3rem .65rem;border-radius:.38rem;border:1px solid var(--border);background:var(--surface);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer;transition:all .15s}
-.page-btn:hover:not(:disabled){background:var(--surface2);color:var(--text)}
-.page-btn.active{background:var(--lime);border-color:var(--lime);color:var(--forest);font-weight:700}
+.page-btn{padding:.3rem .65rem;border-radius:.38rem;border:1px solid var(--border);backgrornd:var(--surface);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer;transition:all .15s}
+.page-btn:hover:not(:disabled){backgrornd:var(--surface2);color:var(--text)}
+.page-btn.active{backgrornd:var(--lime);border-color:var(--lime);color:var(--forest);font-weight:700}
 .page-btn:disabled{opacity:.35;cursor:not-allowed}
 
 /* RIGHT SIDEBAR */
 .sidebar{display:flex;flex-direction:column;gap:.9rem}
 
 /* MY RANK CARD */
-.my-rank-card{background:var(--surface);border:2px solid var(--lime);border-radius:.9rem;padding:1.1rem;box-shadow:0 2px 8px rgba(159,232,112,.12)}
+.my-rank-card{backgrornd:var(--surface);border:2px solid var(--lime);border-radius:.9rem;padding:1.1rem;box-shadow:0 2px 8px rgba(159,232,112,.12)}
 .mrc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.7rem}
 .mrc-rank-big{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--lime);line-height:1}
 .mrc-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;padding:.28rem 0;border-bottom:1px solid var(--border)}
@@ -131,18 +131,18 @@ table.lt{width:100%;border-collapse:collapse}
 .mrc-val{font-weight:700;color:var(--text)}
 
 /* PRIZE POOL CARD */
-.prize-card{background:linear-gradient(135deg,#163300,#1e5200);border-radius:.9rem;padding:1.1rem;color:#fff}
+.prize-card{backgrornd:linear-gradient(135deg,#163300,#1e5200);border-radius:.9rem;padding:1.1rem;color:#fff}
 .pc-label{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
-.pc-amount{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--lime);line-height:1;margin-bottom:.15rem}
+.pc-amornt{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--lime);line-height:1;margin-bottom:.15rem}
 .pc-sub{font-family:'Space Mono',monospace;font-size:.57rem;color:rgba(255,255,255,.4);margin-bottom:.9rem}
 .pc-dist{display:flex;flex-direction:column;gap:.3rem}
-.pc-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem .45rem;background:rgba(255,255,255,.07);border-radius:.38rem}
+.pc-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem .45rem;backgrornd:rgba(255,255,255,.07);border-radius:.38rem}
 .pc-rank{font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.6)}
 .pc-pct{font-family:'Space Mono',monospace;font-size:.57rem;color:rgba(255,255,255,.35)}
 .pc-prize{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold)}
 
 /* TOP CATEGORIES */
-.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.cat-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .cat-title{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text);letter-spacing:.03em;margin-bottom:.7rem}
 .cat-row{display:flex;align-items:center;gap:.6rem;padding:.38rem 0;border-bottom:1px solid var(--border)}
 .cat-row:last-child{border-bottom:none}
@@ -157,12 +157,12 @@ table.lt{width:100%;border-collapse:collapse}
 
 /* STATS TAB */
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.7rem;margin-bottom:1.2rem}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:.95rem 1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.stat-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:.95rem 1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .sc-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;margin-bottom:.1rem}
 .sc-label{font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase}
 
 /* TOAST */
-#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
+#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);backgrornd:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
 @keyframes su{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -195,9 +195,9 @@ table.lt{width:100%;border-collapse:collapse}
 
 <style id="lb-mobile-css">
 #lb-mobile-cards{display:none;flex-direction:column;gap:.42rem;padding:.6rem .75rem}
-.lb-m-card{display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:.7rem;padding:.6rem .75rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}
-.lb-m-card.you{background:#E8F8DF;border-color:rgba(159,232,112,.4)}
-.lb-m-card.top3{background:#FDF3CC;border-color:rgba(245,200,66,.3)}
+.lb-m-card{display:flex;align-items:center;gap:.55rem;backgrornd:#fff;border:1px solid rgba(0,0,0,.07);border-radius:.7rem;padding:.6rem .75rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lb-m-card.yor{backgrornd:#E8F8DF;border-color:rgba(159,232,112,.4)}
+.lb-m-card.top3{backgrornd:#FDF3CC;border-color:rgba(245,200,66,.3)}
 .lb-m-rank{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;min-width:28px;text-align:center;line-height:1}
 .lb-m-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex-shrink:0}
 .lb-m-info{flex:1;min-width:0}
@@ -221,9 +221,9 @@ table.lt{width:100%;border-collapse:collapse}
     <a class="nav-link" href="game.html">🎮 Play</a>
     <a class="nav-link" href="daily-league.html">📅 League</a>
     <a class="nav-link active" href="#">🏆 Leaderboard</a>
-    <a class="nav-link" href="profile.html">👤 Profile</a>
+    <a class="nav-link" href="profile.html">👤 Profilee</a>
   </div>
-  <span id="nav-wrc-badge" onclick="openWRCTopup()" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
+  <span id="nav-wrc-badge" onclick="openWRCTopup()" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
 </nav>
 
 <!-- HERO -->
@@ -251,7 +251,7 @@ table.lt{width:100%;border-collapse:collapse}
     <div class="tab" onclick="switchTab('daily',this)">📅 Daily League</div>
     <div class="tab" onclick="switchTab('duel',this)">⚔️ Duel Arena</div>
     <div class="tab" onclick="switchTab('casual',this)">🆓 Casual</div>
-    <div class="tab" onclick="switchTab('weekly',this)">📆 Cette Semaine</div>
+    <div class="tab" onclick="switchTab('weekly',this)">📆 This Week</div>
     <div class="tab" onclick="switchTab('stats',this)">📊 Statistiques</div>
   </div>
 </div>
@@ -270,21 +270,21 @@ table.lt{width:100%;border-collapse:collapse}
       <div class="lb-table-wrap">
         <div class="lb-table-head">
           <div id="nav-middle-info" style="display:flex;align-items:center;gap:.7rem">
-            <div class="lbth-title">🌍 Classement Global All-Time</div>
+            <div class="lbth-title">🌍 Global All-Time Rankings</div>
             <div class="live-dot">LIVE</div>
           </div>
           <div class="lb-controls">
-            <input class="lb-search" placeholder="🔍 Rechercher..." oninput="filterTable('alltime',this.value)"/>
+            <input class="lb-search" placeholder="🔍 Search..." oninput="filterTable('alltime',this.value)"/>
             <select class="lb-sel" onchange="filterRegion(this.value)">
-              <option>🌍 Mondial</option><option>🇩🇿 Algérie</option><option>🇫🇷 France</option><option>🇹🇳 Tunisie</option><option>🇲🇦 Maroc</option>
+              <option>🌍 Global</option><option>🇩🇿 Algérie</option><option>🇫🇷 France</option><option>🇹🇳 Tunisie</option><option>🇲🇦 Maroc</option>
             </select>
             <button class="page-btn" onclick="exportCSV('alltime')">📤 CSV</button>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
-            <th>Rang</th><th>Joueur</th><th>Score</th><th>Parties</th>
-            <th>Win Rate</th><th>ELO</th><th>Gains</th><th>Variation</th>
+            <th>Rank</th><th>Player</th><th>Score</th><th>Games</th>
+            <th>Win Rate</th><th>ELO</th><th>Earnings</th><th>Change</th>
           </tr></thead>
           <tbody id="tb-alltime"></tbody></table>
         </div>
@@ -292,13 +292,13 @@ table.lt{width:100%;border-collapse:collapse}
 <div class="pagination">
           <div class="page-info" id="pi-alltime">1–20 sur 12,847</div>
           <div class="page-btns">
-            <button class="page-btn" onclick="prevPage('alltime')" id="prev-alltime" disabled>← Préc.</button>
+            <button class="page-btn" onclick="prevPage('alltime')" id="prev-alltime" disabled>← Prev</button>
             <button class="page-btn active" id="p1-alltime">1</button>
             <button class="page-btn" onclick="goPage('alltime',2)">2</button>
             <button class="page-btn" onclick="goPage('alltime',3)">3</button>
             <button class="page-btn" style="pointer-events:none">...</button>
             <button class="page-btn" onclick="goPage('alltime',643)">643</button>
-            <button class="page-btn" onclick="nextPage('alltime')" id="next-alltime">Suiv. →</button>
+            <button class="page-btn" onclick="nextPage('alltime')" id="next-alltime">Next →</button>
           </div>
         </div>
       </div>
@@ -310,33 +310,33 @@ table.lt{width:100%;border-collapse:collapse}
       <div class="lb-table-wrap">
         <div class="lb-table-head">
           <div style="display:flex;align-items:center;gap:.7rem">
-            <div class="lbth-title">📅 Daily League — Aujourd'hui</div>
+            <div class="lbth-title">📅 Daily League — Aujorrd'hui</div>
             <div class="live-dot">LIVE</div>
           </div>
           <div class="lb-controls">
             <select class="lb-sel" onchange="switchDailyTier(this.value)">
               <option value="std">$0.20 Standard</option><option value="prem">$0.50 Premium</option>
             </select>
-            <input class="lb-search" placeholder="🔍 Rechercher..." oninput="filterTable('daily',this.value)"/>
+            <input class="lb-search" placeholder="🔍 Search..." oninput="filterTable('daily',this.value)"/>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
-            <th>Rang</th><th>Joueur</th><th>Score</th><th>Mots</th>
-            <th>Lettre</th><th>Tier</th><th>Gain Estimé</th><th>Variation</th>
+            <th>Rank</th><th>Player</th><th>Score</th><th>Words</th>
+            <th>Letter</th><th>Tier</th><th>Est. Earnings</th><th>Change</th>
           </tr></thead>
           <tbody id="tb-daily"></tbody></table>
         </div>
         <div class="pagination">
           <div class="page-info">1–20 sur 1,262</div>
           <div class="page-btns">
-            <button class="page-btn" disabled>← Préc.</button>
+            <button class="page-btn" disabled>← Prev</button>
             <button class="page-btn active">1</button>
             <button class="page-btn">2</button>
             <button class="page-btn">3</button>
             <button class="page-btn" style="pointer-events:none">...</button>
             <button class="page-btn">64</button>
-            <button class="page-btn">Suiv. →</button>
+            <button class="page-btn">Next →</button>
           </div>
         </div>
       </div>
@@ -353,15 +353,15 @@ table.lt{width:100%;border-collapse:collapse}
           </div>
           <div class="lb-controls">
             <select class="lb-sel">
-              <option>Ce mois</option><option>Cette semaine</option><option>Aujourd'hui</option><option>All Time</option>
+              <option>Ce mois</option><option>Cette semaine</option><option>Aujorrd'hui</option><option>All Time</option>
             </select>
-            <input class="lb-search" placeholder="🔍 Rechercher..." oninput="filterTable('duel',this.value)"/>
+            <input class="lb-search" placeholder="🔍 Search..." oninput="filterTable('duel',this.value)"/>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
-            <th>Rang</th><th>Joueur</th><th>Duels</th><th>Victoires</th>
-            <th>Win Rate</th><th>Gains Nets</th><th>Plus Grosse Mise</th><th>Streak</th>
+            <th>Rank</th><th>Player</th><th>Duels</th><th>Wins</th>
+            <th>Win Rate</th><th>Earnings Nets</th><th>Biggest Wager</th><th>Streak</th>
           </tr></thead>
           <tbody id="tb-duel"></tbody></table>
         </div>
@@ -375,13 +375,13 @@ table.lt{width:100%;border-collapse:collapse}
         <div class="lb-table-head">
           <div class="lbth-title">🆓 Casual Training — High Scores</div>
           <div class="lb-controls">
-            <input class="lb-search" placeholder="🔍 Rechercher..." oninput="filterTable('casual',this.value)"/>
+            <input class="lb-search" placeholder="🔍 Search..." oninput="filterTable('casual',this.value)"/>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
-            <th>Rang</th><th>Joueur</th><th>Meilleur Score</th><th>Parties</th>
-            <th>Moy. Score</th><th>Mots Parfaits</th><th>Lettre Fétiche</th><th>Streak</th>
+            <th>Rank</th><th>Player</th><th>Best Score</th><th>Games</th>
+            <th>Avg Score</th><th>Perfect Words</th><th>Favorite Letter</th><th>Streak</th>
           </tr></thead>
           <tbody id="tb-casual"></tbody></table>
         </div>
@@ -393,18 +393,18 @@ table.lt{width:100%;border-collapse:collapse}
       <div class="lb-table-wrap">
         <div class="lb-table-head">
           <div style="display:flex;align-items:center;gap:.7rem">
-            <div class="lbth-title">📆 Classement Semaine — 19–25 Mai 2026</div>
+            <div class="lbth-title">📆 Weekly Rankings — 19–25 Mai 2026</div>
             <div class="live-dot">LIVE</div>
           </div>
           <div class="lb-controls">
-            <input class="lb-search" placeholder="🔍 Rechercher..."/>
-            <button class="page-btn" style="background:var(--limeBg);border-color:var(--lime);color:var(--forest)">🏆 Mes stats</button>
+            <input class="lb-search" placeholder="🔍 Search..."/>
+            <button class="page-btn" style="backgrornd:var(--limeBg);border-color:var(--lime);color:var(--forest)">🏆 Mes stats</button>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
-            <th>Rang</th><th>Joueur</th><th>Score Sem.</th><th>Parties</th>
-            <th>Victoires</th><th>Gains</th><th>Meilleure Série</th><th>Variation</th>
+            <th>Rank</th><th>Player</th><th>Score Sem.</th><th>Games</th>
+            <th>Wins</th><th>Earnings</th><th>Best Streak</th><th>Change</th>
           </tr></thead>
           <tbody id="tb-weekly"></tbody></table>
         </div>
@@ -415,32 +415,32 @@ table.lt{width:100%;border-collapse:collapse}
     <div class="tab-panel" id="panel-stats">
       <div class="stats-grid">
         <div class="stat-card" style="border-left:3px solid var(--lime)">
-          <div class="sc-val" style="color:var(--lime)">12,847</div><div class="sc-label">Joueurs Inscrits</div>
+          <div class="sc-val" style="color:var(--lime)">12,847</div><div class="sc-label">Players Inscrits</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--gold)">
-          <div class="sc-val" style="color:var(--gold)">$48,210</div><div class="sc-label">Total Distribué</div>
+          <div class="sc-val" style="color:var(--gold)">$48,210</div><div class="sc-label">Total Paid Out</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--blue)">
-          <div class="sc-val" style="color:var(--blue)">2.4M</div><div class="sc-label">Mots Soumis</div>
+          <div class="sc-val" style="color:var(--blue)">2.4M</div><div class="sc-label">Words Submitted</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--purple)">
-          <div class="sc-val" style="color:var(--purple)">87%</div><div class="sc-label">Taux Validation</div>
+          <div class="sc-val" style="color:var(--purple)">87%</div><div class="sc-label">Validation Rate</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--red)">
           <div class="sc-val" style="color:var(--red)">342</div><div class="sc-label">Anti-Cheat Flags</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--orange)">
-          <div class="sc-val" style="color:var(--orange)">$2,410</div><div class="sc-label">Rake Collecté</div>
+          <div class="sc-val" style="color:var(--orange)">$2,410</div><div class="sc-label">Rake Collected</div>
         </div>
       </div>
       <!-- Most used letters -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.9rem">🔤 Lettres les Plus Jouées</div>
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.9rem">🔤 Most Played Letters</div>
         <div style="display:flex;flex-wrap:wrap;gap:.4rem" id="letters-chart"></div>
       </div>
       <!-- Top categories -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.9rem">📊 Taux de Réussite par Catégorie</div>
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.9rem">📊 Success Rate by Category</div>
         <div id="cat-stats"></div>
       </div>
     </div>
@@ -452,25 +452,25 @@ table.lt{width:100%;border-collapse:collapse}
 
     <!-- MY RANK -->
     <div class="my-rank-card">
-      <div class="mrc-title">📍 Mon Classement</div>
+      <div class="mrc-title">📍 Mon Rankings</div>
       <div style="display:flex;align-items:flex-end;gap:.6rem;margin-bottom:.8rem">
-        <div><div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Rang Global</div><div class="mrc-rank-big">#4,821</div></div>
-        <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--valid);margin-bottom:.35rem">▲ +24 cette semaine</div>
+        <div><div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Global Rank</div><div class="mrc-rank-big">#4,821</div></div>
+        <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--valid);margin-bottom:.35rem">▲ +24 this week</div>
       </div>
-      <div class="mrc-row"><span class="mrc-label">Score All-Time</span><span class="mrc-val">18,400</span></div>
+      <div class="mrc-row"><span class="mrc-label">All-Time Score</span><span class="mrc-val">18,400</span></div>
       <div class="mrc-row"><span class="mrc-label">ELO</span><span class="mrc-val" style="color:var(--lime)">1,240</span></div>
       <div class="mrc-row"><span class="mrc-label">Win Rate</span><span class="mrc-val">61%</span></div>
-      <div class="mrc-row"><span class="mrc-label">Gains Totaux</span><span class="mrc-val" style="color:var(--valid)">$142.50</span></div>
-      <div class="mrc-row"><span class="mrc-label">Daily League</span><span class="mrc-val">#14 (aujourd'hui)</span></div>
+      <div class="mrc-row"><span class="mrc-label">Earnings Totaux</span><span class="mrc-val" style="color:var(--valid)">$142.50</span></div>
+      <div class="mrc-row"><span class="mrc-label">Daily League</span><span class="mrc-val">#14 (today)</span></div>
       <div class="mrc-row"><span class="mrc-label">WRC Balance</span><span class="mrc-val" style="color:var(--lime)" id="sidebar-wrc">150 WRC</span></div>
-      <a href="profile.html" style="display:block;text-align:center;margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;padding:.6rem;border-radius:.5rem;background:var(--limeBg);color:var(--forest);text-decoration:none;border:1px solid rgba(159,232,112,.3);transition:background .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">👤 Voir mon Profil →</a>
+      <a href="profile.html" style="display:block;text-align:center;margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;padding:.6rem;border-radius:.5rem;backgrornd:var(--limeBg);color:var(--forest);text-decoration:none;border:1px solid rgba(159,232,112,.3);transition:backgrornd .15s" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">👤 View my Profilee →</a>
     </div>
 
     <!-- PRIZE POOL -->
     <div class="prize-card">
-      <div class="pc-label">🏆 Prize Pool Daily — Aujourd'hui</div>
-      <div class="pc-amount">$631</div>
-      <div class="pc-sub">1,262 participants · 90% redistribués</div>
+      <div class="pc-label">🏆 Daily Prize Pool — Aujorrd'hui</div>
+      <div class="pc-amornt">$631</div>
+      <div class="pc-sub">1,262 participants · 90% redistributed</div>
       <div class="pc-dist">
         <div class="pc-row"><span class="pc-rank">🥇 1er</span><span class="pc-pct">30%</span><span class="pc-prize">$170</span></div>
         <div class="pc-row"><span class="pc-rank">🥈 2ème</span><span class="pc-pct">18%</span><span class="pc-prize">$102</span></div>
@@ -482,13 +482,13 @@ table.lt{width:100%;border-collapse:collapse}
 
     <!-- TOP CATEGORIES -->
     <div class="cat-card">
-      <div class="cat-title">🏅 Meilleur par Catégorie</div>
+      <div class="cat-title">🏅 Best by Category</div>
       <div id="top-cats"></div>
     </div>
 
     <!-- RECENT ACTIVITY -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text);letter-spacing:.03em;margin-bottom:.7rem">⚡ Activité Récente</div>
+    <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text);letter-spacing:.03em;margin-bottom:.7rem">⚡ Recent Activity</div>
       <div id="recent-activity"></div>
     </div>
 
@@ -496,13 +496,13 @@ table.lt{width:100%;border-collapse:collapse}
 </div>
 
 <!-- WRC TOPUP MODAL -->
-<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
-  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Recharger WRC</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Crédits instantanés</div>
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Top up WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Instant credits</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
-    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Acheter</button>
-    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Buy</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
   </div>
 </div>
 
@@ -517,7 +517,7 @@ let _wrcSel=0,_wrcBuying=false;
 function openWRCTopup(){_rp();document.getElementById('wrc-topup-overlay').style.display='flex'}
 function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
 function _rp(){
-  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};backgrornd:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
   const p=WRC_CONFIG.PACKS[_wrcSel];
   document.getElementById('wrc-topup-confirm').textContent=`💳 ${p.wrc} WRC — ${p.usdt} USDT`;
 }
@@ -526,7 +526,7 @@ function execTopup(){
   if(_wrcBuying)return;_wrcBuying=true;
   const btn=document.getElementById('wrc-topup-confirm'),p=WRC_CONFIG.PACKS[_wrcSel];
   btn.textContent='⏳...';btn.disabled=true;
-  setTimeout(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();showToast('✅ '+(p.wrc+(p.bonus||0))+' WRC ajoutés !')},1500);
+  setTimeort(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();showToast('✅ '+(p.wrc+(p.bonus||0))+' WRC ajortés !')},1500);
 }
 WRCEngine.subscribe(bal=>{
   const nb=document.getElementById('nav-wrc-val');if(nb)nb.textContent=bal.toLocaleString();
@@ -547,7 +547,7 @@ function genAllTime(){
     const wr=Math.max(35,78-i*2)+'%';
     const elo=Math.max(500,2100-i*60);
     const earned='$'+(Math.max(0,2840-i*210).toFixed(0));
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,games,wr,elo,earned,change:CHANGES[i%CHANGES.length],you:i===YOU_ROW};
+    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,games,wr,elo,earned,change:CHANGES[i%CHANGES.length],yor:i===YOU_ROW};
   });
 }
 function genDaily(){
@@ -557,7 +557,7 @@ function genDaily(){
     const letter=['M','A','S','T','B','L','R','F','C','P'][i%10];
     const tier=i%3===0?'Premium':'Standard';
     const gain='$'+(i<10?[170,102,68,28,28,22,22,22,22,22][i]:0);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,words,letter,tier,gain,change:CHANGES[i%CHANGES.length],you:i===YOU_ROW};
+    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,words,letter,tier,gain,change:CHANGES[i%CHANGES.length],yor:i===YOU_ROW};
   });
 }
 function genDuel(){
@@ -568,7 +568,7 @@ function genDuel(){
     const earned='$'+(Math.max(0,2840-i*195).toFixed(0));
     const maxWager='$'+[50,50,50,25,25,25,10,10,10,5,5,5,5,5,5,5,5,5,5,5][i];
     const streak=Math.max(0,12-i);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],duels,wins,wr,earned,maxWager,streak,you:i===YOU_ROW};
+    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],duels,wins,wr,earned,maxWager,streak,yor:i===YOU_ROW};
   });
 }
 function genCasual(){
@@ -579,7 +579,7 @@ function genCasual(){
     const perfect=Math.max(0,180-i*10);
     const letters='MLASTBRCPF'[i%10];
     const streak=Math.max(0,15-i);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],best,games,avg,perfect,letters,streak,you:i===YOU_ROW};
+    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],best,games,avg,perfect,letters,streak,yor:i===YOU_ROW};
   });
 }
 function genWeekly(){
@@ -589,7 +589,7 @@ function genWeekly(){
     const wins=Math.floor(games*(0.75-i*0.02));
     const earned='$'+(Math.max(0,380-i*22).toFixed(0));
     const streak=Math.max(0,9-i);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,games,wins,earned,streak,change:CHANGES[i%CHANGES.length],you:i===YOU_ROW};
+    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,games,wins,earned,streak,change:CHANGES[i%CHANGES.length],yor:i===YOU_ROW};
   });
 }
 
@@ -598,7 +598,7 @@ function podium(containerId, data){
   const [p1,p2,p3]=data;
   const spot=(p,cls,ht)=>`
     <div class="podium-spot ${cls}">
-      <div class="podium-avatar" style="border-color:${cls==='p1'?'var(--gold)':cls==='p2'?'#c0c9d4':'#cd8c52'};background:${COLORS[data.indexOf(p)%COLORS.length]}22">
+      <div class="podium-avatar" style="border-color:${cls==='p1'?'var(--gold)':cls==='p2'?'#c0c9d4':'#cd8c52'};backgrornd:${COLORS[data.indexOf(p)%COLORS.length]}22">
         ${p.name[0].toUpperCase()}
         <div class="podium-medal">${cls==='p1'?'🥇':cls==='p2'?'🥈':'🥉'}</div>
       </div>
@@ -615,11 +615,11 @@ function podium(containerId, data){
 
 function renderRows(tbodyId, data, cols){
   document.getElementById(tbodyId).innerHTML=data.map(r=>`
-    <tr class="${r.you?'you':r.rank<=3?'top3':''}">
+    <tr class="${r.yor?'yor':r.rank<=3?'top3':''}">
       <td><span class="rank-num" style="color:${r.rank===1?'var(--gold)':r.rank===2?'#9ba5b0':r.rank===3?'#cd8c52':'var(--muted)'}">${r.rank<=3?['🥇','🥈','🥉'][r.rank-1]:r.rank}</span></td>
       <td><div class="player-cell">
-        <div class="player-av" style="background:${COLORS[r.rank%COLORS.length]}22;color:${COLORS[r.rank%COLORS.length]}">${r.name[0].toUpperCase()}</div>
-        <div><div class="player-name">${r.name}${r.you?' <span style="font-size:.5rem;color:var(--lime)">(vous)</span>':''}</div><div class="player-country">${r.flag}</div></div>
+        <div class="player-av" style="backgrornd:${COLORS[r.rank%COLORS.length]}22;color:${COLORS[r.rank%COLORS.length]}">${r.name[0].toUpperCase()}</div>
+        <div><div class="player-name">${r.name}${r.yor?' <span style="font-size:.5rem;color:var(--lime)">(vors)</span>':''}</div><div class="player-corntry">${r.flag}</div></div>
       </div></td>
       ${cols(r)}
     </tr>`).join('');
@@ -693,23 +693,23 @@ function initStats(){
   document.getElementById('letters-chart').innerHTML=letters.map((l,i)=>`
     <div style="display:flex;flex-direction:column;align-items:center;gap:.18rem">
       <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:var(--muted)">${vals[i]}%</div>
-      <div style="width:22px;border-radius:.2rem .2rem 0 0;height:${vals[i]/max*55}px;background:${vals[i]>75?'var(--lime)':vals[i]>50?'var(--gold)':'var(--surface3)'};min-height:4px;transition:height .4s ease" title="${l}: ${vals[i]}%"></div>
+      <div style="width:22px;border-radius:.2rem .2rem 0 0;height:${vals[i]/max*55}px;backgrornd:${vals[i]>75?'var(--lime)':vals[i]>50?'var(--gold)':'var(--surface3)'};min-height:4px;transition:height .4s ease" title="${l}: ${vals[i]}%"></div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:.75rem;color:var(--muted)">${l}</div>
     </div>`).join('');
 
   // Cat stats
-  const cats=[['🐾 Animal',84],['🌍 Pays',91],['👤 Prénom',88],['🍎 Aliment',79],['💼 Métier',72],['🏷️ Marque',86],['⚽ Sport',81],['🎬 Film/Série',65]];
+  const cats=[['🐾 Animal',84],['🌍 Corntry',91],['👤 First Name',88],['🍎 Food',79],['💼 Profession',72],['🏷️ Brand',86],['⚽ Sport',81],['🎬 Movie/Series',65]];
   document.getElementById('cat-stats').innerHTML=cats.map(([cat,pct])=>`
     <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.45rem">
       <span style="font-family:'Space Mono',monospace;font-size:.63rem;min-width:100px;color:var(--text)">${cat}</span>
-      <div style="flex:1;height:7px;background:var(--surface2);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${pct>=85?'var(--lime)':pct>=75?'var(--gold)':'var(--red)'};border-radius:4px"></div></div>
+      <div style="flex:1;height:7px;backgrornd:var(--surface2);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;backgrornd:${pct>=85?'var(--lime)':pct>=75?'var(--gold)':'var(--red)'};border-radius:4px"></div></div>
       <span style="font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;color:${pct>=85?'var(--valid)':pct>=75?'var(--gold)':'var(--red)'}; min-width:32px">${pct}%</span>
     </div>`).join('');
 }
 
 function initSidebar(){
   // Top cats
-  const cats=[['🐾','Animal','petit_bac_pro','140pts'],['🌍','Pays','lexique_queen','138pts'],['👤','Prénom','crypto_gamer','135pts'],['🍎','Aliment','petit_bac_pro','132pts'],['💼','Métier','vocab_king','128pts'],['⚽','Sport','mrad-boop','125pts'],['🏷️','Marque','alphabeto','130pts'],['🎬','Film','lexique_queen','122pts']];
+  const cats=[['🐾','Animal','petit_bac_pro','140pts'],['🌍','Corntry','lexique_queen','138pts'],['👤','First Name','crypto_gamer','135pts'],['🍎','Food','petit_bac_pro','132pts'],['💼','Profession','vocab_king','128pts'],['⚽','Sport','mrad-boop','125pts'],['🏷️','Brand','alphabeto','130pts'],['🎬','Film','lexique_queen','122pts']];
   document.getElementById('top-cats').innerHTML=cats.map(([e,cat,player,score])=>`
     <div class="cat-row">
       <div class="cat-emoji">${e}</div>
@@ -724,7 +724,7 @@ function initSidebar(){
   const acts=[
     {t:'💎 Duel gagné',u:'petit_bac_pro',a:'+$19',c:'var(--lime)'},
     {t:'🏆 #1 Daily League',u:'lexique_queen',a:'+$170',c:'var(--gold)'},
-    {t:'⚡ Nouveau record',u:'crypto_gamer',a:'140 pts',c:'var(--blue)'},
+    {t:'⚡ Norveau record',u:'crypto_gamer',a:'140 pts',c:'var(--blue)'},
     {t:'🎯 Streak ×10',u:'mrad-boop',a:'🔥×10',c:'var(--orange)'},
     {t:'💎 Duel gagné',u:'vocab_king',a:'+$9.50',c:'var(--lime)'},
   ];
@@ -753,7 +753,7 @@ function switchDailyTier(t){ showToast('📅 Tier : '+(t==='std'?'Standard $0.20
 
 // ─── EXPORT ───────────────────────────────────────────────────
 function exportCSV(mode){
-  showToast('📤 Export CSV du classement '+mode+' en cours...');
+  showToast('📤 Export CSV du classement '+mode+' en corrs...');
 }
 
 // ─── COUNTDOWN ────────────────────────────────────────────────
@@ -775,7 +775,7 @@ function goPage(m,p){ showToast('→ Page '+p); }
 function showToast(msg,dur=3000){
   const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';
   t.style.animation='none';requestAnimationFrame(()=>t.style.animation='su .3s ease');
-  clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.style.display='none',dur);
+  clearTimeort(showToast._t);showToast._t=setTimeort(()=>t.style.display='none',dur);
 }
 
 // ─── LIVE UPDATES ─────────────────────────────────────────────
@@ -809,14 +809,14 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
       links.push({ href: a.href || a.getAttribute('href') || '#', text: a.textContent.trim(), active: a.classList.contains('active') });
     });
 
-    // Default links if nav-links not found or empty
+    // Default links if nav-links not fornd or empty
     const defaultLinks = [
       { href:'index.html',        emoji:'🏠', text:'Home' },
       { href:'game.html',         emoji:'🎮', text:'Play' },
       { href:'daily-league.html', emoji:'📅', text:'League' },
       { href:'duel.html',         emoji:'⚔️', text:'Duel' },
       { href:'leaderboard.html',  emoji:'🏆', text:'Ranks' },
-      { href:'profile.html',      emoji:'👤', text:'Profile' },
+      { href:'profile.html',      emoji:'👤', text:'Profilee' },
       { href:'terms.html',        emoji:'📋', text:'Terms' },
     ];
 
@@ -830,7 +830,7 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
           <div class="wr-mn-wrc-label">🪙 Balance WRC</div>
           <div class="wr-mn-wrc-val" id="wr-mn-wrc-val">—</div>
         </div>
-        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Recharger</button>
+        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Top up</button>
       </div>
       <div class="wr-mn-grid">
         ${defaultLinks.map(l => {
@@ -852,7 +852,7 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
     syncWRC();
     setInterval(syncWRC, 2000);
 
-    // Close menu on outside click
+    // Close menu on ortside click
     document.addEventListener('click', e => {
       if(!btn.contains(e.target) && !menu.contains(e.target)) closeMenu();
     });
@@ -892,7 +892,7 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
     el.innerHTML=data.map(function(p,i){
       var medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
       var rankColor=i===0?'#D4AF37':i===1?'#9BA5B0':i===2?'#CD8C52':'#9B9B9B';
-      var cls=p.you?'you':i<3?'top3':'';
+      var cls=p.yor?'yor':i<3?'top3':'';
       var col=COLORS[i%COLORS.length];
       var ch=p.change||'—';
       var chCol=ch.includes('+')||ch.includes('▲')?'#16A34A':ch==='—'?'#9B9B9B':'#EF4444';
@@ -900,9 +900,9 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
       var meta=(p.games||p.duels||0)+' parties · '+(p.wr||'—')+' WR · ELO '+(p.elo||'—');
       return '<div class="lb-m-card '+cls+'">'
         +'<div class="lb-m-rank" style="color:'+rankColor+'">'+medal+'</div>'
-        +'<div class="lb-m-av" style="background:'+col+'22;color:'+col+'">'+((p.name||'?')[0].toUpperCase())+'</div>'
+        +'<div class="lb-m-av" style="backgrornd:'+col+'22;color:'+col+'">'+((p.name||'?')[0].toUpperCase())+'</div>'
         +'<div class="lb-m-info">'
-          +'<div class="lb-m-name">'+(p.name||'?')+(p.you?' <span style="font-size:.46rem;color:#9FE870">(vous)</span>':'')+'</div>'
+          +'<div class="lb-m-name">'+(p.name||'?')+(p.yor?' <span style="font-size:.46rem;color:#9FE870">(vors)</span>':'')+'</div>'
           +'<div class="lb-m-meta">'+meta+'</div>'
         +'</div>'
         +'<div class="lb-m-right">'
@@ -918,13 +918,13 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
   var _orig=window.switchTab;
   window.switchTab=function(name,el){
     if(_orig)_orig(name,el);
-    setTimeout(function(){
+    setTimeort(function(){
       var fn={alltime:window.genAllTime,daily:window.genDaily,duel:window.genDuel,casual:window.genCasual,weekly:window.genWeekly}[name];
       if(fn)renderCards(fn());
     },50);
   };
   window.addEventListener('load',function(){
-    setTimeout(function(){if(window.genAllTime)renderCards(window.genAllTime())},200);
+    setTimeort(function(){if(window.genAllTime)renderCards(window.genAllTime())},200);
   });
 })();
 </script>
