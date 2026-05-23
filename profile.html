@@ -1017,5 +1017,98 @@ WRCEngine.subscribe(function(bal){
   syncM();setInterval(syncM,2000);window.addEventListener('resize',syncM);
 })();
 </script>
+
+<script id="profile-init">
+// ── Load logged-in user into profile ─────────────────────────
+(function(){
+  function initProfile(){
+    // Get user from auth system
+    const user = (typeof WRAuth !== 'undefined' && WRAuth.user)
+      ? WRAuth.user
+      : (function(){ try{ return JSON.parse(localStorage.getItem('wr_user')||'null'); }catch{return null;} })();
+
+    if(!user){
+      // Not logged in → redirect to home with login prompt
+      window.location.href = 'index.html';
+      return;
+    }
+
+    // Avatar initials (up to 2 chars)
+    const initials = user.username
+      .replace(/[^a-zA-Z0-9]/g,'')
+      .slice(0,2)
+      .toUpperCase() || '?';
+
+    // Username
+    const av = document.getElementById('avatar-display');
+    if(av) av.textContent = initials;
+
+    const un = document.getElementById('username-display');
+    if(un) un.textContent = user.username;
+
+    // Joined date
+    const jd = document.getElementById('joined-display');
+    if(jd){
+      const date = user.joinedAt
+        ? new Date(user.joinedAt).toLocaleDateString('en-US',{month:'long',year:'numeric'})
+        : 'May 2026';
+      jd.textContent = 'Member since ' + date;
+    }
+
+    // Settings form pre-fill
+    const su = document.getElementById('s-username');
+    if(su) su.value = user.username;
+
+    const se = document.getElementById('s-email');
+    if(se) se.value = user.email || '';
+
+    // Update page title
+    document.title = 'WordRace.io — ' + user.username + ' Profile';
+
+    // Update stat card username occurrences
+    document.querySelectorAll('[data-user-username]').forEach(el => {
+      el.textContent = user.username;
+    });
+
+    // WRC balance in sidebar
+    const wrcEl = document.getElementById('sidebar-wrc');
+    if(wrcEl){
+      const bal = parseInt(localStorage.getItem('wrc_balance')||'0');
+      wrcEl.textContent = bal.toLocaleString() + ' WRC';
+    }
+
+    // Fix wallet status
+    const walletEl = document.querySelector('.wc-addr');
+    if(walletEl){
+      walletEl.textContent = user.wallet
+        ? user.wallet.slice(0,20) + '...'
+        : 'No wallet connected';
+    }
+  }
+
+  // Run after auth.js has initialized
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){
+      setTimeout(initProfile, 150);
+    });
+  } else {
+    setTimeout(initProfile, 150);
+  }
+
+  // Also subscribe to auth changes
+  if(typeof WRAuth !== 'undefined'){
+    WRAuth.subscribe(function(user){ if(user) initProfile(); });
+  } else {
+    // Wait for auth.js to load
+    window.addEventListener('load', function(){
+      if(typeof WRAuth !== 'undefined'){
+        WRAuth.subscribe(function(user){ if(user) initProfile(); });
+      }
+      initProfile();
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
