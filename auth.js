@@ -383,6 +383,7 @@ function buildHamburger(){
     {href:'duel.html',        emoji:'⚔️', label:'Duel'},
     {href:'leaderboard.html', emoji:'🏆', label:'Ranks'},
     {href:'profile.html',     emoji:'👤', label:'Profile'},
+    {href:'support.html',     emoji:'🎫', label:'Support'},
   ];
 
   const menu = document.createElement('div');
