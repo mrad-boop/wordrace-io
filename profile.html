@@ -245,11 +245,11 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <div class="pb-bg"></div>
   <div class="pb-inner">
     <div class="avatar-wrap">
-      <div class="avatar" id="avatar-display">MB</div>
+      <div class="avatar" id="avatar-display">?</div>
       <div class="avatar-badge">🏆</div>
     </div>
     <div class="pb-info">
-      <div class="pb-username" id="username-display">mrad-boop</div>
+      <div class="pb-username" id="username-display">...</div>
       <div class="pb-meta">
         <span class="pb-tag pt-lime">🎯 Veteran</span>
         <span class="pb-tag pt-gold">💎 P2E Player</span>
@@ -1095,27 +1095,32 @@ WRCEngine.subscribe(function(bal){
     }
   }
 
-  // Run after auth.js has initialized
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){
-      setTimeout(initProfile, 150);
-    });
-  } else {
-    setTimeout(initProfile, 150);
+  // Run initProfile — tries multiple times to handle async auth.js load
+  function tryInitProfile(attempts) {
+    attempts = attempts || 0;
+    const user = (typeof WRAuth !== 'undefined' && WRAuth.user)
+      ? WRAuth.user
+      : (function(){ try{ return JSON.parse(localStorage.getItem('wr_user')||'null'); }catch{return null;} })();
+    
+    if(!user && attempts < 10) {
+      setTimeout(function(){ tryInitProfile(attempts+1); }, 200);
+      return;
+    }
+    initProfile();
   }
 
-  // Also subscribe to auth changes
-  if(typeof WRAuth !== 'undefined'){
-    WRAuth.subscribe(function(user){ if(user) initProfile(); });
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ tryInitProfile(); });
   } else {
-    // Wait for auth.js to load
-    window.addEventListener('load', function(){
-      if(typeof WRAuth !== 'undefined'){
-        WRAuth.subscribe(function(user){ if(user) initProfile(); });
-      }
-      initProfile();
-    });
+    tryInitProfile();
   }
+
+  // Subscribe to auth changes
+  window.addEventListener('load', function(){
+    if(typeof WRAuth !== 'undefined'){
+      WRAuth.subscribe(function(user){ initProfile(); });
+    }
+  });
 })();
 </script>
 
