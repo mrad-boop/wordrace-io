@@ -268,7 +268,7 @@ table.lt{width:100%;border-collapse:collapse}
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
             <th>Rank</th><th>Player</th><th>Score</th><th>Games</th>
-            <th>Win Rate</th><th>ELO</th><th>Earnings</th><th>Change</th>
+            <th>Win Rate</th><th>WR Score</th><th>Earnings</th><th>Change</th>
           </tr></thead>
           <tbody id="tb-alltime"></tbody></table>
         </div>
@@ -442,7 +442,7 @@ table.lt{width:100%;border-collapse:collapse}
         <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--valid);margin-bottom:.35rem">▲ +24 this week</div>
       </div>
       <div class="mrc-row"><span class="mrc-label">All-Time Score</span><span class="mrc-val">18,400</span></div>
-      <div class="mrc-row"><span class="mrc-label">ELO</span><span class="mrc-val" style="color:var(--lime)">1,240</span></div>
+      <div class="mrc-row"><span class="mrc-label">WR Score</span><span class="mrc-val" style="color:var(--lime)">1,240</span></div>
       <div class="mrc-row"><span class="mrc-label">Win Rate</span><span class="mrc-val">61%</span></div>
       <div class="mrc-row"><span class="mrc-label">Earnings Totaux</span><span class="mrc-val" style="color:var(--valid)">$142.50</span></div>
       <div class="mrc-row"><span class="mrc-label">Daily League</span><span class="mrc-val">#14 (today)</span></div>
@@ -855,7 +855,7 @@ initAllTime();initDaily();initDuel();initCasual();initWeekly();initStats();initS
       var ch=p.change||'—';
       var chCol=ch.includes('+')||ch.includes('▲')?'#16A34A':ch==='—'?'#9B9B9B':'#EF4444';
       var score=(p.score||p.best||0).toLocaleString();
-      var meta=(p.games||p.duels||0)+' parties · '+(p.wr||'—')+' WR · ELO '+(p.elo||'—');
+      var meta=(p.games||p.duels||0)+' parties · '+(p.wr||'—')+' WR · WR Score '+(p.elo||'—');
       return '<div class="lb-m-card '+cls+'">'
         +'<div class="lb-m-rank" style="color:'+rankColor+'">'+medal+'</div>'
         +'<div class="lb-m-av" style="background:'+col+'22;color:'+col+'">'+((p.name||'?')[0].toUpperCase())+'</div>'
