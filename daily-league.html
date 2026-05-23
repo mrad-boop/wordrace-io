@@ -228,6 +228,63 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
 </head>
 <body>
+<div id="cs-overlay" style="
+  position:fixed;inset:0;z-index:900;
+  background:rgba(5,15,5,.88);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;padding:1.5rem;
+">
+  <div style="
+    background:#0d1f0d;border:2px solid rgba(245,200,66,.3);
+    border-radius:1.4rem;padding:2.2rem 2rem;max-width:420px;width:100%;
+    text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5);
+  ">
+    <div style="font-size:2.8rem;margin-bottom:.8rem">📅</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#fff;letter-spacing:.04em;line-height:1;margin-bottom:.3rem">DAILY LEAGUE</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#F5C842;letter-spacing:.1em;margin-bottom:1rem">COMING SOON</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.4rem">
+      Le tournoi quotidien Play-to-Earn avec prize pool USDT est en préparation.<br/>
+      <span style="color:#F5C842">Bêta fermée — lancement prévu Q3 2026.</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.5rem">
+      <button onclick="notifyMeDL()" style="
+        padding:.82rem;border-radius:.6rem;border:none;
+        background:#F5C842;color:#163300;
+        font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;
+        cursor:pointer;letter-spacing:.05em;
+      ">🔔 M'avertir au lancement</button>
+      <a href="game.html" style="
+        display:block;padding:.72rem;border-radius:.6rem;
+        border:1px solid rgba(255,255,255,.15);
+        background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
+        font-family:'Space Mono',monospace;font-size:.72rem;text-decoration:none;
+      ">🎮 Jouer en mode Casual — Gratuit</a>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.25);margin-top:1rem">WORDRACE.IO · Bêta publique · Mai 2026</div>
+  </div>
+</div>
+
+<div id="cs-notify-modal-dl" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:1.1rem;padding:1.8rem;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#1A1A1A;margin-bottom:.2rem">🔔 Me prévenir</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:#6B7280;margin-bottom:.9rem">On vous notifie au lancement du Daily League</div>
+    <input id="cs-email-dl" type="email" placeholder="votre@email.com" style="width:100%;padding:.72rem .9rem;border-radius:.5rem;border:1.5px solid rgba(0,0,0,.1);background:#F8F9F7;font-family:'Space Mono',monospace;font-size:.8rem;outline:none;margin-bottom:.7rem;"/>
+    <button onclick="submitNotifyDL()" style="width:100%;padding:.8rem;border-radius:.55rem;border:none;background:#F5C842;color:#163300;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;">📬 S'inscrire</button>
+    <button onclick="document.getElementById('cs-notify-modal-dl').style.display='none'" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid rgba(0,0,0,.08);background:transparent;color:#6B7280;font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem;">Annuler</button>
+  </div>
+</div>
+<script>
+function notifyMeDL(){document.getElementById('cs-notify-modal-dl').style.display='flex'}
+function submitNotifyDL(){
+  const em=document.getElementById('cs-email-dl').value.trim();
+  if(!em||!em.includes('@')){alert('Email invalide');return}
+  const notifs=JSON.parse(localStorage.getItem('wr_notify_list')||'[]');
+  notifs.push({email:em,feature:'daily_league',ts:Date.now()});
+  localStorage.setItem('wr_notify_list',JSON.stringify(notifs));
+  document.getElementById('cs-notify-modal-dl').style.display='none';
+  document.getElementById('cs-overlay').innerHTML='<div style="text-align:center;color:#fff;font-family:'Space Mono',monospace"><div style="font-size:2rem;margin-bottom:.8rem">✅</div><div style="font-size:.85rem">Inscrit ! On vous prévient au lancement.</div><br/><a href="game.html" style="color:#9FE870">← Jouer en mode Casual</a></div>';
+}
+</script>
+
 
 <!-- NAV -->
 <nav class="topnav">
