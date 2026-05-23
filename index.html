@@ -219,7 +219,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
           <div class="feat">🔁 Unlimited Replays</div>
           <div class="feat">🏆 Personal Best Tracking</div>
         </div>
-        <a href="game.html" style="text-decoration:none"><button class="btn btn-lime"><span>Play Now</span><span>→</span></button></a>
+        <button class="btn btn-lime" onclick="if(typeof requireLogin==='function')requireLogin(function(){window.location.href='game.html'});else window.location.href='game.html'"><span>Play Now</span><span>→</span></button>
         <p class="card-note">No wallet · No fees · Play instantly</p>
       </div>
     </div>
@@ -237,7 +237,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
           <div class="feat">⚡ Power-Ups — Hint · Time Freeze</div>
           <div class="feat">🔐 Smart Contract Escrow</div>
         </div>
-        <button class="btn btn-gold" id="walletBtn" onclick="connectWallet()"><span>Connect Wallet</span><span>→</span></button>
+        <button class="btn btn-gold" id="walletBtn" onclick="if(typeof requireLogin==='function')requireLogin(connectWallet);else connectWallet()"><span>Connect Wallet</span><span>→</span></button>
         <div style="font-size:1rem">🦊 👻 🔗</div>
         <p class="card-note">Polygon & Solana · USDT · 5% rake only</p>
       </div>
@@ -246,10 +246,10 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <div class="modes">
     <div class="modes-title">4 Game Arenas</div>
     <div class="modes-grid">
-      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #9FE870;cursor:pointer"><span class="mode-emoji">🆓</span><div><div class="mode-name">Casual Training</div><div class="mode-sub">vs AI bots</div></div><span class="mode-tag" style="background:#9FE870;color:#163300">FREE</span></div></a>
-      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #3B82F6;cursor:pointer"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="background:#3B82F6">P2E</span> 🔒</div></a>
-      <a href="daily-league.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #F5C842;cursor:pointer"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="background:#F5C842;color:#1a1400">P2E</span> 🔒</div></a>
-      <a href="duel.html" onclick="event.preventDefault();window.location.href='duel.html'" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #EF4444;cursor:pointer"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="background:#EF4444">P2E</span> 🔒</div></a>
+      <div class="mode-card" style="border-left:3px solid #9FE870;cursor:pointer" onclick="if(typeof requireLogin==='function')requireLogin(function(){window.location.href='game.html'});else window.location.href='game.html'"><span class="mode-emoji">🆓</span><div><div class="mode-name">Casual Training</div><div class="mode-sub">vs AI bots</div></div><span class="mode-tag" style="background:#9FE870;color:#163300">FREE</span></div>
+      <div class="mode-card" style="border-left:3px solid #3B82F6;cursor:pointer" onclick="if(typeof requireLogin==='function')requireLogin(function(){window.location.href='game.html'});else window.location.href='game.html'"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="background:#3B82F6">P2E</span> 🔒</div>
+      <div class="mode-card" style="border-left:3px solid #F5C842;cursor:pointer" onclick="if(typeof requireLogin==='function')requireLogin(function(){window.location.href='daily-league.html'});else window.location.href='daily-league.html'"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="background:#F5C842;color:#1a1400">P2E</span> 🔒</div>
+      <div class="mode-card" style="border-left:3px solid #EF4444;cursor:pointer" onclick="if(typeof requireLogin==='function')requireLogin(function(){window.location.href='duel.html'});else window.location.href='duel.html'"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="background:#EF4444">P2E</span> 🔒</div>
     </div>
   </div>
   <footer>© 2026 WordRace.io &middot; <a href="terms.html">Terms</a> &middot; <a href="terms.html#privacy">Privacy</a> &middot; <a href="terms.html">User Guide</a><br><span style="opacity:.4">WordRace is a skill-based game. Results vary. Play responsibly.</span></footer>
