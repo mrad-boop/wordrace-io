@@ -268,9 +268,11 @@ function buildNavBadge(){
   const wrcBadge = document.getElementById('nav-wrc-badge');
   if(wrcBadge) wrcBadge.style.display = 'none';
 
-  const btn = document.createElement('div');
+  const btn = document.createElement('button');
   btn.id = 'wr-nav-user';
-  btn.onclick = function(e){ e.stopPropagation(); toggleUserDropdown(); };
+  btn.type = 'button';
+  btn.onclick = function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); };
+  btn.addEventListener('touchend', function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); }, {passive:false});
   nav.appendChild(btn);
 
   AUTH.subscribe(user => {
@@ -293,7 +295,8 @@ function updateNavUser(user){
     <div class="user-av">${user.avatar||user.username[0].toUpperCase()}</div>
     <span>${user.username.length>10?user.username.slice(0,10)+'…':user.username}</span>
     <span style="font-size:.6rem;color:#9B9B9B">▾</span>`;
-  btn.onclick = function(e){ e.stopPropagation(); toggleUserDropdown(); };
+  btn.onclick = function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); };
+  btn.addEventListener('touchend', function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); }, {passive:false});
 
   // Update dropdown
   const dd = document.getElementById('wr-user-dropdown');
@@ -318,11 +321,16 @@ function toggleUserDropdown(){
   const dd = document.getElementById('wr-user-dropdown');
   if(!dd) return;
   const isOpen = dd.classList.contains('open');
-  dd.classList.toggle('open');
-  // Also force display directly for reliability
-  dd.style.display = isOpen ? 'none' : 'block';
-  dd.style.zIndex = '600';
-  dd.style.background = '#ffffff';
+  // Close all other dropdowns first
+  document.getElementById('wr-mobile-menu')?.classList.remove('open');
+  // Toggle
+  if(isOpen){
+    dd.classList.remove('open');
+    dd.style.display = 'none';
+  } else {
+    dd.classList.add('open');
+    dd.style.cssText = 'display:block!important;position:fixed!important;top:54px!important;right:.75rem!important;background:#ffffff!important;border:1px solid rgba(0,0,0,.12)!important;border-radius:.75rem!important;padding:.5rem!important;box-shadow:0 12px 32px rgba(0,0,0,.18)!important;z-index:600!important;min-width:200px!important;';
+  }
 }
 
 // ── GUARD: require login for paid modes ───────────────────────
@@ -392,8 +400,8 @@ function buildHamburger(){
         background:#9FE870;color:#163300;cursor:pointer}
     `;
     document.head.appendChild(s);
-  // Additional solid-bg overrides
-  const s2=document.createElement('style');s2.id='wr-solid-bg';s2.textContent=`
+  // DISABLED - was causing opacity issues
+  /* const s2=document.createElement('style');s2.id='wr-solid-bg';s2.textContent=`
 /* FORCE SOLID BACKGROUNDS — no transparency leaks */
 #wr-user-dropdown,
 #wr-mobile-menu {
