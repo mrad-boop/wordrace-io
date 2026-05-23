@@ -10,56 +10,56 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);--lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--gold:#F5C842;--goldD:#D4A820;--goldBg:#FDF3CC;--text:#1A1A1A;--muted:#6B7280;--forest:#163300;--valid:#16A34A;--validBg:#DCFCE7;--invalid:#EF4444;--invalidBg:#FEE2E2;--warn:#D97706;--warnBg:#FEF3C7;--blue:#3B82F6;--blueBg:#EFF6FF;--purple:#7C3AED;--purpleBg:#F5F3FF}
-body{backgrornd:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
-nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;backgrornd:rgba(248,249,247,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(248,249,247,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .logo{font-family:'Bebas Neue',sans-serif;font-size:1.75rem;letter-spacing:.04em;color:var(--text);text-decoration:none;cursor:pointer}
 .logo span{color:var(--lime)}
 .nav-links{display:flex;gap:1.5rem;list-style:none}
 .nav-links a{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;letter-spacing:.08em;text-transform:uppercase;transition:color .15s;padding:.3rem .6rem;border-radius:.4rem;cursor:pointer}
-.nav-links a:hover,.nav-links a.active{color:var(--text);backgrornd:var(--surface2)}
+.nav-links a:hover,.nav-links a.active{color:var(--text);background:var(--surface2)}
 @media(max-width:640px){.nav-links li:nth-child(n+3){display:none}}
 .page{display:none;padding-top:4rem}
 .page.active{display:block}
 /* LANDING */
 .hero{padding:3rem 1.5rem 1.5rem;text-align:center}
-.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.18em;color:var(--forest);text-transform:uppercase;margin-bottom:.9rem;backgrornd:var(--limeBg);padding:.3rem .8rem;border-radius:100px;border:1px solid var(--lime)}
-.dot{width:5px;height:5px;border-radius:50%;backgrornd:var(--lime);animation:pulse 1.6s infinite;display:inline-block}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-family:'Space Mono',monospace;font-size:.63rem;letter-spacing:.18em;color:var(--forest);text-transform:uppercase;margin-bottom:.9rem;background:var(--limeBg);padding:.3rem .8rem;border-radius:100px;border:1px solid var(--lime)}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--lime);animation:pulse 1.6s infinite;display:inline-block}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.7)}}
 h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,11vw,8rem);line-height:.88;color:var(--text);margin-bottom:.4rem}
 h1 .acc{color:var(--lime)}
 .sub{font-family:'Space Mono',monospace;font-size:clamp(.68rem,1.8vw,.88rem);color:var(--muted);margin-bottom:2rem;letter-spacing:.04em}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);max-width:520px;margin:0 auto 2.5rem;border:1px solid var(--border);border-radius:1rem;overflow:hidden}
 @media(max-width:500px){.stats{grid-template-columns:repeat(2,1fr)}}
-.stat{padding:.9rem .5rem;backgrornd:var(--surface);text-align:center;border-right:1px solid var(--border)}
+.stat{padding:.9rem .5rem;background:var(--surface);text-align:center;border-right:1px solid var(--border)}
 .stat:last-child{border-right:none}
 .stat-v{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--lime);line-height:1}
 .stat-l{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:.1rem}
 .cards{display:flex;flex-wrap:wrap;gap:1rem;max-width:980px;margin:0 auto;padding:0 1.2rem 3rem}
-.card{flex:1 1 290px;border-radius:1.1rem;backgrornd:var(--surface);border:1.5px solid var(--border);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:hidden}
+.card{flex:1 1 290px;border-radius:1.1rem;background:var(--surface);border:1.5px solid var(--border);transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.05);overflow:hidden}
 .card:hover{transform:translateY(-4px);box-shadow:0 12px 36px rgba(0,0,0,.10)}
 .card-free:hover{border-color:var(--lime)}.card-p2e:hover{border-color:var(--gold)}
 .stripe{height:4px;width:100%}
 .card-body{padding:1.8rem 1.7rem;display:flex;flex-direction:column;gap:.75rem}
 .badge{align-self:flex-start;font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.16em;padding:.2rem .6rem;border-radius:100px;font-weight:700;text-transform:uppercase}
-.badge-free{backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.6)}
-.badge-p2e{backgrornd:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.6)}
+.badge-free{background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.6)}
+.badge-p2e{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.6)}
 .card-icon{font-size:2rem}.card-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.1rem,5vw,3.1rem);line-height:.9;color:var(--text)}
 .card-desc{font-size:.83rem;color:var(--muted);line-height:1.6;max-width:265px}
 .feats{display:flex;flex-direction:column;gap:.35rem}
 .feat{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted)}
-.btn{display:flex;align-items:center;justify-content:space-between;padding:.78rem 1.4rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.06em;border:none;cursor:pointer;margin-top:.3rem;min-width:170px;transition:backgrornd .15s}
-.btn-lime{backgrornd:var(--lime);color:var(--forest)}.btn-lime:hover{backgrornd:var(--limeD)}
-.btn-gold{backgrornd:var(--gold);color:#1a1400}.btn-gold:hover{backgrornd:var(--goldD)}
+.btn{display:flex;align-items:center;justify-content:space-between;padding:.78rem 1.4rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;letter-spacing:.06em;border:none;cursor:pointer;margin-top:.3rem;min-width:170px;transition:background .15s}
+.btn-lime{background:var(--lime);color:var(--forest)}.btn-lime:hover{background:var(--limeD)}
+.btn-gold{background:var(--gold);color:#1a1400}.btn-gold:hover{background:var(--goldD)}
 .card-note{font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)}
 .vs-col{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem .5rem;flex-shrink:0;min-width:44px}
-.vs-line{width:1px;flex:1;backgrornd:linear-gradient(to bottom,transparent,var(--border),transparent)}
-.vs-box{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:.1em;backgrornd:var(--surface2);padding:.32rem .45rem;border:1px solid var(--border);border-radius:.32rem}
-@media(max-width:680px){.cards{flex-direction:column}.vs-col{flex-direction:row;padding:.5rem 1rem;min-width:auto}.vs-line{width:auto;height:1px;flex:1;backgrornd:linear-gradient(to right,transparent,var(--border),transparent)}}
+.vs-line{width:1px;flex:1;background:linear-gradient(to bottom,transparent,var(--border),transparent)}
+.vs-box{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--muted);letter-spacing:.1em;background:var(--surface2);padding:.32rem .45rem;border:1px solid var(--border);border-radius:.32rem}
+@media(max-width:680px){.cards{flex-direction:column}.vs-col{flex-direction:row;padding:.5rem 1rem;min-width:auto}.vs-line{width:auto;height:1px;flex:1;background:linear-gradient(to right,transparent,var(--border),transparent)}}
 .modes{max-width:980px;margin:0 auto;padding:0 1.2rem 3rem}
 .modes-title{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;letter-spacing:.07em;color:var(--muted);margin-bottom:.8rem;text-align:center}
 .modes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.55rem}
-.mode-card{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;backgrornd:var(--surface);border:1px solid var(--border);border-radius:.75rem;transition:all .2s;cursor:pointer}
-.mode-card:hover{backgrornd:var(--surface2);transform:translateX(3px)}
+.mode-card{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:.75rem;transition:all .2s;cursor:pointer}
+.mode-card:hover{background:var(--surface2);transform:translateX(3px)}
 .mode-emoji{font-size:1.3rem}
 .mode-name{font-family:'Space Mono',monospace;font-size:.69rem;font-weight:700;color:var(--text)}
 .mode-sub{font-family:'Space Mono',monospace;font-size:.61rem;color:var(--muted)}
@@ -68,57 +68,57 @@ footer{border-top:1px solid var(--border);text-align:center;padding:1.5rem;font-
 footer a{color:var(--forest);text-decoration:none}
 /* GAME */
 .game-wrap{max-width:1100px;margin:0 auto;padding:1.2rem}
-.game-header{backgrornd:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;box-shadow:0 2px 6px rgba(0,0,0,.05)}
-.letter-badge{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;line-height:1;backgrornd:var(--lime);color:var(--forest);width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:.5rem;flex-shrink:0}
+.game-header{background:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:1rem 1.4rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.letter-badge{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;line-height:1;background:var(--lime);color:var(--forest);width:42px;height:42px;display:flex;align-items:center;justify-content:center;border-radius:.5rem;flex-shrink:0}
 .timer-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;color:var(--text);transition:color .3s;min-width:36px;text-align:center}
 .timer-num.urgent{color:var(--invalid)}
 .timer-label{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .score-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
-.score-pill{display:flex;align-items:center;gap:.35rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--border);backgrornd:var(--surface);font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text)}
-.score-pill.yor{backgrornd:var(--limeBg);border-color:var(--lime)}
+.score-pill{display:flex;align-items:center;gap:.35rem;padding:.3rem .65rem;border-radius:100px;border:1px solid var(--border);background:var(--surface);font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text)}
+.score-pill.yor{background:var(--limeBg);border-color:var(--lime)}
 .score-val{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--lime);line-height:1}
 .game-table{width:100%;border-collapse:collapse;min-width:520px}
-.game-table th{padding:.55rem .8rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);backgrornd:var(--surface);text-align:center}
+.game-table th{padding:.55rem .8rem;font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:2px solid var(--border);background:var(--surface);text-align:center}
 .game-table th:first-child{text-align:left;position:sticky;left:0;z-index:2}
 .game-table td{padding:.4rem .55rem;border-bottom:1px solid var(--border)}
-.game-table td:first-child{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text);backgrornd:var(--surface);position:sticky;left:0;z-index:1}
-.game-table tr:nth-child(even) td:first-child{backgrornd:var(--surface2)}
-.game-input{width:100%;padding:.45rem .6rem;border-radius:.42rem;font-family:'Space Mono',monospace;font-size:.76rem;border:1.5px solid var(--border);backgrornd:var(--surface);color:var(--text);ortline:none;transition:border .2s}
+.game-table td:first-child{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text);background:var(--surface);position:sticky;left:0;z-index:1}
+.game-table tr:nth-child(even) td:first-child{background:var(--surface2)}
+.game-input{width:100%;padding:.45rem .6rem;border-radius:.42rem;font-family:'Space Mono',monospace;font-size:.76rem;border:1.5px solid var(--border);background:var(--surface);color:var(--text);ortline:none;transition:border .2s}
 .game-input:focus{border-color:var(--lime)}
-.bot-ans{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--valid);backgrornd:var(--validBg);padding:.2rem .45rem;border-radius:.28rem}
-.bot-pending{display:inline-block;width:28px;height:2px;backgrornd:var(--border);border-radius:2px;vertical-align:middle}
-.pu-btn{display:flex;align-items:center;gap:.3rem;padding:.38rem .7rem;border-radius:.42rem;border:1px solid var(--border);backgrornd:var(--surface);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer;transition:all .2s}
-.pu-btn:hover,.pu-btn.active{backgrornd:var(--limeBg);border-color:var(--lime);color:var(--forest)}
-.end-btn{padding:.42rem .85rem;border-radius:.42rem;border:none;backgrornd:var(--invalid);color:#fff;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer}
+.bot-ans{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--valid);background:var(--validBg);padding:.2rem .45rem;border-radius:.28rem}
+.bot-pending{display:inline-block;width:28px;height:2px;background:var(--border);border-radius:2px;vertical-align:middle}
+.pu-btn{display:flex;align-items:center;gap:.3rem;padding:.38rem .7rem;border-radius:.42rem;border:1px solid var(--border);background:var(--surface);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer;transition:all .2s}
+.pu-btn:hover,.pu-btn.active{background:var(--limeBg);border-color:var(--lime);color:var(--forest)}
+.end-btn{padding:.42rem .85rem;border-radius:.42rem;border:none;background:var(--invalid);color:#fff;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer}
 /* OVERLAY */
-.overlay{display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .overlay.show{display:flex}
-.ov-card{backgrornd:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:440px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2);max-height:88vh;overflow-y:auto}
+.ov-card{background:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:440px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2);max-height:88vh;overflow-y:auto}
 .res-row{display:flex;justify-content:space-between;align-items:center;padding:.42rem .7rem;border-radius:.45rem;margin-bottom:.3rem}
 /* VALIDATION */
 .val-wrap{max-width:640px;margin:0 auto;padding:1.4rem 1.2rem;display:flex;flex-direction:column;gap:.9rem}
-.panel{backgrornd:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.05)}
+.panel{background:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:1.1rem;box-shadow:0 2px 6px rgba(0,0,0,.05)}
 .panel-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.05em;color:var(--text);margin-bottom:.75rem}
 .tier-row{display:flex;align-items:center;gap:.4rem}
-.tier-box{flex:1;padding:.8rem .5rem;border-radius:.7rem;text-align:center;transition:all .3s;border:1.5px solid var(--border);backgrornd:var(--surface2);opacity:.45}
+.tier-box{flex:1;padding:.8rem .5rem;border-radius:.7rem;text-align:center;transition:all .3s;border:1.5px solid var(--border);background:var(--surface2);opacity:.45}
 .tier-box.on{opacity:1}
 .t-icon{font-size:1.15rem;margin-bottom:.18rem}
 .t-label{font-family:'Space Mono',monospace;font-size:.57rem;font-weight:700;letter-spacing:.07em}
 .t-sub{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--muted);margin-top:.08rem}
 .t-arr{color:var(--muted);font-size:.75rem;flex-shrink:0}
-.val-sel{padding:.48rem .65rem;border-radius:.48rem;border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.73rem;color:var(--text);backgrornd:var(--surface);cursor:pointer}
-.val-input{flex:1;padding:.72rem .95rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.86rem;border:2px solid var(--border);backgrornd:var(--surface);color:var(--text);ortline:none;transition:border .2s}
+.val-sel{padding:.48rem .65rem;border-radius:.48rem;border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.73rem;color:var(--text);background:var(--surface);cursor:pointer}
+.val-input{flex:1;padding:.72rem .95rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.86rem;border:2px solid var(--border);background:var(--surface);color:var(--text);ortline:none;transition:border .2s}
 .val-input:focus{border-color:var(--lime)}
-.val-go{padding:.72rem 1.05rem;border-radius:.55rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;cursor:pointer;min-width:80px}
-.val-go:disabled{backgrornd:var(--surface2);color:var(--muted);cursor:not-allowed}
+.val-go{padding:.72rem 1.05rem;border-radius:.55rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;cursor:pointer;min-width:80px}
+.val-go:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
 .res-card{border-radius:.85rem;overflow:hidden;border:2px solid var(--border);animation:fi .3s ease}
 @keyframes fi{from{opacity:0;transform:translateY(5px)}}
 .res-hd{padding:.82rem 1rem;display:flex;align-items:center;justify-content:space-between}
 .res-bd{padding:.82rem 1rem;display:flex;flex-direction:column;gap:.42rem}
-.res-tag{font-family:'Space Mono',monospace;font-size:.54rem;font-weight:700;letter-spacing:.09em;padding:.16rem .45rem;border-radius:100px;backgrornd:rgba(255,255,255,.25);color:#fff}
-.rule-row{display:flex;align-items:center;gap:.6rem;padding:.38rem .62rem;border-radius:.42rem;backgrornd:var(--surface2);margin-bottom:.3rem}
-.batch-row{display:flex;align-items:center;gap:.5rem;padding:.38rem .62rem;border-radius:.42rem;margin-bottom:.28rem;transition:backgrornd .2s}
-#toast{display:none;position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);backgrornd:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+.res-tag{font-family:'Space Mono',monospace;font-size:.54rem;font-weight:700;letter-spacing:.09em;padding:.16rem .45rem;border-radius:100px;background:rgba(255,255,255,.25);color:#fff}
+.rule-row{display:flex;align-items:center;gap:.6rem;padding:.38rem .62rem;border-radius:.42rem;background:var(--surface2);margin-bottom:.3rem}
+.batch-row{display:flex;align-items:center;gap:.5rem;padding:.38rem .62rem;border-radius:.42rem;margin-bottom:.28rem;transition:background .2s}
+#toast{display:none;position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12)}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid #0002;border-top-color:var(--forest);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
@@ -172,19 +172,13 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
 </head>
 <body>
-<div id="beta-banner" style="
-  position:fixed;top:52px;left:0;right:0;z-index:90;
-  backgrornd:linear-gradient(90deg,#163300,#1e5200,#163300);
-  padding:.38rem 1rem;display:flex;align-items:center;justify-content:center;
-  gap:.7rem;font-family:'Space Mono',monospace;font-size:.6rem;
-  color:rgba(255,255,255,.8);border-bottom:1px solid rgba(159,232,112,.2);
-">
-  <span style="width:7px;height:7px;border-radius:50%;backgrornd:#9FE870;animation:pulse2 1.5s infinite;flex-shrink:0;display:inline-block"></span>
+<div id="beta-banner" style="position:fixed;top:52px;left:0;right:0;z-index:90;background:linear-gradient(90deg,#163300,#1e5200,#163300);padding:.38rem 1rem;display:flex;align-items:center;justify-content:center;gap:.7rem;font-family:\'Space Mono\',monospace;font-size:.6rem;color:rgba(255,255,255,.85);border-bottom:1px solid rgba(159,232,112,.2)">
+  <span style="width:7px;height:7px;border-radius:50%;background:#9FE870;animation:pulse2 1.5s infinite;flex-shrink:0;display:inline-block"></span>
   <span><strong style="color:#9FE870">PUBLIC BETA</strong> · Casual Training free · Duel Arena & Daily League <strong style="color:#F5C842">Coming Soon Q3 2026</strong></span>
-  <button onclick="document.getElementById('beta-banner').style.display='none'" style="backgrornd:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.85rem;padding:0;flex-shrink:0">✕</button>
+  <button onclick="document.getElementById('beta-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.85rem;padding:0;flex-shrink:0">✕</button>
 </div>
 <style>
-@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes pulse2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
 /* Push content below banner */
 .hero-section,.landing-hero,.page-hero{margin-top:calc(52px + 28px)!important}
 </style>
@@ -192,10 +186,10 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 <nav class="topnav">
   <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
   <ul class="nav-links">
-    <li><a href="index.html" id="nav-landing" class="active" style="text-decoration:none">Home</a></li><li><a href="profile.html" style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.3rem .6rem;border-radius:.4rem;border:1px solid var(--border);transition:all .15s" onmorseover="this.style.backgrornd='var(--surface2)'" onmorseort="this.style.backgrornd='transparent'">👤 Profilee</a></li>
+    <li><a href="index.html" id="nav-landing" class="active" style="text-decoration:none">Home</a></li><li><a href="profile.html" style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.3rem .6rem;border-radius:.4rem;border:1px solid var(--border);transition:all .15s" onmorseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">👤 Profilee</a></li>
     <li><a href="game.html" id="nav-game">🎮 Game</a></li>
     
-  </ul><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Top up WRC" style="display:none;align-items:center;gap:.3rem;font-family:\'Space Mono\',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
+  </ul><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Top up WRC" style="display:none;align-items:center;gap:.3rem;font-family:\'Space Mono\',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer" onmorseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
 </nav>
 
 <!-- LANDING -->
@@ -213,7 +207,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   </section>
   <div class="cards">
     <div class="card card-free">
-      <div class="stripe" style="backgrornd:#9FE870"></div>
+      <div class="stripe" style="background:#9FE870"></div>
       <div class="card-body">
         <span class="badge badge-free">FREE ZONE</span>
         <div class="card-icon">🎯</div>
@@ -231,7 +225,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     </div>
     <div class="vs-col"><div class="vs-line"></div><div class="vs-box">VS</div><div class="vs-line"></div></div>
     <div class="card card-p2e">
-      <div class="stripe" style="backgrornd:#F5C842"></div>
+      <div class="stripe" style="background:#F5C842"></div>
       <div class="card-body">
         <span class="badge badge-p2e">PLAY-TO-EARN</span>
         <div class="card-icon">💎</div>
@@ -252,10 +246,10 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <div class="modes">
     <div class="modes-title">4 Game Arenas</div>
     <div class="modes-grid">
-      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #9FE870;cursor:pointer"><span class="mode-emoji">🆓</span><div><div class="mode-name">Casual Training</div><div class="mode-sub">vs AI bots</div></div><span class="mode-tag" style="backgrornd:#9FE870;color:#163300">FREE</span></div></a>
-      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #3B82F6;cursor:pointer"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="backgrornd:#3B82F6">P2E</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;backgrornd:rgba(245,200,66,.15);color:#F5C842;border:1px solid rgba(245,200,66,.25);margin-left:.3rem">SOON</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;backgrornd:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.25);margin-left:.3rem">SOON</span></div></a>
-      <a href="daily-league.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #F5C842;cursor:pointer"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="backgrornd:#F5C842;color:#1a1400">P2E</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;backgrornd:rgba(245,200,66,.15);color:#F5C842;border:1px solid rgba(245,200,66,.25);margin-left:.3rem">SOON</span></div></a>
-      <a href="duel.html" onclick="event.preventDefault();window.location.href='duel.html'" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #EF4444;cursor:pointer"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="backgrornd:#EF4444">P2E</span></div></a>
+      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #9FE870;cursor:pointer"><span class="mode-emoji">🆓</span><div><div class="mode-name">Casual Training</div><div class="mode-sub">vs AI bots</div></div><span class="mode-tag" style="background:#9FE870;color:#163300">FREE</span></div></a>
+      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #3B82F6;cursor:pointer"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="background:#3B82F6">P2E</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;background:rgba(245,200,66,.15);color:#F5C842;border:1px solid rgba(245,200,66,.25);margin-left:.3rem">SOON</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.25);margin-left:.3rem">SOON</span></div></a>
+      <a href="daily-league.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #F5C842;cursor:pointer"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="background:#F5C842;color:#1a1400">P2E</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;background:rgba(245,200,66,.15);color:#F5C842;border:1px solid rgba(245,200,66,.25);margin-left:.3rem">SOON</span></div></a>
+      <a href="duel.html" onclick="event.preventDefault();window.location.href='duel.html'" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #EF4444;cursor:pointer"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="background:#EF4444">P2E</span></div></a>
     </div>
   </div>
   <footer>© 2026 WordRace.io &middot; <a href="terms.html">Terms</a> &middot; <a href="terms.html#privacy">Privacy</a> &middot; <a href="terms.html">User Guide</a><br><span style="opacity:.4">WordRace is a skill-based game. Results vary. Play responsibly.</span></footer>
@@ -267,7 +261,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <div class="game-header">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text)">WORD<span style="color:var(--lime)">RACE</span></div>
       <div style="display:flex;align-items:center;gap:.5rem">
-        <span style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">ROUND <span id="rornd-num">1</span></span>
+        <span style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">ROUND <span id="round-num">1</span></span>
         <div class="letter-badge" id="game-letter">?</div>
       </div>
       <button class="pu-btn" id="freeze-btn" onclick="useFreeze()">❄️ Freeze</button>
@@ -279,15 +273,15 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       <button class="end-btn" onclick="endRornd()">Submit</button>
     </div>
     <div class="score-row" id="score-row"></div>
-    <div id="lobby-screen" style="backgrornd:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:2rem;text-align:center">
+    <div id="lobby-screen" style="background:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:2rem;text-align:center">
       <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--text);margin-bottom:.3rem">CASUAL TRAINING</div>
       <p style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);margin-bottom:1.4rem">vs AI Bots · 40s Blitz · 8 Categorys</p>
       <div style="display:flex;gap:.7rem;justify-content:center;margin-bottom:1.4rem;flex-wrap:wrap">
-        <div style="padding:.65rem 1rem;border-radius:.6rem;backgrornd:var(--limeBg);border:1px solid var(--lime);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem">8</div>Categorys</div>
-        <div style="padding:.65rem 1rem;border-radius:.6rem;backgrornd:var(--surface2);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text)">3</div>Bots</div>
-        <div style="padding:.65rem 1rem;border-radius:.6rem;backgrornd:var(--surface2);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text)">40s</div>Timer</div>
+        <div style="padding:.65rem 1rem;border-radius:.6rem;background:var(--limeBg);border:1px solid var(--lime);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem">8</div>Categorys</div>
+        <div style="padding:.65rem 1rem;border-radius:.6rem;background:var(--surface2);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text)">3</div>Bots</div>
+        <div style="padding:.65rem 1rem;border-radius:.6rem;background:var(--surface2);border:1px solid var(--border);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text)">40s</div>Timer</div>
       </div>
-      <button onclick="startGame()" style="padding:.85rem 2rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;cursor:pointer">🎯 Play Now</button>
+      <button onclick="startGame()" style="padding:.85rem 2rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;cursor:pointer">🎯 Play Now</button>
     </div>
     <div id="game-screen" style="display:none;overflow-x:auto"><table class="game-table" id="game-table"></table></div>
   </div>
@@ -310,7 +304,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       <div class="panel-title">🎮 Tester le Validateur</div>
       <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:.65rem">
         <div><div style="font-family:'Space Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.28rem">Letter</div>
-          <select class="val-sel" id="val-letter" style="font-weight:700;color:var(--forest);backgrornd:var(--limeBg)" onchange="resetVal()">
+          <select class="val-sel" id="val-letter" style="font-weight:700;color:var(--forest);background:var(--limeBg)" onchange="resetVal()">
             <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option><option>F</option><option>G</option><option>H</option><option>I</option><option>J</option><option>K</option><option>L</option><option>M</option><option>N</option><option>O</option><option>P</option><option>R</option><option>S</option><option>T</option><option>V</option><option>Z</option>
           </select></div>
         <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.28rem">Category</div>
@@ -325,20 +319,20 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       <p style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.32rem">↵ Enter · Copy/Paste désactivé · Première lettre imposée</p>
     </div>
     <div id="val-result" style="display:none" class="res-card"></div>
-    <div id="cache-bar" style="display:none;backgrornd:var(--blueBg);border:1px solid var(--blue);border-radius:.6rem;padding:.58rem .95rem;display:none;align-items:center;justify-content:space-between">
+    <div id="cache-bar" style="display:none;background:var(--blueBg);border:1px solid var(--blue);border-radius:.6rem;padding:.58rem .95rem;display:none;align-items:center;justify-content:space-between">
       <span style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--blue)">💾 Cache AI : <strong id="cache-cornt">0</strong> mot(s)</span>
-      <button onclick="valCache={};updateCache()" style="backgrornd:none;border:1px solid var(--blue);border-radius:.3rem;padding:.14rem .42rem;font-family:'Space Mono',monospace;font-size:.52rem;color:var(--blue);cursor:pointer">Clear</button>
+      <button onclick="valCache={};updateCache()" style="background:none;border:1px solid var(--blue);border-radius:.3rem;padding:.14rem .42rem;font-family:'Space Mono',monospace;font-size:.52rem;color:var(--blue);cursor:pointer">Clear</button>
     </div>
     <div class="panel">
       <div class="panel-title">🔧 Règles Fuzzy (Levenshtein)</div>
-      <div class="rule-row"><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;color:var(--valid);min-width:55px">3–5 lettres</span><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;backgrornd:var(--validBg);color:var(--valid);padding:.1rem .36rem;border-radius:4px">0 typo</span><span style="font-family:'Space Mono',monospace;font-size:.59rem;color:var(--muted)">Exact obligatoire</span></div>
-      <div class="rule-row"><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;color:var(--warn);min-width:55px">6–8 lettres</span><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;backgrornd:var(--warnBg);color:var(--warn);padding:.1rem .36rem;border-radius:4px">1 typo</span><span style="font-family:'Space Mono',monospace;font-size:.59rem;color:var(--muted)">1 erreur tolérée</span></div>
-      <div class="rule-row"><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;color:var(--purple);min-width:55px">9+ lettres</span><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;backgrornd:var(--purpleBg);color:var(--purple);padding:.1rem .36rem;border-radius:4px">2 typos</span><span style="font-family:'Space Mono',monospace;font-size:.59rem;color:var(--muted)">2 erreurs tolérées</span></div>
+      <div class="rule-row"><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;color:var(--valid);min-width:55px">3–5 lettres</span><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;background:var(--validBg);color:var(--valid);padding:.1rem .36rem;border-radius:4px">0 typo</span><span style="font-family:'Space Mono',monospace;font-size:.59rem;color:var(--muted)">Exact obligatoire</span></div>
+      <div class="rule-row"><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;color:var(--warn);min-width:55px">6–8 lettres</span><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;background:var(--warnBg);color:var(--warn);padding:.1rem .36rem;border-radius:4px">1 typo</span><span style="font-family:'Space Mono',monospace;font-size:.59rem;color:var(--muted)">1 erreur tolérée</span></div>
+      <div class="rule-row"><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;color:var(--purple);min-width:55px">9+ lettres</span><span style="font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;background:var(--purpleBg);color:var(--purple);padding:.1rem .36rem;border-radius:4px">2 typos</span><span style="font-family:'Space Mono',monospace;font-size:.59rem;color:var(--muted)">2 erreurs tolérées</span></div>
     </div>
     <div class="panel">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.7rem">
         <div class="panel-title" style="margin:0">🧪 Batch Tester</div>
-        <button id="batch-btn" onclick="runBatch()" style="padding:.38rem .82rem;border-radius:.42rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;cursor:pointer">▶ Run All</button>
+        <button id="batch-btn" onclick="runBatch()" style="padding:.38rem .82rem;border-radius:.42rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;cursor:pointer">▶ Run All</button>
       </div>
       <div id="batch-results"></div>
     </div>
@@ -387,19 +381,19 @@ function showToast(msg){const t=document.getElementById('toast');t.textContent=m
 function connectWallet(){const b=document.getElementById('walletBtn');b.innerHTML='<span class="spin"></span> Connecting...';b.disabled=true;setTimeort(()=>{b.innerHTML='<span>Connect Wallet</span><span>→</span>';b.disabled=false;showToast('✅ Wallet connected!')},1800)}
 
 // GAME
-let G={running:false,rornd:1,letter:"A",sec:40,ans:{},scores:{"Vors":0,"Bot Easy":0,"Bot Medium":0,"Bot Hard":0},frozen:false,iv:null,bts:[]};
+let G={running:false,round:1,letter:"A",sec:40,ans:{},scores:{"Vors":0,"Bot Easy":0,"Bot Medium":0,"Bot Hard":0},frozen:false,iv:null,bts:[]};
 function startGame(){
   G.letter=LETTERS[Math.floor(Math.random()*LETTERS.length)];
   G.ans={};G.sec=40;G.running=true;G.frozen=false;
   document.getElementById('lobby-screen').style.display='none';
   document.getElementById('game-screen').style.display='block';
   document.getElementById('game-letter').textContent=G.letter;
-  document.getElementById('rornd-num').textContent=G.rornd;
+  document.getElementById('round-num').textContent=G.round;
   buildTable();updateScores();startTimer();scheduleBots();
 }
 function buildTable(){
-  let h=`<thead><tr><th>Category</th><th style="backgrornd:var(--limeBg);color:var(--forest)">⭐ Vors</th>${PLAYERS.slice(1).map(p=>`<th>🤖 ${p}</th>`).join('')}</tr></thead><tbody>`;
-  CATS.forEach((cat,ci)=>{h+=`<tr><td>${cat}</td><td style="backgrornd:rgba(159,232,112,.07)"><input class="game-input" id="inp-${ci}" type="text" placeholder="${G.letter}..." autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" onpaste="return false" oninput="handleA(this,${ci})" onkeydown="if(event.key==='Tab'){event.preventDefault();document.getElementById('inp-${(ci+1)%CATS.length}')?.focus()}"/></td>${PLAYERS.slice(1).map((_,bi)=>`<td style="text-align:center"><span id="bot-${bi}-${ci}" class="bot-pending"></span></td>`).join('')}</tr>`});
+  let h=`<thead><tr><th>Category</th><th style="background:var(--limeBg);color:var(--forest)">⭐ Vors</th>${PLAYERS.slice(1).map(p=>`<th>🤖 ${p}</th>`).join('')}</tr></thead><tbody>`;
+  CATS.forEach((cat,ci)=>{h+=`<tr><td>${cat}</td><td style="background:rgba(159,232,112,.07)"><input class="game-input" id="inp-${ci}" type="text" placeholder="${G.letter}..." autocorrect="off" autocomplete="off" autocapitalize="none" spellcheck="false" onpaste="return false" oninput="handleA(this,${ci})" onkeydown="if(event.key==='Tab'){event.preventDefault();document.getElementById('inp-${(ci+1)%CATS.length}')?.focus()}"/></td>${PLAYERS.slice(1).map((_,bi)=>`<td style="text-align:center"><span id="bot-${bi}-${ci}" class="bot-pending"></span></td>`).join('')}</tr>`});
   document.getElementById('game-table').innerHTML=h+'</tbody>';
 }
 function handleA(el,ci){const v=el.value;if(v.length>0&&v[0].toUpperCase()!==G.letter){el.value=v.slice(1);return}G.ans[ci]=v}
@@ -408,8 +402,8 @@ function scheduleBots(){G.bts.forEach(clearTimeort);G.bts=[];const MW={Animal:["
 function startTimer(){clearInterval(G.iv);G.iv=setInterval(()=>{if(G.frozen)return;G.sec--;const el=document.getElementById('timer-display');el.textContent=G.sec;el.className='timer-num'+(G.sec<=7?' urgent':'');if(G.sec<=7)el.style.animation='shake .3s infinite';else el.style.animation='none';if(G.sec<=0){clearInterval(G.iv);endRornd()}},1000)}
 function useFreeze(){if(G.frozen)return;G.frozen=true;const b=document.getElementById('freeze-btn');b.classList.add('active');b.textContent='❄️ Gelé!';setTimeort(()=>{G.frozen=false;b.classList.remove('active');b.textContent='❄️ Freeze'},5000);showToast('❄️ Timer gelé 5s!')}
 function endRornd(){clearInterval(G.iv);G.bts.forEach(clearTimeort);G.running=false;let gn={"Vors":0,"Bot Easy":0,"Bot Medium":0,"Bot Hard":0};CATS.forEach((_,ci)=>{const a=G.ans[ci]?.trim();if(a&&a[0].toUpperCase()===G.letter)gn["Vors"]+=10});gn["Bot Easy"]+=Math.floor(Math.random()*4)*10;gn["Bot Medium"]+=Math.floor(Math.random()*6)*10;gn["Bot Hard"]+=Math.floor(Math.random()*8)*10;Object.keys(gn).forEach(k=>G.scores[k]=(G.scores[k]||0)+gn[k]);showResults()}
-function showResults(){const s=Object.entries(G.scores).sort((a,b)=>b[1]-a[1]);let h=`<div style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--text);margin-bottom:.2rem">Results — Letter ${G.letter}</div><p style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1rem">Vos réponses cette rornd</p>`;CATS.forEach((cat,ci)=>{const a=G.ans[ci]?.trim();const ok=a&&a[0].toUpperCase()===G.letter;h+=`<div class="res-row" style="backgrornd:${ok?'var(--validBg)':'var(--invalidBg)'}"><span style="font-family:'Space Mono',monospace;font-size:.64rem;color:var(--muted)">${cat}</span><span style="font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text)">${a||'—'}</span><span style="font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:${ok?'var(--valid)':'var(--invalid)'}">${ok?'+10':'+0'}</span></div>`});h+=`<div style="margin:1rem 0;border-top:1px solid var(--border);padding-top:.9rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--text);margin-bottom:.55rem">Rankings</div>`;s.forEach(([p,sc],i)=>h+=`<div style="display:flex;align-items:center;gap:.55rem;padding:.32rem .58rem;border-radius:.38rem;backgrornd:${p==='Vors'?'var(--limeBg)':'var(--surface2)'};margin-bottom:.28rem"><span>${['🥇','🥈','🥉',''][i]}</span><span style="font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex:1">${p}</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--lime)">${sc}</span></div>`);h+=`</div><button onclick="nextRornd()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">Manche Suivante →</button>`;document.getElementById('ov-card').innerHTML=h;document.getElementById('overlay').classList.add('show')}
-function nextRornd(){closeOverlay();G.rornd++;G.ans={};G.sec=40;G.frozen=false;startGame()}
+function showResults(){const s=Object.entries(G.scores).sort((a,b)=>b[1]-a[1]);let h=`<div style="font-family:'Bebas Neue',sans-serif;font-size:1.9rem;color:var(--text);margin-bottom:.2rem">Results — Letter ${G.letter}</div><p style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1rem">Vos réponses cette round</p>`;CATS.forEach((cat,ci)=>{const a=G.ans[ci]?.trim();const ok=a&&a[0].toUpperCase()===G.letter;h+=`<div class="res-row" style="background:${ok?'var(--validBg)':'var(--invalidBg)'}"><span style="font-family:'Space Mono',monospace;font-size:.64rem;color:var(--muted)">${cat}</span><span style="font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text)">${a||'—'}</span><span style="font-family:'Bebas Neue',sans-serif;font-size:.95rem;color:${ok?'var(--valid)':'var(--invalid)'}">${ok?'+10':'+0'}</span></div>`});h+=`<div style="margin:1rem 0;border-top:1px solid var(--border);padding-top:.9rem"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--text);margin-bottom:.55rem">Rankings</div>`;s.forEach(([p,sc],i)=>h+=`<div style="display:flex;align-items:center;gap:.55rem;padding:.32rem .58rem;border-radius:.38rem;background:${p==='Vors'?'var(--limeBg)':'var(--surface2)'};margin-bottom:.28rem"><span>${['🥇','🥈','🥉',''][i]}</span><span style="font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex:1">${p}</span><span style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--lime)">${sc}</span></div>`);h+=`</div><button onclick="nextRornd()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">Manche Suivante →</button>`;document.getElementById('ov-card').innerHTML=h;document.getElementById('overlay').classList.add('show')}
+function nextRornd(){closeOverlay();G.round++;G.ans={};G.sec=40;G.frozen=false;startGame()}
 function closeOverlay(){document.getElementById('overlay').classList.remove('show')}
 function updateScores(){document.getElementById('score-row').innerHTML=Object.entries(G.scores).sort((a,b)=>b[1]-a[1]).map(([p,s],i)=>`<div class="score-pill${p==='Vors'?' yor':''}"><span>${['🥇','🥈','🥉',''][i]}</span><span>${p}</span><span class="score-val">${s}</span></div>`).join('')}
 
@@ -418,7 +412,7 @@ let valCache={};let valBusy=false;
 const TC={1:'var(--lime)',2:'var(--gold)',3:'var(--purple)'};
 const TB={1:'var(--limeBg)',2:'var(--goldBg)',3:'var(--purpleBg)'};
 function resetVal(){document.getElementById('val-result').style.display='none';const l=document.getElementById('val-letter').value;document.getElementById('val-input').placeholder=`${l}... (commence par ${l})`;}
-function setTier(n){for(let i=1;i<=3;i++){const el=document.getElementById('tier'+i);el.classList.toggle('on',i<=n);el.style.borderColor=i===n?TC[i]:'var(--border)';el.style.backgrornd=i===n?TB[i]:i<n?'var(--validBg)':'var(--surface2)';el.style.opacity=i<=n?'1':'0.42';el.querySelector('.t-label').style.color=i===n?TC[i]:'var(--text)';el.querySelector('.t-icon').textContent=i<n?'✅':[,'🔍','🔧','🤖'][i]}}
+function setTier(n){for(let i=1;i<=3;i++){const el=document.getElementById('tier'+i);el.classList.toggle('on',i<=n);el.style.borderColor=i===n?TC[i]:'var(--border)';el.style.background=i===n?TB[i]:i<n?'var(--validBg)':'var(--surface2)';el.style.opacity=i<=n?'1':'0.42';el.querySelector('.t-label').style.color=i===n?TC[i]:'var(--text)';el.querySelector('.t-icon').textContent=i<n?'✅':[,'🔍','🔧','🤖'][i]}}
 async function runVal(){
   if(valBusy)return;const letter=document.getElementById('val-letter').value;const cat=document.getElementById('val-cat').value;const input=document.getElementById('val-input').value;if(!input.trim())return;
   if(input.length>0&&input[0].toUpperCase()!==letter){showToast(`⚠️ Le mot doit commencer par ${letter}`);return}
@@ -427,23 +421,23 @@ async function runVal(){
   valBusy=true;const btn=document.getElementById('val-go');btn.innerHTML='<span class="spin"></span>';btn.disabled=true;setTier(0);document.getElementById('val-result').style.display='none';
   const r=await validate(input,cat,letter,t=>setTier(t));setTier(r.tier||0);if(r.valid)valCache[key]=r;updateCache();showValRes(r);valBusy=false;btn.innerHTML='Valider →';btn.disabled=false;
 }
-function showValRes(r){const el=document.getElementById('val-result');el.style.display='block';el.style.borderColor=r.valid?'var(--valid)':'var(--invalid)';const tn={1:'Exact Match',2:'Fuzzy Match',3:'AI Arbitrator'};el.innerHTML=`<div class="res-hd" style="backgrornd:${r.valid?'var(--valid)':'var(--invalid)'}"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:#fff">${r.valid?'✅ MOT VALIDE':'❌ MOT INVALIDE'}</div>${r.tier?`<span class="res-tag">${tn[r.tier]}</span>`:''}</div><div class="res-bd">${r.corrected?`<div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--warn);backgrornd:var(--warnBg);padding:.3rem .55rem;border-radius:.38rem">✏️ Corrigé → <strong>${r.word}</strong></div>`:''}${r.fromCache?`<div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--blue);backgrornd:var(--blueBg);padding:.26rem .48rem;border-radius:.35rem">⚡ Cache local</div>`:''}<div style="font-family:'Space Mono',monospace;font-size:.66rem;color:${r.valid?'var(--valid)':'var(--invalid)'}">${r.reason}</div><div style="display:flex;gap:1rem;font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)"><span>⏱️ ${r.ms||0}ms</span>${r.tier?`<span style="color:${TC[r.tier]}">● Tier ${r.tier}</span>`:''}</div></div>`}
+function showValRes(r){const el=document.getElementById('val-result');el.style.display='block';el.style.borderColor=r.valid?'var(--valid)':'var(--invalid)';const tn={1:'Exact Match',2:'Fuzzy Match',3:'AI Arbitrator'};el.innerHTML=`<div class="res-hd" style="background:${r.valid?'var(--valid)':'var(--invalid)'}"><div style="font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:#fff">${r.valid?'✅ MOT VALIDE':'❌ MOT INVALIDE'}</div>${r.tier?`<span class="res-tag">${tn[r.tier]}</span>`:''}</div><div class="res-bd">${r.corrected?`<div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--warn);background:var(--warnBg);padding:.3rem .55rem;border-radius:.38rem">✏️ Corrigé → <strong>${r.word}</strong></div>`:''}${r.fromCache?`<div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--blue);background:var(--blueBg);padding:.26rem .48rem;border-radius:.35rem">⚡ Cache local</div>`:''}<div style="font-family:'Space Mono',monospace;font-size:.66rem;color:${r.valid?'var(--valid)':'var(--invalid)'}">${r.reason}</div><div style="display:flex;gap:1rem;font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)"><span>⏱️ ${r.ms||0}ms</span>${r.tier?`<span style="color:${TC[r.tier]}">● Tier ${r.tier}</span>`:''}</div></div>`}
 function updateCache(){const n=Object.keys(valCache).length;const el=document.getElementById('cache-bar');el.style.display=n?'flex':'none';document.getElementById('cache-cornt').textContent=n}
 
 const BTESTS=[{word:"Lion",cat:"Animal",letter:"L",desc:"Exact match"},{word:"Lino",cat:"Animal",letter:"L",desc:"Fuzzy (Lion)"},{word:"Lybié",cat:"Corntry",letter:"L",desc:"Fuzzy (Libye)"},{word:"Lucas",cat:"First Name",letter:"L",desc:"Exact prénom"},{word:"Zlion",cat:"Animal",letter:"L",desc:"Mauvaise lettre"},{word:"Lamborghini",cat:"Brand",letter:"L",desc:"Exact marque"}];
-function initBatch(){const c=document.getElementById('batch-results');if(c.children.length)return;c.innerHTML=BTESTS.map((t,i)=>`<div class="batch-row" id="br-${i}" style="backgrornd:var(--surface2)"><span id="bi-${i}">⬜</span><div style="flex:1"><div><span style="font-family:'Space Mono',monospace;font-size:.66rem;font-weight:700">${t.word}</span> <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">(${t.cat})</span></div><div id="binfo-${i}" style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">${t.desc}</div></div><span id="btag-${i}"></span></div>`).join('')}
-async function runBatch(){const btn=document.getElementById('batch-btn');btn.innerHTML='⏳...';btn.disabled=true;initBatch();BTESTS.forEach((_,i)=>{document.getElementById(`bi-${i}`).textContent='⬜';document.getElementById(`br-${i}`).style.backgrornd='var(--surface2)';document.getElementById(`binfo-${i}`).textContent=BTESTS[i].desc;document.getElementById(`btag-${i}`).innerHTML=''});
-  for(let i=0;i<BTESTS.length;i++){const t=BTESTS[i];document.getElementById(`bi-${i}`).textContent='⏳';const r=await validate(t.word,t.cat,t.letter,()=>{});document.getElementById(`bi-${i}`).textContent=r.valid?'✅':'❌';document.getElementById(`br-${i}`).style.backgrornd=r.valid?'var(--validBg)':'var(--invalidBg)';document.getElementById(`binfo-${i}`).textContent=`${r.reason} · ${r.ms}ms · Tier ${r.tier||'—'}`;if(r.tier)document.getElementById(`btag-${i}`).innerHTML=`<span style="font-family:'Space Mono',monospace;font-size:.52rem;padding:.11rem .36rem;border-radius:100px;backgrornd:${TB[r.tier]};color:${TC[r.tier]}">T${r.tier}</span>`;await sleep(160)}
+function initBatch(){const c=document.getElementById('batch-results');if(c.children.length)return;c.innerHTML=BTESTS.map((t,i)=>`<div class="batch-row" id="br-${i}" style="background:var(--surface2)"><span id="bi-${i}">⬜</span><div style="flex:1"><div><span style="font-family:'Space Mono',monospace;font-size:.66rem;font-weight:700">${t.word}</span> <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">(${t.cat})</span></div><div id="binfo-${i}" style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">${t.desc}</div></div><span id="btag-${i}"></span></div>`).join('')}
+async function runBatch(){const btn=document.getElementById('batch-btn');btn.innerHTML='⏳...';btn.disabled=true;initBatch();BTESTS.forEach((_,i)=>{document.getElementById(`bi-${i}`).textContent='⬜';document.getElementById(`br-${i}`).style.background='var(--surface2)';document.getElementById(`binfo-${i}`).textContent=BTESTS[i].desc;document.getElementById(`btag-${i}`).innerHTML=''});
+  for(let i=0;i<BTESTS.length;i++){const t=BTESTS[i];document.getElementById(`bi-${i}`).textContent='⏳';const r=await validate(t.word,t.cat,t.letter,()=>{});document.getElementById(`bi-${i}`).textContent=r.valid?'✅':'❌';document.getElementById(`br-${i}`).style.background=r.valid?'var(--validBg)':'var(--invalidBg)';document.getElementById(`binfo-${i}`).textContent=`${r.reason} · ${r.ms}ms · Tier ${r.tier||'—'}`;if(r.tier)document.getElementById(`btag-${i}`).innerHTML=`<span style="font-family:'Space Mono',monospace;font-size:.52rem;padding:.11rem .36rem;border-radius:100px;background:${TB[r.tier]};color:${TC[r.tier]}">T${r.tier}</span>`;await sleep(160)}
   btn.innerHTML='▶ Run All';btn.disabled=false}
 </script>
 
-<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
-  <div style="backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 WRC Credits</div>
     <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Utilisez vos WRC dans le jeu</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
-    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">💳 Buy</button>
-    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">💳 Buy</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
   </div>
 </div>
 <script>
@@ -451,7 +445,7 @@ let _wrcSel=0,_wrcBuying=false;
 function openWRCTopup(){_rp();document.getElementById('wrc-topup-overlay').style.display='flex'}
 function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
 function _rp(){
-  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};backgrornd:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
   const p=WRC_CONFIG.PACKS[_wrcSel];
   document.getElementById('wrc-topup-confirm').textContent=`💳 ${p.wrc} WRC — ${p.usdt} USDT`;
 }
