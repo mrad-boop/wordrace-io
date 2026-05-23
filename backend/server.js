@@ -313,6 +313,58 @@ function finishGame(room) {
   setTimeout(()=>store.rooms.delete(room.id), 300000);
 }
 
+
+// ─── PRESENCE TRACKING ───────────────────────────────────────
+// Tracks which zone each connected socket is in
+const presence = {
+  casual:      new Set(),   // socketIds in casual game
+  duel:        new Set(),   // socketIds in duel rooms
+  daily_league: new Set(),  // socketIds in daily league
+  lobby:       new Set(),   // socketIds in lobby/browsing
+  practice:    new Set(),   // socketIds in practice zone
+};
+
+function updatePresence(socketId, zone) {
+  // Remove from all zones first
+  Object.values(presence).forEach(s => s.delete(socketId));
+  // Add to new zone
+  if (zone && presence[zone]) presence[zone].add(socketId);
+}
+
+function getPresenceStats() {
+  const rooms = [...store.rooms.values()];
+  const roomStats = {};
+  rooms.forEach(r => {
+    roomStats[r.id] = {
+      id: r.id,
+      mode: r.mode,
+      players: r.players.filter(p => !p.isBot && p.connected).length,
+      maxPlayers: CONFIG.MAX_PLAYERS,
+      status: r.status,
+      wager: r.wager || 0,
+    };
+  });
+
+  return {
+    total_online:    store.users.size,
+    casual:          presence.casual.size,
+    duel:            presence.duel.size,
+    daily_league:    presence.daily_league.size,
+    practice:        presence.practice.size,
+    lobby:           store.users.size - presence.casual.size - presence.duel.size - presence.daily_league.size - presence.practice.size,
+    rooms_active:    rooms.filter(r => r.status === 'playing').length,
+    rooms_waiting:   rooms.filter(r => r.status === 'waiting').length,
+    rooms:           roomStats,
+    ts:              Date.now(),
+  };
+}
+
+// Broadcast presence update to all connected clients every 5s
+setInterval(() => {
+  const stats = getPresenceStats();
+  io.emit('presence:update', stats);
+}, 5000);
+
 // ─── SOCKET.IO EVENTS ─────────────────────────────────────────
 io.on('connection', (socket) => {
   console.log(`[Socket] Connected: ${socket.id}`);
@@ -330,6 +382,14 @@ io.on('connection', (socket) => {
     console.log(`[Auth] ${user.username} (${socket.id})`);
     if(cb) cb({ ok:true, user });
     socket.emit('auth:ok', user);
+  });
+
+
+  // ── PRESENCE: Zone tracking ──
+  socket.on('presence:join', ({ zone }) => {
+    updatePresence(socket.id, zone);
+    // Immediately send current stats back
+    socket.emit('presence:update', getPresenceStats());
   });
 
   // ── ROOM: CREATE ──
@@ -504,6 +564,7 @@ io.on('connection', (socket) => {
       }
     });
 
+    updatePresence(socket.id, null);
     store.users.delete(socket.id);
     store.anticheat.delete(socket.id);
   });
@@ -581,6 +642,7 @@ app.post('/api/validate', (req, res) => {
 // Server stats (admin)
 app.get('/api/stats', (req, res) => {
   const rooms = [...store.rooms.values()];
+  const ps = getPresenceStats();
   res.json({
     users_online:    store.users.size,
     rooms_total:     rooms.length,
@@ -589,7 +651,14 @@ app.get('/api/stats', (req, res) => {
     leaderboard_entries: store.leaderboard.length,
     daily_entries:   store.dailyEntries.size,
     uptime_seconds:  Math.round(process.uptime()),
+    presence:        ps,
   });
+});
+
+
+// Presence stats (detailed)
+app.get('/api/presence', (_, res) => {
+  res.json(getPresenceStats());
 });
 
 // ─── START ────────────────────────────────────────────────────
