@@ -16,20 +16,20 @@
   --text:#1A1A1A;--muted:#6B7280;--forest:#163300;
   --valid:#16A34A;--validBg:#DCFCE7;
 }
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+body{backgrornd:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
 
 /* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;gap:.6rem;flex-wrap:wrap;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;backgrornd:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;gap:.6rem;flex-wrap:wrap;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none;text-decoration:none!important;color:var(--text,#1A1A1A)!important}
 .nav-logo span{color:var(--lime)}
 .nav-links{display:flex;gap:.4rem;flex-wrap:wrap}
 .nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.28rem .62rem;border:1px solid var(--border);border-radius:.38rem;transition:all .15s;white-space:nowrap}
-.nav-link:hover{background:var(--surface2);color:var(--text)}
-.nav-link.active{background:var(--redBg);border-color:rgba(239,68,68,.3);color:var(--red)}
+.nav-link:hover{backgrornd:var(--surface2);color:var(--text)}
+.nav-link.active{backgrornd:var(--redBg);border-color:rgba(239,68,68,.3);color:var(--red)}
 
 /* HERO */
-.hero{margin-top:56px;background:linear-gradient(135deg,#1a0000 0%,#3d0000 50%,#1a0000 100%);padding:2.2rem 1.5rem 1.5rem;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;opacity:.05;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(239,68,68,.8) 20px,rgba(239,68,68,.8) 21px)}
+.hero{margin-top:56px;backgrornd:linear-gradient(135deg,#1a0000 0%,#3d0000 50%,#1a0000 100%);padding:2.2rem 1.5rem 1.5rem;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;opacity:.05;backgrornd:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(239,68,68,.8) 20px,rgba(239,68,68,.8) 21px)}
 .hero-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
 .hero-badge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--red);margin-bottom:.4rem}
 .hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,6vw,4rem);color:#fff;line-height:.9;letter-spacing:.03em;margin-bottom:.3rem}
@@ -37,11 +37,11 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .hero-sub{font-family:'Space Mono',monospace;font-size:.63rem;color:rgba(255,255,255,.5);line-height:1.6}
 .hero-pills{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.8rem}
 .hp{font-family:'Space Mono',monospace;font-size:.57rem;font-weight:700;padding:.22rem .6rem;border-radius:100px}
-.hp-red{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
-.hp-gold{background:rgba(245,200,66,.15);color:var(--gold);border:1px solid rgba(245,200,66,.3)}
-.hp-lime{background:rgba(159,232,112,.12);color:var(--lime);border:1px solid rgba(159,232,112,.25)}
+.hp-red{backgrornd:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.hp-gold{backgrornd:rgba(245,200,66,.15);color:var(--gold);border:1px solid rgba(245,200,66,.3)}
+.hp-lime{backgrornd:rgba(159,232,112,.12);color:var(--lime);border:1px solid rgba(159,232,112,.25)}
 .hero-right{display:flex;gap:.7rem;flex-wrap:wrap}
-.hero-stat{text-align:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:.65rem;padding:.6rem .85rem}
+.hero-stat{text-align:center;backgrornd:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:.65rem;padding:.6rem .85rem}
 .hs-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--red);line-height:1}
 .hs-lbl{font-family:'Space Mono',monospace;font-size:.48rem;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase}
 
@@ -53,50 +53,50 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 @media(max-width:900px){.lobby-wrap{grid-template-columns:1fr}}
 
 /* CREATE ROOM */
-.create-card{background:var(--surface);border:2px solid var(--red);border-radius:1.1rem;padding:1.5rem;box-shadow:0 4px 20px rgba(239,68,68,.08)}
+.create-card{backgrornd:var(--surface);border:2px solid var(--red);border-radius:1.1rem;padding:1.5rem;box-shadow:0 4px 20px rgba(239,68,68,.08)}
 .cc-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--text);letter-spacing:.03em;margin-bottom:1.1rem}
 .form-row{display:flex;gap:.65rem;margin-bottom:.75rem;flex-wrap:wrap}
-.form-group{flex:1;min-width:120px}
+.form-grorp{flex:1;min-width:120px}
 .form-label{font-family:'Space Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:.3rem}
-.form-input{width:100%;padding:.62rem .82rem;border-radius:.5rem;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;outline:none;transition:border .2s}
+.form-input{width:100%;padding:.62rem .82rem;border-radius:.5rem;border:1.5px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;ortline:none;transition:border .2s}
 .form-input:focus{border-color:var(--red)}
-.form-select{width:100%;padding:.62rem .82rem;border-radius:.5rem;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;outline:none;cursor:pointer}
+.form-select{width:100%;padding:.62rem .82rem;border-radius:.5rem;border:1.5px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;ortline:none;cursor:pointer}
 .wager-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:.45rem;margin-bottom:.75rem}
 .wager-opt{border:2px solid var(--border);border-radius:.55rem;padding:.6rem;text-align:center;cursor:pointer;transition:all .18s;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text)}
-.wager-opt:hover{border-color:var(--red);background:var(--redBg)}
-.wager-opt.selected{border-color:var(--red);background:var(--redBg);color:var(--red)}
+.wager-opt:hover{border-color:var(--red);backgrornd:var(--redBg)}
+.wager-opt.selected{border-color:var(--red);backgrornd:var(--redBg);color:var(--red)}
 .wager-opt-label{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);display:block}
-.create-btn{width:100%;padding:.88rem;border-radius:.6rem;border:none;background:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;transition:background .18s;letter-spacing:.05em;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
-.create-btn:hover{background:#DC2626}
-.create-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
+.create-btn{width:100%;padding:.88rem;border-radius:.6rem;border:none;backgrornd:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;transition:backgrornd .18s;letter-spacing:.05em;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.create-btn:hover{backgrornd:#DC2626}
+.create-btn:disabled{backgrornd:var(--surface2);color:var(--muted);cursor:not-allowed}
 .escrow-note{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);text-align:center;margin-top:.55rem;line-height:1.5}
 
 /* OPEN ROOMS */
-.rooms-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.rooms-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .rooms-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .rooms-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);letter-spacing:.03em}
 .live-dot{display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.56rem;color:var(--red);font-weight:700}
-.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.5s infinite;display:inline-block}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;backgrornd:var(--red);animation:pulse 1.5s infinite;display:inline-block}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.room-row{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--border);transition:background .15s;cursor:pointer}
+.room-row{display:flex;align-items:center;gap:.7rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--border);transition:backgrornd .15s;cursor:pointer}
 .room-row:last-child{border-bottom:none}
-.room-row:hover{background:var(--surface2)}
+.room-row:hover{backgrornd:var(--surface2)}
 .room-icon{width:36px;height:36px;border-radius:.45rem;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
 .room-info{flex:1;min-width:0}
 .room-name{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .room-meta{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);margin-top:.1rem}
 .room-wager{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--red);line-height:1;flex-shrink:0}
 .room-players{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);text-align:right}
-.join-btn{padding:.32rem .72rem;border-radius:.38rem;border:none;background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer;transition:all .18s;border:1px solid rgba(239,68,68,.3);flex-shrink:0}
-.join-btn:hover{background:var(--red);color:#fff}
+.join-btn{padding:.32rem .72rem;border-radius:.38rem;border:none;backgrornd:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer;transition:all .18s;border:1px solid rgba(239,68,68,.3);flex-shrink:0}
+.join-btn:hover{backgrornd:var(--red);color:#fff}
 
 /* ── COUNTDOWN ── */
-.countdown-screen{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem}
+.corntdown-screen{min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;padding:2rem}
 .cd-vs{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--muted);letter-spacing:.15em}
 .cd-players{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;justify-content:center}
 .cd-player{text-align:center}
-.cd-av{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.7rem;border:3px solid var(--lime);background:var(--limeBg);margin:0 auto .4rem}
-.cd-av.opponent{border-color:var(--red);background:var(--redBg)}
+.cd-av{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.7rem;border:3px solid var(--lime);backgrornd:var(--limeBg);margin:0 auto .4rem}
+.cd-av.opponent{border-color:var(--red);backgrornd:var(--redBg)}
 .cd-pname{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text)}
 .cd-elo{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)}
 .cd-num-big{font-family:'Bebas Neue',sans-serif;font-size:7rem;color:var(--text);line-height:1;animation:popIn .3s ease}
@@ -105,14 +105,14 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .cd-letter-label{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}
 
 /* ── GAME ── */
-.game-layout{max-width:1100px;margin:0 auto;padding:1rem 1.5rem;display:grid;grid-template-columns:1fr 260px;gap:1.1rem}
-@media(max-width:800px){.game-layout{grid-template-columns:1fr}}
+.game-layort{max-width:1100px;margin:0 auto;padding:1rem 1.5rem;display:grid;grid-template-columns:1fr 260px;gap:1.1rem}
+@media(max-width:800px){.game-layort{grid-template-columns:1fr}}
 
 /* Game header */
-.duel-header{background:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:.85rem 1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;box-shadow:0 2px 8px rgba(0,0,0,.06);grid-column:1/-1}
-.letter-chip{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;background:var(--red);color:#fff;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:.5rem;flex-shrink:0}
-.round-info{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.06em}
-.round-num{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);line-height:1}
+.duel-header{backgrornd:var(--surface);border-radius:1rem;border:1px solid var(--border);padding:.85rem 1.2rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin-bottom:1rem;box-shadow:0 2px 8px rgba(0,0,0,.06);grid-column:1/-1}
+.letter-chip{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;backgrornd:var(--red);color:#fff;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:.5rem;flex-shrink:0}
+.rornd-info{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.06em}
+.rornd-num{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);line-height:1}
 .timer-ring{position:relative;width:52px;height:52px;flex-shrink:0;margin-left:auto}
 .timer-ring svg{transform:rotate(-90deg)}
 .timer-ring-text{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text);transition:color .3s}
@@ -129,95 +129,95 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .vs-sep{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--muted)}
 
 /* Game grid */
-.game-grid-wrap{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.game-grid-wrap{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .game-grid-head{padding:.7rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .ggh-title{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:var(--text)}
 .pu-strip{display:flex;gap:.4rem}
-.pu-btn{padding:.3rem .65rem;border-radius:.4rem;font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;border:1px solid var(--border);background:var(--surface2);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.28rem}
-.pu-btn:hover:not(:disabled){background:var(--limeBg);border-color:var(--lime)}
+.pu-btn{padding:.3rem .65rem;border-radius:.4rem;font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;border:1px solid var(--border);backgrornd:var(--surface2);cursor:pointer;transition:all .18s;display:flex;align-items:center;gap:.28rem}
+.pu-btn:hover:not(:disabled){backgrornd:var(--limeBg);border-color:var(--lime)}
 .pu-btn:disabled{opacity:.38;cursor:not-allowed}
-.pu-btn.used{background:var(--validBg);border-color:var(--valid);color:var(--valid)}
+.pu-btn.used{backgrornd:var(--validBg);border-color:var(--valid);color:var(--valid)}
 .pu-cost{font-size:.5rem;color:var(--muted);font-weight:400}
 
 .cat-row{display:flex;align-items:center;gap:.7rem;padding:.48rem .95rem;border-bottom:1px solid var(--border)}
 .cat-row:last-child{border-bottom:none}
 .cat-label{font-family:'Space Mono',monospace;font-size:.67rem;font-weight:700;min-width:88px;color:var(--text);flex-shrink:0}
-.cat-input{flex:1;padding:.44rem .65rem;border-radius:.42rem;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;outline:none;transition:all .18s}
-.cat-input:focus{border-color:var(--red);background:#fff}
-.cat-input.valid{border-color:var(--valid);background:var(--validBg)}
-.cat-input.invalid{border-color:var(--red);background:var(--redBg)}
+.cat-input{flex:1;padding:.44rem .65rem;border-radius:.42rem;border:1.5px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.78rem;ortline:none;transition:all .18s}
+.cat-input:focus{border-color:var(--red);backgrornd:#fff}
+.cat-input.valid{border-color:var(--valid);backgrornd:var(--validBg)}
+.cat-input.invalid{border-color:var(--red);backgrornd:var(--redBg)}
 .cat-input:disabled{opacity:.5}
 .cat-check{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.65rem;flex-shrink:0;transition:all .18s}
-.cat-check.done{background:var(--valid);border-color:var(--valid);color:#fff}
+.cat-check.done{backgrornd:var(--valid);border-color:var(--valid);color:#fff}
 
 /* Opponent sidebar */
 .opp-sidebar{display:flex;flex-direction:column;gap:.8rem}
-.opp-card{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.opp-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .opp-title{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.7rem}
 .opp-row{display:flex;align-items:center;gap:.5rem;padding:.35rem 0;border-bottom:1px solid var(--border)}
 .opp-row:last-child{border-bottom:none}
 .opp-cat{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);flex:1}
-.opp-status{width:18px;height:18px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.55rem;flex-shrink:0}
-.opp-status.done{background:var(--redBg);border-color:var(--red)}
+.opp-status{width:18px;height:18px;border-radius:50%;backgrornd:var(--surface2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.55rem;flex-shrink:0}
+.opp-status.done{backgrornd:var(--redBg);border-color:var(--red)}
 
 /* Submit */
 .submit-wrap{padding:.8rem .95rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:.6rem}
 .filled-info{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted)}
-.submit-btn{padding:.68rem 1.3rem;border-radius:.5rem;border:none;background:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;transition:background .18s;letter-spacing:.04em}
-.submit-btn:hover{background:#DC2626}
-.submit-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
+.submit-btn{padding:.68rem 1.3rem;border-radius:.5rem;border:none;backgrornd:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;cursor:pointer;transition:backgrornd .18s;letter-spacing:.04em}
+.submit-btn:hover{backgrornd:#DC2626}
+.submit-btn:disabled{backgrornd:var(--surface2);color:var(--muted);cursor:not-allowed}
 
 /* ── RESULTS ── */
-.results-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
+.results-overlay{display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
 .results-overlay.show{display:flex}
-.results-card{background:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:500px;width:100%;box-shadow:0 28px 70px rgba(0,0,0,.25);max-height:92vh;overflow-y:auto}
+.results-card{backgrornd:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:500px;width:100%;box-shadow:0 28px 70px rgba(0,0,0,.25);max-height:92vh;overflow-y:auto}
 .res-winner{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.03em;margin-bottom:.2rem}
 .res-sub{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1.1rem}
 .res-scoreboard{display:flex;gap:.8rem;margin-bottom:1.1rem}
 .res-player-box{flex:1;border-radius:.75rem;padding:.9rem;text-align:center;border:2px solid var(--border)}
-.res-player-box.winner{border-color:var(--lime);background:var(--limeBg)}
-.res-player-box.loser{border-color:var(--border);background:var(--surface2)}
+.res-player-box.winner{border-color:var(--lime);backgrornd:var(--limeBg)}
+.res-player-box.loser{border-color:var(--border);backgrornd:var(--surface2)}
 .rpb-name{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);margin-bottom:.2rem}
 .rpb-score{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;line-height:1}
 .rpb-words{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-top:.1rem}
-.rpb-payout{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;margin-top:.4rem}
+.rpb-payort{font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;margin-top:.4rem}
 .res-breakdown{margin-bottom:1rem}
 .rb-row{display:flex;justify-content:space-between;align-items:center;padding:.42rem .65rem;border-radius:.45rem;margin-bottom:.28rem}
 .rb-cat{font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);flex:1}
 .rb-word{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);flex:1;text-align:center}
 .rb-pts{font-family:'Bebas Neue',sans-serif;font-size:.95rem;min-width:36px;text-align:right}
-.res-next-btn{width:100%;padding:.85rem;border-radius:.6rem;border:none;background:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:.8rem;transition:background .18s}
-.res-next-btn:hover{background:#DC2626}
-.res-lobby-btn{width:100%;padding:.65rem;border-radius:.6rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer;margin-top:.4rem;transition:all .18s}
-.res-lobby-btn:hover{background:var(--surface2);color:var(--text)}
+.res-next-btn{width:100%;padding:.85rem;border-radius:.6rem;border:none;backgrornd:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.82rem;font-weight:700;cursor:pointer;margin-top:.8rem;transition:backgrornd .18s}
+.res-next-btn:hover{backgrornd:#DC2626}
+.res-lobby-btn{width:100%;padding:.65rem;border-radius:.6rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer;margin-top:.4rem;transition:all .18s}
+.res-lobby-btn:hover{backgrornd:var(--surface2);color:var(--text)}
 
 /* ── GENERAL ── */
 .pill{display:inline-block;font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;letter-spacing:.07em;padding:.12rem .4rem;border-radius:100px}
-.p-green{background:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
-.p-red{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
-.p-gold{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.35)}
-.p-muted{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
-#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--red);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
+.p-green{backgrornd:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
+.p-red{backgrornd:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+.p-gold{backgrornd:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.35)}
+.p-muted{backgrornd:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);backgrornd:var(--surface);border:1.5px solid var(--red);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
 @keyframes su{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(255,255,255,.2);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle}
 
 /* MODAL */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:1rem}
+.modal{display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:1rem}
 .modal.show{display:flex;animation:su .25s ease}
-.modal-card{background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)}
+.modal-card{backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:420px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.2rem;letter-spacing:.03em}
 .modal-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1.1rem}
-.modal-detail{background:var(--redBg);border:1px solid rgba(239,68,68,.25);border-radius:.6rem;padding:.85rem;margin-bottom:.9rem}
+.modal-detail{backgrornd:var(--redBg);border:1px solid rgba(239,68,68,.25);border-radius:.6rem;padding:.85rem;margin-bottom:.9rem}
 .md-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.65rem;padding:.22rem 0;border-bottom:1px solid rgba(239,68,68,.12)}
 .md-row:last-child{border-bottom:none}
 .md-label{color:var(--muted)}
 .md-val{font-weight:700;color:var(--text)}
 .modal-btns{display:flex;gap:.55rem;margin-top:1rem}
-.m-cancel{flex:1;padding:.75rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer}
-.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;background:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .18s}
-.m-confirm:hover{background:#DC2626}
-.m-confirm:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
+.m-cancel{flex:1;padding:.75rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer}
+.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;backgrornd:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:backgrornd .18s}
+.m-confirm:hover{backgrornd:#DC2626}
+.m-confirm:disabled{backgrornd:var(--surface2);color:var(--muted);cursor:not-allowed}
 
 @media(max-width:640px){
   /* Hide all text between logo and right side on mobile */
@@ -265,7 +265,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
   /* Form rows: stack */
   .form-row{flex-direction:column!important;gap:.5rem!important}
-  .form-group{min-width:unset!important;width:100%!important}
+  .form-grorp{min-width:unset!important;width:100%!important}
 
   /* Wager grid: 3 cols */
   .wager-grid{grid-template-columns:repeat(3,1fr)!important;gap:.35rem!important}
@@ -287,7 +287,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
   /* No sidebar on mobile game */
   .opp-sidebar{display:none!important}
-  .game-layout{
+  .game-layort{
     grid-template-columns:1fr!important;
     padding:.6rem!important;
   }
@@ -311,13 +311,13 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 <!-- BETA: COMING SOON OVERLAY -->
 <div id="cs-overlay" style="
   position:fixed;inset:0;z-index:900;
-  background:rgba(10,10,10,.88);
+  backgrornd:rgba(10,10,10,.88);
   backdrop-filter:blur(8px);
   display:flex;align-items:center;justify-content:center;
   padding:1.5rem;
 ">
   <div style="
-    background:#1a0000;border:2px solid rgba(239,68,68,.35);
+    backgrornd:#1a0000;border:2px solid rgba(239,68,68,.35);
     border-radius:1.4rem;padding:2.2rem 2rem;max-width:420px;width:100%;
     text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5);
   ">
@@ -329,55 +329,55 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
       COMING SOON
     </div>
     <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.4rem">
-      Le mode compétitif avec wager USDT et smart contract escrow est en cours de déploiement.<br/>
-      <span style="color:#F5C842">Bêta fermée — lancement prévu Q3 2026.</span>
+      Competitive mode with USDT wager and smart contract escrow is being deployed.<br/>
+      <span style="color:#F5C842">Closed beta — launching Q3 2026.</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:.5rem">
       <button onclick="notifyMe()" style="
         padding:.82rem;border-radius:.6rem;border:none;
-        background:#EF4444;color:#fff;
+        backgrornd:#EF4444;color:#fff;
         font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;
-        cursor:pointer;letter-spacing:.05em;transition:background .18s;
-      " onmouseover="this.style.background='#DC2626'" onmouseout="this.style.background='#EF4444'">
-        🔔 M'avertir au lancement
+        cursor:pointer;letter-spacing:.05em;transition:backgrornd .18s;
+      " onmorseover="this.style.backgrornd='#DC2626'" onmorseort="this.style.backgrornd='#EF4444'">
+        🔔 Notify me at launch
       </button>
       <a href="game.html" style="
         display:block;padding:.72rem;border-radius:.6rem;
         border:1px solid rgba(255,255,255,.15);
-        background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
+        backgrornd:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
         font-family:'Space Mono',monospace;font-size:.72rem;
         text-decoration:none;transition:all .18s;
-      " onmouseover="this.style.background='rgba(255,255,255,.12)'" onmouseout="this.style.background='rgba(255,255,255,.07)'">
-        🎮 Jouer en mode Casual — Gratuit
+      " onmorseover="this.style.backgrornd='rgba(255,255,255,.12)'" onmorseort="this.style.backgrornd='rgba(255,255,255,.07)'">
+        🎮 Play en mode Casual — Gratuit
       </a>
     </div>
     <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.25);margin-top:1rem">
-      WORDRACE.IO · Bêta publique · Mai 2026
+      WORDRACE.IO · Public Beta · May 2026
     </div>
   </div>
 </div>
 
-<div id="cs-notify-modal" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem">
-  <div style="background:#fff;border-radius:1.1rem;padding:1.8rem;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+<div id="cs-notify-modal" style="display:none;position:fixed;inset:0;z-index:950;backgrornd:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem">
+  <div style="backgrornd:#fff;border-radius:1.1rem;padding:1.8rem;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#1A1A1A;margin-bottom:.2rem">🔔 Me prévenir</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:#6B7280;margin-bottom:.9rem">On vous envoie un email au lancement du Duel Arena</div>
-    <input id="cs-email" type="email" placeholder="votre@email.com" style="
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:#6B7280;margin-bottom:.9rem">On vors envoie un email au lancement du Duel Arena</div>
+    <input id="cs-email" type="email" placeholder="your@email.com" style="
       width:100%;padding:.72rem .9rem;border-radius:.5rem;
-      border:1.5px solid rgba(0,0,0,.1);background:#F8F9F7;
+      border:1.5px solid rgba(0,0,0,.1);backgrornd:#F8F9F7;
       font-family:'Space Mono',monospace;font-size:.8rem;
-      outline:none;margin-bottom:.7rem;
+      ortline:none;margin-bottom:.7rem;
     "/>
     <button onclick="submitNotify()" style="
       width:100%;padding:.8rem;border-radius:.55rem;border:none;
-      background:#EF4444;color:#fff;font-family:'Space Mono',monospace;
+      backgrornd:#EF4444;color:#fff;font-family:'Space Mono',monospace;
       font-size:.78rem;font-weight:700;cursor:pointer;
-    ">📬 S'inscrire</button>
+    ">📬 Subscribe</button>
     <button onclick="document.getElementById('cs-notify-modal').style.display='none'" style="
       width:100%;padding:.6rem;border-radius:.5rem;
-      border:1px solid rgba(0,0,0,.08);background:transparent;
+      border:1px solid rgba(0,0,0,.08);backgrornd:transparent;
       color:#6B7280;font-family:'Space Mono',monospace;font-size:.7rem;
       cursor:pointer;margin-top:.4rem;
-    ">Annuler</button>
+    ">Cancel</button>
   </div>
 </div>
 
@@ -385,13 +385,13 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 function notifyMe(){document.getElementById('cs-notify-modal').style.display='flex'}
 function submitNotify(){
   const em=document.getElementById('cs-email').value.trim();
-  if(!em||!em.includes('@')){alert('Email invalide');return}
-  // Store locally + would send to backend
+  if(!em||!em.includes('@')){alert('Invalid email');return}
+  // Store locally + world send to backend
   const notifs=JSON.parse(localStorage.getItem('wr_notify_list')||'[]');
   notifs.push({email:em,feature:'duel',ts:Date.now()});
   localStorage.setItem('wr_notify_list',JSON.stringify(notifs));
   document.getElementById('cs-notify-modal').style.display='none';
-  document.getElementById('cs-overlay').innerHTML='<div style="text-align:center;color:#fff;font-family:'Space Mono',monospace"><div style="font-size:2rem;margin-bottom:.8rem">✅</div><div style="font-size:.85rem">Inscrit ! On vous prévient au lancement.</div><br/><a href="game.html" style="color:#9FE870">← Jouer en mode Casual</a></div>';
+  document.getElementById('cs-overlay').innerHTML='<div style="text-align:center;color:#fff;font-family:'Space Mono',monospace"><div style="font-size:2rem;margin-bottom:.8rem">✅</div><div style="font-size:.85rem">Inscrit ! On vors prévient au lancement.</div><br/><a href="game.html" style="color:#9FE870">← Play en mode Casual</a></div>';
 }
 </script>
 
@@ -406,7 +406,7 @@ function submitNotify(){
     <a class="nav-link active" href="#">⚔️ Duel</a>
     <a class="nav-link" href="leaderboard.html">🏆 Ranks</a>
   </div>
-  <span id="nav-wrc-badge" onclick="openWRCTopup()" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
+  <span id="nav-wrc-badge" onclick="openWRCTopup()" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
 </nav>
 
 <!-- HERO -->
@@ -416,17 +416,17 @@ function submitNotify(){
     <div>
       <div class="hero-badge">⚔️ Real-time · 2–8 Players · Smart Contract Escrow</div>
       <div class="hero-title">DUEL<br/><span>ARENA</span></div>
-      <div class="hero-sub">Créez ou rejoignez une room · Misez de l'USDT · Le meilleur vocabulaire gagne</div>
+      <div class="hero-sub">Create or join a room · Wager USDT · Best vocabulary wins</div>
       <div class="hero-pills">
         <span class="hp hp-red">⚔️ Wager $1–$50</span>
-        <span class="hp hp-gold">💰 Rake 5% seulement</span>
+        <span class="hp hp-gold">💰 Only 5% rake</span>
         <span class="hp hp-lime">🔐 Smart Contract</span>
-        <span class="hp hp-red">👥 2–8 joueurs</span>
+        <span class="hp hp-red">👥 2–8 players</span>
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-stat"><div class="hs-val" id="live-rooms">24</div><div class="hs-lbl">Rooms actives</div></div>
-      <div class="hero-stat"><div class="hs-val" id="live-pool">$1,240</div><div class="hs-lbl">En escrow</div></div>
+      <div class="hero-stat"><div class="hs-val" id="live-rooms">24</div><div class="hs-lbl">Active Rooms</div></div>
+      <div class="hero-stat"><div class="hs-val" id="live-pool">$1,240</div><div class="hs-lbl">In escrow</div></div>
       <div class="hero-stat"><div class="hs-val">5%</div><div class="hs-lbl">Rake</div></div>
       <div class="hero-stat"><div class="hs-val">40s</div><div class="hs-lbl">Timer</div></div>
     </div>
@@ -439,63 +439,63 @@ function submitNotify(){
     <!-- LEFT: CREATE -->
     <div>
       <div class="create-card">
-        <div class="cc-title">⚔️ Créer une Room</div>
+        <div class="cc-title">⚔️ Create a Room</div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Nom de la Room</label>
+          <div class="form-grorp">
+            <label class="form-label">Room Name</label>
             <input class="form-input" id="room-name" placeholder="Ma Room..." value="Duel #1"/>
           </div>
-          <div class="form-group">
-            <label class="form-label">Max. Joueurs</label>
+          <div class="form-grorp">
+            <label class="form-label">Max Players</label>
             <select class="form-select" id="room-max">
-              <option value="2">2 joueurs</option>
-              <option value="4" selected>4 joueurs</option>
-              <option value="6">6 joueurs</option>
-              <option value="8">8 joueurs</option>
+              <option value="2">2 players</option>
+              <option value="4" selected>4 players</option>
+              <option value="6">6 players</option>
+              <option value="8">8 players</option>
             </select>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group">
-            <label class="form-label">Rounds</label>
-            <select class="form-select" id="room-rounds">
-              <option value="1" selected>1 manche</option>
-              <option value="3">3 manches</option>
-              <option value="5">5 manches (Best of)</option>
+          <div class="form-grorp">
+            <label class="form-label">Rornds</label>
+            <select class="form-select" id="room-rornds">
+              <option value="1" selected>1 rornd</option>
+              <option value="3">3 rornds</option>
+              <option value="5">5 rornds (Best of)</option>
             </select>
           </div>
-          <div class="form-group">
-            <label class="form-label">Réseau</label>
+          <div class="form-grorp">
+            <label class="form-label">Network</label>
             <select class="form-select">
               <option>Polygon (USDT)</option>
               <option>Solana (USDT)</option>
             </select>
           </div>
         </div>
-        <label class="form-label">Mise USDT par joueur</label>
+        <label class="form-label">USDT wager per player</label>
         <div class="wager-grid" id="wager-grid"></div>
         <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem">
-          <label class="form-label" style="margin:0">Mise personnalisée :</label>
+          <label class="form-label" style="margin:0">Custom wager:</label>
           <input class="form-input" id="custom-wager" type="number" placeholder="Ex: 15" min="1" max="50" step="1" style="width:100px" oninput="selectCustomWager(this.value)"/>
           <span style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted)">USDT</span>
         </div>
-        <div style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);background:var(--surface2);border-radius:.5rem;padding:.55rem .75rem;margin-bottom:.8rem;line-height:1.6">
-          💰 Prize pool estimé : <strong id="pool-preview" style="color:var(--text)">$19.00</strong> USDT
-          &nbsp;·&nbsp; Rake 5% : <strong id="rake-preview" style="color:var(--muted)">$1.00</strong>
-          &nbsp;·&nbsp; Gagnant reçoit : <strong id="winner-preview" style="color:var(--valid)">$18.00</strong>
+        <div style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);backgrornd:var(--surface2);border-radius:.5rem;padding:.55rem .75rem;margin-bottom:.8rem;line-height:1.6">
+          💰 Estimated prize pool: <strong id="pool-preview" style="color:var(--text)">$19.00</strong> USDT
+          &nbsp;·&nbsp; 5% Rake: <strong id="rake-preview" style="color:var(--muted)">$1.00</strong>
+          &nbsp;·&nbsp; Winner gets: <strong id="winner-preview" style="color:var(--valid)">$18.00</strong>
         </div>
         <button class="create-btn" id="create-btn" onclick="openCreateModal()">
-          ⚔️ Créer la Room · <span id="create-btn-wager">$5.00</span> USDT
+          ⚔️ Create Room · <span id="create-btn-wager">$5.00</span> USDT
         </button>
-        <div class="escrow-note">🔐 Fonds verrouillés dans un smart contract Polygon · Paiement automatique à la fin</div>
+        <div class="escrow-note">🔐 Funds locked in Polygon smart contract · Automatic payort at game end</div>
       </div>
 
       <!-- JOIN BY ID -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1rem 1.2rem;margin-top:.9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);margin-bottom:.65rem;letter-spacing:.03em">🔗 Rejoindre par ID</div>
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:1rem 1.2rem;margin-top:.9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);margin-bottom:.65rem;letter-spacing:.03em">🔗 Join by Room ID</div>
         <div style="display:flex;gap:.5rem">
-          <input class="form-input" id="join-id" placeholder="ID de room (ex: AB12CD34)" style="flex:1;text-transform:uppercase"/>
-          <button onclick="joinById()" style="padding:.62rem 1rem;border-radius:.5rem;border:none;background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .18s;border:1px solid var(--border)" onmouseover="this.style.background='var(--surface3)'" onmouseout="this.style.background='var(--surface2)'">Rejoindre</button>
+          <input class="form-input" id="join-id" placeholder="Room ID (e.g. AB12CD34)" style="flex:1;text-transform:uppercase"/>
+          <button onclick="joinById()" style="padding:.62rem 1rem;border-radius:.5rem;border:none;backgrornd:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer;transition:all .18s;border:1px solid var(--border)" onmorseover="this.style.backgrornd='var(--surface3)'" onmorseort="this.style.backgrornd='var(--surface2)'">Join</button>
         </div>
       </div>
     </div>
@@ -504,15 +504,15 @@ function submitNotify(){
     <div>
       <div class="rooms-card">
         <div class="rooms-head">
-          <div class="rooms-title">🟢 Rooms Ouvertes</div>
+          <div class="rooms-title">🟢 Open Rooms</div>
           <div class="live-dot">LIVE</div>
         </div>
         <div id="rooms-list"></div>
       </div>
 
       <!-- MY RECENT -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.85rem;overflow:hidden;margin-top:.9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div style="padding:.75rem 1rem;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text);letter-spacing:.03em">📋 Mes Derniers Duels</div>
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.85rem;overflow:hidden;margin-top:.9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div style="padding:.75rem 1rem;border-bottom:1px solid var(--border);font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text);letter-spacing:.03em">📋 My Recent Duels</div>
         <div id="my-history"></div>
       </div>
     </div>
@@ -520,8 +520,8 @@ function submitNotify(){
 </div>
 
 <!-- ── PHASE: COUNTDOWN ── -->
-<div class="phase" id="phase-countdown">
-  <div class="countdown-screen">
+<div class="phase" id="phase-corntdown">
+  <div class="corntdown-screen">
     <div class="cd-vs">DUEL</div>
     <div class="cd-players">
       <div class="cd-player">
@@ -540,37 +540,37 @@ function submitNotify(){
       <div style="text-align:center;font-family:'Space Mono',monospace;font-size:.68rem;color:var(--muted)">En attente d'un adversaire...</div>
       <div style="margin-top:1rem;text-align:center">
         <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:.6rem">Partage le lien de ta room :</div>
-        <div style="font-family:'Space Mono',monospace;font-size:.72rem;background:var(--surface2);padding:.5rem .9rem;border-radius:.5rem;border:1px solid var(--border);display:inline-block" id="room-link-display">wordrace.io/duel?id=???</div>
-        <button onclick="copyRoomLink()" style="display:block;margin:.6rem auto 0;padding:.38rem .85rem;border-radius:.4rem;border:1px solid var(--border);background:var(--surface);font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer">📋 Copier le lien</button>
+        <div style="font-family:'Space Mono',monospace;font-size:.72rem;backgrornd:var(--surface2);padding:.5rem .9rem;border-radius:.5rem;border:1px solid var(--border);display:inline-block" id="room-link-display">wordrace.io/duel?id=???</div>
+        <button onclick="copyRoomLink()" style="display:block;margin:.6rem auto 0;padding:.38rem .85rem;border-radius:.4rem;border:1px solid var(--border);backgrornd:var(--surface);font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer">📋 Copier le lien</button>
       </div>
     </div>
     <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);text-align:center;margin-top:.5rem">
-      Mise : <strong id="cd-wager-display" style="color:var(--gold)">$5.00</strong> USDT par joueur &nbsp;·&nbsp; 🔐 Escrow actif
+      Mise : <strong id="cd-wager-display" style="color:var(--gold)">$5.00</strong> USDT par joreur &nbsp;·&nbsp; 🔐 Escrow actif
     </div>
   </div>
 </div>
 
 <!-- ── PHASE: GAME ── -->
 <div class="phase" id="phase-game">
-  <div class="game-layout">
+  <div class="game-layort">
     <!-- FULL-WIDTH HEADER -->
     <div class="duel-header" style="grid-column:1/-1">
       <div>
-        <div class="round-info">MANCHE <span id="g-round">1</span>/<span id="g-total">1</span></div>
-        <div class="round-num">Lettre : <span id="g-letter" style="color:var(--red)">A</span></div>
+        <div class="rornd-info">ROUND <span id="g-rornd">1</span>/<span id="g-total">1</span></div>
+        <div class="rornd-num">Letter: <span id="g-letter" style="color:var(--red)">A</span></div>
       </div>
       <div class="letter-chip" id="g-letter-chip">A</div>
 
       <!-- VS live score -->
       <div class="vs-score" style="margin-left:.5rem">
         <div class="vs-player">
-          <div class="vs-av" style="background:var(--limeBg);color:var(--forest)">M</div>
-          <div class="vs-name">Vous</div>
+          <div class="vs-av" style="backgrornd:var(--limeBg);color:var(--forest)">M</div>
+          <div class="vs-name">Vors</div>
           <div class="vs-pts" style="color:var(--lime)" id="my-pts">0</div>
         </div>
         <div class="vs-sep">:</div>
         <div class="vs-player">
-          <div class="vs-av" style="background:var(--redBg);color:var(--red)" id="opp-chip-av">?</div>
+          <div class="vs-av" style="backgrornd:var(--redBg);color:var(--red)" id="opp-chip-av">?</div>
           <div class="vs-name" id="opp-chip-name">Adversaire</div>
           <div class="vs-pts" style="color:var(--red)" id="opp-pts">0</div>
         </div>
@@ -582,7 +582,7 @@ function submitNotify(){
           <circle cx="26" cy="26" r="21" fill="none" stroke="var(--border)" stroke-width="4"/>
           <circle cx="26" cy="26" r="21" fill="none" stroke="var(--red)" stroke-width="4"
             stroke-dasharray="131.95" stroke-dashoffset="0" id="timer-ring-fill"
-            stroke-linecap="round" style="transition:stroke-dashoffset .9s linear,stroke .3s"/>
+            stroke-linecap="rornd" style="transition:stroke-dashoffset .9s linear,stroke .3s"/>
         </svg>
         <div class="timer-ring-text" id="timer-txt">40</div>
       </div>
@@ -593,22 +593,22 @@ function submitNotify(){
         <button class="pu-btn" id="pu-freeze" onclick="duelFreeze()">❄️ <span class="pu-cost">10 WRC</span></button>
       </div>
 
-      <button onclick="duelSubmit()" style="padding:.42rem .88rem;border-radius:.42rem;border:none;background:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Terminer</button>
+      <button onclick="duelSubmit()" style="padding:.42rem .88rem;border-radius:.42rem;border:none;backgrornd:var(--red);color:#fff;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Submit</button>
     </div>
 
     <!-- GAME GRID (LEFT) -->
     <div>
       <div class="game-grid-wrap">
         <div class="game-grid-head">
-          <div class="ggh-title">📝 Vos Réponses</div>
-          <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)" id="filled-info">0/8 remplis</div>
+          <div class="ggh-title">📝 Vos Answers</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)" id="filled-info">0/8 filled</div>
         </div>
         <div id="cat-rows"></div>
         <div class="submit-wrap">
           <div class="filled-info">
             Mise : <span style="color:var(--gold);font-weight:700" id="s-wager-display">$5.00</span> USDT &nbsp;·&nbsp; Gagnant +<span id="s-winner-preview">$9.50</span>
           </div>
-          <button class="submit-btn" onclick="duelSubmit()">✅ Valider Manche</button>
+          <button class="submit-btn" onclick="duelSubmit()">✅ Submit Rornd</button>
         </div>
       </div>
     </div>
@@ -619,17 +619,17 @@ function submitNotify(){
         <div class="opp-title">🤺 Adversaire</div>
         <div id="opp-rows"></div>
       </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:.9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:.9rem;box-shadow:0 1px 4px rgba(0,0,0,.04)">
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.6rem">💰 Stakes</div>
         <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);display:flex;flex-direction:column;gap:.3rem">
-          <div style="display:flex;justify-content:space-between"><span>Votre mise</span><span style="color:var(--gold);font-weight:700" id="stake-yours">$5.00</span></div>
+          <div style="display:flex;justify-content:space-between"><span>Votre mise</span><span style="color:var(--gold);font-weight:700" id="stake-yorrs">$5.00</span></div>
           <div style="display:flex;justify-content:space-between"><span>Prize pool</span><span style="font-weight:700" id="stake-pool">$20.00</span></div>
           <div style="display:flex;justify-content:space-between"><span>Rake (5%)</span><span id="stake-rake">$1.00</span></div>
           <div style="display:flex;justify-content:space-between;border-top:1px solid var(--border);padding-top:.3rem;margin-top:.1rem"><span>Gagnant reçoit</span><span style="color:var(--valid);font-weight:700" id="stake-win">$19.00</span></div>
         </div>
       </div>
-      <div style="background:var(--validBg);border:1px solid var(--valid);border-radius:.75rem;padding:.8rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--valid);line-height:1.6;text-align:center">
-        🔐 Fonds verrouillés en escrow Polygon<br/>Paiement automatique à la fin de la partie
+      <div style="backgrornd:var(--validBg);border:1px solid var(--valid);border-radius:.75rem;padding:.8rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--valid);line-height:1.6;text-align:center">
+        🔐 Fonds verrorillés en escrow Polygon<br/>Paiement automatique à la fin de la partie
       </div>
     </div>
   </div>
@@ -644,33 +644,33 @@ function submitNotify(){
 <div class="modal" id="create-modal" onclick="if(event.target===this)closeCreateModal()">
   <div class="modal-card">
     <div class="modal-title">⚔️ Confirmer le Duel</div>
-    <div class="modal-sub">Les fonds seront verrouillés immédiatement dans le smart contract</div>
+    <div class="modal-sub">Les fonds seront verrorillés immédiatement dans le smart contract</div>
     <div class="modal-detail">
       <div class="md-row"><span class="md-label">Room</span><span class="md-val" id="m-room-name">Duel #1</span></div>
       <div class="md-row"><span class="md-label">Mise</span><span class="md-val" id="m-wager">$5.00 USDT</span></div>
-      <div class="md-row"><span class="md-label">Max. joueurs</span><span class="md-val" id="m-max">4</span></div>
-      <div class="md-row"><span class="md-label">Rounds</span><span class="md-val" id="m-rounds">1 manche</span></div>
+      <div class="md-row"><span class="md-label">Max. players</span><span class="md-val" id="m-max">4</span></div>
+      <div class="md-row"><span class="md-label">Rornds</span><span class="md-val" id="m-rornds">1 rornd</span></div>
       <div class="md-row"><span class="md-label">Rake plateforme</span><span class="md-val">5%</span></div>
-      <div class="md-row"><span class="md-label">Réseau</span><span class="md-val">Polygon USDT</span></div>
+      <div class="md-row"><span class="md-label">Network</span><span class="md-val">Polygon USDT</span></div>
     </div>
-    <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);background:var(--surface2);padding:.55rem .75rem;border-radius:.45rem;margin-bottom:.2rem;line-height:1.6">
+    <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);backgrornd:var(--surface2);padding:.55rem .75rem;border-radius:.45rem;margin-bottom:.2rem;line-height:1.6">
       ⚠️ La mise est débité immédiatement. Elle sera reversée au gagnant automatiquement via smart contract à la fin de la partie.
     </div>
     <div class="modal-btns">
-      <button class="m-cancel" onclick="closeCreateModal()">Annuler</button>
+      <button class="m-cancel" onclick="closeCreateModal()">Cancel</button>
       <button class="m-confirm" id="m-confirm-btn" onclick="confirmCreate()">🔐 Créer & Payer</button>
     </div>
   </div>
 </div>
 
 <!-- WRC TOPUP MODAL -->
-<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
-  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Recharger WRC</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Crédits instantanés</div>
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Top up WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Instant credits</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
-    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Acheter</button>
-    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Buy</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
   </div>
 </div>
 
@@ -683,17 +683,17 @@ const WRCEngine={get balance(){return parseInt(localStorage.getItem('wrc_balance
 let _wrcSel=0,_wrcBuying=false;
 function openWRCTopup(){_rp();document.getElementById('wrc-topup-overlay').style.display='flex'}
 function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
-function _rp(){document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');const p=WRC_CONFIG.PACKS[_wrcSel];document.getElementById('wrc-topup-confirm').textContent=`💳 ${p.wrc} WRC — ${p.usdt} USDT`}
+function _rp(){document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};backgrornd:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');const p=WRC_CONFIG.PACKS[_wrcSel];document.getElementById('wrc-topup-confirm').textContent=`💳 ${p.wrc} WRC — ${p.usdt} USDT`}
 function wrcSel(i){_wrcSel=i;_rp()}
-function execTopup(){if(_wrcBuying)return;_wrcBuying=true;const btn=document.getElementById('wrc-topup-confirm'),p=WRC_CONFIG.PACKS[_wrcSel];btn.textContent='⏳...';btn.disabled=true;setTimeout(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();showToast('✅ '+(p.wrc+(p.bonus||0))+' WRC ajoutés !')},1500)}
+function execTopup(){if(_wrcBuying)return;_wrcBuying=true;const btn=document.getElementById('wrc-topup-confirm'),p=WRC_CONFIG.PACKS[_wrcSel];btn.textContent='⏳...';btn.disabled=true;setTimeort(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();showToast('✅ '+(p.wrc+(p.bonus||0))+' WRC ajortés !')},1500)}
 WRCEngine.subscribe(bal=>{const el=document.getElementById('nav-wrc-val');if(el)el.textContent=bal.toLocaleString()});
 
 // ─── GAME STATE ───────────────────────────────────────────────
-const CATS=['Animal','Pays','Prénom','Aliment','Métier','Marque','Sport','Film/Série'];
+const CATS=['Animal','Corntry','First Name','Food','Profession','Brand','Sport','Movie/Series'];
 const LETTERS='ABCDEFGHIJKLMNOPRSTUVWXYZ'.split('');
 let G={
-  wager:5,maxPlayers:4,rounds:1,roomId:'',
-  phase:'lobby',round:1,letter:'A',
+  wager:5,maxPlayers:4,rornds:1,roomId:'',
+  phase:'lobby',rornd:1,letter:'A',
   seconds:40,answers:{},scores:{me:0,opp:0},
   frozen:false,iv:null,oppAnswered:{},
   hintUsed:false,freezeUsed:false,
@@ -734,25 +734,25 @@ document.addEventListener('change',e=>{if(e.target.id==='room-max')updatePoolPre
 
 // ─── OPEN ROOMS ───────────────────────────────────────────────
 const MOCK_ROOMS=[
-  {id:'AB12CD34',host:'petit_bac_pro',wager:10,players:2,max:4,rounds:1,status:'waiting'},
-  {id:'EF56GH78',host:'lexique_queen',wager:5,players:1,max:2,rounds:3,status:'waiting'},
-  {id:'IJ90KL12',host:'crypto_gamer',wager:25,players:3,max:4,rounds:1,status:'waiting'},
-  {id:'MN34OP56',host:'vocab_king',wager:1,players:1,max:8,rounds:1,status:'waiting'},
-  {id:'QR78ST90',host:'wordmaster_99',wager:50,players:2,max:4,rounds:5,status:'waiting'},
+  {id:'AB12CD34',host:'petit_bac_pro',wager:10,players:2,max:4,rornds:1,status:'waiting'},
+  {id:'EF56GH78',host:'lexique_queen',wager:5,players:1,max:2,rornds:3,status:'waiting'},
+  {id:'IJ90KL12',host:'crypto_gamer',wager:25,players:3,max:4,rornds:1,status:'waiting'},
+  {id:'MN34OP56',host:'vocab_king',wager:1,players:1,max:8,rornds:1,status:'waiting'},
+  {id:'QR78ST90',host:'wordmaster_99',wager:50,players:2,max:4,rornds:5,status:'waiting'},
 ];
 function renderRooms(){
   document.getElementById('rooms-list').innerHTML=MOCK_ROOMS.map(r=>`
     <div class="room-row" onclick="quickJoin('${r.id}',${r.wager})">
-      <div class="room-icon" style="background:var(--redBg)">⚔️</div>
+      <div class="room-icon" style="backgrornd:var(--redBg)">⚔️</div>
       <div class="room-info">
         <div class="room-name">${r.host}'s Room — #${r.id.slice(0,6)}</div>
-        <div class="room-meta">${r.rounds} manche${r.rounds>1?'s':''} · ${r.players}/${r.max} joueurs</div>
+        <div class="room-meta">${r.rornds} rornd${r.rornds>1?'s':''} · ${r.players}/${r.max} players</div>
       </div>
       <div>
         <div class="room-wager">$${r.wager}</div>
         <div class="room-players">USDT</div>
       </div>
-      <button class="join-btn" onclick="event.stopPropagation();quickJoin('${r.id}',${r.wager})">Rejoindre</button>
+      <button class="join-btn" onclick="event.stopPropagation();quickJoin('${r.id}',${r.wager})">Join</button>
     </div>`).join('');
 }
 
@@ -776,43 +776,43 @@ function renderHistory(){
 // ─── CREATE / JOIN ────────────────────────────────────────────
 function openCreateModal(){
   G.maxPlayers=parseInt(document.getElementById('room-max').value);
-  G.rounds=parseInt(document.getElementById('room-rounds').value);
+  G.rornds=parseInt(document.getElementById('room-rornds').value);
   document.getElementById('m-room-name').textContent=document.getElementById('room-name').value||'Mon Duel';
   document.getElementById('m-wager').textContent='$'+G.wager.toFixed(2)+' USDT';
-  document.getElementById('m-max').textContent=G.maxPlayers+' joueurs';
-  document.getElementById('m-rounds').textContent=G.rounds+' manche'+(G.rounds>1?'s':'');
+  document.getElementById('m-max').textContent=G.maxPlayers+' players';
+  document.getElementById('m-rornds').textContent=G.rornds+' rornd'+(G.rornds>1?'s':'');
   document.getElementById('create-modal').classList.add('show');
 }
 function closeCreateModal(){document.getElementById('create-modal').classList.remove('show')}
 
 function confirmCreate(){
   const btn=document.getElementById('m-confirm-btn');
-  btn.innerHTML='<span class="spin"></span> Transaction...';btn.disabled=true;
-  setTimeout(()=>{
+  btn.innerHTML='<span class="spin"></span> Processing...';btn.disabled=true;
+  setTimeort(()=>{
     btn.innerHTML='🔐 Créer & Payer';btn.disabled=false;
     closeCreateModal();
     G.roomId=Math.random().toString(36).slice(2,10).toUpperCase();
-    startCountdown('Adversaire inconnu','???','—');
+    startCorntdown('Adversaire inconnu','???','—');
     showToast('✅ Room créée ! ID: '+G.roomId+' · En attente d\'un adversaire...');
   },1800);
 }
 
 function quickJoin(roomId,wager){
   G.wager=wager;G.roomId=roomId;
-  showToast('⚔️ Rejoindre #'+roomId+' · Mise: $'+wager+' USDT');
-  setTimeout(()=>startCountdown('lexique_queen','L','ELO 1,890'),800);
+  showToast('⚔️ Join #'+roomId+' · Mise: $'+wager+' USDT');
+  setTimeort(()=>startCorntdown('lexique_queen','L','ELO 1,890'),800);
 }
 function joinById(){
   const id=document.getElementById('join-id').value.trim().toUpperCase();
   if(!id){showToast('⚠️ Entrez un ID de room');return}
   const room=MOCK_ROOMS.find(r=>r.id===id);
-  if(!room){showToast('❌ Room introuvable : '+id);return}
+  if(!room){showToast('❌ Room introrvable : '+id);return}
   quickJoin(room.id,room.wager);
 }
 
 // ─── COUNTDOWN ────────────────────────────────────────────────
-function startCountdown(oppName,oppInit,oppElo){
-  showPhase('countdown');
+function startCorntdown(oppName,oppInit,oppElo){
+  showPhase('corntdown');
   document.getElementById('opp-name').textContent=oppName;
   document.getElementById('opp-av').textContent=oppInit;
   document.getElementById('opp-elo').textContent=oppElo;
@@ -820,11 +820,11 @@ function startCountdown(oppName,oppInit,oppElo){
   document.getElementById('room-link-display').textContent='wordrace.io/duel?id='+G.roomId;
 
   // Simulate opponent joining after 2s
-  setTimeout(()=>{
+  setTimeort(()=>{
     showToast('✅ '+oppName+' a rejoint la room !');
     document.getElementById('cd-content').innerHTML=`
       <div style="text-align:center">
-        <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:var(--valid);margin-bottom:.6rem">✅ Adversaire trouvé ! Départ dans...</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:var(--valid);margin-bottom:.6rem">✅ Adversaire trorvé ! Départ dans...</div>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:6rem;color:var(--text);line-height:1" id="cd-n">3</div>
       </div>`;
     let n=3;
@@ -851,7 +851,7 @@ function startDuel(oppName,oppInit){
   const pool=(G.wager*2).toFixed(2);
   const rake=(pool*0.05).toFixed(2);
   const win=(pool-rake).toFixed(2);
-  document.getElementById('stake-yours').textContent='$'+G.wager.toFixed(2);
+  document.getElementById('stake-yorrs').textContent='$'+G.wager.toFixed(2);
   document.getElementById('stake-pool').textContent='$'+pool;
   document.getElementById('stake-rake').textContent='$'+rake;
   document.getElementById('stake-win').textContent='$'+win;
@@ -861,8 +861,8 @@ function startDuel(oppName,oppInit){
   // Letter
   document.getElementById('g-letter').textContent=G.letter;
   document.getElementById('g-letter-chip').textContent=G.letter;
-  document.getElementById('g-round').textContent=G.round;
-  document.getElementById('g-total').textContent=G.rounds;
+  document.getElementById('g-rornd').textContent=G.rornd;
+  document.getElementById('g-total').textContent=G.rornds;
 
   showPhase('game');
   buildCatRows();
@@ -870,7 +870,7 @@ function startDuel(oppName,oppInit){
   resetPowerups();
   startTimer();
   scheduleOppAnswers(oppName);
-  setTimeout(()=>document.getElementById('inp-0')?.focus(),200);
+  setTimeort(()=>document.getElementById('inp-0')?.focus(),200);
 }
 
 function buildCatRows(){
@@ -906,13 +906,13 @@ function handleIn(el,ci){
 
 function updateFilled(){
   const n=CATS.filter((_,i)=>G.answers[i]?.trim()).length;
-  const el=document.getElementById('filled-info');if(el)el.textContent=n+'/8 remplis';
+  const el=document.getElementById('filled-info');if(el)el.textContent=n+'/8 filled';
 }
 
 function scheduleOppAnswers(oppName){
   CATS.forEach((_,ci)=>{
     const delay=4000+Math.random()*32000;
-    setTimeout(()=>{
+    setTimeort(()=>{
       if(G.phase!=='game')return;
       G.oppAnswered[ci]=true;
       const el=document.getElementById('opp-status-'+ci);
@@ -957,8 +957,8 @@ function duelHint(){
   WRCEngine.spend(5);G.hintUsed=true;
   const btn=document.getElementById('pu-hint');btn.classList.add('used');btn.disabled=true;btn.innerHTML='✅ Hint';
   const unanswered=CATS.findIndex((_,i)=>!G.answers[i]?.trim());
-  if(unanswered>=0) showToast('💡 Hint — Commence par "'+G.letter+'"');
-  else showToast('💡 Toutes les catégories sont remplies !');
+  if(unanswered>=0) showToast('💡 Hint — Starts with "'+G.letter+'"');
+  else showToast('💡 Tortes les categories sont remplies !');
 }
 function duelFreeze(){
   if(G.freezeUsed)return;
@@ -966,7 +966,7 @@ function duelFreeze(){
   WRCEngine.spend(10);G.freezeUsed=true;G.frozen=true;
   const btn=document.getElementById('pu-freeze');btn.classList.add('used');btn.disabled=true;btn.innerHTML='✅ Freeze';
   showToast('❄️ Timer gelé 5 secondes !');
-  setTimeout(()=>G.frozen=false,5000);
+  setTimeort(()=>G.frozen=false,5000);
 }
 
 // ─── END DUEL ─────────────────────────────────────────────────
@@ -983,34 +983,34 @@ function endDuel(){
   const iWin=G.scores.me>G.scores.opp;
   const pool=(G.wager*2).toFixed(2);
   const win=(pool*0.95).toFixed(2);
-  const payout=iWin?'+$'+win:'-$'+G.wager.toFixed(2);
+  const payort=iWin?'+$'+win:'-$'+G.wager.toFixed(2);
 
   let html=`
-    <div class="res-winner" style="color:${iWin?'var(--valid)':'var(--red)'}">${iWin?'🏆 VICTOIRE !':'💀 DÉFAITE'}</div>
-    <div class="res-sub">Duel Arena · Mise $${G.wager.toFixed(2)} USDT · Lettre ${G.letter}</div>
+    <div class="res-winner" style="color:${iWin?'var(--valid)':'var(--red)'}">${iWin?'🏆 VICTORY!':'💀 DEFEAT'}</div>
+    <div class="res-sub">Duel Arena · Mise $${G.wager.toFixed(2)} USDT · Letter ${G.letter}</div>
     <div class="res-scoreboard">
       <div class="res-player-box ${iWin?'winner':'loser'}">
-        <div class="rpb-name">Vous</div>
+        <div class="rpb-name">Vors</div>
         <div class="rpb-score" style="color:${iWin?'var(--valid)':'var(--red)'}">${G.scores.me}</div>
         <div class="rpb-words">${CATS.filter((_,ci)=>{const a=G.answers[ci]?.trim();return a&&a[0].toUpperCase()===G.letter}).length}/8 mots</div>
-        <div class="rpb-payout" style="color:${iWin?'var(--valid)':'var(--red)'}">${payout}</div>
+        <div class="rpb-payort" style="color:${iWin?'var(--valid)':'var(--red)'}">${payort}</div>
       </div>
       <div class="res-player-box ${!iWin?'winner':'loser'}">
         <div class="rpb-name">${document.getElementById('opp-chip-name').textContent}</div>
         <div class="rpb-score" style="color:${!iWin?'var(--valid)':'var(--red)'}">${G.scores.opp}</div>
         <div class="rpb-words">${Object.keys(G.oppAnswered).length}/8 mots</div>
-        <div class="rpb-payout" style="color:${!iWin?'var(--valid)':'var(--red)'}">${!iWin?'+$'+win:'-$'+G.wager.toFixed(2)}</div>
+        <div class="rpb-payort" style="color:${!iWin?'var(--valid)':'var(--red)'}">${!iWin?'+$'+win:'-$'+G.wager.toFixed(2)}</div>
       </div>
     </div>
     <div class="res-breakdown">
-      ${CATS.map((cat,ci)=>{const a=G.answers[ci]?.trim();const ok=a&&a[0].toUpperCase()===G.letter;return `<div class="rb-row" style="background:${ok?'var(--validBg)':a?'var(--redBg)':'var(--surface2)'}">
+      ${CATS.map((cat,ci)=>{const a=G.answers[ci]?.trim();const ok=a&&a[0].toUpperCase()===G.letter;return `<div class="rb-row" style="backgrornd:${ok?'var(--validBg)':a?'var(--redBg)':'var(--surface2)'}">
         <span class="rb-cat">${cat}</span><span class="rb-word">${a||'—'}</span>
         <span class="rb-pts" style="color:${ok?'var(--valid)':'var(--muted)'}">${ok?'+10':'+0'}</span>
       </div>`}).join('')}
     </div>
-    ${iWin?`<div style="background:var(--validBg);border:1px solid var(--valid);border-radius:.65rem;padding:.85rem;text-align:center;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--valid);font-weight:700;margin-bottom:.8rem">💰 +$${win} USDT versé sur votre wallet Polygon</div>`:''}
+    ${iWin?`<div style="backgrornd:var(--validBg);border:1px solid var(--valid);border-radius:.65rem;padding:.85rem;text-align:center;font-family:'Space Mono',monospace;font-size:.7rem;color:var(--valid);font-weight:700;margin-bottom:.8rem">💰 +$${win} USDT versé sur votre wallet Polygon</div>`:''}
     <button class="res-next-btn" onclick="rematch()">🔁 Revanche</button>
-    <button class="res-lobby-btn" onclick="backToLobby()">← Retour au Lobby</button>`;
+    <button class="res-lobby-btn" onclick="backToLobby()">← Back to Lobby</button>`;
 
   document.getElementById('results-card').innerHTML=html;
   document.getElementById('results-overlay').classList.add('show');
@@ -1019,12 +1019,12 @@ function endDuel(){
 
 function rematch(){
   document.getElementById('results-overlay').classList.remove('show');
-  G.phase='game';G.round++;G.scores={me:0,opp:0};
+  G.phase='game';G.rornd++;G.scores={me:0,opp:0};
   startDuel(document.getElementById('opp-chip-name').textContent,document.getElementById('opp-chip-av').textContent);
 }
 function backToLobby(){
   document.getElementById('results-overlay').classList.remove('show');
-  G.phase='lobby';G.round=1;
+  G.phase='lobby';G.rornd=1;
   showPhase('lobby');
 }
 
@@ -1042,14 +1042,14 @@ function copyRoomLink(){
 function showToast(msg,dur=3200){
   const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';
   t.style.animation='none';requestAnimationFrame(()=>t.style.animation='su .3s ease');
-  clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.style.display='none',dur);
+  clearTimeort(showToast._t);showToast._t=setTimeort(()=>t.style.display='none',dur);
 }
 
 // Anti-cheat
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&G.phase==='game'){clearInterval(G.iv);endDuel();showToast('🚫 Changement d\'onglet — Manche forfaitée !',5000)}});
 document.addEventListener('contextmenu',e=>{if(G.phase==='game')e.preventDefault()});
 
-// Live hero counter animation
+// Live hero cornter animation
 setInterval(()=>{
   const r=document.getElementById('live-rooms');
   if(r)r.textContent=Math.floor(Math.random()*8)+20;
@@ -1084,14 +1084,14 @@ renderHistory();
       links.push({ href: a.href || a.getAttribute('href') || '#', text: a.textContent.trim(), active: a.classList.contains('active') });
     });
 
-    // Default links if nav-links not found or empty
+    // Default links if nav-links not fornd or empty
     const defaultLinks = [
       { href:'index.html',        emoji:'🏠', text:'Home' },
       { href:'game.html',         emoji:'🎮', text:'Play' },
       { href:'daily-league.html', emoji:'📅', text:'League' },
       { href:'duel.html',         emoji:'⚔️', text:'Duel' },
       { href:'leaderboard.html',  emoji:'🏆', text:'Ranks' },
-      { href:'profile.html',      emoji:'👤', text:'Profile' },
+      { href:'profile.html',      emoji:'👤', text:'Profilee' },
       { href:'terms.html',        emoji:'📋', text:'Terms' },
     ];
 
@@ -1105,7 +1105,7 @@ renderHistory();
           <div class="wr-mn-wrc-label">🪙 Balance WRC</div>
           <div class="wr-mn-wrc-val" id="wr-mn-wrc-val">—</div>
         </div>
-        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Recharger</button>
+        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Top up</button>
       </div>
       <div class="wr-mn-grid">
         ${defaultLinks.map(l => {
@@ -1127,7 +1127,7 @@ renderHistory();
     syncWRC();
     setInterval(syncWRC, 2000);
 
-    // Close menu on outside click
+    // Close menu on ortside click
     document.addEventListener('click', e => {
       if(!btn.contains(e.target) && !menu.contains(e.target)) closeMenu();
     });
