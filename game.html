@@ -198,115 +198,86 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 </style>
 
-<style id="wr-mobile-nav-style">
-/* ── MOBILE NAV OVERRIDES ─────────────────────────────────── */
 
-/* Hide nav links on mobile, show hamburger */
+
+
+
+<style id="nav-mobile-v3">
+/* ── MOBILE NAV V3 — single tight row ── */
 @media(max-width:640px){
-  .nav-links, .nav-links a, .nav-links li { display:none !important; }
-  #wr-hamburger { display:flex !important; }
-  .topnav { padding:.6rem 1rem; gap:.5rem; flex-wrap:nowrap; }
-  /* WRC badge: compact on mobile */
-  #nav-wrc-badge { padding:.2rem .45rem; font-size:.55rem; }
-  #nav-wrc-badge::before { content:'🪙 '; }
+  /* Nav: Logo | spacer | WRC-chip | user-av | hamburger */
+  .topnav {
+    padding: .5rem .85rem !important;
+    gap: .35rem !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    min-height: 48px;
+  }
+  /* Hide bulky elements */
+  .nav-links, .nav-back, #mode-label,
+  #nav-middle-info, .score-strip { display: none !important; }
+
+  /* WRC inline chip in nav (mobile only) */
+  #nav-wrc-mobile {
+    display: inline-flex !important;
+    align-items: center;
+    gap: .22rem;
+    font-family: 'Space Mono', monospace;
+    font-size: .58rem;
+    font-weight: 700;
+    padding: .2rem .48rem;
+    border-radius: 100px;
+    background: var(--limeBg, #E8F8DF);
+    border: 1px solid rgba(159,232,112,.4);
+    color: var(--forest, #163300);
+    cursor: pointer;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* User avatar: circle only, no text */
+  #wr-nav-user {
+    padding: .2rem !important;
+    border-radius: 50% !important;
+    min-width: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    justify-content: center !important;
+    flex-shrink: 0 !important;
+  }
+  #wr-nav-user span:not(.user-av) { display: none !important; }
+  #wr-nav-user .user-av {
+    width: 24px !important; height: 24px !important;
+    font-size: .7rem !important;
+    margin: 0 !important;
+  }
+
+  /* Hide the big WRC floating widget during game on mobile */
+  #wrc-widget { display: none !important; }
+
+  /* Hamburger tight */
+  #wr-hamburger {
+    width: 32px !important; height: 32px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Nav badge (desktop WRC) — hide on mobile, use inline chip instead */
+  #nav-wrc-badge { display: none !important; }
 }
 @media(min-width:641px){
-  #wr-hamburger { display:none !important; }
-  #wr-mobile-menu { display:none !important; }
+  #nav-wrc-mobile { display: none !important; }
 }
-
-/* Hamburger button */
-#wr-hamburger {
-  display:none;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:4px;
-  width:36px; height:36px;
-  border:1px solid rgba(0,0,0,.1);
-  border-radius:.5rem;
-  background:transparent;
-  cursor:pointer;
-  padding:0;
-  flex-shrink:0;
-  transition:background .15s;
-}
-#wr-hamburger:hover { background:rgba(0,0,0,.05); }
-#wr-hamburger span {
-  display:block; width:18px; height:2px;
-  background:var(--text,#1A1A1A);
-  border-radius:2px;
-  transition:all .2s;
-}
-#wr-hamburger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
-#wr-hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
-#wr-hamburger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
-
-/* Mobile dropdown menu */
-#wr-mobile-menu {
-  position:fixed;
-  top:56px; left:0; right:0;
-  background:var(--surface,#fff);
-  border-bottom:1px solid rgba(0,0,0,.08);
-  box-shadow:0 8px 24px rgba(0,0,0,.12);
-  z-index:99;
-  padding:.5rem .75rem .75rem;
-  animation:wr-mn-in .18s ease;
-  display:none;
-}
-#wr-mobile-menu.open { display:block; }
-@keyframes wr-mn-in{ from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
-
-.wr-mn-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:.4rem;
-}
-.wr-mn-item {
-  display:flex;
-  align-items:center;
-  gap:.5rem;
-  padding:.62rem .8rem;
-  border-radius:.55rem;
-  border:1px solid rgba(0,0,0,.07);
-  background:var(--surface2,#F0F2EE);
-  text-decoration:none;
-  color:var(--text,#1A1A1A);
-  font-family:'Space Mono',monospace;
-  font-size:.68rem;
-  font-weight:700;
-  transition:all .15s;
-}
-.wr-mn-item:hover { background:var(--limeBg,#E8F8DF); border-color:var(--lime,#9FE870); color:var(--forest,#163300); }
-.wr-mn-item.active { background:var(--limeBg,#E8F8DF); border-color:var(--lime,#9FE870); color:var(--forest,#163300); }
-.wr-mn-item.danger { background:#FEE2E2; border-color:rgba(239,68,68,.25); color:#EF4444; }
-.wr-mn-emoji { font-size:1rem; flex-shrink:0; }
-
-/* WRC balance row */
-.wr-mn-wrc {
-  grid-column:1/-1;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:.55rem .8rem;
-  border-radius:.55rem;
-  background:var(--limeBg,#E8F8DF);
-  border:1px solid rgba(159,232,112,.35);
-  margin-bottom:.2rem;
-}
-.wr-mn-wrc-label { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--muted,#6B7280); }
-.wr-mn-wrc-val { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--lime,#9FE870); }
-.wr-mn-wrc-btn { font-family:'Space Mono',monospace; font-size:.58rem; font-weight:700; padding:.2rem .55rem; border-radius:.35rem; border:none; background:var(--lime,#9FE870); color:var(--forest,#163300); cursor:pointer; }
 </style>
 
-<style id="logo-fix">
-a.nav-logo,.nav-logo{font-family:'Bebas Neue',sans-serif!important;font-size:1.75rem!important;letter-spacing:.04em!important;color:#1A1A1A!important;text-decoration:none!important;white-space:nowrap;flex-shrink:0}
-a.nav-logo span,.nav-logo span{color:#9FE870!important}
-</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="topnav">
   <a class="nav-logo" href="index.html" style="text-decoration:none;color:var(--text,#1A1A1A);font-family:\'Bebas Neue\',sans-serif;font-size:1.6rem;letter-spacing:.04em">WORD<span>RACE</span>.IO</a>
+  <span id="nav-wrc-mobile" onclick="if(typeof openWRCTopup==='function')openWRCTopup()" style="display:none">
+    🪙 <span id="nav-wrc-mobile-val">—</span>
+  </span>
   <div id="nav-middle-info" style="display:flex;align-items:center;gap:.7rem">
     <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)" id="mode-label">CASUAL TRAINING</span>
     <a class="nav-back" href="index.html">← Accueil</a>
@@ -1499,6 +1470,25 @@ updateWRCUI();
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', buildMobileNav);
   else buildMobileNav();
+})();
+</script>
+
+
+<script>
+(function(){
+  function syncMobileWRC(){
+    var bal = parseInt(localStorage.getItem('wrc_balance')||'0');
+    var el = document.getElementById('nav-wrc-mobile-val');
+    if(el) el.textContent = bal > 0 ? bal.toLocaleString() + ' WRC' : '—';
+    // Only show if logged in
+    var user = null;
+    try { user = JSON.parse(localStorage.getItem('wr_user')||'null'); } catch(e){}
+    var chip = document.getElementById('nav-wrc-mobile');
+    if(chip) chip.style.display = (user && window.innerWidth <= 640) ? 'inline-flex' : 'none';
+  }
+  syncMobileWRC();
+  setInterval(syncMobileWRC, 2000);
+  window.addEventListener('resize', syncMobileWRC);
 })();
 </script>
 
