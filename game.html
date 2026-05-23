@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
+<link rel="stylesheet" href="global.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
 <title>WordRace.io — Jouer</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -202,79 +203,14 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 
 
-<style id="nav-mobile-v3">
-/* ── MOBILE NAV V3 — single tight row ── */
-@media(max-width:640px){
-  /* Nav: Logo | spacer | WRC-chip | user-av | hamburger */
-  .topnav {
-    padding: .5rem .85rem !important;
-    gap: .35rem !important;
-    flex-wrap: nowrap !important;
-    align-items: center !important;
-    min-height: 48px;
-  }
-  /* Hide bulky elements */
-  .nav-links, .nav-back, #mode-label,
-  #nav-middle-info, .score-strip { display: none !important; }
 
-  /* WRC inline chip in nav (mobile only) */
-  #nav-wrc-mobile {
-    display: inline-flex !important;
-    align-items: center;
-    gap: .22rem;
-    font-family: 'Space Mono', monospace;
-    font-size: .58rem;
-    font-weight: 700;
-    padding: .2rem .48rem;
-    border-radius: 100px;
-    background: var(--limeBg, #E8F8DF);
-    border: 1px solid rgba(159,232,112,.4);
-    color: var(--forest, #163300);
-    cursor: pointer;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  /* User avatar: circle only, no text */
-  #wr-nav-user {
-    padding: .2rem !important;
-    border-radius: 50% !important;
-    min-width: 32px !important;
-    width: 32px !important;
-    height: 32px !important;
-    justify-content: center !important;
-    flex-shrink: 0 !important;
-  }
-  #wr-nav-user span:not(.user-av) { display: none !important; }
-  #wr-nav-user .user-av {
-    width: 24px !important; height: 24px !important;
-    font-size: .7rem !important;
-    margin: 0 !important;
-  }
-
-  /* Hide the big WRC floating widget during game on mobile */
-  #wrc-widget { display: none !important; }
-
-  /* Hamburger tight */
-  #wr-hamburger {
-    width: 32px !important; height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-
-  /* Nav badge (desktop WRC) — hide on mobile, use inline chip instead */
-  #nav-wrc-badge { display: none !important; }
-}
-@media(min-width:641px){
-  #nav-wrc-mobile { display: none !important; }
-}
-</style>
 
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="topnav">
-  <a class="nav-logo" href="index.html" style="text-decoration:none;color:var(--text,#1A1A1A);font-family:\'Bebas Neue\',sans-serif;font-size:1.6rem;letter-spacing:.04em">WORD<span>RACE</span>.IO</a>
+  <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
   <span id="nav-wrc-mobile" onclick="if(typeof openWRCTopup==='function')openWRCTopup()" style="display:none">
     🪙 <span id="nav-wrc-mobile-val">—</span>
   </span>
