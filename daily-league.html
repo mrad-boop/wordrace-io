@@ -67,7 +67,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .info-row:last-child{border-bottom:none}
 .info-label{color:var(--muted)}
 .info-val{color:var(--text);font-weight:700}
-.enter-btn{width:100%;padding:.9rem;border-radius:.65rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:backgrornd .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.enter-btn{width:100%;padding:.9rem;border-radius:.65rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .enter-btn:hover{background:var(--goldD)}
 .enter-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
 .already-entered{background:var(--validBg);border:1px solid var(--valid);border-radius:.65rem;padding:.9rem;text-align:center;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--valid);font-weight:700}
@@ -92,7 +92,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .ga-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.03em}
 .ga-meta{display:flex;align-items:center;gap:.6rem}
 .letter-chip{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;background:var(--lime);color:var(--forest);width:38px;height:38px;border-radius:.45rem;display:flex;align-items:center;justify-content:center;line-height:1}
-.rornd-chip{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);background:var(--surface2);padding:.25rem .55rem;border-radius:.35rem}
+.round-chip{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);background:var(--surface2);padding:.25rem .55rem;border-radius:.35rem}
 .timer-compact{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--text);min-width:40px;text-align:center;transition:color .3s}
 .timer-compact.warn{color:var(--gold)}
 .timer-compact.danger{color:var(--red);animation:shake .25s infinite}
@@ -109,7 +109,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .cat-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;transition:all .2s}
 .cat-check.done{background:var(--valid);border-color:var(--valid);color:#fff}
 .submit-row{display:flex;gap:.6rem;margin-top:1rem;align-items:center}
-.submit-btn{flex:1;padding:.78rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:backgrornd .2s}
+.submit-btn{flex:1;padding:.78rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s}
 .submit-btn:hover{background:var(--limeD)}
 .submit-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
 .filled-cornt{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
@@ -125,7 +125,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .lb-tab{flex:1;padding:.6rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent}
 .lb-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--goldBg)}
 .lb-body{max-height:480px;overflow-y:auto}
-.lb-row{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-bottom:1px solid rgba(0,0,0,.04);transition:backgrornd .15s}
+.lb-row{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-bottom:1px solid rgba(0,0,0,.04);transition:background .15s}
 .lb-row:hover{background:var(--surface2)}
 .lb-row.yor{background:var(--limeBg);border-left:3px solid var(--lime)}
 .lb-row.top3{background:var(--goldBg)}
@@ -179,7 +179,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .md-val{font-weight:700;color:var(--text)}
 .modal-btns{display:flex;gap:.6rem}
 .m-cancel{flex:1;padding:.75rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer}
-.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:backgrornd .2s}
+.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s}
 .m-confirm:hover{background:var(--goldD)}
 
 /* RESULTS */
@@ -228,41 +228,26 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
 </head>
 <body>
-<div id="cs-overlay" style="
-  position:fixed;inset:0;z-index:900;
-  background:rgba(0,5,0,.95);backdrop-filter:blur(8px);
-  display:flex;align-items:center;justify-content:center;padding:1.5rem;
-">
-  <div style="
-    background:#0d1f0d;border:2px solid rgba(245,200,66,.5);
-    border-radius:1.4rem;padding:2.2rem 2rem;max-width:420px;width:100%;
-    text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5);
-  ">
+<div id="cs-overlay" style="position:fixed;inset:0;z-index:900;background:linear-gradient(135deg,#0a1f0a 0%,#163300 50%,#0a1f0a 100%);display:flex;align-items:center;justify-content:center;padding:1.5rem;">
+  <div style="background:#163300;border:2px solid rgba(245,200,66,.5);border-radius:1.4rem;padding:2.2rem 2rem;max-width:420px;width:100%;text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.6);">
     <div style="font-size:2.8rem;margin-bottom:.8rem">📅</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#fff;letter-spacing:.04em;line-height:1;margin-bottom:.3rem">DAILY LEAGUE</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#F5C842;letter-spacing:.1em;margin-bottom:1rem">COMING SOON</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.4rem">
-      The daily Play-to-Earn torrnament with USDT prize pool is coming soon.<br/>
+    <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.6);line-height:1.7;margin-bottom:1.4rem">
+      The daily Play-to-Earn tournament with USDT prize pool is coming soon.<br/>
       <span style="color:#F5C842">Closed beta — launching Q3 2026.</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:.5rem">
-      <button onclick="notifyMeDL()" style="
-        padding:.82rem;border-radius:.6rem;border:none;
-        background:#F5C842;color:#163300;
-        font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;
-        cursor:pointer;letter-spacing:.05em;
-      ">🔔 Notify me at launch</button>
-      <a href="game.html" style="
-        display:block;padding:.72rem;border-radius:.6rem;
-        border:1px solid rgba(255,255,255,.15);
-        background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
-        font-family:'Space Mono',monospace;font-size:.72rem;text-decoration:none;
-      ">🎮 Play Casual — Free</a>
+      <button onclick="notifyMeDL()" style="padding:.82rem;border-radius:.6rem;border:none;background:#F5C842;color:#163300;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em;">
+        🔔 Notify me at launch
+      </button>
+      <a href="game.html" style="display:block;padding:.72rem;border-radius:.6rem;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:rgba(255,255,255,.75);font-family:'Space Mono',monospace;font-size:.72rem;text-decoration:none;">
+        🎮 Play Casual — Free
+      </a>
     </div>
     <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.25);margin-top:1rem">WORDRACE.IO · Public Beta · May 2026</div>
   </div>
 </div>
-
 <div id="cs-notify-modal-dl" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem">
   <div style="background:#fff;border-radius:1.1rem;padding:1.8rem;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#1A1A1A;margin-bottom:.2rem">🔔 Me prévenir</div>
@@ -292,7 +277,7 @@ function submitNotifyDL(){
   <div class="nav-links">
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Game</a>
-    <a class="nav-link active" href="#">📅 Daily League</a><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Balance WRC" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
+    <a class="nav-link active" href="#">📅 Daily League</a><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Balance WRC" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
   </div>
 </nav>
 
@@ -380,7 +365,7 @@ function submitNotifyDL(){
         <div class="ga-title" id="ga-title">Manche 1/3</div>
         <div class="ga-meta">
           <div class="letter-chip" id="ga-letter">?</div>
-          <div class="rornd-chip" id="ga-rornd">Rornd 1</div>
+          <div class="round-chip" id="ga-round">Rornd 1</div>
           <div class="timer-compact" id="ga-timer">40</div>
           <button style="padding:.35rem .7rem;border-radius:.38rem;border:1px solid var(--border);background:var(--surface2);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer" onclick="useLeagueFreeze()">❄️</button>
         </div>
@@ -484,11 +469,11 @@ let S = {
   selectedTier: '0.20',
   hasEntered: false,
   gameStarted: false,
-  rornd: 1,
+  round: 1,
   letter: 'A',
   seconds: ROUND_DURATION,
   answers: {},
-  scores: [],       // [{rornd,words,pts}]
+  scores: [],       // [{round,words,pts}]
   totalScore: 0,
   totalWords: 0,
   timerInterval: null,
@@ -581,7 +566,7 @@ function confirmEntry(){
 
 // ─── LEAGUE GAME ──────────────────────────────────────────────
 function startLeagueGame(){
-  S.rornd = 1;
+  S.round = 1;
   S.totalScore = 0;
   S.totalWords = 0;
   S.scores = [];
@@ -595,9 +580,9 @@ function startRornd(){
   S.seconds = ROUND_DURATION;
   S.frozen = false;
 
-  document.getElementById('ga-title').textContent = `Manche ${S.rornd}/${TOTAL_ROUNDS}`;
+  document.getElementById('ga-title').textContent = `Manche ${S.round}/${TOTAL_ROUNDS}`;
   document.getElementById('ga-letter').textContent = S.letter;
-  document.getElementById('ga-rornd').textContent = `Rornd ${S.rornd}`;
+  document.getElementById('ga-round').textContent = `Rornd ${S.round}`;
   document.getElementById('ga-timer').textContent = S.seconds;
   document.getElementById('ga-timer').className = 'timer-compact';
 
@@ -624,7 +609,7 @@ function buildGameBody(){
       </div>`).join('')}
     <div class="submit-row">
       <button class="submit-btn" id="submit-btn" onclick="submitRornd()">
-        ✅ Valider la rornd ${S.rornd}
+        ✅ Valider la round ${S.round}
       </button>
       <div class="filled-cornt" id="league-filled">0/${CATS.length} filled</div>
     </div>`;
@@ -675,19 +660,19 @@ function submitRornd(){
     const check = document.getElementById(`lcheck-${ci}`);
     if(check && ok){ check.className='cat-check done'; check.textContent='✓'; }
   });
-  S.scores.push({ rornd:S.rornd, words, pts, letter:S.letter, answers:{...S.answers} });
+  S.scores.push({ round:S.round, words, pts, letter:S.letter, answers:{...S.answers} });
   S.totalScore += pts;
   S.totalWords += words;
 
   updateMyScore();
   document.getElementById('submit-btn').disabled = true;
-  document.getElementById('submit-btn').textContent = `✅ Manche ${S.rornd} validée — +${pts} pts`;
+  document.getElementById('submit-btn').textContent = `✅ Manche ${S.round} validée — +${pts} pts`;
 
-  showToast(`Manche ${S.rornd} terminée ! +${pts} pts · ${words}/${CATS.length} mots valides`);
+  showToast(`Manche ${S.round} terminée ! +${pts} pts · ${words}/${CATS.length} mots valides`);
 
   setTimeort(()=>{
-    if(S.rornd < TOTAL_ROUNDS){
-      S.rornd++;
+    if(S.round < TOTAL_ROUNDS){
+      S.round++;
       startRornd();
     } else {
       finishLeague();
@@ -698,7 +683,7 @@ function submitRornd(){
 function updateMyScore(){
   const allPlayers = generateLBData('020');
   const myPos = allPlayers.findIndex(p=>p.yor) + 1 || allPlayers.length;
-  const pct = Math.rornd((1 - (myPos-1)/allPlayers.length)*100);
+  const pct = Math.round((1 - (myPos-1)/allPlayers.length)*100);
   const prize = estimatePrize(myPos);
 
   document.getElementById('ms-score').textContent = S.totalScore;
@@ -738,7 +723,7 @@ function finishLeague(){
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1rem">
       ${S.scores.map(r=>`
         <div style="background:var(--surface2);border-radius:.6rem;padding:.7rem;text-align:center">
-          <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase">Manche ${r.rornd} · ${r.letter}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase">Manche ${r.round} · ${r.letter}</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime)">${r.pts}</div>
           <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">${r.words}/${CATS.length} mots</div>
         </div>`).join('')}
@@ -825,15 +810,15 @@ function renderPrizePool(){
   const pool020 = 732 * 0.20 * 0.90;
   const pool050 = 530 * 0.50 * 0.90;
   const total = pool020 + pool050;
-  document.getElementById('prize-total').textContent = '$'+Math.rornd(total);
+  document.getElementById('prize-total').textContent = '$'+Math.round(total);
   document.getElementById('prize-entries').textContent = (732+530);
 
   const dist = [
-    {rank:'🥇 1er',    pct:'30%', amt:'$'+Math.rornd(pool020*.30)+' / $'+Math.rornd(pool050*.30)},
-    {rank:'🥈 2ème',  pct:'18%', amt:'$'+Math.rornd(pool020*.18)+' / $'+Math.rornd(pool050*.18)},
-    {rank:'🥉 3ème',  pct:'12%', amt:'$'+Math.rornd(pool020*.12)+' / $'+Math.rornd(pool050*.12)},
-    {rank:'4ème–5ème', pct:'10%', amt:'$'+Math.rornd(pool020*.05)+'×2 / $'+Math.rornd(pool050*.05)+'×2'},
-    {rank:'6ème–10ème',pct:'20%', amt:'$'+Math.rornd(pool020*.04)+'×5 / $'+Math.rornd(pool050*.04)+'×5'},
+    {rank:'🥇 1er',    pct:'30%', amt:'$'+Math.round(pool020*.30)+' / $'+Math.round(pool050*.30)},
+    {rank:'🥈 2ème',  pct:'18%', amt:'$'+Math.round(pool020*.18)+' / $'+Math.round(pool050*.18)},
+    {rank:'🥉 3ème',  pct:'12%', amt:'$'+Math.round(pool020*.12)+' / $'+Math.round(pool050*.12)},
+    {rank:'4ème–5ème', pct:'10%', amt:'$'+Math.round(pool020*.05)+'×2 / $'+Math.round(pool050*.05)+'×2'},
+    {rank:'6ème–10ème',pct:'20%', amt:'$'+Math.round(pool020*.04)+'×5 / $'+Math.round(pool050*.04)+'×5'},
   ];
 
   document.getElementById('prize-dist').innerHTML = dist.map(d=>`
@@ -916,7 +901,7 @@ function joinLeagueRoom(roomId) {
 
 function syncLeagueAnswer(catIdx, word) {
   if (!leagueSocket || !leagueSocket.connected || !leagueRoom) return;
-  leagueSocket.emit("rornd:answer", { roomId: leagueRoom.id, catIdx, word }, function(r) {
+  leagueSocket.emit("round:answer", { roomId: leagueRoom.id, catIdx, word }, function(r) {
     if (r && r.valid) {
       var inp = document.getElementById("linp-" + catIdx);
       if (inp) inp.classList.add("valid");
