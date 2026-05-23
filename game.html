@@ -640,31 +640,29 @@ function showValidating() {
     '<div class="validating-msg"><span class="spin"></span>Checking English dictionary...</div>';
 }
 
-// ── DICTIONARY VALIDATION ─────────────────────────────────────
-// Uses Free Dictionary API for common nouns.
-// Proper noun categories (Country, First Name, Brand, Movie…) are
-// validated by letter only — dictionaries don't cover proper nouns.
-const PROPER_NOUN_CATS = ['country','first name','city','brand','movie','series','singer','actor','celebrity','athlete'];
+// ── WIKTIONARY VALIDATION ─────────────────────────────────────
+// Free, no API key, CORS-open. Covers common words AND proper nouns
+// (countries, first names, brands, cities…). "fffff" has no page → invalid.
+async function wordExistsWiktionary(word) {
+  const r = await fetch(
+    `https://en.wiktionary.org/w/api.php?action=query&titles=${encodeURIComponent(word)}&format=json&origin=*`
+  );
+  const d = await r.json();
+  const page = Object.values(d.query.pages)[0];
+  return page.pageid !== -1;
+}
 
 async function validateDictionary() {
   const results = await Promise.all(CATS.map(async (cat, i) => {
     const w = (G.answers[i] || '').trim();
     if (!w || w.length < 2) return { cat, word: w, valid: false, pts: 0, reason: 'Empty' };
     if (w[0].toUpperCase() !== G.letter) return { cat, word: w, valid: false, pts: 0, reason: 'Wrong letter' };
-
-    const isProper = PROPER_NOUN_CATS.some(p => cat.toLowerCase().includes(p));
-    if (isProper) {
-      // Can't validate proper nouns with a dictionary — accept if letter is right
-      return { cat, word: w, valid: true, pts: 10, reason: '' };
-    }
-
     try {
-      const r = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(w.toLowerCase())}`);
-      const ok = r.ok;
+      const ok = await wordExistsWiktionary(w);
       return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Not a valid English word' };
     } catch {
-      const ok = w.length >= 2 && w[0].toUpperCase() === G.letter;
-      return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Does not start with ' + G.letter };
+      // Network error — fall through to letter-only check
+      return { cat, word: w, valid: true, pts: 10, reason: '' };
     }
   }));
   return results;
