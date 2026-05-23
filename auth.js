@@ -287,8 +287,8 @@ function updateNavUser(user){
   if(!btn) return;
   if(!user){
     btn.classList.remove('logged-in');
-    btn.innerHTML = `<span style="font-size:.85rem">👤</span> Sign in`;
-    btn.style.cssText = '';
+    btn.innerHTML = `🎯 Login / Sign Up`;
+    btn.style.cssText = 'background:#9FE870;color:#163300;border:none;font-family:"Space Mono",monospace;font-size:.65rem;font-weight:700;padding:.42rem .85rem;border-radius:.5rem;cursor:pointer;letter-spacing:.04em;white-space:nowrap;flex-shrink:0';
     btn.onclick = openLogin;
     return;
   }
@@ -382,7 +382,7 @@ function buildHamburger(){
     {href:'daily-league.html',emoji:'📅', label:'League'},
     {href:'duel.html',        emoji:'⚔️', label:'Duel'},
     {href:'leaderboard.html', emoji:'🏆', label:'Ranks'},
-    {href:'profile.html',     emoji:'👤', label:'Profile'},
+    {href:'profile.html',     emoji:'👤', label:'Profile', authOnly:true},
     {href:'support.html',     emoji:'🎫', label:'Support'},
   ];
 
@@ -398,12 +398,16 @@ function buildHamburger(){
     </div>
     <div class="wr-mn-grid">
       ${links.map(l => {
-        const active = cur.includes(l.href.replace('.html','')) || 
+        const active = cur.includes(l.href.replace('.html','')) ||
                        (l.href==='index.html' && (cur==='/'||cur.endsWith('index.html')||cur.endsWith('wordrace-io/')));
-        return `<a href="${l.href}" class="wr-mn-item${active?' active':''}">
+        const authAttr = l.authOnly ? ' data-auth-only="1"' : '';
+        return `<a href="${l.href}" class="wr-mn-item${active?' active':''}${l.authOnly?' wr-mn-item-auth':''}"${authAttr}>
           <span class="wr-mn-emoji">${l.emoji}</span>${l.label}
         </a>`;
       }).join('')}
+      <a href="#" class="wr-mn-item wr-mn-item-nologin" onclick="closeHamburger();openLogin();return false;" style="display:none">
+        <span class="wr-mn-emoji">🎯</span>Login / Sign Up
+      </a>
     </div>`;
   document.body.appendChild(menu);
 
@@ -415,6 +419,9 @@ function buildHamburger(){
     const val = document.getElementById('wr-mn-wrc-v');
     if(row) row.style.display = user ? 'flex' : 'none';
     if(val) val.textContent = bal.toLocaleString() + ' WRC';
+    // Show Profile only when logged in; show Login/Sign Up only when logged out
+    document.querySelectorAll('[data-auth-only]').forEach(el => el.style.display = user ? '' : 'none');
+    document.querySelectorAll('.wr-mn-item-nologin').forEach(el => el.style.display = user ? 'none' : '');
   }
   syncMenuWRC();
   AUTH.subscribe(() => syncMenuWRC());
@@ -446,10 +453,12 @@ function init(){
   buildNavBadge();
   buildHamburger();
 
-  // Auto-show login if accessing paid page withort login
-  const isPaidPage = window.location.pathname.includes('duel') || window.location.pathname.includes('daily-league');
+  // Auto-show login on game page and paid pages if not logged in
+  const isPaidPage = window.location.pathname.includes('duel') ||
+                     window.location.pathname.includes('daily-league') ||
+                     window.location.pathname.includes('game');
   if(isPaidPage && !AUTH.isLoggedIn){
-    setTimeort(openLogin, 800);
+    setTimeout(openLogin, 600);
   }
 }
 
