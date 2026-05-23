@@ -864,5 +864,425 @@ window.addEventListener("load", function() {
 });
 </script>
 
+
+<!-- ═══════════ WRC CREDIT SYSTEM ═══════════ -->
+<style>
+/* ── CREDIT WIDGET ── */
+.wrc-widget{
+  position:fixed;bottom:1.2rem;left:1.2rem;z-index:500;
+  display:flex;flex-direction:column;gap:.4rem;
+  animation:wrc-in .3s cubic-bezier(.2,.8,.3,1);
+}
+@keyframes wrc-in{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+.wrc-balance{
+  display:flex;align-items:center;gap:.5rem;
+  background:var(--surface);border:1.5px solid var(--lime);
+  border-radius:.75rem;padding:.5rem .85rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.10);
+  cursor:pointer;transition:all .2s;
+  font-family:'Space Mono',monospace;
+}
+.wrc-balance:hover{box-shadow:0 6px 20px rgba(159,232,112,.2);transform:translateY(-1px)}
+.wrc-icon{font-size:1rem;flex-shrink:0}
+.wrc-info{display:flex;flex-direction:column;gap:.05rem}
+.wrc-label{font-size:.5rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;line-height:1}
+.wrc-amount{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--lime);line-height:1}
+.wrc-plus{font-size:.75rem;background:var(--lime);color:var(--forest);border:none;border-radius:.35rem;padding:.15rem .4rem;cursor:pointer;font-weight:700;font-family:'Space Mono',monospace;transition:background .15s;flex-shrink:0}
+.wrc-plus:hover{background:var(--limeD)}
+
+/* daily limit bar */
+.wrc-limits{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:.6rem;padding:.4rem .7rem;
+  font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);
+  box-shadow:0 2px 8px rgba(0,0,0,.07);
+}
+.wrc-limit-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem;margin-bottom:.15rem}
+.wrc-limit-row:last-child{margin-bottom:0}
+.wrc-lbar{flex:1;height:4px;background:var(--surface2);border-radius:2px;overflow:hidden}
+.wrc-lbar-fill{height:100%;border-radius:2px;background:var(--lime);transition:width .3s}
+.wrc-lbar-fill.warn{background:var(--gold)}
+.wrc-lbar-fill.full{background:var(--red)}
+
+/* boost buttons */
+.wrc-boosts{display:flex;gap:.35rem}
+.wrc-boost-btn{
+  display:flex;align-items:center;gap:.32rem;
+  padding:.42rem .75rem;border-radius:.5rem;
+  font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;
+  border:1.5px solid var(--border);background:var(--surface);
+  cursor:pointer;transition:all .18s;box-shadow:0 2px 6px rgba(0,0,0,.07);
+  white-space:nowrap;
+}
+.wrc-boost-btn:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.12)}
+.wrc-boost-btn:disabled{opacity:.4;cursor:not-allowed;transform:none !important}
+.wrc-boost-btn.hint-btn:not(:disabled){border-color:rgba(245,200,66,.4);background:#fffdf0}
+.wrc-boost-btn.hint-btn:hover:not(:disabled){background:var(--goldBg);border-color:var(--gold)}
+.wrc-boost-btn.freeze-btn:not(:disabled){border-color:rgba(59,130,246,.3);background:#f0f7ff}
+.wrc-boost-btn.freeze-btn:hover:not(:disabled){background:var(--blueBg);border-color:var(--blue)}
+.wrc-boost-btn.used{background:var(--validBg) !important;border-color:var(--valid) !important;color:var(--valid) !important}
+.wrc-cost{font-size:.52rem;color:var(--muted);font-weight:400}
+
+/* ── TOPUP MODAL ── */
+.wrc-modal-overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.5);z-index:600;
+  align-items:center;justify-content:center;padding:1rem;
+}
+.wrc-modal-overlay.show{display:flex;animation:wrc-in .25s ease}
+.wrc-modal{
+  background:var(--surface);border-radius:1.2rem;
+  padding:1.8rem;max-width:400px;width:100%;
+  box-shadow:0 24px 60px rgba(0,0,0,.2);
+}
+.wrc-modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.2rem;letter-spacing:.03em}
+.wrc-modal-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1.2rem}
+.wrc-rate{background:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.6rem;padding:.6rem .9rem;margin-bottom:1rem;font-family:'Space Mono',monospace;font-size:.63rem;color:var(--forest);display:flex;justify-content:space-between}
+.wrc-packs{display:grid;grid-template-columns:1fr 1fr;gap:.55rem;margin-bottom:1rem}
+.wrc-pack{
+  border:2px solid var(--border);border-radius:.8rem;padding:.9rem;
+  text-align:center;cursor:pointer;transition:all .2s;position:relative;
+}
+.wrc-pack:hover{border-color:var(--lime);background:var(--limeBg)}
+.wrc-pack.selected{border-color:var(--lime);background:var(--limeBg)}
+.wrc-pack.selected::after{content:'✓';position:absolute;top:.35rem;right:.55rem;font-size:.7rem;color:var(--lime);font-weight:700}
+.wrc-pack-wrc{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--lime);line-height:1}
+.wrc-pack-usdt{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--gold);font-weight:700;margin:.1rem 0}
+.wrc-pack-label{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted)}
+.wrc-pack-badge{font-family:'Space Mono',monospace;font-size:.48rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;display:inline-block;margin-top:.25rem}
+.wrc-buy-btn{width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .15s;letter-spacing:.05em;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.wrc-buy-btn:hover{background:var(--limeD)}
+.wrc-buy-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
+.wrc-cancel{width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.45rem;transition:all .15s}
+.wrc-cancel:hover{background:var(--surface2);color:var(--text)}
+
+/* boost used flash */
+@keyframes wrc-flash{0%{background:var(--validBg)}50%{background:var(--lime)}100%{background:var(--validBg)}}
+.wrc-flash{animation:wrc-flash .4s ease}
+
+/* insufficient warning */
+.wrc-insuf{
+  position:fixed;bottom:5rem;left:1.2rem;z-index:600;
+  background:var(--redBg);border:1.5px solid var(--red);
+  color:var(--red);padding:.55rem .9rem;border-radius:.6rem;
+  font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;
+  animation:wrc-in .3s ease;box-shadow:0 4px 12px rgba(239,68,68,.15);
+}
+</style>
+
+<!-- WRC WIDGET HTML -->
+<div class="wrc-widget" id="wrc-widget" style="display:none">
+  <!-- Balance + recharge -->
+  <div class="wrc-balance" onclick="openTopup()" title="Recharger vos WRC">
+    <span class="wrc-icon">🪙</span>
+    <div class="wrc-info">
+      <span class="wrc-label">WRC Balance</span>
+      <span class="wrc-amount" id="wrc-amount">0</span>
+    </div>
+    <button class="wrc-plus" onclick="event.stopPropagation();openTopup()">+ Recharger</button>
+  </div>
+
+  <!-- Daily limit indicator -->
+  <div class="wrc-limits" id="wrc-limits">
+    <div class="wrc-limit-row">
+      <span>💡 Hints aujourd'hui</span>
+      <div class="wrc-lbar"><div class="wrc-lbar-fill" id="hint-daybar" style="width:0%"></div></div>
+      <span id="hint-day-count">0/5</span>
+    </div>
+    <div class="wrc-limit-row">
+      <span>❄️ Freezes aujourd'hui</span>
+      <div class="wrc-lbar"><div class="wrc-lbar-fill" id="freeze-daybar" style="width:0%"></div></div>
+      <span id="freeze-day-count">0/5</span>
+    </div>
+  </div>
+
+  <!-- Boost buttons -->
+  <div class="wrc-boosts">
+    <button class="wrc-boost-btn hint-btn" id="wrc-hint-btn" onclick="useWRCHint()">
+      💡 Hint <span class="wrc-cost">5 WRC</span>
+    </button>
+    <button class="wrc-boost-btn freeze-btn" id="wrc-freeze-btn" onclick="useWRCFreeze()">
+      ❄️ Freeze <span class="wrc-cost">10 WRC</span>
+    </button>
+  </div>
+</div>
+
+<!-- TOPUP MODAL -->
+<div class="wrc-modal-overlay" id="wrc-modal" onclick="if(event.target===this)closeTopup()">
+  <div class="wrc-modal">
+    <div class="wrc-modal-title">🪙 Recharger WRC</div>
+    <div class="wrc-modal-sub">Crédits instantanés · Aucune transaction pendant le jeu</div>
+    <div class="wrc-rate">
+      <span>Taux de conversion</span>
+      <span><strong>1 WRC = $0.01 USDT</strong></span>
+    </div>
+    <div class="wrc-packs" id="wrc-packs"></div>
+    <div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);margin-bottom:.9rem;padding:.5rem .7rem;background:var(--surface2);border-radius:.45rem;line-height:1.55">
+      💡 Hint = 5 WRC · ❄️ Freeze = 10 WRC<br>
+      Max 1 Hint + 1 Freeze par manche · 5 de chaque par jour
+    </div>
+    <button class="wrc-buy-btn" id="wrc-buy-btn" onclick="confirmTopup()">
+      💳 Acheter
+    </button>
+    <button class="wrc-cancel" onclick="closeTopup()">Annuler</button>
+  </div>
+</div>
+
+<script>
+// ─── WRC CONFIG ───────────────────────────────────────────────
+const WRC = {
+  HINT_COST:      5,
+  FREEZE_COST:    10,
+  MAX_PER_ROUND:  1,   // max 1 hint + 1 freeze per round
+  MAX_PER_DAY:    5,   // max 5 of each per day
+  PACKS: [
+    { wrc:100,  usdt:'$1.00',  label:'Starter',  badge:'',         badgeColor:''},
+    { wrc:500,  usdt:'$5.00',  label:'Popular',  badge:'+5% bonus',badgeColor:'var(--gold)'},
+    { wrc:1000, usdt:'$10.00', label:'Value',    badge:'+10% bonus',badgeColor:'var(--lime)'},
+    { wrc:2500, usdt:'$25.00', label:'Pro',      badge:'+15% bonus',badgeColor:'var(--purple)'},
+  ],
+};
+
+// ─── WRC STATE ────────────────────────────────────────────────
+const WRCState = {
+  balance:       parseInt(localStorage.getItem('wrc_balance') || '150'), // start with 150 WRC demo
+  selectedPack:  0,
+  buying:        false,
+  // Per-round limits
+  hintUsedRound:    false,
+  freezeUsedRound:  false,
+  // Per-day limits (stored in localStorage with date key)
+  get dayKey(){ return 'wrc_day_' + new Date().toISOString().slice(0,10); },
+  get hintsToday(){ return parseInt(localStorage.getItem(this.dayKey + '_hints') || '0'); },
+  get freezesToday(){ return parseInt(localStorage.getItem(this.dayKey + '_freezes') || '0'); },
+  addHintToday(){
+    const k = this.dayKey + '_hints';
+    localStorage.setItem(k, String(this.hintsToday + 1));
+  },
+  addFreezeToday(){
+    const k = this.dayKey + '_freezes';
+    localStorage.setItem(k, String(this.freezesToday + 1));
+  },
+  save(){
+    localStorage.setItem('wrc_balance', String(this.balance));
+  },
+};
+
+// ─── WIDGET VISIBILITY ────────────────────────────────────────
+function showWRCWidget(){ document.getElementById('wrc-widget').style.display='flex'; updateWRCUI(); }
+function hideWRCWidget(){ document.getElementById('wrc-widget').style.display='none'; }
+
+// ─── UPDATE UI ────────────────────────────────────────────────
+function updateWRCUI(){
+  // Balance
+  document.getElementById('wrc-amount').textContent = WRCState.balance.toLocaleString();
+
+  // Day bars
+  const hd = WRCState.hintsToday, fd = WRCState.freezesToday;
+  const hPct = Math.min(100, (hd / WRC.MAX_PER_DAY) * 100);
+  const fPct = Math.min(100, (fd / WRC.MAX_PER_DAY) * 100);
+
+  const hBar = document.getElementById('hint-daybar');
+  const fBar = document.getElementById('freeze-daybar');
+  hBar.style.width = hPct + '%';
+  fBar.style.width = fPct + '%';
+  hBar.className = 'wrc-lbar-fill' + (hd >= WRC.MAX_PER_DAY ? ' full' : hd >= 3 ? ' warn' : '');
+  fBar.className = 'wrc-lbar-fill' + (fd >= WRC.MAX_PER_DAY ? ' full' : fd >= 3 ? ' warn' : '');
+
+  document.getElementById('hint-day-count').textContent = `${hd}/${WRC.MAX_PER_DAY}`;
+  document.getElementById('freeze-day-count').textContent = `${fd}/${WRC.MAX_PER_DAY}`;
+
+  // Boost buttons
+  const hBtn = document.getElementById('wrc-hint-btn');
+  const fBtn = document.getElementById('wrc-freeze-btn');
+
+  const hUsed   = WRCState.hintUsedRound;
+  const fUsed   = WRCState.freezeUsedRound;
+  const hDayMax = hd >= WRC.MAX_PER_DAY;
+  const fDayMax = fd >= WRC.MAX_PER_DAY;
+  const noWRCH  = WRCState.balance < WRC.HINT_COST;
+  const noWRCF  = WRCState.balance < WRC.FREEZE_COST;
+
+  hBtn.disabled = hUsed || hDayMax || noWRCH;
+  fBtn.disabled = fUsed || fDayMax || noWRCF;
+
+  if(hUsed){ hBtn.classList.add('used'); hBtn.innerHTML = '✅ Hint utilisé'; }
+  else { hBtn.classList.remove('used'); hBtn.innerHTML = `💡 Hint <span class="wrc-cost">5 WRC</span>`; }
+
+  if(fUsed){ fBtn.classList.add('used'); fBtn.innerHTML = '✅ Freeze actif'; }
+  else { fBtn.classList.remove('used'); fBtn.innerHTML = `❄️ Freeze <span class="wrc-cost">10 WRC</span>`; }
+
+  // Tooltip on disabled
+  hBtn.title = hUsed ? 'Déjà utilisé cette manche' : hDayMax ? 'Limite journalière atteinte' : noWRCH ? 'WRC insuffisants' : '';
+  fBtn.title = fUsed ? 'Déjà utilisé cette manche' : fDayMax ? 'Limite journalière atteinte' : noWRCF ? 'WRC insuffisants' : '';
+}
+
+// ─── RESET PER-ROUND LIMITS ───────────────────────────────────
+function wrcResetRound(){
+  WRCState.hintUsedRound   = false;
+  WRCState.freezeUsedRound = false;
+  updateWRCUI();
+}
+
+// ─── USE HINT ─────────────────────────────────────────────────
+function useWRCHint(){
+  if(WRCState.hintUsedRound || WRCState.hintsToday >= WRC.MAX_PER_DAY) return;
+  if(WRCState.balance < WRC.HINT_COST){ showInsuf('💡 Hint'); return; }
+
+  WRCState.balance -= WRC.HINT_COST;
+  WRCState.hintUsedRound = true;
+  WRCState.addHintToday();
+  WRCState.save();
+  updateWRCUI();
+
+  // Find first unanswered category
+  const unanswered = G.phase === 'game' ? (() => {
+    for(let i=0; i<8; i++){
+      const inp = document.getElementById('inp-' + i) || document.getElementById('linp-' + i) || document.getElementById('minp-' + i);
+      if(inp && !inp.value.trim()) return i;
+    }
+    return -1;
+  })() : -1;
+
+  if(unanswered >= 0){
+    const cats = ['Animal','Pays','Prénom','Aliment','Métier','Marque','Sport','Film/Série'];
+    const HINTS = {
+      Animal:['Aigle','Autruche','Baleine','Chameau','Dauphin','Éléphant','Faucon','Girafe','Hippopotame','Jaguar','Kangourou','Lion','Lynx','Mamba','Narval','Ocelot','Panthère','Requin','Serpent','Tigre'],
+      Pays:['Algérie','Australie','Brésil','Canada','Chili','Chine','Danemark','Espagne','France','Grèce','Inde','Italie','Japon','Kenya','Liban','Maroc','Mexique','Nigeria','Norvège','Portugal'],
+      Prénom:['Alice','Bruno','Camille','David','Emma','Fatima','Gabriel','Hugo','Isabelle','Julien','Kenza','Lucas','Marie','Nicolas','Omar','Pierre','Rachid','Sarah','Thomas','Yasmine'],
+      Aliment:['Avocat','Banane','Carotte','Datte','Épinard','Fraise','Grenade','Huître','Igname','Jambon','Kiwi','Lait','Mangue','Noix','Orange','Poire','Raisin','Saumon','Tomate','Vanille'],
+      Métier:['Architecte','Biologiste','Chimiste','Dentiste','Économiste','Fermier','Géographe','Historien','Ingénieur','Journaliste','Kinésithérapeute','Libraire','Médecin','Notaire','Opticien','Pharmacien','Radiologue','Styliste','Technicien','Vétérinaire'],
+      Marque:['Adidas','Apple','BMW','Canon','Disney','Emirates','Ferrari','Google','Hermès','Intel','Jaguar','KFC','Lamborghini','Mercedes','Netflix','OpenAI','Porsche','Rolex','Samsung','Tesla'],
+      Sport:['Athlétisme','Badminton','Cyclisme','Danse','Escalade','Football','Golf','Handball','Judo','Karaté','Lutte','Marathon','Natation','Patinage','Rugby','Ski','Tennis','Triathlon','Voile','Volleyball'],
+      'Film/Série':['Avatar','Barbie','Coco','Dune','Encanto','Fight Club','Gladiator','Her','Inception','Joker','Kill Bill','Luca','Matrix','Naruto','Oppenheimer','Parasite','Ratatouille','Soul','Titanic','Up'],
+    };
+    const cat = cats[unanswered];
+    const letter = G.letter;
+    const words = (HINTS[cat]||[]).filter(w=>w[0].toUpperCase()===letter);
+    const hint = words.length ? words[0].slice(0,3)+'...' : letter+'...';
+    showToast(`💡 Hint — ${cat} : commence par "${hint}"`, 4000);
+  } else {
+    showToast('💡 Toutes les catégories sont déjà remplies !');
+  }
+
+  // Flash balance
+  const el = document.getElementById('wrc-amount');
+  el.style.color = 'var(--valid)';
+  setTimeout(()=>el.style.color='var(--lime)',600);
+}
+
+// ─── USE FREEZE ───────────────────────────────────────────────
+function useWRCFreeze(){
+  if(WRCState.freezeUsedRound || WRCState.freezesToday >= WRC.MAX_PER_DAY) return;
+  if(WRCState.balance < WRC.FREEZE_COST){ showInsuf('❄️ Freeze'); return; }
+  if(G.phase !== 'game'){ showToast('⚠️ Démarre une manche pour utiliser Freeze !'); return; }
+
+  WRCState.balance -= WRC.FREEZE_COST;
+  WRCState.freezeUsedRound = true;
+  WRCState.addFreezeToday();
+  WRCState.save();
+  G.frozen = true;
+  updateWRCUI();
+  showToast('❄️ Timer gelé pendant 5 secondes !');
+
+  setTimeout(()=>{
+    G.frozen = false;
+    updateWRCUI();
+  }, 5000);
+}
+
+// ─── INSUFFICIENT WRC ─────────────────────────────────────────
+function showInsuf(boost){
+  // Remove existing
+  document.querySelectorAll('.wrc-insuf').forEach(e=>e.remove());
+  const d = document.createElement('div');
+  d.className='wrc-insuf';
+  d.textContent = `⚠️ WRC insuffisants pour ${boost} — Rechargez !`;
+  d.onclick = ()=>{ d.remove(); openTopup(); };
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(), 3500);
+}
+
+// ─── TOPUP MODAL ──────────────────────────────────────────────
+function openTopup(){
+  renderPacks();
+  document.getElementById('wrc-modal').classList.add('show');
+}
+function closeTopup(){ document.getElementById('wrc-modal').classList.remove('show'); }
+
+function renderPacks(){
+  const bonuses = ['','','ab-lime','ab-gold'];
+  document.getElementById('wrc-packs').innerHTML = WRC.PACKS.map((p,i)=>`
+    <div class="wrc-pack ${i===WRCState.selectedPack?'selected':''}" onclick="selectPack(${i})">
+      <div class="wrc-pack-wrc">${p.wrc.toLocaleString()}</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted)">WRC</div>
+      <div class="wrc-pack-usdt">${p.usdt}</div>
+      <div class="wrc-pack-label">${p.label}</div>
+      ${p.badge?`<div class="wrc-pack-badge" style="background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.4)">${p.badge}</div>`:''}
+    </div>`).join('');
+  updateBuyBtn();
+}
+
+function selectPack(i){
+  WRCState.selectedPack = i;
+  renderPacks();
+}
+
+function updateBuyBtn(){
+  const p = WRC.PACKS[WRCState.selectedPack];
+  const btn = document.getElementById('wrc-buy-btn');
+  btn.textContent = `💳 Acheter ${p.wrc} WRC — ${p.usdt} USDT`;
+}
+
+function confirmTopup(){
+  if(WRCState.buying) return;
+  WRCState.buying = true;
+  const btn = document.getElementById('wrc-buy-btn');
+  const p = WRC.PACKS[WRCState.selectedPack];
+  btn.innerHTML = '<span style="display:inline-block;width:13px;height:13px;border:2px solid rgba(0,0,0,.15);border-top-color:var(--forest);border-radius:50%;animation:spin .7s linear infinite"></span> Transaction...';
+  btn.disabled = true;
+
+  // Simulate blockchain tx (1.5s)
+  setTimeout(()=>{
+    // Apply bonus
+    const bonuses = [0, 25, 100, 375]; // actual bonus WRC
+    const received = p.wrc + bonuses[WRCState.selectedPack];
+    WRCState.balance += received;
+    WRCState.save();
+    WRCState.buying = false;
+    btn.disabled = false;
+    closeTopup();
+    updateWRCUI();
+    showToast(`✅ ${received.toLocaleString()} WRC ajoutés ! Balance : ${WRCState.balance.toLocaleString()} WRC`);
+  }, 1500);
+}
+
+// ─── HOOK INTO GAME LIFECYCLE ─────────────────────────────────
+// Show widget when game starts, hide in lobby, reset per round
+const _origStartGame = window.startGame;
+window.startGame = function(){
+  if(_origStartGame) _origStartGame.apply(this, arguments);
+  showWRCWidget();
+  wrcResetRound();
+};
+
+const _origStartRound = window.startRound;
+window.startRound = function(){
+  if(_origStartRound) _origStartRound.apply(this, arguments);
+  wrcResetRound();
+};
+
+const _origShowPhase = window.showPhase;
+window.showPhase = function(name){
+  if(_origShowPhase) _origShowPhase.apply(this, arguments);
+  if(name === 'lobby'){ hideWRCWidget(); }
+  else if(name === 'game'){ showWRCWidget(); wrcResetRound(); }
+};
+
+// Init widget (hidden at start)
+updateWRCUI();
+</script>
+
 </body>
 </html>
