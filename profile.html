@@ -258,7 +258,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       </div>
     </div>
     <div class="pb-actions">
-      <button class="pb-btn pbb-lime" onclick="switchTab('wallet')">💰 Wallet</button>
+      <button class="pb-btn pbb-lime" onclick="showComingSoon('Wallet & Payments','USDT wallet and P2E earnings launch in Q3 2026.')">🔒 Wallet</button>
       <button class="pb-btn pbb-ghost" onclick="switchTab('settings')">⚙️ Settings</button>
     </div>
   </div>
@@ -869,20 +869,22 @@ renderPerfChart();
 renderEloChart();
 </script>
 
-<!-- WRC TOPUP MODAL -->
-<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
-  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Top up WRC</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Instant credits</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
-    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Buy</button>
-    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
+<!-- WRC TOPUP MODAL — COMING SOON -->
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="background:#fff;border-radius:1.2rem;padding:1.8rem;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2);text-align:center">
+    <div style="font-size:2.2rem;margin-bottom:.5rem">🔒</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#1A1A1A;letter-spacing:.04em;margin-bottom:.3rem">WRC CREDITS</div>
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#9FE870;letter-spacing:.1em;margin-bottom:.8rem">COMING SOON</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.63rem;color:#6B7280;line-height:1.65;margin-bottom:1rem">USDT payments and WRC credits will be available at the P2E launch in Q3 2026. Casual Training is free!</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:#163300;font-weight:700;background:#E8F8DF;border-radius:.5rem;padding:.55rem .8rem;margin-bottom:.9rem;border:1px solid rgba(159,232,112,.3)">⚡ P2E Launch — Q3 2026 · Stay tuned!</div>
+    <a href="game.html" style="display:block;padding:.75rem;border-radius:.52rem;background:#9FE870;color:#163300;font-family:'Space Mono',monospace;font-size:.73rem;font-weight:700;text-decoration:none;margin-bottom:.4rem">🎯 Play Casual — Free</a>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.58rem;border-radius:.5rem;border:1px solid rgba(0,0,0,.1);background:transparent;color:#6B7280;font-family:'Space Mono',monospace;font-size:.68rem;cursor:pointer">Close</button>
   </div>
 </div>
 <script>
 let _wrcSel=0,_wrcBuying=false;
 function openWRCTopup(){_renderPacks();document.getElementById('wrc-topup-overlay').style.display='flex'}
-function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
+function closeWRCTopup(){ const o=document.getElementById('wrc-topup-overlay'); if(o)o.style.display='none'; }
 function _renderPacks(){
   document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
   const p=WRC_CONFIG.PACKS[_wrcSel];
@@ -1107,6 +1109,148 @@ WRCEngine.subscribe(function(bal){
     });
   }
 })();
+</script>
+
+
+<script id="settings-persistence">
+const SETTINGS_KEY = 'wr_settings';
+
+function loadSettings(){
+  try {
+    const s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+    
+    // Account info
+    const user = (typeof WRAuth !== 'undefined' && WRAuth.user)
+      ? WRAuth.user
+      : JSON.parse(localStorage.getItem('wr_user') || 'null');
+
+    if(user){
+      const su = document.getElementById('s-username');
+      const se = document.getElementById('s-email');
+      if(su) su.value = s.username || user.username || '';
+      if(se) se.value = s.email    || user.email    || '';
+    }
+
+    // Country
+    const sc = document.querySelector('.setting-input[id="s-country"], select.setting-input');
+    if(sc && s.country) sc.value = s.country;
+
+    // Toggles
+    const toggleMap = {
+      'toggle-league-results': s.notif_league ?? true,
+      'toggle-duel-invite':    s.notif_duel   ?? true,
+      'toggle-payment':        s.notif_pay    ?? true,
+      'toggle-newsletter':     s.notif_news   ?? false,
+      'toggle-sound':          s.sound        ?? true,
+      'toggle-show-elo':       s.show_elo     ?? true,
+      'toggle-public':         s.public       ?? true,
+    };
+    Object.entries(toggleMap).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if(el){
+        el.classList.toggle('on', val);
+        el.classList.toggle('off', !val);
+      }
+    });
+  } catch(e){ console.warn('loadSettings error:', e); }
+}
+
+function saveSettings(){
+  try {
+    const s = {};
+
+    // Account
+    const su = document.getElementById('s-username');
+    const se = document.getElementById('s-email');
+    if(su) s.username = su.value.trim();
+    if(se) s.email    = se.value.trim();
+
+    // Country
+    const sc = document.querySelector('select.setting-input');
+    if(sc) s.country = sc.value;
+
+    // Toggles
+    const toggleMap = [
+      ['toggle-league-results', 'notif_league'],
+      ['toggle-duel-invite',    'notif_duel'],
+      ['toggle-payment',        'notif_pay'],
+      ['toggle-newsletter',     'notif_news'],
+      ['toggle-sound',          'sound'],
+      ['toggle-show-elo',       'show_elo'],
+      ['toggle-public',         'public'],
+    ];
+    toggleMap.forEach(([id, key]) => {
+      const el = document.getElementById(id);
+      if(el) s[key] = el.classList.contains('on');
+    });
+
+    localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+
+    // Also update user object if username/email changed
+    const user = JSON.parse(localStorage.getItem('wr_user') || 'null');
+    if(user){
+      if(s.username) user.username = s.username;
+      if(s.email)    user.email    = s.email;
+      localStorage.setItem('wr_user', JSON.stringify(user));
+    }
+
+    showToast('✅ Settings saved!');
+  } catch(e){ showToast('❌ Save failed'); }
+}
+
+// Add IDs to toggles so they can be targeted
+function tagToggles(){
+  const labels = [
+    'Daily League Results',
+    'New challenge received',
+    'Earnings paid',
+    'Weekly newsletter',
+    'Sound & effects',
+    'Show competitive mode',
+    'Public profile',
+  ];
+  const ids = [
+    'toggle-league-results',
+    'toggle-duel-invite',
+    'toggle-payment',
+    'toggle-newsletter',
+    'toggle-sound',
+    'toggle-show-elo',
+    'toggle-public',
+  ];
+  document.querySelectorAll('.toggle').forEach((el, i) => {
+    if(ids[i] && !el.id) el.id = ids[i];
+  });
+}
+
+// Replace generic save buttons with real saveSettings
+function wireButtons(){
+  document.querySelectorAll('.save-settings-btn').forEach(btn => {
+    btn.onclick = saveSettings;
+  });
+}
+
+// Toast helper (in case not defined)
+if(typeof showToast === 'undefined'){
+  window.showToast = function(msg, dur=3000){
+    const t = document.getElementById('toast');
+    if(!t) return;
+    t.textContent = msg;
+    t.style.display = 'block';
+    clearTimeout(showToast._t);
+    showToast._t = setTimeout(() => t.style.display = 'none', dur);
+  };
+}
+
+// Init on load
+window.addEventListener('load', function(){
+  tagToggles();
+  wireButtons();
+  loadSettings();
+});
+
+window.saveSettings = saveSettings;
+window.loadSettings = loadSettings;
 </script>
 
 </body>
