@@ -124,6 +124,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     <a class="toc-link" href="#powerups">Power-Ups</a>
     <a class="toc-link" href="#wrc">🪙 WRC Credits</a>
     <a class="toc-link" href="#validation">Word Validation</a>
+    <a class="toc-link" href="#duel">⚔️ Duel Arena</a>
     <a class="toc-link" href="#leaderboard">🏆 Leaderboard</a>
     <a class="toc-link" href="#anticheat">Fair Play Rules</a>
     <a class="toc-link" href="#wallet">Wallet & USDT</a>
@@ -242,14 +243,14 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
         </table>
         <p><strong>Prize distribution (top 10):</strong> 1st 30% · 2nd 18% · 3rd 12% · 4th–5th 5% each · 6th–10th 4% each.</p>
 
-        <span class="section-anchor" id="duel"></span>
+        <span class="section-anchor" id="duel-mode"></span>
         <h3>⚔️ Duel Arena <span class="badge b-red">P2E</span></h3>
-        <p>Real-time multiplayer rooms (2–8 players). The room creator sets the USDT wager. A smart contract locks all funds and automatically distributes winnings.</p>
+        <p>Real-time multiplayer rooms (2–8 players). The room creator sets the USDT wager. A smart contract locks all funds and automatically distributes winnings. <a href="#duel">→ See full Duel Arena rules</a></p>
         <ul>
-          <li>Wager range: <strong>$1 to $50 USDT</strong></li>
+          <li>Wager range: <strong>$1 to $50 USDT</strong> (or custom)</li>
           <li>Platform rake: <strong>5%</strong> — winner receives 95% of the pool</li>
           <li>Smart contract escrow — trustless, instant payout on Polygon</li>
-          <li>Max 8 players per room</li>
+          <li>2–8 players · 1, 3, or 5 rounds</li>
         </ul>
         <div class="callout c-blue"><span class="callout-icon">🔐</span><span>All Duel Arena funds are held in a verified smart contract. WordRace never has direct custody of your USDT during a game.</span></div>
       </div>
@@ -337,6 +338,43 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     <!-- FAIR PLAY -->
     
     <!-- LEADERBOARD -->
+    
+    <!-- DUEL ARENA -->
+    <div class="section">
+      <span class="section-anchor" id="duel"></span>
+      <div class="s-title">⚔️ Duel Arena</div>
+      <div class="s-sub">Real-time multiplayer wagering — Smart contract escrow</div>
+      <div class="s-body">
+        <p>The Duel Arena allows 2 to 8 players to compete in real-time vocabulary rounds with a USDT wager. All funds are locked in a Polygon smart contract immediately upon room creation and released automatically to the winner at game end.</p>
+
+        <h3>How It Works</h3>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Create or join a room</div><div class="step-desc">Set your wager ($1–$50 USDT), number of players (2–8), and rounds (1, 3, or 5). Share the Room ID with opponents.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Funds locked in escrow</div><div class="step-desc">Each player's wager is deducted immediately and locked in a verified Polygon smart contract. WordRace never holds funds directly.</div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Play — 40s rounds</div><div class="step-desc">Fill 8 categories starting with the round's letter. Tab to navigate on desktop, swipe on mobile. Opponent's answers are hidden during play.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Automatic payout</div><div class="step-desc">The player with the highest score wins 95% of the prize pool. The 5% rake is retained by WordRace. Payout is triggered automatically by the smart contract.</div></div></div>
+        </div>
+
+        <h3>Wager Rules</h3>
+        <table class="prize-table">
+          <thead><tr><th>Setting</th><th>Options</th></tr></thead>
+          <tbody>
+            <tr><td>Wager per player</td><td>$1 · $2 · $5 · $10 · $20 · $50 USDT (or custom $1–$50)</td></tr>
+            <tr><td>Players per room</td><td>2 · 4 · 6 · 8 (set by room creator)</td></tr>
+            <tr><td>Rounds</td><td>1 · 3 · 5 (Best-of format)</td></tr>
+            <tr><td>Platform rake</td><td>5% of total prize pool</td></tr>
+            <tr><td>Network</td><td>Polygon USDT (primary) · Solana USDT</td></tr>
+            <tr><td>Payout</td><td>Automatic via smart contract at game end</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Disconnection Policy</h3>
+        <p>If a player disconnects or switches tabs during a Duel Arena match, their round score is submitted immediately with whatever answers were entered at that moment. The match continues for remaining players. <strong>No refunds are issued for disconnections.</strong></p>
+
+        <div class="callout c-red"><span class="callout-icon">⚠️</span><span>Duel Arena involves real financial risk. Never wager more than you can afford to lose. Wagers are non-refundable once the match begins. Smart contract execution is irreversible.</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <span class="section-anchor" id="leaderboard"></span>
       <div class="s-title">🏆 Global Leaderboard</div>
@@ -532,8 +570,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
         <a class="df-link" href="index.html">🏠 Home</a>
         <a class="df-link" href="game.html">🎮 Play Now</a>
         <a class="df-link" href="daily-league.html">📅 Daily League</a>
-        <a class="df-link" href="#">🐦 Twitter</a>
-        <a class="df-link" href="#">💬 Discord</a>
+        <a class="df-link" href="https://twitter.com/WordRaceIO" target="_blank" rel="noopener">🐦 Twitter</a>
+        <a class="df-link" href="https://discord.gg/wordrace" target="_blank" rel="noopener">💬 Discord</a>
       </div>
     </div>
 
