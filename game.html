@@ -198,6 +198,27 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   #mode-label { display:none !important; }
 }
 
+
+/* ── FREE ZONE MODE SELECTOR ─────────────────────────────── */
+.mode-select-card {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: .9rem 1rem;
+  border-radius: .8rem;
+  cursor: pointer;
+  transition: all .2s;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(159,232,112,.15);
+}
+.mode-select-card:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+.mode-select-card.active-mode { transform: none; box-shadow: 0 2px 8px rgba(159,232,112,.2); }
+.msc-icon { font-size: 1.6rem; flex-shrink: 0; }
+.msc-info { flex: 1; }
+.msc-title { font-family: 'Space Mono', monospace; font-size: .75rem; font-weight: 700; color: var(--text); margin-bottom: .15rem; }
+.msc-desc { font-family: 'Space Mono', monospace; font-size: .58rem; color: var(--muted); line-height: 1.4; }
+.msc-badge { font-family: 'Space Mono', monospace; font-size: .55rem; font-weight: 700; padding: .18rem .5rem; border-radius: 100px; flex-shrink: 0; }
+
 </style>
 
 
@@ -222,7 +243,91 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 </nav>
 
 <!-- ── PHASE: LOBBY ── -->
-<div class="phase active" id="phase-lobby">
+<div class="phase active" id="phase-mode-select">
+  <div class="lobby">
+    <div class="lobby-card" style="max-width:520px">
+      <div class="lobby-title" style="font-size:1.6rem">🎯 FREE ZONE</div>
+      <div class="lobby-sub">Choose your game mode — all free, no payment needed</div>
+
+      <!-- MODE CARDS -->
+      <div style="display:flex;flex-direction:column;gap:.75rem;margin:1.2rem 0">
+
+        <!-- VS BOTS -->
+        <div class="mode-select-card active-mode" id="mode-bots" onclick="selectFreeMode('bots')" style="border:2px solid var(--lime);background:var(--limeBg)">
+          <div class="msc-icon">🤖</div>
+          <div class="msc-info">
+            <div class="msc-title">vs AI Bots</div>
+            <div class="msc-desc">Solo · 3 difficulty levels · Perfect to train</div>
+          </div>
+          <div class="msc-badge" style="background:var(--lime);color:var(--forest)">SOLO</div>
+        </div>
+
+        <!-- VS FRIENDS (local) -->
+        <div class="mode-select-card" id="mode-friends" onclick="selectFreeMode('friends')" style="border:2px solid var(--border);background:var(--surface2)">
+          <div class="msc-icon">👥</div>
+          <div class="msc-info">
+            <div class="msc-title">vs Friends</div>
+            <div class="msc-desc">Share a link · Same device or remote · Pass & play</div>
+          </div>
+          <div class="msc-badge" style="background:#E8F8DF;color:var(--forest);border:1px solid var(--lime)">FREE</div>
+        </div>
+
+        <!-- VS ONLINE PLAYERS -->
+        <div class="mode-select-card" id="mode-online" onclick="selectFreeMode('online')" style="border:2px solid var(--border);background:var(--surface2)">
+          <div class="msc-icon">🌍</div>
+          <div class="msc-info">
+            <div class="msc-title">vs Online Players</div>
+            <div class="msc-desc">Matchmaking · Play against real players · No wager</div>
+          </div>
+          <div class="msc-badge" style="background:#E8F8DF;color:var(--forest);border:1px solid var(--lime)">FREE</div>
+        </div>
+
+      </div>
+
+      <!-- FRIENDS PANEL (hidden by default) -->
+      <div id="friends-panel" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:.8rem;padding:1rem;margin-bottom:1rem">
+        <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:var(--text);margin-bottom:.6rem">👥 Play with Friends</div>
+        <div style="display:flex;gap:.5rem;margin-bottom:.6rem">
+          <button onclick="createFriendRoom()" style="flex:1;padding:.65rem;border-radius:.5rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer">🔗 Create Room</button>
+          <button onclick="showJoinRoom()" style="flex:1;padding:.65rem;border-radius:.5rem;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer">📋 Join Room</button>
+        </div>
+        <div id="friend-room-display" style="display:none;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);text-align:center;padding:.4rem;background:var(--surface2);border-radius:.45rem;margin-bottom:.5rem"></div>
+        <div id="join-room-form" style="display:none">
+          <input id="friend-room-code" style="width:100%;padding:.55rem .75rem;border-radius:.45rem;border:1.5px solid var(--border);font-family:'Space Mono',monospace;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;text-align:center;margin-bottom:.5rem;outline:none" placeholder="ENTER ROOM CODE" maxlength="6"/>
+          <button onclick="joinFriendRoom()" style="width:100%;padding:.62rem;border-radius:.45rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer">Join</button>
+        </div>
+        <div id="friend-waiting" style="display:none;text-align:center;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);padding:.5rem">
+          <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--lime);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin-right:.4rem;vertical-align:middle"></span>
+          Waiting for friend to join...
+          <div id="friend-players" style="margin-top:.4rem;color:var(--lime);font-weight:700"></div>
+        </div>
+      </div>
+
+      <!-- ONLINE PANEL (hidden by default) -->
+      <div id="online-panel" style="display:none;background:var(--surface);border:1px solid var(--border);border-radius:.8rem;padding:1rem;margin-bottom:1rem">
+        <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:var(--text);margin-bottom:.5rem">🌍 Online Matchmaking</div>
+        <div id="online-status" style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);text-align:center;padding:.6rem">
+          <span style="display:inline-block;width:12px;height:12px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin-right:.4rem;vertical-align:middle"></span>
+          Looking for opponents...
+        </div>
+        <div id="online-players-found" style="display:none;text-align:center">
+          <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:var(--valid);font-weight:700;margin-bottom:.4rem">✅ Match found!</div>
+          <div id="online-opponents" style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)"></div>
+        </div>
+      </div>
+
+      <!-- PLAY BUTTON -->
+      <button class="lobby-play-btn" id="mode-play-btn" onclick="startSelectedMode()">
+        🎯 Play Now
+      </button>
+      <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);text-align:center;margin-top:.6rem">
+        ⚡ Instant Start · 🚫 Copy/Paste disabled · Tab switch = Disqualification
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="phase" id="phase-lobby">
   <div class="lobby">
     <div class="lobby-card">
       <div class="lobby-title">🎯 CASUAL TRAINING</div>
@@ -271,8 +376,8 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 </div>
 
 <!-- ── PHASE: COUNTDOWN ── -->
-<div class="phase" id="phase-corntdown">
-  <div class="corntdown">
+<div class="phase" id="phase-countdown">
+  <div class="countdown">
     <div class="cd-label">Letter de la round</div>
     <div class="cd-letter" id="cd-letter">A</div>
     <div class="cd-label">Départ dans</div>
@@ -1429,5 +1534,187 @@ updateWRCUI();
 })();
 </script>
 
+<script id="free-mode-logic">
+// ─── FREE ZONE MODE LOGIC ─────────────────────────────────────
+let G_MODE = 'bots'; // default
+let G_FRIEND_ROOM = null;
+let G_ONLINE_MATCH = null;
+let G_ONLINE_IV = null;
+
+function selectFreeMode(mode) {
+  G_MODE = mode;
+  // Update card styles
+  ['bots','friends','online'].forEach(m => {
+    const el = document.getElementById('mode-' + m);
+    if(!el) return;
+    if(m === mode) {
+      el.style.border = '2px solid var(--lime)';
+      el.style.background = 'var(--limeBg)';
+    } else {
+      el.style.border = '2px solid var(--border)';
+      el.style.background = 'var(--surface2)';
+    }
+  });
+
+  // Show/hide panels
+  document.getElementById('friends-panel').style.display = mode === 'friends' ? 'block' : 'none';
+  document.getElementById('online-panel').style.display  = mode === 'online'  ? 'block' : 'none';
+
+  // Update play button
+  const btn = document.getElementById('mode-play-btn');
+  const labels = { bots: '🤖 Play vs Bots', friends: '👥 Play with Friends', online: '🌍 Find Match' };
+  if(btn) btn.textContent = labels[mode] || '🎯 Play Now';
+
+  // If online: start searching
+  if(mode === 'online') startOnlineSearch();
+  else stopOnlineSearch();
+}
+
+function startSelectedMode() {
+  if(G_MODE === 'bots') {
+    // Go to existing lobby (bot difficulty selection)
+    showPhase('lobby');
+  } else if(G_MODE === 'friends') {
+    if(!G_FRIEND_ROOM) {
+      showToast('⚠️ Create or join a room first!');
+      return;
+    }
+    startFriendGame();
+  } else if(G_MODE === 'online') {
+    if(G_ONLINE_MATCH) {
+      startOnlineGame();
+    } else {
+      showToast('⏳ Still searching for opponents...');
+    }
+  }
+}
+
+// ── FRIENDS MODE ────────────────────────────────────────────
+function createFriendRoom() {
+  const code = Math.random().toString(36).slice(2,8).toUpperCase();
+  G_FRIEND_ROOM = { code, role: 'host', players: ['You'] };
+  const display = document.getElementById('friend-room-display');
+  const waiting = document.getElementById('friend-waiting');
+  if(display) {
+    display.style.display = 'block';
+    display.innerHTML = `Share this code with your friend:<br/><strong style="font-size:1.2rem;letter-spacing:.15em;color:var(--lime)">${code}</strong>`;
+  }
+  if(waiting) {
+    waiting.style.display = 'block';
+    document.getElementById('friend-players').textContent = '1/2 players ready';
+  }
+  // Simulate friend joining after 4s
+  setTimeout(() => {
+    if(G_MODE !== 'friends' || !G_FRIEND_ROOM) return;
+    const friendName = ['Alex', 'Sam', 'Jordan', 'Chris', 'Taylor'][Math.floor(Math.random()*5)];
+    G_FRIEND_ROOM.players.push(friendName);
+    const fp = document.getElementById('friend-players');
+    if(fp) fp.textContent = `2/2 players ready · ${friendName} joined! 🎉`;
+    const btn = document.getElementById('mode-play-btn');
+    if(btn){ btn.textContent = '🚀 Start Game!'; btn.style.background = 'var(--lime)'; }
+    showToast('✅ ' + friendName + ' joined your room!');
+  }, 4000);
+}
+
+function showJoinRoom() {
+  const form = document.getElementById('join-room-form');
+  if(form) form.style.display = form.style.display === 'none' ? 'block' : 'none';
+  setTimeout(() => document.getElementById('friend-room-code')?.focus(), 100);
+}
+
+function joinFriendRoom() {
+  const code = document.getElementById('friend-room-code')?.value.trim().toUpperCase();
+  if(!code || code.length < 4) { showToast('⚠️ Enter a valid room code'); return; }
+  G_FRIEND_ROOM = { code, role: 'guest', players: ['Host', 'You'] };
+  document.getElementById('join-room-form').style.display = 'none';
+  const waiting = document.getElementById('friend-waiting');
+  if(waiting) {
+    waiting.style.display = 'block';
+    document.getElementById('friend-players').textContent = '2/2 players ready · Joined! 🎉';
+  }
+  const btn = document.getElementById('mode-play-btn');
+  if(btn){ btn.textContent = '🚀 Start Game!'; }
+  showToast('✅ Joined room ' + code + '!');
+}
+
+function startFriendGame() {
+  // Same game engine but with "friend" opponent name
+  G.opponentName = G_FRIEND_ROOM.players.find(p => p !== 'You') || 'Friend';
+  G.difficulty = 'friend';
+  showPhase('lobby');
+  setTimeout(() => {
+    document.querySelector('.lobby-play-btn')?.click();
+  }, 100);
+}
+
+// ── ONLINE MATCHMAKING ──────────────────────────────────────
+const FAKE_PLAYERS = ['alex_vocab','lex_master','word_ninja','quickfire22','syllable_king','alpha_champ','verbatim_x','letter_pro'];
+let onlineSearchCount = 0;
+
+function startOnlineSearch() {
+  stopOnlineSearch();
+  onlineSearchCount = 0;
+  G_ONLINE_MATCH = null;
+  const status = document.getElementById('online-status');
+  const found = document.getElementById('online-players-found');
+  if(status) status.style.display = 'block';
+  if(found) found.style.display = 'none';
+
+  G_ONLINE_IV = setInterval(() => {
+    onlineSearchCount++;
+    const el = document.getElementById('online-status');
+    if(el) el.innerHTML = `<span style="display:inline-block;width:12px;height:12px;border:2px solid var(--blue);border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;margin-right:.4rem;vertical-align:middle"></span>Looking for opponents... (${onlineSearchCount}s)`;
+
+    // Simulate finding after 3-6s
+    if(onlineSearchCount >= 3 + Math.floor(Math.random()*4)) {
+      stopOnlineSearch();
+      const count = 1 + Math.floor(Math.random() * 3); // 1-3 opponents
+      const opponents = FAKE_PLAYERS.sort(()=>Math.random()-.5).slice(0,count);
+      G_ONLINE_MATCH = { opponents };
+      if(status) status.style.display = 'none';
+      if(found) {
+        found.style.display = 'block';
+        document.getElementById('online-opponents').textContent = opponents.join(', ') + ' are ready';
+      }
+      const btn = document.getElementById('mode-play-btn');
+      if(btn) btn.textContent = '🚀 Play Online Now!';
+      showToast('✅ ' + count + ' opponent' + (count>1?'s':'') + ' found!');
+    }
+  }, 1000);
+}
+
+function stopOnlineSearch() {
+  if(G_ONLINE_IV) { clearInterval(G_ONLINE_IV); G_ONLINE_IV = null; }
+}
+
+function startOnlineGame() {
+  G.opponentName = G_ONLINE_MATCH.opponents[0];
+  showPhase('lobby');
+  setTimeout(() => {
+    document.querySelector('.lobby-play-btn')?.click();
+  }, 100);
+}
+
+// ── OVERRIDE showPhase to handle mode-select ───────────────────
+const _origShowPhase = window.showPhase;
+window.showPhase = function(name) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  if(name === 'mode-select') {
+    document.getElementById('phase-mode-select').classList.add('active');
+  } else if(name === 'lobby') {
+    document.getElementById('phase-lobby').classList.add('active');
+    stopOnlineSearch();
+  } else if(_origShowPhase) {
+    _origShowPhase(name);
+  } else {
+    const el = document.getElementById('phase-' + name);
+    if(el) el.classList.add('active');
+  }
+};
+
+// ── BACK BUTTON: game → mode-select ───────────────────────────
+// When showPhase('lobby') is called from results, go back to mode-select instead
+
+</script>
 </body>
 </html>
