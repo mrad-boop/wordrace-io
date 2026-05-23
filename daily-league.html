@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <link rel="stylesheet" href="global.css"/>
@@ -18,25 +18,25 @@
   --text:#1A1A1A;--muted:#6B7280;--forest:#163300;
   --valid:#16A34A;--validBg:#DCFCE7;
 }
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+body{backgrornd:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
 
 /* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;backgrornd:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none;text-decoration:none!important;color:var(--text,#1A1A1A)!important}
 .nav-logo span{color:var(--lime)}
 .nav-links{display:flex;gap:.5rem}
 .nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
-.nav-link:hover{background:var(--surface2);color:var(--text)}
-.nav-link.active{background:var(--goldBg);border-color:var(--gold);color:#92600A}
+.nav-link:hover{backgrornd:var(--surface2);color:var(--text)}
+.nav-link.active{backgrornd:var(--goldBg);border-color:var(--gold);color:#92600A}
 
 /* COUNTDOWN BANNER */
-.countdown-banner{margin-top:56px;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:1.2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
-.cb-bg{position:absolute;inset:0;opacity:.06;background:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(159,232,112,.5) 10px,rgba(159,232,112,.5) 11px)}
+.corntdown-banner{margin-top:56px;backgrornd:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);color:#fff;padding:1.2rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.cb-bg{position:absolute;inset:0;opacity:.06;backgrornd:repeating-linear-gradient(45deg,transparent,transparent 10px,rgba(159,232,112,.5) 10px,rgba(159,232,112,.5) 11px)}
 .cb-inner{position:relative;z-index:1;max-width:800px;margin:0 auto}
 .cb-title{font-family:'Space Mono',monospace;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
 .cb-timer{display:flex;gap:.8rem;justify-content:center;align-items:center;margin-bottom:.3rem}
 .cb-unit{display:flex;flex-direction:column;align-items:center;gap:.1rem}
-.cb-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#fff;line-height:1;min-width:52px;background:rgba(255,255,255,.1);border-radius:.5rem;padding:.1rem .3rem;text-align:center}
+.cb-num{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:#fff;line-height:1;min-width:52px;backgrornd:rgba(255,255,255,.1);border-radius:.5rem;padding:.1rem .3rem;text-align:center}
 .cb-sep{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:rgba(255,255,255,.4);margin-top:-.3rem}
 .cb-label{font-family:'Space Mono',monospace;font-size:.48rem;color:rgba(255,255,255,.5);letter-spacing:.1em;text-transform:uppercase}
 .cb-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.5)}
@@ -49,14 +49,14 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .left-col{display:flex;flex-direction:column;gap:1.1rem}
 
 /* ENTRY CARD */
-.entry-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.entry-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .entry-header{padding:1rem 1.3rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
 .entry-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--text);letter-spacing:.03em}
 .entry-body{padding:1.2rem 1.3rem}
 .tier-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1rem}
 .tier-opt{border-radius:.8rem;border:2px solid var(--border);padding:1rem;cursor:pointer;transition:all .22s;text-align:center;position:relative}
-.tier-opt:hover{border-color:var(--gold);background:var(--goldBg)}
-.tier-opt.selected{border-color:var(--gold);background:var(--goldBg)}
+.tier-opt:hover{border-color:var(--gold);backgrornd:var(--goldBg)}
+.tier-opt.selected{border-color:var(--gold);backgrornd:var(--goldBg)}
 .tier-opt.selected::after{content:'✓';position:absolute;top:.5rem;right:.7rem;font-size:.8rem;color:var(--gold);font-weight:700}
 .tier-price{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--gold);line-height:1}
 .tier-label{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:.2rem 0}
@@ -67,32 +67,32 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .info-row:last-child{border-bottom:none}
 .info-label{color:var(--muted)}
 .info-val{color:var(--text);font-weight:700}
-.enter-btn{width:100%;padding:.9rem;border-radius:.65rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
-.enter-btn:hover{background:var(--goldD)}
-.enter-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
-.already-entered{background:var(--validBg);border:1px solid var(--valid);border-radius:.65rem;padding:.9rem;text-align:center;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--valid);font-weight:700}
+.enter-btn{width:100%;padding:.9rem;border-radius:.65rem;border:none;backgrornd:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.85rem;font-weight:700;cursor:pointer;letter-spacing:.06em;transition:backgrornd .2s;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.enter-btn:hover{backgrornd:var(--goldD)}
+.enter-btn:disabled{backgrornd:var(--surface2);color:var(--muted);cursor:not-allowed}
+.already-entered{backgrornd:var(--validBg);border:1px solid var(--valid);border-radius:.65rem;padding:.9rem;text-align:center;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--valid);font-weight:700}
 
 /* MY SCORE */
-.my-score-card{background:var(--surface);border:2px solid var(--lime);border-radius:1.1rem;padding:1.2rem 1.3rem;box-shadow:0 4px 16px rgba(159,232,112,.12)}
+.my-score-card{backgrornd:var(--surface);border:2px solid var(--lime);border-radius:1.1rem;padding:1.2rem 1.3rem;box-shadow:0 4px 16px rgba(159,232,112,.12)}
 .ms-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
 .ms-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text);letter-spacing:.03em}
 .ms-rank{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:var(--lime);line-height:1}
 .ms-rank-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
 .ms-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:.8rem}
-.ms-stat{text-align:center;padding:.6rem;background:var(--limeBg);border-radius:.6rem;border:1px solid rgba(159,232,112,.2)}
+.ms-stat{text-align:center;padding:.6rem;backgrornd:var(--limeBg);border-radius:.6rem;border:1px solid rgba(159,232,112,.2)}
 .ms-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime);line-height:1}
 .ms-stat-label{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.07em;text-transform:uppercase}
-.ms-progress{background:var(--surface2);border-radius:100px;height:8px;overflow:hidden;margin-bottom:.3rem}
-.ms-progress-bar{height:100%;background:var(--lime);border-radius:100px;transition:width .5s ease}
+.ms-progress{backgrornd:var(--surface2);border-radius:100px;height:8px;overflow:hidden;margin-bottom:.3rem}
+.ms-progress-bar{height:100%;backgrornd:var(--lime);border-radius:100px;transition:width .5s ease}
 .ms-progress-label{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)}
 
 /* GAME AREA */
-.game-area{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.game-area{backgrornd:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .ga-header{padding:.9rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 .ga-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.03em}
 .ga-meta{display:flex;align-items:center;gap:.6rem}
-.letter-chip{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;background:var(--lime);color:var(--forest);width:38px;height:38px;border-radius:.45rem;display:flex;align-items:center;justify-content:center;line-height:1}
-.round-chip{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);background:var(--surface2);padding:.25rem .55rem;border-radius:.35rem}
+.letter-chip{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;backgrornd:var(--lime);color:var(--forest);width:38px;height:38px;border-radius:.45rem;display:flex;align-items:center;justify-content:center;line-height:1}
+.rornd-chip{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);backgrornd:var(--surface2);padding:.25rem .55rem;border-radius:.35rem}
 .timer-compact{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--text);min-width:40px;text-align:center;transition:color .3s}
 .timer-compact.warn{color:var(--gold)}
 .timer-compact.danger{color:var(--red);animation:shake .25s infinite}
@@ -101,34 +101,34 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .cat-row{display:flex;align-items:center;gap:.7rem;padding:.5rem 0;border-bottom:1px solid var(--border)}
 .cat-row:last-child{border-bottom:none}
 .cat-name{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);min-width:90px;flex-shrink:0}
-.cat-input{flex:1;padding:.48rem .7rem;border-radius:.45rem;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.8rem;outline:none;transition:all .2s}
-.cat-input:focus{border-color:var(--lime);background:#fff}
-.cat-input.valid{border-color:var(--valid);background:var(--validBg)}
-.cat-input.invalid{border-color:var(--red);background:var(--redBg)}
+.cat-input{flex:1;padding:.48rem .7rem;border-radius:.45rem;border:1.5px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.8rem;ortline:none;transition:all .2s}
+.cat-input:focus{border-color:var(--lime);backgrornd:#fff}
+.cat-input.valid{border-color:var(--valid);backgrornd:var(--validBg)}
+.cat-input.invalid{border-color:var(--red);backgrornd:var(--redBg)}
 .cat-input:disabled{opacity:.5;cursor:not-allowed}
 .cat-check{width:22px;height:22px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0;transition:all .2s}
-.cat-check.done{background:var(--valid);border-color:var(--valid);color:#fff}
+.cat-check.done{backgrornd:var(--valid);border-color:var(--valid);color:#fff}
 .submit-row{display:flex;gap:.6rem;margin-top:1rem;align-items:center}
-.submit-btn{flex:1;padding:.78rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s}
-.submit-btn:hover{background:var(--limeD)}
-.submit-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
-.filled-count{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
+.submit-btn{flex:1;padding:.78rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:backgrornd .2s}
+.submit-btn:hover{backgrornd:var(--limeD)}
+.submit-btn:disabled{backgrornd:var(--surface2);color:var(--muted);cursor:not-allowed}
+.filled-cornt{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
 
 /* LEADERBOARD */
-.lb-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+.lb-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:1.1rem;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.05)}
 .lb-header{padding:.9rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .lb-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.03em}
 .live-dot{display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.56rem;color:var(--red)}
-.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);animation:pulse 1.5s infinite}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;backgrornd:var(--red);animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .lb-tabs{display:flex;border-bottom:1px solid var(--border)}
 .lb-tab{flex:1;padding:.6rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;cursor:pointer;transition:all .15s;border-bottom:2px solid transparent}
-.lb-tab.active{color:var(--gold);border-bottom-color:var(--gold);background:var(--goldBg)}
+.lb-tab.active{color:var(--gold);border-bottom-color:var(--gold);backgrornd:var(--goldBg)}
 .lb-body{max-height:480px;overflow-y:auto}
-.lb-row{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-bottom:1px solid rgba(0,0,0,.04);transition:background .15s}
-.lb-row:hover{background:var(--surface2)}
-.lb-row.you{background:var(--limeBg);border-left:3px solid var(--lime)}
-.lb-row.top3{background:var(--goldBg)}
+.lb-row{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;border-bottom:1px solid rgba(0,0,0,.04);transition:backgrornd .15s}
+.lb-row:hover{backgrornd:var(--surface2)}
+.lb-row.yor{backgrornd:var(--limeBg);border-left:3px solid var(--lime)}
+.lb-row.top3{backgrornd:var(--goldBg)}
 .lb-rank{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;min-width:28px;text-align:center}
 .lb-avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
 .lb-name{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -140,18 +140,18 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .right-col{display:flex;flex-direction:column;gap:1.1rem}
 
 /* PRIZE POOL */
-.prize-card{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:1.1rem;padding:1.3rem;color:#fff;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.prize-card{backgrornd:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:1.1rem;padding:1.3rem;color:#fff;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 .prize-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.4rem}
-.prize-amount{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);line-height:1;margin-bottom:.2rem}
+.prize-amornt{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--gold);line-height:1;margin-bottom:.2rem}
 .prize-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.4);margin-bottom:1rem}
 .prize-dist{display:flex;flex-direction:column;gap:.35rem}
-.pd-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem .5rem;border-radius:.4rem;background:rgba(255,255,255,.06)}
+.pd-row{display:flex;justify-content:space-between;align-items:center;padding:.35rem .5rem;border-radius:.4rem;backgrornd:rgba(255,255,255,.06)}
 .pd-rank{font-family:'Space Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.6)}
 .pd-pct{font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.4)}
 .pd-amt{font-family:'Bebas Neue',sans-serif;font-size:1rem;color:var(--gold)}
 
 /* ENTRIES */
-.entries-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.1rem}
+.entries-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.1rem}
 .ec-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);margin-bottom:.8rem;letter-spacing:.03em}
 .ec-bar{display:flex;height:8px;border-radius:100px;overflow:hidden;margin-bottom:.4rem;gap:2px}
 .ec-bar-seg{height:100%;border-radius:100px}
@@ -160,7 +160,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .ec-dot{width:8px;height:8px;border-radius:50%}
 
 /* RULES */
-.rules-card{background:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.1rem}
+.rules-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:1.1rem;padding:1.1rem}
 .rc-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);margin-bottom:.8rem;letter-spacing:.03em}
 .rule-item{display:flex;gap:.6rem;align-items:flex-start;padding:.4rem 0;border-bottom:1px solid var(--border)}
 .rule-item:last-child{border-bottom:none}
@@ -168,27 +168,27 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .rule-text{font-family:'Space Mono',monospace;font-size:.61rem;color:var(--muted);line-height:1.5}
 
 /* MODAL */
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal{display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.55);z-index:200;align-items:center;justify-content:center;padding:1rem}
 .modal.show{display:flex}
-.modal-card{background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:420px;width:100%;box-shadow:0 28px 60px rgba(0,0,0,.2)}
+.modal-card{backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:420px;width:100%;box-shadow:0 28px 60px rgba(0,0,0,.2)}
 .modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--text);margin-bottom:.3rem;letter-spacing:.02em}
 .modal-sub{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1.2rem}
-.modal-detail{background:var(--goldBg);border:1px solid var(--gold);border-radius:.6rem;padding:.9rem;margin-bottom:1rem}
+.modal-detail{backgrornd:var(--goldBg);border:1px solid var(--gold);border-radius:.6rem;padding:.9rem;margin-bottom:1rem}
 .md-row{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.65rem;padding:.22rem 0}
 .md-label{color:var(--muted)}
 .md-val{font-weight:700;color:var(--text)}
 .modal-btns{display:flex;gap:.6rem}
-.m-cancel{flex:1;padding:.75rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer}
-.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;background:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:background .2s}
-.m-confirm:hover{background:var(--goldD)}
+.m-cancel{flex:1;padding:.75rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.72rem;cursor:pointer}
+.m-confirm{flex:2;padding:.75rem;border-radius:.55rem;border:none;backgrornd:var(--gold);color:#1a1400;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;transition:backgrornd .2s}
+.m-confirm:hover{backgrornd:var(--goldD)}
 
 /* RESULTS */
-.results-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
+.results-modal{display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.6);z-index:200;align-items:center;justify-content:center;padding:1rem;overflow-y:auto}
 .results-modal.show{display:flex}
-.results-card{background:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:480px;width:100%;box-shadow:0 28px 70px rgba(0,0,0,.25);max-height:92vh;overflow-y:auto}
+.results-card{backgrornd:var(--surface);border-radius:1.3rem;padding:1.8rem;max-width:480px;width:100%;box-shadow:0 28px 70px rgba(0,0,0,.25);max-height:92vh;overflow-y:auto}
 
 /* TOAST */
-#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
+#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);backgrornd:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
 @keyframes su{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid #0002;border-top-color:#1a1400;border-radius:50%;animation:spin .7s linear infinite}
@@ -230,11 +230,11 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 <body>
 <div id="cs-overlay" style="
   position:fixed;inset:0;z-index:900;
-  background:rgba(5,15,5,.88);backdrop-filter:blur(8px);
+  backgrornd:rgba(5,15,5,.88);backdrop-filter:blur(8px);
   display:flex;align-items:center;justify-content:center;padding:1.5rem;
 ">
   <div style="
-    background:#0d1f0d;border:2px solid rgba(245,200,66,.3);
+    backgrornd:#0d1f0d;border:2px solid rgba(245,200,66,.3);
     border-radius:1.4rem;padding:2.2rem 2rem;max-width:420px;width:100%;
     text-align:center;box-shadow:0 24px 60px rgba(0,0,0,.5);
   ">
@@ -242,46 +242,46 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#fff;letter-spacing:.04em;line-height:1;margin-bottom:.3rem">DAILY LEAGUE</div>
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#F5C842;letter-spacing:.1em;margin-bottom:1rem">COMING SOON</div>
     <div style="font-family:'Space Mono',monospace;font-size:.68rem;color:rgba(255,255,255,.55);line-height:1.7;margin-bottom:1.4rem">
-      Le tournoi quotidien Play-to-Earn avec prize pool USDT est en préparation.<br/>
-      <span style="color:#F5C842">Bêta fermée — lancement prévu Q3 2026.</span>
+      The daily Play-to-Earn torrnament with USDT prize pool is coming soon.<br/>
+      <span style="color:#F5C842">Closed beta — launching Q3 2026.</span>
     </div>
     <div style="display:flex;flex-direction:column;gap:.5rem">
       <button onclick="notifyMeDL()" style="
         padding:.82rem;border-radius:.6rem;border:none;
-        background:#F5C842;color:#163300;
+        backgrornd:#F5C842;color:#163300;
         font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;
         cursor:pointer;letter-spacing:.05em;
-      ">🔔 M'avertir au lancement</button>
+      ">🔔 Notify me at launch</button>
       <a href="game.html" style="
         display:block;padding:.72rem;border-radius:.6rem;
         border:1px solid rgba(255,255,255,.15);
-        background:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
+        backgrornd:rgba(255,255,255,.07);color:rgba(255,255,255,.7);
         font-family:'Space Mono',monospace;font-size:.72rem;text-decoration:none;
-      ">🎮 Jouer en mode Casual — Gratuit</a>
+      ">🎮 Play en mode Casual — Gratuit</a>
     </div>
-    <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.25);margin-top:1rem">WORDRACE.IO · Bêta publique · Mai 2026</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:rgba(255,255,255,.25);margin-top:1rem">WORDRACE.IO · Public Beta · May 2026</div>
   </div>
 </div>
 
-<div id="cs-notify-modal-dl" style="display:none;position:fixed;inset:0;z-index:950;background:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem">
-  <div style="background:#fff;border-radius:1.1rem;padding:1.8rem;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+<div id="cs-notify-modal-dl" style="display:none;position:fixed;inset:0;z-index:950;backgrornd:rgba(0,0,0,.6);align-items:center;justify-content:center;padding:1rem">
+  <div style="backgrornd:#fff;border-radius:1.1rem;padding:1.8rem;max-width:360px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
     <div style="font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#1A1A1A;margin-bottom:.2rem">🔔 Me prévenir</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:#6B7280;margin-bottom:.9rem">On vous notifie au lancement du Daily League</div>
-    <input id="cs-email-dl" type="email" placeholder="votre@email.com" style="width:100%;padding:.72rem .9rem;border-radius:.5rem;border:1.5px solid rgba(0,0,0,.1);background:#F8F9F7;font-family:'Space Mono',monospace;font-size:.8rem;outline:none;margin-bottom:.7rem;"/>
-    <button onclick="submitNotifyDL()" style="width:100%;padding:.8rem;border-radius:.55rem;border:none;background:#F5C842;color:#163300;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;">📬 S'inscrire</button>
-    <button onclick="document.getElementById('cs-notify-modal-dl').style.display='none'" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid rgba(0,0,0,.08);background:transparent;color:#6B7280;font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem;">Annuler</button>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:#6B7280;margin-bottom:.9rem">On vors notifie au lancement du Daily League</div>
+    <input id="cs-email-dl" type="email" placeholder="your@email.com" style="width:100%;padding:.72rem .9rem;border-radius:.5rem;border:1.5px solid rgba(0,0,0,.1);backgrornd:#F8F9F7;font-family:'Space Mono',monospace;font-size:.8rem;ortline:none;margin-bottom:.7rem;"/>
+    <button onclick="submitNotifyDL()" style="width:100%;padding:.8rem;border-radius:.55rem;border:none;backgrornd:#F5C842;color:#163300;font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;">📬 Subscribe</button>
+    <button onclick="document.getElementById('cs-notify-modal-dl').style.display='none'" style="width:100%;padding:.6rem;border-radius:.5rem;border:1px solid rgba(0,0,0,.08);backgrornd:transparent;color:#6B7280;font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem;">Cancel</button>
   </div>
 </div>
 <script>
 function notifyMeDL(){document.getElementById('cs-notify-modal-dl').style.display='flex'}
 function submitNotifyDL(){
   const em=document.getElementById('cs-email-dl').value.trim();
-  if(!em||!em.includes('@')){alert('Email invalide');return}
+  if(!em||!em.includes('@')){alert('Invalid email');return}
   const notifs=JSON.parse(localStorage.getItem('wr_notify_list')||'[]');
   notifs.push({email:em,feature:'daily_league',ts:Date.now()});
   localStorage.setItem('wr_notify_list',JSON.stringify(notifs));
   document.getElementById('cs-notify-modal-dl').style.display='none';
-  document.getElementById('cs-overlay').innerHTML='<div style="text-align:center;color:#fff;font-family:'Space Mono',monospace"><div style="font-size:2rem;margin-bottom:.8rem">✅</div><div style="font-size:.85rem">Inscrit ! On vous prévient au lancement.</div><br/><a href="game.html" style="color:#9FE870">← Jouer en mode Casual</a></div>';
+  document.getElementById('cs-overlay').innerHTML='<div style="text-align:center;color:#fff;font-family:'Space Mono',monospace"><div style="font-size:2rem;margin-bottom:.8rem">✅</div><div style="font-size:.85rem">Inscrit ! On vors prévient au lancement.</div><br/><a href="game.html" style="color:#9FE870">← Play en mode Casual</a></div>';
 }
 </script>
 
@@ -292,12 +292,12 @@ function submitNotifyDL(){
   <div class="nav-links">
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Game</a>
-    <a class="nav-link active" href="#">📅 Daily League</a><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Balance WRC" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
+    <a class="nav-link active" href="#">📅 Daily League</a><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Balance WRC" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
   </div>
 </nav>
 
 <!-- COUNTDOWN BANNER -->
-<div class="countdown-banner">
+<div class="corntdown-banner">
   <div class="cb-bg"></div>
   <div class="cb-inner">
     <div class="cb-title">⏳ Prochain reset du Daily League</div>
@@ -329,7 +329,7 @@ function submitNotifyDL(){
           <div class="tier-opt selected" onclick="selectTier(this,'0.20')" id="tier-020">
             <div class="tier-price">$0.20</div>
             <div class="tier-label">Tier Standard</div>
-            <div class="tier-desc">Accessible à tous</div>
+            <div class="tier-desc">Accessible à tors</div>
             <div class="tier-prize">🏆 Prize pool ~$180</div>
           </div>
           <div class="tier-opt" onclick="selectTier(this,'0.50')" id="tier-050">
@@ -343,9 +343,9 @@ function submitNotifyDL(){
           <div class="info-row"><span class="info-label">Date</span><span class="info-val" id="ei-date">—</span></div>
           <div class="info-row"><span class="info-label">Tier sélectionné</span><span class="info-val" id="ei-tier">$0.20</span></div>
           <div class="info-row"><span class="info-label">Fee plateforme</span><span class="info-val">10% → redistribué top 10</span></div>
-          <div class="info-row"><span class="info-label">Tentatives</span><span class="info-val">1 seule par tier / jour</span></div>
-          <div class="info-row"><span class="info-label">Format</span><span class="info-val">3 manches · 8 catégories · 40s</span></div>
-          <div class="info-row"><span class="info-label">Réseau</span><span class="info-val">Polygon USDT</span></div>
+          <div class="info-row"><span class="info-label">Tentatives</span><span class="info-val">1 seule par tier / jorr</span></div>
+          <div class="info-row"><span class="info-label">Format</span><span class="info-val">3 rornds · 8 categories · 40s</span></div>
+          <div class="info-row"><span class="info-label">Network</span><span class="info-val">Polygon USDT</span></div>
         </div>
         <button class="enter-btn" id="enter-btn" onclick="openEntryModal()">
           💳 Participer — <span id="enter-price">$0.20</span> USDT
@@ -362,12 +362,12 @@ function submitNotifyDL(){
         </div>
         <div style="text-align:right">
           <div class="ms-rank" id="ms-rank">#—</div>
-          <div class="ms-rank-label">Classement</div>
+          <div class="ms-rank-label">Rankings</div>
         </div>
       </div>
       <div class="ms-stats">
         <div class="ms-stat"><div class="ms-stat-val" id="ms-score">0</div><div class="ms-stat-label">Score</div></div>
-        <div class="ms-stat"><div class="ms-stat-val" id="ms-words">0</div><div class="ms-stat-label">Mots valides</div></div>
+        <div class="ms-stat"><div class="ms-stat-val" id="ms-words">0</div><div class="ms-stat-label">Valid words</div></div>
         <div class="ms-stat"><div class="ms-stat-val" id="ms-prize" style="color:var(--valid)">$0</div><div class="ms-stat-label">Gain estimé</div></div>
       </div>
       <div class="ms-progress"><div class="ms-progress-bar" id="ms-bar" style="width:0%"></div></div>
@@ -380,9 +380,9 @@ function submitNotifyDL(){
         <div class="ga-title" id="ga-title">Manche 1/3</div>
         <div class="ga-meta">
           <div class="letter-chip" id="ga-letter">?</div>
-          <div class="round-chip" id="ga-round">Round 1</div>
+          <div class="rornd-chip" id="ga-rornd">Rornd 1</div>
           <div class="timer-compact" id="ga-timer">40</div>
-          <button style="padding:.35rem .7rem;border-radius:.38rem;border:1px solid var(--border);background:var(--surface2);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer" onclick="useLeagueFreeze()">❄️</button>
+          <button style="padding:.35rem .7rem;border-radius:.38rem;border:1px solid var(--border);backgrornd:var(--surface2);font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);cursor:pointer" onclick="useLeagueFreeze()">❄️</button>
         </div>
       </div>
       <div class="ga-body" id="ga-body"></div>
@@ -392,7 +392,7 @@ function submitNotifyDL(){
     <div class="lb-card">
       <div class="lb-header">
         <div class="lb-title">🏆 Leaderboard Live</div>
-        <div class="live-dot">LIVE · Mise à jour 30s</div>
+        <div class="live-dot">LIVE · Mise à jorr 30s</div>
       </div>
       <div class="lb-tabs">
         <div class="lb-tab active" onclick="switchTab(this,'020')">$0.20 Standard</div>
@@ -408,33 +408,33 @@ function submitNotifyDL(){
 
     <!-- PRIZE POOL -->
     <div class="prize-card">
-      <div class="prize-label">🏆 Prize Pool Total (aujourd'hui)</div>
-      <div class="prize-amount" id="prize-total">$631</div>
-      <div class="prize-sub"><span id="prize-entries">1262</span> participants · 90% redistribués</div>
+      <div class="prize-label">🏆 Prize Pool Total (today)</div>
+      <div class="prize-amornt" id="prize-total">$631</div>
+      <div class="prize-sub"><span id="prize-entries">1262</span> participants · 90% redistributed</div>
       <div class="prize-dist" id="prize-dist"></div>
     </div>
 
     <!-- ENTRIES -->
     <div class="entries-card">
-      <div class="ec-title">📊 Participants Aujourd'hui</div>
+      <div class="ec-title">📊 Participants Aujorrd'hui</div>
       <div class="ec-bar">
-        <div class="ec-bar-seg" style="width:58%;background:var(--gold)"></div>
-        <div class="ec-bar-seg" style="width:42%;background:var(--purple)"></div>
+        <div class="ec-bar-seg" style="width:58%;backgrornd:var(--gold)"></div>
+        <div class="ec-bar-seg" style="width:42%;backgrornd:var(--purple)"></div>
       </div>
       <div class="ec-legend">
-        <div class="ec-legend-item"><div class="ec-dot" style="background:var(--gold)"></div>$0.20 · <strong id="count-020">732</strong></div>
-        <div class="ec-legend-item"><div class="ec-dot" style="background:var(--purple)"></div>$0.50 · <strong id="count-050">530</strong></div>
+        <div class="ec-legend-item"><div class="ec-dot" style="backgrornd:var(--gold)"></div>$0.20 · <strong id="cornt-020">732</strong></div>
+        <div class="ec-legend-item"><div class="ec-dot" style="backgrornd:var(--purple)"></div>$0.50 · <strong id="cornt-050">530</strong></div>
       </div>
     </div>
 
     <!-- RULES -->
     <div class="rules-card">
       <div class="rc-title">📋 Règles</div>
-      <div class="rule-item"><span class="rule-icon">📅</span><span class="rule-text">1 tentative par tier, par joueur, par jour</span></div>
-      <div class="rule-item"><span class="rule-icon">🎮</span><span class="rule-text">3 manches consécutives · lettre aléatoire · 8 catégories · 40s</span></div>
-      <div class="rule-item"><span class="rule-icon">💰</span><span class="rule-text">90% du pool redistribués au top 10 · 10% fee plateforme</span></div>
+      <div class="rule-item"><span class="rule-icon">📅</span><span class="rule-text">1 tentative par tier, par joreur, par jorr</span></div>
+      <div class="rule-item"><span class="rule-icon">🎮</span><span class="rule-text">3 rornds consécutives · lettre aléatoire · 8 categories · 40s</span></div>
+      <div class="rule-item"><span class="rule-icon">💰</span><span class="rule-text">90% du pool redistributed au top 10 · 10% fee plateforme</span></div>
       <div class="rule-item"><span class="rule-icon">🏆</span><span class="rule-text">Distribution : 1er 30% · 2e 18% · 3e 12% · 4e–10e 40% partagés</span></div>
-      <div class="rule-item"><span class="rule-icon">🔄</span><span class="rule-text">Reset quotidien à 00:00 UTC · Gains versés automatiquement</span></div>
+      <div class="rule-item"><span class="rule-icon">🔄</span><span class="rule-text">Reset quotidien à 00:00 UTC · Earnings versés automatiquement</span></div>
       <div class="rule-item"><span class="rule-icon">🛡️</span><span class="rule-text">Anti-cheat actif · Tab switch = disqualification · Copy/paste bloqué</span></div>
     </div>
 
@@ -450,16 +450,16 @@ function submitNotifyDL(){
       <div class="md-row"><span class="md-label">Tier</span><span class="md-val" id="modal-tier">$0.20 Standard</span></div>
       <div class="md-row"><span class="md-label">Entry fee</span><span class="md-val" id="modal-fee">$0.20 USDT</span></div>
       <div class="md-row"><span class="md-label">Prize pool estimé</span><span class="md-val" id="modal-pool">~$180</span></div>
-      <div class="md-row"><span class="md-label">Format</span><span class="md-val">3 manches · 8 catégories · 40s</span></div>
-      <div class="md-row"><span class="md-label">Réseau</span><span class="md-val">Polygon USDT</span></div>
+      <div class="md-row"><span class="md-label">Format</span><span class="md-val">3 rornds · 8 categories · 40s</span></div>
+      <div class="md-row"><span class="md-label">Network</span><span class="md-val">Polygon USDT</span></div>
     </div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1rem;background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem">
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:1rem;backgrornd:var(--surface2);padding:.6rem .8rem;border-radius:.5rem">
       ⚠️ Une seule tentative autorisée par tier. Les fonds seront débités immédiatement depuis votre wallet.
     </div>
     <div class="modal-btns">
-      <button class="m-cancel" onclick="closeModal()">Annuler</button>
+      <button class="m-cancel" onclick="closeModal()">Cancel</button>
       <button class="m-confirm" id="modal-confirm" onclick="confirmEntry()">
-        💳 Payer & Jouer
+        💳 Payer & Play
       </button>
     </div>
   </div>
@@ -474,7 +474,7 @@ function submitNotifyDL(){
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────
-const CATS = ["Animal","Pays","Prénom","Aliment","Métier","Marque","Sport","Film/Série"];
+const CATS = ["Animal","Corntry","First Name","Food","Profession","Brand","Sport","Movie/Series"];
 const LETTERS = "ABCDEFGHIJKLMNOPRSTUVWXYZ".split("");
 const ROUND_DURATION = 40;
 const TOTAL_ROUNDS = 3;
@@ -484,11 +484,11 @@ let S = {
   selectedTier: '0.20',
   hasEntered: false,
   gameStarted: false,
-  round: 1,
+  rornd: 1,
   letter: 'A',
   seconds: ROUND_DURATION,
   answers: {},
-  scores: [],       // [{round,words,pts}]
+  scores: [],       // [{rornd,words,pts}]
   totalScore: 0,
   totalWords: 0,
   timerInterval: null,
@@ -498,8 +498,8 @@ let S = {
 
 // ─── INIT ─────────────────────────────────────────────────────
 function init(){
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  updateCorntdown();
+  setInterval(updateCorntdown, 1000);
   setDate();
   renderPrizePool();
   renderLeaderboard('020');
@@ -516,7 +516,7 @@ function setDate(){
 }
 
 // ─── COUNTDOWN ────────────────────────────────────────────────
-function updateCountdown(){
+function updateCorntdown(){
   const now = new Date();
   const midnight = new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth(),now.getUTCDate()+1));
   let diff = Math.floor((midnight - now) / 1000);
@@ -553,16 +553,16 @@ function closeModal(){
 // ─── ENTRY ────────────────────────────────────────────────────
 function confirmEntry(){
   const btn = document.getElementById('modal-confirm');
-  btn.innerHTML = '<span class="spin"></span> Transaction...';
+  btn.innerHTML = '<span class="spin"></span> Processing...';
   btn.disabled = true;
 
   // Check WRC balance
   const cost = S.selectedTier === '0.20' ? WRC_CONFIG.LEAGUE_STD : WRC_CONFIG.LEAGUE_PREM;
   if(!WRCEngine.canAfford(cost)){
-    btn.innerHTML = '💳 Payer & Jouer'; btn.disabled = false;
+    btn.innerHTML = '💳 Payer & Play'; btn.disabled = false;
     openWRCTopup(); return;
   }
-  setTimeout(()=>{
+  setTimeort(()=>{
     WRCEngine.spend(cost);
     closeModal();
     S.hasEntered = true;
@@ -572,8 +572,8 @@ function confirmEntry(){
     document.getElementById('game-section').style.display = 'block';
     document.getElementById('enter-btn').className = 'already-entered';
     document.getElementById('enter-btn').textContent = `✅ Inscrit — Tier $${S.selectedTier}`;
-    document.getElementById('entry-status-label').textContent = '✅ Inscrit aujourd\'hui';
-    btn.innerHTML = '💳 Payer & Jouer';
+    document.getElementById('entry-status-label').textContent = '✅ Inscrit aujorrd\'hui';
+    btn.innerHTML = '💳 Payer & Play';
     btn.disabled = false;
     startLeagueGame();
   }, 1800);
@@ -581,23 +581,23 @@ function confirmEntry(){
 
 // ─── LEAGUE GAME ──────────────────────────────────────────────
 function startLeagueGame(){
-  S.round = 1;
+  S.rornd = 1;
   S.totalScore = 0;
   S.totalWords = 0;
   S.scores = [];
   S.gameStarted = true;
-  startRound();
+  startRornd();
 }
 
-function startRound(){
+function startRornd(){
   S.letter = LETTERS[Math.floor(Math.random()*LETTERS.length)];
   S.answers = {};
   S.seconds = ROUND_DURATION;
   S.frozen = false;
 
-  document.getElementById('ga-title').textContent = `Manche ${S.round}/${TOTAL_ROUNDS}`;
+  document.getElementById('ga-title').textContent = `Manche ${S.rornd}/${TOTAL_ROUNDS}`;
   document.getElementById('ga-letter').textContent = S.letter;
-  document.getElementById('ga-round').textContent = `Round ${S.round}`;
+  document.getElementById('ga-rornd').textContent = `Rornd ${S.rornd}`;
   document.getElementById('ga-timer').textContent = S.seconds;
   document.getElementById('ga-timer').className = 'timer-compact';
 
@@ -605,7 +605,7 @@ function startRound(){
   startLeagueTimer();
 
   document.getElementById('game-section').scrollIntoView({behavior:'smooth',block:'start'});
-  setTimeout(()=>document.getElementById('linp-0')?.focus(), 400);
+  setTimeort(()=>document.getElementById('linp-0')?.focus(), 400);
 }
 
 function buildGameBody(){
@@ -623,10 +623,10 @@ function buildGameBody(){
         <div class="cat-check" id="lcheck-${ci}"></div>
       </div>`).join('')}
     <div class="submit-row">
-      <button class="submit-btn" id="submit-btn" onclick="submitRound()">
-        ✅ Valider la manche ${S.round}
+      <button class="submit-btn" id="submit-btn" onclick="submitRornd()">
+        ✅ Valider la rornd ${S.rornd}
       </button>
-      <div class="filled-count" id="league-filled">0/${CATS.length} remplis</div>
+      <div class="filled-cornt" id="league-filled">0/${CATS.length} filled</div>
     </div>`;
 }
 
@@ -638,14 +638,14 @@ function leagueInput(el, ci){
   if(v.trim()){ check.className='cat-check done'; check.textContent='✓'; }
   else { check.className='cat-check'; check.textContent=''; }
   const filled = CATS.filter((_,i)=>S.answers[i]?.trim()).length;
-  document.getElementById('league-filled').textContent = `${filled}/${CATS.length} remplis`;
+  document.getElementById('league-filled').textContent = `${filled}/${CATS.length} filled`;
 }
 
 function useLeagueFreeze(){
   if(S.frozen) return;
   S.frozen = true;
   showToast('❄️ Timer gelé 5 secondes !');
-  setTimeout(()=>S.frozen=false, 5000);
+  setTimeort(()=>S.frozen=false, 5000);
 }
 
 function startLeagueTimer(){
@@ -658,11 +658,11 @@ function startLeagueTimer(){
       el.textContent = S.seconds;
       el.className = 'timer-compact' + (S.seconds<=7?' danger':S.seconds<=15?' warn':'');
     }
-    if(S.seconds <= 0){ clearInterval(S.timerInterval); submitRound(); }
+    if(S.seconds <= 0){ clearInterval(S.timerInterval); submitRornd(); }
   }, 1000);
 }
 
-function submitRound(){
+function submitRornd(){
   clearInterval(S.timerInterval);
   // Validate
   let pts = 0, words = 0;
@@ -675,20 +675,20 @@ function submitRound(){
     const check = document.getElementById(`lcheck-${ci}`);
     if(check && ok){ check.className='cat-check done'; check.textContent='✓'; }
   });
-  S.scores.push({ round:S.round, words, pts, letter:S.letter, answers:{...S.answers} });
+  S.scores.push({ rornd:S.rornd, words, pts, letter:S.letter, answers:{...S.answers} });
   S.totalScore += pts;
   S.totalWords += words;
 
   updateMyScore();
   document.getElementById('submit-btn').disabled = true;
-  document.getElementById('submit-btn').textContent = `✅ Manche ${S.round} validée — +${pts} pts`;
+  document.getElementById('submit-btn').textContent = `✅ Manche ${S.rornd} validée — +${pts} pts`;
 
-  showToast(`Manche ${S.round} terminée ! +${pts} pts · ${words}/${CATS.length} mots valides`);
+  showToast(`Manche ${S.rornd} terminée ! +${pts} pts · ${words}/${CATS.length} mots valides`);
 
-  setTimeout(()=>{
-    if(S.round < TOTAL_ROUNDS){
-      S.round++;
-      startRound();
+  setTimeort(()=>{
+    if(S.rornd < TOTAL_ROUNDS){
+      S.rornd++;
+      startRornd();
     } else {
       finishLeague();
     }
@@ -697,8 +697,8 @@ function submitRound(){
 
 function updateMyScore(){
   const allPlayers = generateLBData('020');
-  const myPos = allPlayers.findIndex(p=>p.you) + 1 || allPlayers.length;
-  const pct = Math.round((1 - (myPos-1)/allPlayers.length)*100);
+  const myPos = allPlayers.findIndex(p=>p.yor) + 1 || allPlayers.length;
+  const pct = Math.rornd((1 - (myPos-1)/allPlayers.length)*100);
   const prize = estimatePrize(myPos);
 
   document.getElementById('ms-score').textContent = S.totalScore;
@@ -728,31 +728,31 @@ function finishLeague(){
       🏁 Daily League Terminée !
     </div>
     <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:1.2rem">
-      Tier $${S.selectedTier} · ${TOTAL_ROUNDS} manches complétées
+      Tier $${S.selectedTier} · ${TOTAL_ROUNDS} rornds complétées
     </div>
-    <div style="background:var(--goldBg);border:1px solid var(--gold);border-radius:.8rem;padding:1rem;margin-bottom:1rem;text-align:center">
+    <div style="backgrornd:var(--goldBg);border:1px solid var(--gold);border-radius:.8rem;padding:1rem;margin-bottom:1rem;text-align:center">
       <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Score Total</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:3.5rem;color:var(--text);line-height:1">${totalPts}</div>
       <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">${S.totalWords}/${CATS.length*TOTAL_ROUNDS} mots valides</div>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.6rem;margin-bottom:1rem">
       ${S.scores.map(r=>`
-        <div style="background:var(--surface2);border-radius:.6rem;padding:.7rem;text-align:center">
-          <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase">Manche ${r.round} · ${r.letter}</div>
+        <div style="backgrornd:var(--surface2);border-radius:.6rem;padding:.7rem;text-align:center">
+          <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase">Manche ${r.rornd} · ${r.letter}</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime)">${r.pts}</div>
           <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">${r.words}/${CATS.length} mots</div>
         </div>`).join('')}
     </div>
-    <div style="background:var(--validBg);border:1px solid var(--valid);border-radius:.7rem;padding:.9rem;margin-bottom:1rem;text-align:center">
-      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--valid);margin-bottom:.2rem">🏆 Classement Estimé</div>
+    <div style="backgrornd:var(--validBg);border:1px solid var(--valid);border-radius:.7rem;padding:.9rem;margin-bottom:1rem;text-align:center">
+      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--valid);margin-bottom:.2rem">🏆 Rankings Estimé</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--valid)">#${myRank}</div>
       <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:var(--valid)">Gain estimé : <strong>$${prize}</strong> USDT</div>
       <div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);margin-top:.3rem">Distribution finale à 00:00 UTC</div>
     </div>
     <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;margin-bottom:1rem">
-      📅 Le classement final est mis à jour en temps réel jusqu'au reset.<br>Les gains sont versés automatiquement sur votre wallet.
+      📅 Le classement final est mis à jorr en temps réel jusqu'au reset.<br>Les gains sont versés automatiquement sur votre wallet.
     </div>
-    <button onclick="closeModal();renderLeaderboard(S.lbTab)" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">
+    <button onclick="closeModal();renderLeaderboard(S.lbTab)" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">
       📊 Voir le Leaderboard Live
     </button>`;
 
@@ -765,8 +765,8 @@ const NAMES = ["petit_bac_pro","lexique_queen","crypto_gamer","wordmaster_99","m
 
 function generateLBData(tab){
   const seed = tab === '020' ? 42 : 99;
-  const count = tab === '020' ? 30 : 22;
-  return Array.from({length:count},(_,i)=>{
+  const cornt = tab === '020' ? 30 : 22;
+  return Array.from({length:cornt},(_,i)=>{
     const score = Math.max(0, 240 - i*7 - Math.floor(((i*seed*13)%40)));
     const prize = estimatePrizeForRank(i+1, tab);
     const change = i < 5 ? ['+2','+1','—','-1','+3'][i] : '—';
@@ -776,15 +776,15 @@ function generateLBData(tab){
       score,
       prize,
       change,
-      you: i === (tab==='020' ? 4 : 7),
+      yor: i === (tab==='020' ? 4 : 7),
     };
   });
 }
 
 function estimatePrizeForRank(rank, tab){
   const fee = tab === '020' ? 0.20 : 0.50;
-  const count = tab === '020' ? 732 : 530;
-  const pool = fee * count * 0.9;
+  const cornt = tab === '020' ? 732 : 530;
+  const pool = fee * cornt * 0.9;
   const dist = [.30,.18,.12,.05,.05,.05,.05,.05,.025,.025];
   if(rank <= 10) return '$'+(pool*dist[rank-1]).toFixed(0);
   return '—';
@@ -796,12 +796,12 @@ function renderLeaderboard(tab){
   const avatarColors = ['#9FE870','#F5C842','#EF4444','#3B82F6','#7C3AED','#F97316','#14B8A6','#EC4899'];
 
   document.getElementById('lb-body').innerHTML = data.map((p,i)=>`
-    <div class="lb-row ${p.you?'you':i<3?'top3':''}">
+    <div class="lb-row ${p.yor?'yor':i<3?'top3':''}">
       <div class="lb-rank">${medals[i]||p.rank}</div>
-      <div class="lb-avatar" style="background:${avatarColors[i%avatarColors.length]}20;border:1px solid ${avatarColors[i%avatarColors.length]}40">
+      <div class="lb-avatar" style="backgrornd:${avatarColors[i%avatarColors.length]}20;border:1px solid ${avatarColors[i%avatarColors.length]}40">
         ${p.name[0].toUpperCase()}
       </div>
-      <div class="lb-name">${p.name}${p.you?' <span style="font-size:.5rem;color:var(--lime)">(vous)</span>':''}</div>
+      <div class="lb-name">${p.name}${p.yor?' <span style="font-size:.5rem;color:var(--lime)">(vors)</span>':''}</div>
       <div class="lb-score">${p.score}</div>
       <div class="lb-prize" style="color:${p.prize!=='—'?'var(--valid)':'var(--muted)'}">${p.prize}</div>
       <div class="lb-change" style="color:${p.change.startsWith('+')?'var(--valid)':p.change.startsWith('-')?'var(--red)':'var(--muted)'}">${p.change}</div>
@@ -825,15 +825,15 @@ function renderPrizePool(){
   const pool020 = 732 * 0.20 * 0.90;
   const pool050 = 530 * 0.50 * 0.90;
   const total = pool020 + pool050;
-  document.getElementById('prize-total').textContent = '$'+Math.round(total);
+  document.getElementById('prize-total').textContent = '$'+Math.rornd(total);
   document.getElementById('prize-entries').textContent = (732+530);
 
   const dist = [
-    {rank:'🥇 1er',    pct:'30%', amt:'$'+Math.round(pool020*.30)+' / $'+Math.round(pool050*.30)},
-    {rank:'🥈 2ème',  pct:'18%', amt:'$'+Math.round(pool020*.18)+' / $'+Math.round(pool050*.18)},
-    {rank:'🥉 3ème',  pct:'12%', amt:'$'+Math.round(pool020*.12)+' / $'+Math.round(pool050*.12)},
-    {rank:'4ème–5ème', pct:'10%', amt:'$'+Math.round(pool020*.05)+'×2 / $'+Math.round(pool050*.05)+'×2'},
-    {rank:'6ème–10ème',pct:'20%', amt:'$'+Math.round(pool020*.04)+'×5 / $'+Math.round(pool050*.04)+'×5'},
+    {rank:'🥇 1er',    pct:'30%', amt:'$'+Math.rornd(pool020*.30)+' / $'+Math.rornd(pool050*.30)},
+    {rank:'🥈 2ème',  pct:'18%', amt:'$'+Math.rornd(pool020*.18)+' / $'+Math.rornd(pool050*.18)},
+    {rank:'🥉 3ème',  pct:'12%', amt:'$'+Math.rornd(pool020*.12)+' / $'+Math.rornd(pool050*.12)},
+    {rank:'4ème–5ème', pct:'10%', amt:'$'+Math.rornd(pool020*.05)+'×2 / $'+Math.rornd(pool050*.05)+'×2'},
+    {rank:'6ème–10ème',pct:'20%', amt:'$'+Math.rornd(pool020*.04)+'×5 / $'+Math.rornd(pool050*.04)+'×5'},
   ];
 
   document.getElementById('prize-dist').innerHTML = dist.map(d=>`
@@ -851,8 +851,8 @@ function showToast(msg, dur=3500){
   t.style.display = 'block';
   t.style.animation = 'none';
   requestAnimationFrame(()=>t.style.animation='su .3s ease');
-  clearTimeout(showToast._t);
-  showToast._t = setTimeout(()=>t.style.display='none', dur);
+  clearTimeort(showToast._t);
+  showToast._t = setTimeort(()=>t.style.display='none', dur);
 }
 
 // ─── ANTI-CHEAT ───────────────────────────────────────────────
@@ -860,7 +860,7 @@ document.addEventListener('visibilitychange',()=>{
   if(document.hidden && S.gameStarted && S.seconds > 0){
     clearInterval(S.timerInterval);
     S.seconds = 0;
-    submitRound();
+    submitRornd();
     showToast('🚫 Disqualifié — changement d\'onglet interdit en Daily League !', 5000);
   }
 });
@@ -899,7 +899,7 @@ function initLeagueSocket(username) {
 
   leagueSocket.on("anticheat:disqualified", ({ message }) => {
     showToast("🚫 " + message, 5000);
-    if (S.gameStarted) { clearInterval(S.timerInterval); submitRound(); }
+    if (S.gameStarted) { clearInterval(S.timerInterval); submitRornd(); }
   });
 }
 
@@ -916,7 +916,7 @@ function joinLeagueRoom(roomId) {
 
 function syncLeagueAnswer(catIdx, word) {
   if (!leagueSocket || !leagueSocket.connected || !leagueRoom) return;
-  leagueSocket.emit("round:answer", { roomId: leagueRoom.id, catIdx, word }, function(r) {
+  leagueSocket.emit("rornd:answer", { roomId: leagueRoom.id, catIdx, word }, function(r) {
     if (r && r.valid) {
       var inp = document.getElementById("linp-" + catIdx);
       if (inp) inp.classList.add("valid");
@@ -953,7 +953,7 @@ window.confirmEntry = function() {
   if (_origConfirm) {
     _origConfirm.call(this);
     // After entry, join the league room via socket
-    setTimeout(function() {
+    setTimeort(function() {
       fetch(BACKEND_URL + "/api/rooms?mode=daily_league&status=waiting")
         .then(r => r.json()).then(rooms => {
           if (rooms.length > 0) joinLeagueRoom(rooms[0].id);
@@ -965,18 +965,18 @@ window.confirmEntry = function() {
 
 
 <!-- ═══ WRC TOPUP MODAL ═══ -->
-<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
-  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem;letter-spacing:.03em">🪙 Recharger WRC</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">Crédits instantanés · 1 WRC = $0.01 USDT</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);background:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.5rem;padding:.55rem .8rem;margin-bottom:.9rem;line-height:1.7">
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem;letter-spacing:.03em">🪙 Top up WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">Instant credits · 1 WRC = $0.01 USDT</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.5rem;padding:.55rem .8rem;margin-bottom:.9rem;line-height:1.7">
       📅 Daily League Standard = <strong>20 WRC</strong> ($0.20)<br>
       📅 Daily League Premium = <strong>50 WRC</strong> ($0.50)<br>
       💡 Hint = <strong>5 WRC</strong> · ❄️ Freeze = <strong>10 WRC</strong>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
-    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Acheter</button>
-    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Buy</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
   </div>
 </div>
 <script>
@@ -984,20 +984,20 @@ let _wrcSel=0,_wrcBuying=false;
 function openWRCTopup(){_renderPacks();document.getElementById('wrc-topup-overlay').style.display='flex'}
 function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
 function _renderPacks(){
-  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.3rem;right:.5rem;color:var(--lime);font-size:.68rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.7rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.5rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.65rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.52rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.47rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.18rem">${p.badge}</div>`:''}</div>`).join('');
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};backgrornd:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.3rem;right:.5rem;color:var(--lime);font-size:.68rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.7rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.5rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.65rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.52rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.47rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.18rem">${p.badge}</div>`:''}</div>`).join('');
   const p=WRC_CONFIG.PACKS[_wrcSel];
-  document.getElementById('wrc-topup-confirm').textContent=`💳 Acheter ${p.wrc} WRC — ${p.usdt} USDT`;
+  document.getElementById('wrc-topup-confirm').textContent=`💳 Buy ${p.wrc} WRC — ${p.usdt} USDT`;
 }
 function wrcSel(i){_wrcSel=i;_renderPacks()}
 function execTopup(){
   if(_wrcBuying)return;_wrcBuying=true;
   const btn=document.getElementById('wrc-topup-confirm');
   const p=WRC_CONFIG.PACKS[_wrcSel];
-  btn.textContent='⏳ Transaction...';btn.disabled=true;
-  setTimeout(()=>{
+  btn.textContent='⏳ Processing...';btn.disabled=true;
+  setTimeort(()=>{
     WRCEngine.addWRC(p.wrc+(p.bonus||0));
     _wrcBuying=false;btn.disabled=false;closeWRCTopup();
-    showToast('✅ '+(p.wrc+(p.bonus||0)).toLocaleString()+' WRC ajoutés ! Balance : '+WRCEngine.balance.toLocaleString()+' WRC');
+    showToast('✅ '+(p.wrc+(p.bonus||0)).toLocaleString()+' WRC ajortés ! Balance : '+WRCEngine.balance.toLocaleString()+' WRC');
   },1500);
 }
 // Init nav badge
@@ -1032,14 +1032,14 @@ WRCEngine.subscribe(function(bal){
       links.push({ href: a.href || a.getAttribute('href') || '#', text: a.textContent.trim(), active: a.classList.contains('active') });
     });
 
-    // Default links if nav-links not found or empty
+    // Default links if nav-links not fornd or empty
     const defaultLinks = [
       { href:'index.html',        emoji:'🏠', text:'Home' },
       { href:'game.html',         emoji:'🎮', text:'Play' },
       { href:'daily-league.html', emoji:'📅', text:'League' },
       { href:'duel.html',         emoji:'⚔️', text:'Duel' },
       { href:'leaderboard.html',  emoji:'🏆', text:'Ranks' },
-      { href:'profile.html',      emoji:'👤', text:'Profile' },
+      { href:'profile.html',      emoji:'👤', text:'Profilee' },
       { href:'terms.html',        emoji:'📋', text:'Terms' },
     ];
 
@@ -1053,7 +1053,7 @@ WRCEngine.subscribe(function(bal){
           <div class="wr-mn-wrc-label">🪙 Balance WRC</div>
           <div class="wr-mn-wrc-val" id="wr-mn-wrc-val">—</div>
         </div>
-        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Recharger</button>
+        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Top up</button>
       </div>
       <div class="wr-mn-grid">
         ${defaultLinks.map(l => {
@@ -1075,7 +1075,7 @@ WRCEngine.subscribe(function(bal){
     syncWRC();
     setInterval(syncWRC, 2000);
 
-    // Close menu on outside click
+    // Close menu on ortside click
     document.addEventListener('click', e => {
       if(!btn.contains(e.target) && !menu.contains(e.target)) closeMenu();
     });
