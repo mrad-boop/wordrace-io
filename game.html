@@ -358,15 +358,19 @@ function pickMode(m) {
 }
 
 function onPlay() {
-  if(G.mode === 'bots')    { goTo('lobby'); return; }
-  if(G.mode === 'friends') {
-    if(!G.friendRoom) { showToast('⚠️ Create or join a room first'); return; }
-    startCountdown(); return;
-  }
-  if(G.mode === 'online') {
-    if(!G.onlineMatch) { showToast('⏳ Still searching...'); return; }
-    startCountdown(); return;
-  }
+  const doPlay = function() {
+    if(G.mode === 'bots')    { goTo('lobby'); return; }
+    if(G.mode === 'friends') {
+      if(!G.friendRoom) { showToast('⚠️ Create or join a room first'); return; }
+      startCountdown(); return;
+    }
+    if(G.mode === 'online') {
+      if(!G.onlineMatch) { showToast('⏳ Still searching...'); return; }
+      startCountdown(); return;
+    }
+  };
+  if(typeof requireLogin === 'function') requireLogin(doPlay);
+  else doPlay();
 }
 
 // ── FRIENDS ───────────────────────────────────────────────────
