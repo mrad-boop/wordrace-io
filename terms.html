@@ -122,7 +122,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     <a class="toc-link toc-sub" href="#daily">Daily League</a>
     <a class="toc-link toc-sub" href="#duel">Duel Arena</a>
     <a class="toc-link" href="#powerups">Power-Ups</a>
+    <a class="toc-link" href="#wrc">🪙 WRC Credits</a>
     <a class="toc-link" href="#validation">Word Validation</a>
+    <a class="toc-link" href="#leaderboard">🏆 Leaderboard</a>
     <a class="toc-link" href="#anticheat">Fair Play Rules</a>
     <a class="toc-link" href="#wallet">Wallet & USDT</a>
     <a class="toc-link" href="#payouts">Payouts</a>
@@ -278,6 +280,45 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     </div>
 
     <!-- VALIDATION -->
+    
+    <!-- WRC CREDITS -->
+    <div class="section">
+      <span class="section-anchor" id="wrc"></span>
+      <div class="s-title">🪙 WordRace Credits (WRC)</div>
+      <div class="s-sub">Instant in-game currency — no transaction delays</div>
+      <div class="s-body">
+        <p>WordRace Credits (WRC) are the platform's internal currency. They allow players to purchase power-ups and pay entry fees <strong>instantly</strong>, without waiting for a blockchain transaction to confirm. WRC are pre-purchased with USDT and stored in your account balance.</p>
+
+        <h3>Exchange Rate</h3>
+        <p style="font-family:'Space Mono',monospace;font-size:.85rem;background:var(--limeBg);padding:.6rem .9rem;border-radius:.5rem;border:1px solid rgba(159,232,112,.3);color:var(--forest)"><strong>1 WRC = $0.01 USDT</strong> (100 WRC = $1.00)</p>
+
+        <h3>WRC Packs</h3>
+        <table class="prize-table">
+          <thead><tr><th>Pack</th><th>WRC Received</th><th>Price (USDT)</th><th>Bonus</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Starter</strong></td><td>100 WRC</td><td>$1.00</td><td>—</td></tr>
+            <tr><td><strong>Popular</strong></td><td>525 WRC</td><td>$5.00</td><td>+5% (25 WRC)</td></tr>
+            <tr><td><strong>Value</strong></td><td>1,100 WRC</td><td>$10.00</td><td>+10% (100 WRC)</td></tr>
+            <tr><td><strong>Pro</strong></td><td>2,875 WRC</td><td>$25.00</td><td>+15% (375 WRC)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>WRC Cost of Actions</h3>
+        <table class="prize-table">
+          <thead><tr><th>Action</th><th>WRC Cost</th><th>USDT Equivalent</th><th>Limit</th></tr></thead>
+          <tbody>
+            <tr><td>💡 Hint power-up</td><td><strong>5 WRC</strong></td><td>$0.05</td><td>1 per round · 5 per day</td></tr>
+            <tr><td>❄️ Time Freeze power-up</td><td><strong>10 WRC</strong></td><td>$0.10</td><td>1 per round · 5 per day</td></tr>
+            <tr><td>📅 Daily League Standard</td><td><strong>20 WRC</strong></td><td>$0.20</td><td>1 per tier per day</td></tr>
+            <tr><td>📅 Daily League Premium</td><td><strong>50 WRC</strong></td><td>$0.50</td><td>1 per tier per day</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout c-gold"><span class="callout-icon">⚠️</span><span>WRC purchases are final and non-refundable. WRC have no monetary value outside of the WordRace platform and cannot be withdrawn or exchanged back to USDT.</span></div>
+        <div class="callout c-lime"><span class="callout-icon">⚡</span><span>New players receive 150 WRC as a welcome bonus (equivalent to $1.50). This bonus is for demo purposes and may be adjusted or removed at any time.</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <span class="section-anchor" id="validation"></span>
       <div class="s-title">✅ Word Validation Engine</div>
@@ -294,6 +335,40 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     </div>
 
     <!-- FAIR PLAY -->
+    
+    <!-- LEADERBOARD -->
+    <div class="section">
+      <span class="section-anchor" id="leaderboard"></span>
+      <div class="s-title">🏆 Global Leaderboard</div>
+      <div class="s-sub">Real-time rankings across all game modes</div>
+      <div class="s-body">
+        <p>The WordRace Global Leaderboard tracks player performance across all game modes in real-time, updated every 60 seconds.</p>
+
+        <h3>Leaderboard Tabs</h3>
+        <table class="prize-table">
+          <thead><tr><th>Tab</th><th>Content</th><th>Reset</th></tr></thead>
+          <tbody>
+            <tr><td><strong>🌍 All Time</strong></td><td>Cumulative score since account creation</td><td>Never</td></tr>
+            <tr><td><strong>📅 Daily League</strong></td><td>Today's league rankings (Standard & Premium)</td><td>Daily 00:00 UTC</td></tr>
+            <tr><td><strong>⚔️ Duel Arena</strong></td><td>Top earners by net USDT gains</td><td>Monthly option</td></tr>
+            <tr><td><strong>🆓 Casual</strong></td><td>All-time high scores in free mode</td><td>Never</td></tr>
+            <tr><td><strong>📆 Weekly</strong></td><td>Scores from Mon–Sun current week</td><td>Weekly Monday 00:00 UTC</td></tr>
+            <tr><td><strong>📊 Stats</strong></td><td>Platform-wide analytics (letters, categories)</td><td>Live</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Leaderboard Integrity</h3>
+        <ul>
+          <li>Players found to have cheated are removed from all leaderboards immediately upon detection.</li>
+          <li>WordRace reserves the right to adjust rankings in cases of verified fraud or technical errors.</li>
+          <li>Prize distributions are calculated from the <strong>final snapshot</strong> taken at reset time, not from intermediate rankings.</li>
+          <li>Leaderboard positions are <strong>not guaranteed</strong> — they reflect live competition and may change at any moment.</li>
+        </ul>
+
+        <div class="callout c-blue"><span class="callout-icon">📊</span><span>The leaderboard is publicly visible. Your username, score, win rate, and earnings are displayed to all users. You can make your profile private in Settings, which hides your stats from the public leaderboard.</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <span class="section-anchor" id="anticheat"></span>
       <div class="s-title">🛡️ Fair Play Rules & Anti-Cheat</div>
@@ -367,8 +442,9 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
         <h3>2. Skill-Based Competition</h3>
         <p>WordRace.io is a <strong>skill-based game</strong>. Outcomes depend on vocabulary knowledge, typing speed, and strategic use of power-ups. It is not classified as gambling under most jurisdictions. However, users are solely responsible for ensuring compliance with local laws regarding online skill gaming and cryptocurrency use.</p>
 
-        <h3>3. Platform Fees</h3>
+        <h3>3. Platform Fees & WRC Credits</h3>
         <p>WordRace charges the following platform fees: <strong>5% rake on Duel Arena</strong> prize pools and <strong>10% fee on Daily League</strong> entry totals. These fees fund platform operations, development, and server costs. All fees are disclosed clearly before any purchase.</p>
+        <p>WordRace Credits (WRC) are purchased at a fixed rate of <strong>1 WRC = $0.01 USDT</strong>. WRC are non-refundable, have no cash value, and cannot be transferred between accounts or withdrawn. Bonus WRC included in packs are promotional and subject to change.</p>
 
         <h3>4. No Refunds</h3>
         <p>All entry fees and power-up purchases are <strong>final and non-refundable</strong> once a game session has started. In cases of documented technical failure on our part, credits may be issued at WordRace's sole discretion.</p>
