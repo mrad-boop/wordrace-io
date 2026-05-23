@@ -1575,9 +1575,7 @@ function selectFreeMode(mode) {
 
 function startSelectedMode() {
   if(G_MODE === 'bots') {
-    const btn = document.querySelector('#phase-lobby .lobby-play-btn, #phase-lobby #start-btn');
-    if(btn) btn.click();
-    else startCountdown();
+    showPhase('lobby');
   } else if(G_MODE === 'friends') {
     if(!G_FRIEND_ROOM) {
       showToast('⚠️ Create or join a room first!');
