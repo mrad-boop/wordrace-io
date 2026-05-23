@@ -177,6 +177,12 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   .wr-ring-wrap{flex-direction:column}
 }
 </style>
+
+<script>
+const WRC_CONFIG={HINT_COST:5,FREEZE_COST:10,LEAGUE_STD:20,LEAGUE_PREM:50,MAX_PER_DAY:5,PACKS:[{wrc:100,usdt:'$1.00',label:'Starter',bonus:0},{wrc:525,usdt:'$5.00',label:'Popular',bonus:25,badge:'+5% bonus'},{wrc:1100,usdt:'$10.00',label:'Value',bonus:100,badge:'+10% bonus'},{wrc:2875,usdt:'$25.00',label:'Pro',bonus:375,badge:'+15% bonus'}]};
+const WRCEngine={get balance(){return parseInt(localStorage.getItem('wrc_balance')||'150')},set balance(v){localStorage.setItem('wrc_balance',String(Math.max(0,v)))},get dayKey(){return 'wrc_'+new Date().toISOString().slice(0,10)},getDay(t){return parseInt(localStorage.getItem(this.dayKey+'_'+t)||'0')},addDay(t){localStorage.setItem(this.dayKey+'_'+t,String(this.getDay(t)+1))},canAfford(c){return this.balance>=c},spend(c){if(!this.canAfford(c))return false;this.balance-=c;this.notifyAll();return true},addWRC(a){this.balance+=a;this.notifyAll()},_listeners:[],subscribe(fn){this._listeners.push(fn);fn(this.balance)},notifyAll(){this._listeners.forEach(fn=>fn(this.balance))}};
+window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
+</script>
 </head>
 <body>
 
@@ -187,7 +193,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Play</a>
     <a class="nav-link" href="daily-league.html">📅 League</a>
-    <a class="nav-link active" href="#">👤 Profile</a>
+    <a class="nav-link active" href="#">👤 Profile</a><span id="nav-wrc-badge" onclick="switchTab('wallet')" title="Balance WRC — cliquez pour recharger" style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
   </div>
 </nav>
 
@@ -490,7 +496,51 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
   <!-- WALLET -->
   <div class="tab-panel" id="panel-wallet">
-    <div class="wallet-card">
+    
+    <!-- WRC Credits Section -->
+    <div style="background:var(--surface);border:1.5px solid var(--lime);border-radius:.9rem;padding:1.2rem;margin-bottom:.9rem;box-shadow:0 2px 8px rgba(159,232,112,.1)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;flex-wrap:wrap;gap:.5rem">
+        <div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:.2rem">🪙 Crédits WordRace (WRC)</div>
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--lime);line-height:1" id="profile-wrc-balance">150</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">≈ $<span id="profile-wrc-usdt">1.50</span> USDT · 1 WRC = $0.01</div>
+        </div>
+        <button onclick="openWRCTopup()" style="padding:.65rem 1.2rem;border-radius:.55rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer;transition:background .15s;letter-spacing:.05em" onmouseover="this.style.background='var(--limeD)'" onmouseout="this.style.background='var(--lime)'">+ Recharger WRC</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.5rem;margin-bottom:.8rem">
+        <div style="background:var(--limeBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(159,232,112,.2)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--lime);line-height:1">5 WRC</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">💡 Hint = $0.05</div>
+        </div>
+        <div style="background:var(--blueBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(59,130,246,.15)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--blue);line-height:1">10 WRC</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">❄️ Freeze = $0.10</div>
+        </div>
+        <div style="background:var(--goldBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(245,200,66,.2)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">20 WRC</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">📅 League Std = $0.20</div>
+        </div>
+        <div style="background:var(--goldBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(245,200,66,.2)">
+          <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">50 WRC</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">📅 League Prem = $0.50</div>
+        </div>
+      </div>
+      <!-- Daily usage -->
+      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.4rem;letter-spacing:.06em;text-transform:uppercase">Utilisation aujourd'hui</div>
+      <div style="display:flex;flex-direction:column;gap:.3rem">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
+          <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">💡 Hints</span>
+          <div style="flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden"><div id="prof-hint-bar" style="height:100%;background:var(--lime);border-radius:3px;transition:width .3s"></div></div>
+          <span id="prof-hint-count" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
+          <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">❄️ Freezes</span>
+          <div style="flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden"><div id="prof-freeze-bar" style="height:100%;background:var(--blue);border-radius:3px;transition:width .3s"></div></div>
+          <span id="prof-freeze-count" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
+        </div>
+      </div>
+    </div>
+<div class="wallet-card">
       <div class="wc-label">Balance USDT totale</div>
       <div class="wc-amount">$142.50</div>
       <div class="wc-addr">0x1a2b3c4d5e6f7890abcdef · Polygon</div>
@@ -768,5 +818,55 @@ renderTransactions();
 renderPerfChart();
 renderEloChart();
 </script>
+
+<!-- WRC TOPUP MODAL -->
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Recharger WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Crédits instantanés</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Acheter</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+  </div>
+</div>
+<script>
+let _wrcSel=0,_wrcBuying=false;
+function openWRCTopup(){_renderPacks();document.getElementById('wrc-topup-overlay').style.display='flex'}
+function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
+function _renderPacks(){
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
+  const p=WRC_CONFIG.PACKS[_wrcSel];
+  document.getElementById('wrc-topup-confirm').textContent=`💳 Acheter ${p.wrc} WRC — ${p.usdt} USDT`;
+}
+function wrcSel(i){_wrcSel=i;_renderPacks()}
+function execTopup(){
+  if(_wrcBuying)return;_wrcBuying=true;
+  const btn=document.getElementById('wrc-topup-confirm');
+  const p=WRC_CONFIG.PACKS[_wrcSel];
+  btn.textContent='⏳ Transaction...';btn.disabled=true;
+  setTimeout(()=>{
+    WRCEngine.addWRC(p.wrc+(p.bonus||0));
+    _wrcBuying=false;btn.disabled=false;closeWRCTopup();
+    toast('✅ '+(p.wrc+(p.bonus||0)).toLocaleString()+' WRC ajoutés ! Balance : '+WRCEngine.balance.toLocaleString()+' WRC');
+  },1500);
+}
+// Subscribe all profile WRC displays
+WRCEngine.subscribe(function(bal){
+  // Nav badge
+  var nb=document.getElementById('nav-wrc-val'); if(nb)nb.textContent=bal.toLocaleString();
+  // Wallet section
+  var wb=document.getElementById('profile-wrc-balance'); if(wb)wb.textContent=bal.toLocaleString();
+  var wu=document.getElementById('profile-wrc-usdt'); if(wu)wu.textContent=(bal*0.01).toFixed(2);
+  // Daily bars
+  var dayKey='wrc_'+new Date().toISOString().slice(0,10);
+  var hd=parseInt(localStorage.getItem(dayKey+'_hints')||'0');
+  var fd=parseInt(localStorage.getItem(dayKey+'_freezes')||'0');
+  var hb=document.getElementById('prof-hint-bar'); if(hb)hb.style.width=(hd/5*100)+'%';
+  var fb=document.getElementById('prof-freeze-bar'); if(fb)fb.style.width=(fd/5*100)+'%';
+  var hc=document.getElementById('prof-hint-count'); if(hc)hc.textContent=hd+'/5';
+  var fc=document.getElementById('prof-freeze-count'); if(fc)fc.textContent=fd+'/5';
+});
+</script>
+
 </body>
 </html>
