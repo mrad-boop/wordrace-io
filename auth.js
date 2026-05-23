@@ -102,8 +102,11 @@ const CSS = `
   font-family:'Space Mono',monospace; font-size:.6rem; font-weight:700;
   padding:.25rem .65rem; border-radius:100px;
   background:#F0F2EE; border:1px solid rgba(0,0,0,.08);
-  color:#1A1A1A; cursor:pointer; transition:all .15s;
+  color:#1A1A1A; cursor:pointer !important; transition:all .15s;
   white-space:nowrap; flex-shrink:0;
+  position:relative; z-index:10;
+  -webkit-tap-highlight-color:rgba(0,0,0,.05);
+  user-select:none;
 }
 #wr-nav-user:hover { background:#E8EBE5; }
 #wr-nav-user .user-av {
@@ -195,6 +198,7 @@ function buildModals(){
     const dd  = document.getElementById('wr-user-dropdown');
     if(dd && !dd.contains(e.target) && nav && !nav.contains(e.target)){
       dd.classList.remove('open');
+      dd.style.display = 'none';
     }
   });
 }
@@ -266,7 +270,7 @@ function buildNavBadge(){
 
   const btn = document.createElement('div');
   btn.id = 'wr-nav-user';
-  btn.onclick = toggleUserDropdown;
+  btn.onclick = function(e){ e.stopPropagation(); toggleUserDropdown(); };
   nav.appendChild(btn);
 
   AUTH.subscribe(user => {
@@ -289,7 +293,7 @@ function updateNavUser(user){
     <div class="user-av">${user.avatar||user.username[0].toUpperCase()}</div>
     <span>${user.username.length>10?user.username.slice(0,10)+'…':user.username}</span>
     <span style="font-size:.6rem;color:#9B9B9B">▾</span>`;
-  btn.onclick = toggleUserDropdown;
+  btn.onclick = function(e){ e.stopPropagation(); toggleUserDropdown(); };
 
   // Update dropdown
   const dd = document.getElementById('wr-user-dropdown');
@@ -311,7 +315,14 @@ function updateNavUser(user){
 }
 
 function toggleUserDropdown(){
-  document.getElementById('wr-user-dropdown')?.classList.toggle('open');
+  const dd = document.getElementById('wr-user-dropdown');
+  if(!dd) return;
+  const isOpen = dd.classList.contains('open');
+  dd.classList.toggle('open');
+  // Also force display directly for reliability
+  dd.style.display = isOpen ? 'none' : 'block';
+  dd.style.zIndex = '600';
+  dd.style.background = '#ffffff';
 }
 
 // ── GUARD: require login for paid modes ───────────────────────
