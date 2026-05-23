@@ -212,6 +212,20 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
 
 
+<style id="beta-payment-hide">
+/* BETA: Hide all payment sections */
+.wallet-card,
+#wr-mn-wrc-row,
+.wc-actions,
+.tx-row,
+#panel-wallet .wallet-card { display: none !important; }
+
+/* WRC section in wallet tab: show coming soon instead */
+#wallet-cs-banner { display: flex !important; }
+
+/* Profile: hide wallet tab entirely from tabs bar */
+.tab[onclick*="wallet"] { display: none !important; }
+</style>
 </head>
 <body>
 
@@ -568,6 +582,14 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
           <span id="prof-freeze-cornt" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
         </div>
       </div>
+    </div>
+
+    <!-- BETA: Wallet coming soon -->
+    <div id="wallet-cs-banner" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1rem;text-align:center;gap:1rem;background:#F8F9F7;border-radius:1rem;border:2px dashed rgba(159,232,112,.4);margin-bottom:1rem">
+      <div style="font-size:2.5rem">🔒</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#1A1A1A;letter-spacing:.04em">COMING SOON</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.65rem;color:#6B7280;line-height:1.65;max-width:280px">USDT wallet, WRC credits and P2E earnings will be available at launch in Q3 2026.</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:#163300;font-weight:700;background:#E8F8DF;border-radius:.5rem;padding:.55rem 1rem;border:1px solid rgba(159,232,112,.3)">⚡ P2E Launch — Q3 2026</div>
     </div>
 <div class="wallet-card">
       <div class="wc-label">Balance USDT totale</div>
