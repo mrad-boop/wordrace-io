@@ -102,7 +102,9 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
     <a class="toc-link toc-sub" href="#daily">Daily League</a>
     <a class="toc-link toc-sub" href="#duel">Duel Arena</a>
     <a class="toc-link" href="#powerups">Power-Ups</a>
+    <a class="toc-link" href="#wrc">🪙 Crédits WRC</a>
     <a class="toc-link" href="#validation">Validation des Mots</a>
+    <a class="toc-link" href="#leaderboard">🏆 Leaderboard</a>
     <a class="toc-link" href="#anticheat">Règles Fair Play</a>
     <a class="toc-link" href="#wallet">Wallet & USDT</a>
     <a class="toc-link" href="#payouts">Paiements</a>
@@ -255,6 +257,44 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
     </div>
 
     <!-- VALIDATION -->
+    
+    <div class="section">
+      <span class="sa" id="wrc"></span>
+      <div class="s-title">🪙 Crédits WordRace (WRC)</div>
+      <div class="s-sub">Monnaie interne instantanée — zéro délai de transaction</div>
+      <div class="s-body">
+        <p>Les Crédits WordRace (WRC) sont la monnaie interne de la plateforme. Ils permettent aux joueurs d'acheter des power-ups et de payer les frais d'entrée <strong>instantanément</strong>, sans attendre la confirmation d'une transaction blockchain. Les WRC sont pré-achetés en USDT et stockés dans le solde du compte.</p>
+
+        <h3>Taux de Conversion</h3>
+        <p style="font-family:'Space Mono',monospace;font-size:.82rem;background:var(--limeBg);padding:.6rem .9rem;border-radius:.5rem;border:1px solid rgba(159,232,112,.3);color:var(--forest)"><strong>1 WRC = 0,01 $ USDT</strong> (100 WRC = 1,00 $)</p>
+
+        <h3>Packs WRC</h3>
+        <table class="dt">
+          <thead><tr><th>Pack</th><th>WRC Reçus</th><th>Prix (USDT)</th><th>Bonus</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Starter</strong></td><td>100 WRC</td><td>1,00 $</td><td>—</td></tr>
+            <tr><td><strong>Popular</strong></td><td>525 WRC</td><td>5,00 $</td><td>+5% (25 WRC)</td></tr>
+            <tr><td><strong>Value</strong></td><td>1 100 WRC</td><td>10,00 $</td><td>+10% (100 WRC)</td></tr>
+            <tr><td><strong>Pro</strong></td><td>2 875 WRC</td><td>25,00 $</td><td>+15% (375 WRC)</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Coût des Actions en WRC</h3>
+        <table class="dt">
+          <thead><tr><th>Action</th><th>Coût WRC</th><th>Équivalent USDT</th><th>Limite</th></tr></thead>
+          <tbody>
+            <tr><td>💡 Power-up Hint</td><td><strong>5 WRC</strong></td><td>0,05 $</td><td>1/manche · 5/jour</td></tr>
+            <tr><td>❄️ Power-up Time Freeze</td><td><strong>10 WRC</strong></td><td>0,10 $</td><td>1/manche · 5/jour</td></tr>
+            <tr><td>📅 Daily League Standard</td><td><strong>20 WRC</strong></td><td>0,20 $</td><td>1 par tier par jour</td></tr>
+            <tr><td>📅 Daily League Premium</td><td><strong>50 WRC</strong></td><td>0,50 $</td><td>1 par tier par jour</td></tr>
+          </tbody>
+        </table>
+
+        <div class="callout c-gold"><span class="ci">⚠️</span><span>Les achats de WRC sont définitifs et non remboursables. Les WRC n'ont aucune valeur monétaire en dehors de la plateforme WordRace et ne peuvent pas être retirés ou reconvertis en USDT.</span></div>
+        <div class="callout c-lime"><span class="ci">⚡</span><span>Les nouveaux joueurs reçoivent 150 WRC en bonus de bienvenue (équivalent à 1,50 $). Ce bonus est à titre de démonstration et peut être modifié ou supprimé à tout moment.</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <span class="sa" id="validation"></span>
       <div class="s-title">✅ Moteur de Validation</div>
@@ -270,6 +310,39 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
     </div>
 
     <!-- FAIR PLAY -->
+    
+    <div class="section">
+      <span class="sa" id="leaderboard"></span>
+      <div class="s-title">🏆 Leaderboard Global</div>
+      <div class="s-sub">Classements en temps réel — tous les modes de jeu</div>
+      <div class="s-body">
+        <p>Le Leaderboard Global de WordRace suit les performances des joueurs dans tous les modes de jeu en temps réel, mis à jour toutes les 60 secondes.</p>
+
+        <h3>Onglets du Leaderboard</h3>
+        <table class="dt">
+          <thead><tr><th>Onglet</th><th>Contenu</th><th>Reset</th></tr></thead>
+          <tbody>
+            <tr><td><strong>🌍 All Time</strong></td><td>Score cumulé depuis la création du compte</td><td>Jamais</td></tr>
+            <tr><td><strong>📅 Daily League</strong></td><td>Classements du jour (Standard & Premium)</td><td>Quotidien 00:00 UTC</td></tr>
+            <tr><td><strong>⚔️ Duel Arena</strong></td><td>Meilleurs gains nets USDT</td><td>Option mensuelle</td></tr>
+            <tr><td><strong>🆓 Casual</strong></td><td>Meilleurs scores all-time en mode gratuit</td><td>Jamais</td></tr>
+            <tr><td><strong>📆 Semaine</strong></td><td>Scores de la semaine Lun–Dim en cours</td><td>Lundi 00:00 UTC</td></tr>
+            <tr><td><strong>📊 Statistiques</strong></td><td>Analytiques plateforme (lettres, catégories)</td><td>Temps réel</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Intégrité du Leaderboard</h3>
+        <ul>
+          <li>Les joueurs reconnus coupables de triche sont retirés de tous les classements immédiatement après détection.</li>
+          <li>WordRace se réserve le droit d'ajuster les classements en cas de fraude avérée ou d'erreur technique.</li>
+          <li>Les distributions de prix sont calculées à partir du <strong>snapshot final</strong> pris au moment du reset, et non à partir des classements intermédiaires.</li>
+          <li>Les positions du leaderboard <strong>ne sont pas garanties</strong> — elles reflètent la compétition en temps réel et peuvent changer à tout moment.</li>
+        </ul>
+
+        <div class="callout c-blue"><span class="ci">📊</span><span>Le leaderboard est visible publiquement. Le nom d'utilisateur, le score, le win rate et les gains sont affichés à tous les utilisateurs. Le joueur peut rendre son profil privé dans les Paramètres pour masquer ses stats du classement public.</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <span class="sa" id="anticheat"></span>
       <div class="s-title">🛡️ Règles Fair Play & Anti-Cheat</div>
@@ -343,8 +416,9 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
         <h3>Article 2 — Jeu Basé sur la Compétence</h3>
         <p>WordRace.io est un <strong>jeu de compétence</strong>. Les résultats dépendent des connaissances en vocabulaire, de la vitesse de frappe et de l'utilisation stratégique des power-ups. Il n'est pas classé comme jeu de hasard dans la plupart des juridictions. Les utilisateurs sont seuls responsables du respect des lois locales relatives aux jeux de compétence en ligne et à l'utilisation des cryptomonnaies.</p>
 
-        <h3>Article 3 — Frais de Plateforme</h3>
+        <h3>Article 3 — Frais de Plateforme & Crédits WRC</h3>
         <p>WordRace prélève les frais suivants : <strong>5% de rake sur le Duel Arena</strong> et <strong>10% de frais sur le total des entrées Daily League</strong>. Ces frais financent les opérations de la plateforme, le développement et les coûts serveur. Tous les frais sont clairement affichés avant tout achat.</p>
+        <p>Les Crédits WordRace (WRC) sont achetés à un taux fixe de <strong>1 WRC = 0,01 $ USDT</strong>. Les WRC sont non remboursables, n'ont aucune valeur monétaire et ne peuvent être ni transférés entre comptes, ni retirés. Les WRC bonus inclus dans les packs sont promotionnels et susceptibles d'être modifiés.</p>
 
         <h3>Article 4 — Non-Remboursement</h3>
         <p>Tous les frais d'entrée et achats de power-ups sont <strong>définitifs et non remboursables</strong> une fois la session de jeu commencée. En cas de défaillance technique avérée de notre part, des crédits peuvent être accordés à la seule discrétion de WordRace.</p>
