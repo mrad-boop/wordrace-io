@@ -626,22 +626,41 @@ function doSubmit() {
   clearInterval(G.timer);
   goTo('results');
   showValidating();
-  // Try AI validation first, fallback to local
-  validateAI()
-    .then(showFinal)
-    .catch(() => showFinal(localValidate()));
+  // Tier 1: Free Dictionary API (English word existence — works from browser)
+  // Tier 2: local letter check only (last resort)
+  validateDictionary().then(showFinal).catch(() => showFinal(localValidate()));
 }
 
 function showValidating() {
   document.getElementById('r-em').textContent = '⏳';
   document.getElementById('r-title').textContent = 'CHECKING...';
-  document.getElementById('r-sub').textContent = 'AI is validating your words...';
+  document.getElementById('r-sub').textContent = 'Checking words in dictionary...';
   document.getElementById('r-score').textContent = '—';
   document.getElementById('r-words').innerHTML =
-    '<div class="validating-msg"><span class="spin"></span>Validating with AI...</div>';
+    '<div class="validating-msg"><span class="spin"></span>Checking English dictionary...</div>';
 }
 
-// ── LOCAL VALIDATION (fallback) ───────────────────────────────
+// ── DICTIONARY VALIDATION (fallback tier 2) ───────────────────
+// Uses Free Dictionary API — English specialist, no key required
+async function validateDictionary() {
+  const results = await Promise.all(CATS.map(async (cat, i) => {
+    const w = (G.answers[i] || '').trim();
+    if (!w || w.length < 2) return { cat, word: w, valid: false, pts: 0, reason: 'Empty' };
+    if (w[0].toUpperCase() !== G.letter) return { cat, word: w, valid: false, pts: 0, reason: 'Wrong letter' };
+    try {
+      const r = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(w.toLowerCase())}`);
+      const ok = r.ok;
+      return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Not a valid English word' };
+    } catch {
+      // network error — fall through to letter-only check
+      const ok = w.length >= 2 && w[0].toUpperCase() === G.letter;
+      return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Does not start with ' + G.letter };
+    }
+  }));
+  return results;
+}
+
+// ── LOCAL VALIDATION (fallback tier 3) ───────────────────────
 function localValidate() {
   return CATS.map((cat, i) => {
     const w = (G.answers[i] || '').trim();
@@ -653,17 +672,17 @@ function localValidate() {
 // ── AI VALIDATION ─────────────────────────────────────────────
 async function validateAI() {
   const items = CATS.map((cat, i) => `${i+1}. ${cat}: "${(G.answers[i]||'').trim()||'(empty)'}"`).join('\n');
-  const prompt = `You are a strict judge in a Petit Bac / Stop word game. Letter: "${G.letter}".
+  const prompt = `You are a strict English-language judge in a Petit Bac / Stop word game. Letter: "${G.letter}".
 
 Validate each answer:
 ${items}
 
 Rules:
 - Must start with "${G.letter}" (case insensitive)
-- Must be a REAL, commonly known word/name that GENUINELY belongs to that category
+- Must be a REAL English word or proper noun that GENUINELY belongs to that category
 - Minimum 2 characters
-- Accept English and French words
-- Reject nonsense, gibberish, misspellings, borderline words
+- English only — reject non-English words
+- Reject nonsense, gibberish, misspellings, borderline or invented words
 
 Respond ONLY with a valid JSON array of exactly ${CATS.length} objects:
 [{"valid":true/false,"pts":10/0,"reason":"1-4 word reason"}]
