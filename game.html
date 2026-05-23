@@ -640,28 +640,55 @@ function showValidating() {
     '<div class="validating-msg"><span class="spin"></span>Checking English dictionary...</div>';
 }
 
-// ── WIKTIONARY VALIDATION ─────────────────────────────────────
-// Free, no API key, CORS-open. Covers common words AND proper nouns
-// (countries, first names, brands, cities…). "fffff" has no page → invalid.
-async function wordExistsWiktionary(word) {
-  const r = await fetch(
-    `https://en.wiktionary.org/w/api.php?action=query&titles=${encodeURIComponent(word)}&format=json&origin=*`
-  );
+// ── CATEGORY-SPECIFIC VALIDATORS ──────────────────────────────
+
+// Animal / Food / Profession / Sport → Wiktionary (common English words)
+async function checkWiktionary(word) {
+  const r = await fetch(`https://en.wiktionary.org/w/api.php?action=query&titles=${encodeURIComponent(word)}&format=json&origin=*`);
   const d = await r.json();
-  const page = Object.values(d.query.pages)[0];
-  return page.pageid !== -1;
+  return Object.values(d.query.pages)[0].pageid !== -1;
 }
 
+// Country → REST Countries (195 countries, no key)
+async function checkCountry(word) {
+  const r = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(word)}?fullText=false`);
+  return r.ok;
+}
+
+// First Name → Genderize.io (seen in real-world data, no key, 1000/day free)
+async function checkFirstName(word) {
+  const r = await fetch(`https://api.genderize.io/?name=${encodeURIComponent(word.toLowerCase())}`);
+  const d = await r.json();
+  return (d.count || 0) > 0;
+}
+
+// Brand / Movie / Series → Wikipedia exact page lookup
+async function checkWikipedia(word) {
+  const r = await fetch(`https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(word)}&format=json&origin=*`);
+  const d = await r.json();
+  return Object.values(d.query.pages)[0].pageid !== -1;
+}
+
+async function validateByCategory(cat, word) {
+  const c = cat.toLowerCase();
+  if (c.includes('country'))                    return checkCountry(word);
+  if (c.includes('first name'))                 return checkFirstName(word);
+  if (c.includes('brand'))                      return checkWikipedia(word);
+  if (c.includes('movie') || c.includes('series')) return checkWikipedia(word);
+  return checkWiktionary(word); // Animal, Food, Profession, Sport
+}
+
+// ── MAIN VALIDATION ───────────────────────────────────────────
 async function validateDictionary() {
   const results = await Promise.all(CATS.map(async (cat, i) => {
     const w = (G.answers[i] || '').trim();
     if (!w || w.length < 2) return { cat, word: w, valid: false, pts: 0, reason: 'Empty' };
     if (w[0].toUpperCase() !== G.letter) return { cat, word: w, valid: false, pts: 0, reason: 'Wrong letter' };
     try {
-      const ok = await wordExistsWiktionary(w);
-      return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Not a valid English word' };
+      const ok = await validateByCategory(cat, w);
+      return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : `Not a valid ${cat.toLowerCase()}` };
     } catch {
-      // Network error — fall through to letter-only check
+      // Network error — accept the word (don't punish player for connectivity)
       return { cat, word: w, valid: true, pts: 10, reason: '' };
     }
   }));
