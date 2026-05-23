@@ -274,6 +274,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <div class="tab" onclick="switchTab('achievements',this)">🏆 Achievements</div>
     <div class="tab" onclick="switchTab('wallet',this)">💰 Wallet</div>
     <div class="tab" onclick="switchTab('settings',this)">⚙️ Settings</div>
+    <div class="tab" onclick="switchTab('support',this)">🎫 Support</div>
   </div>
 </div>
 
@@ -723,6 +724,22 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
   </div>
 
+  <!-- SUPPORT TAB -->
+  <div class="tab-panel" id="panel-support">
+    <div class="pcard">
+      <div class="pcard-head" style="display:flex;align-items:center;justify-content:space-between">
+        <div class="pcard-title">🎫 My Support Tickets</div>
+        <a href="support.html" style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;color:var(--forest);background:var(--lime);padding:.38rem .85rem;border-radius:.45rem;text-decoration:none;letter-spacing:.04em">+ New Ticket</a>
+      </div>
+      <div class="pcard-body" style="padding:0">
+        <div id="profile-ticket-list"></div>
+      </div>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-align:center;margin-top:1rem;line-height:1.7">
+      Réponse sous 24h (lun–ven) · <a href="support.html" style="color:var(--forest);font-weight:700">Voir tous les tickets →</a>
+    </div>
+  </div>
+
 </div><!-- end main -->
 
 <div id="toast"></div>
@@ -947,6 +964,7 @@ function showComingSoon(title,msg){toast('🔒 '+title+' — '+(msg||'Coming soo
   renderHistory(games);
   renderAchievements(games,stats);
   renderTransactions();
+  renderProfileTickets();
   renderPerfChart(games);
   renderEloChart(games);
   updateStats(stats);
@@ -1126,6 +1144,28 @@ WRCEngine.subscribe(function(bal){
     }else{
       window.addEventListener('load',()=>{if(typeof WRAuth!=='undefined')WRAuth.subscribe(u=>{if(u)window.location.reload();});});
     }
+  }
+
+  function renderProfileTickets(){
+    const el = document.getElementById('profile-ticket-list');
+    if(!el) return;
+    const tickets = (()=>{ try{ return JSON.parse(localStorage.getItem('wr_tickets')||'[]'); }catch{ return []; } })();
+    if(!tickets.length){
+      el.innerHTML='<div style="padding:1.2rem;text-align:center;font-family:\'Space Mono\',monospace;font-size:.65rem;color:var(--muted)">Aucun ticket — <a href="support.html" style="color:var(--forest);font-weight:700">ouvrez votre premier ticket</a></div>';
+      return;
+    }
+    const SC={open:'b-open',progress:'b-progress',resolved:'b-resolved',closed:'b-closed'};
+    const SL={open:'Open',progress:'En cours',resolved:'Resolved',closed:'Closed'};
+    const IC={bug:'🐛',account:'👤',wrc:'🪙',game:'🎮',feature:'💡',other:'📋'};
+    el.innerHTML=tickets.slice(0,5).map(t=>`
+      <a href="support.html" style="text-decoration:none;display:flex;align-items:center;gap:.75rem;padding:.7rem 1.1rem;border-bottom:1px solid var(--border);transition:background .12s;cursor:pointer" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background=''">
+        <div style="width:32px;height:32px;border-radius:.4rem;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;background:${{open:'#EFF6FF',progress:'#FDF3CC',resolved:'#DCFCE7',closed:'#F0F2EE'}[t.status]||'#F0F2EE'}">${IC[t.cat]||'📋'}</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.subject}</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);margin-top:.1rem">${t.id} · ${new Date(t.createdAt).toLocaleDateString('fr-FR')}</div>
+        </div>
+        <span style="font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;padding:.1rem .38rem;border-radius:100px;flex-shrink:0" class="${SC[t.status]||'b-open'}">${SL[t.status]||t.status}</span>
+      </a>`).join('');
   }
 
   function initProfile(){
