@@ -518,206 +518,187 @@ WRCEngine.subscribe(bal=>{
   const sb=document.getElementById('sidebar-wrc');if(sb)sb.textContent=bal.toLocaleString()+' WRC';
 });
 
-// ─── DATA GENERATION ─────────────────────────────────────────
-const NAMES=['petit_bac_pro','lexique_queen','crypto_gamer','wordmaster_99','mrad-boop','vocab_king','letterhero','alphabeto','quickwords','fasttyper','scorehunter','dailychamp','ranklord','topplayer','wordrider','lettreville','bocquet_fr','scorezilla','lexmaster','alphazero','rapidpen','dictovox','verbatim_x','lexibot','wordninja','textfire','spelldrop','verbosity','charades_fr','quickdraw'];
-const FLAGS=['🇩🇿','🇫🇷','🇹🇳','🇲🇦','🇸🇳','🇨🇦','🇧🇪','🇨🇭','🇬🇧','🇺🇸'];
+// ─── COLORS ───────────────────────────────────────────────────
 const COLORS=['#9FE870','#F5C842','#EF4444','#3B82F6','#7C3AED','#F97316','#14B8A6','#EC4899','#6366F1','#84CC16'];
-const CHANGES=['+2','▲1','—','-1','+3','▲4','-2','▲1','—','+1'];
-const YOU_ROW = 4; // mrad-boop is rank 5
 
-function genAllTime(){
-  return Array.from({length:20},(_,i)=>{
-    const score=Math.max(0,48200-i*1800-Math.floor(i*17%400));
-    const games=Math.max(50,1240-i*55);
-    const wr=Math.max(35,78-i*2)+'%';
-    const elo=Math.max(500,2100-i*60);
-    const earned='$'+(Math.max(0,2840-i*210).toFixed(0));
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,games,wr,elo,earned,change:CHANGES[i%CHANGES.length],yor:i===YOU_ROW};
-  });
-}
-function genDaily(){
-  return Array.from({length:20},(_,i)=>{
-    const score=Math.max(0,340-i*14-Math.floor(i*11%30));
-    const words=Math.max(0,24-i);
-    const letter=['M','A','S','T','B','L','R','F','C','P'][i%10];
-    const tier=i%3===0?'Premium':'Standard';
-    const gain='$'+(i<10?[170,102,68,28,28,22,22,22,22,22][i]:0);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,words,letter,tier,gain,change:CHANGES[i%CHANGES.length],yor:i===YOU_ROW};
-  });
-}
-function genDuel(){
-  return Array.from({length:20},(_,i)=>{
-    const duels=Math.max(10,450-i*22);
-    const wins=Math.floor(duels*(0.82-i*0.02));
-    const wr=Math.floor(wins/duels*100)+'%';
-    const earned='$'+(Math.max(0,2840-i*195).toFixed(0));
-    const maxWager='$'+[50,50,50,25,25,25,10,10,10,5,5,5,5,5,5,5,5,5,5,5][i];
-    const streak=Math.max(0,12-i);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],duels,wins,wr,earned,maxWager,streak,yor:i===YOU_ROW};
-  });
-}
-function genCasual(){
-  return Array.from({length:20},(_,i)=>{
-    const best=Math.max(60,140-i*4);
-    const games=Math.max(50,1500-i*70);
-    const avg=Math.max(40,110-i*3);
-    const perfect=Math.max(0,180-i*10);
-    const letters='MLASTBRCPF'[i%10];
-    const streak=Math.max(0,15-i);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],best,games,avg,perfect,letters,streak,yor:i===YOU_ROW};
-  });
-}
-function genWeekly(){
-  return Array.from({length:20},(_,i)=>{
-    const score=Math.max(0,8400-i*350-Math.floor(i*23%200));
-    const games=Math.max(5,84-i*4);
-    const wins=Math.floor(games*(0.75-i*0.02));
-    const earned='$'+(Math.max(0,380-i*22).toFixed(0));
-    const streak=Math.max(0,9-i);
-    return {rank:i+1,name:NAMES[i],flag:FLAGS[i%FLAGS.length],score,games,wins,earned,streak,change:CHANGES[i%CHANGES.length],yor:i===YOU_ROW};
-  });
+// ─── LOCAL DATA ───────────────────────────────────────────────
+function loadGames(){try{return JSON.parse(localStorage.getItem('wr_games')||'[]');}catch(e){return[];}}
+function getUser(){try{return JSON.parse(localStorage.getItem('wr_user')||'null');}catch(e){return null;}}
+
+function computeLocalStats(games){
+  const total=games.length;
+  const wins=games.filter(g=>g.result==='win').length;
+  const wr=total>0?Math.round(wins/total*100):0;
+  let streak=0;for(let i=0;i<games.length;i++){if(games[i].result==='win')streak++;else break;}
+  let elo=1000;[...games].reverse().forEach(g=>{elo+=(g.result==='win'?20:-15);if(elo<100)elo=100;});
+  const best=games.length>0?Math.max(...games.map(g=>g.score)):0;
+  const avg=total>0?Math.round(games.reduce((s,g)=>s+g.score,0)/total):0;
+  let perfect=0;games.forEach(g=>{if(g.words>=8)perfect++;});
+  const letters=games.length>0?games.map(g=>g.letter).filter(Boolean).join('').split('').filter((v,i,a)=>a.indexOf(v)===i).join(''):'—';
+  const catMap={};
+  games.forEach(g=>{if(g.cats)g.cats.forEach(c=>{if(!catMap[c.cat])catMap[c.cat]={t:0,v:0};catMap[c.cat].t++;if(c.valid)catMap[c.cat].v++;});});
+  const catList=Object.entries(catMap).map(([cat,s])=>({cat,pct:s.t>0?Math.round(s.v/s.t*100):0,best:0})).sort((a,b)=>b.pct-a.pct);
+  return{total,wins,wr,streak,elo,best,avg,perfect,letters,catList};
 }
 
-// ─── RENDER HELPERS ───────────────────────────────────────────
-function podium(containerId, data){
-  const [p1,p2,p3]=data;
-  const spot=(p,cls,ht)=>`
-    <div class="podium-spot ${cls}">
-      <div class="podium-avatar" style="border-color:${cls==='p1'?'var(--gold)':cls==='p2'?'#c0c9d4':'#cd8c52'};background:${COLORS[data.indexOf(p)%COLORS.length]}22">
-        ${p.name[0].toUpperCase()}
-        <div class="podium-medal">${cls==='p1'?'🥇':cls==='p2'?'🥈':'🥉'}</div>
-      </div>
-      <div class="podium-name">${p.name}</div>
-      <div class="podium-score">${(p.score||p.best||p.earned||0).toLocaleString()}</div>
-      ${p.earned?`<div class="podium-prize">${p.earned}</div>`:''}
-      <div class="podium-base" style="height:${ht}px">${p.rank}</div>
-    </div>`;
-  document.getElementById(containerId).innerHTML=`
-    <div style="order:1">${spot(p2,'p2',50)}</div>
-    <div style="order:0">${spot(p1,'p1',70)}</div>
-    <div style="order:2">${spot(p3,'p3',38)}</div>`;
-}
+// ─── EMPTY STATE ──────────────────────────────────────────────
+const EMPTY_MSG=`<tr><td colspan="8" style="text-align:center;padding:3rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">🔒 Classement multijoueur — disponible au lancement global<br><a href="game.html" style="color:var(--lime);font-weight:700;text-decoration:none;margin-top:.5rem;display:inline-block">🎮 Joue en Casual pour voir tes stats ici →</a></td></tr>`;
+const EMPTY_PODIUM=`<div style="text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">Podium disponible au lancement</div>`;
 
-function renderRows(tbodyId, data, cols){
-  document.getElementById(tbodyId).innerHTML=data.map(r=>`
-    <tr class="${r.yor?'yor':r.rank<=3?'top3':''}">
-      <td><span class="rank-num" style="color:${r.rank===1?'var(--gold)':r.rank===2?'#9ba5b0':r.rank===3?'#cd8c52':'var(--muted)'}">${r.rank<=3?['🥇','🥈','🥉'][r.rank-1]:r.rank}</span></td>
-      <td><div class="player-cell">
-        <div class="player-av" style="background:${COLORS[r.rank%COLORS.length]}22;color:${COLORS[r.rank%COLORS.length]}">${r.name[0].toUpperCase()}</div>
-        <div><div class="player-name">${r.name}${r.yor?' <span style="font-size:.5rem;color:var(--lime)">(vors)</span>':''}</div><div class="player-corntry">${r.flag}</div></div>
-      </div></td>
-      ${cols(r)}
+// ─── CASUAL INIT (REAL DATA) ───────────────────────────────────
+function initCasual(){
+  const games=loadGames();
+  const user=getUser();
+  const stats=computeLocalStats(games);
+  const uname=user?.username||'Vous';
+  const col='#9FE870';
+
+  // Podium
+  const pod=document.getElementById('podium-casual');
+  if(pod){
+    if(stats.total===0){pod.innerHTML=EMPTY_PODIUM;}
+    else{pod.innerHTML=`<div class="podium-spot p1" style="margin:0 auto">
+      <div class="podium-avatar" style="border-color:var(--gold);background:#9FE87022;width:56px;height:56px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem">${uname[0].toUpperCase()}<div class="podium-medal">🥇</div></div>
+      <div class="podium-name">${uname}</div>
+      <div class="podium-score">${stats.best} pts</div>
+      <div class="podium-base" style="height:70px;background:linear-gradient(135deg,#d4af37,#f5c842)">1</div>
+    </div>`;}
+  }
+
+  // Table
+  const tbody=document.getElementById('tb-casual');
+  if(!tbody)return;
+  if(stats.total===0){tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:3rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">Aucune partie jouée — <a href="game.html" style="color:var(--lime);font-weight:700;text-decoration:none">joue maintenant →</a></td></tr>`;return;}
+
+  // Group by date for best score per session (show each game as a row)
+  const rows=games.slice(0,20).map((g,i)=>({
+    rank:i+1,name:uname,flag:'🎮',
+    best:g.score,games:1,avg:g.score,
+    perfect:g.words>=8?1:0,
+    letters:g.letter||'?',streak:i===0?stats.streak:0,
+    yor:true
+  }));
+
+  tbody.innerHTML=rows.map(r=>`
+    <tr class="yor">
+      <td><span class="rank-num" style="color:${r.rank===1?'var(--gold)':'var(--muted)'}">${r.rank===1?'🥇':r.rank}</span></td>
+      <td><div class="player-cell"><div class="player-av" style="background:#9FE87022;color:#9FE870">${r.name[0].toUpperCase()}</div><div><div class="player-name">${r.name} <span style="font-size:.5rem;color:var(--lime)">(vous)</span></div><div class="player-country">${r.flag}</div></div></div></td>
+      <td style="font-weight:700;color:var(--lime)">${r.best} pts</td>
+      <td>${r.games}</td>
+      <td>${r.avg} pts</td>
+      <td style="color:var(--purple)">${r.perfect?'✓':'—'}</td>
+      <td><span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--lime)">${r.letters}</span></td>
+      <td><span class="pill ${r.streak>=3?'p-lime':'p-muted'}">🔥 ${r.streak||'—'}</span></td>
     </tr>`).join('');
 }
 
-// ─── INIT TABLES ──────────────────────────────────────────────
+// ─── OTHER TABS: EMPTY STATE ──────────────────────────────────
 function initAllTime(){
-  const d=genAllTime();
-  podium('podium-alltime',d);
-  renderRows('tb-alltime',d,r=>`
-    <td style="font-weight:700;color:var(--text)">${r.score.toLocaleString()}</td>
-    <td>${r.games}</td>
-    <td style="color:${parseInt(r.wr)>=70?'var(--valid)':parseInt(r.wr)>=50?'var(--gold)':'var(--red)'}">${r.wr}</td>
-    <td><span style="color:${r.elo>=1500?'var(--gold)':r.elo>=1000?'var(--lime)':'var(--muted)'}">${r.elo}</span></td>
-    <td style="font-weight:700;color:var(--valid)">${r.earned}</td>
-    <td class="${r.change.includes('+')||r.change.includes('▲')?'change-up':r.change===('—')?'change-eq':'change-dn'}">${r.change}</td>`);
+  document.getElementById('podium-alltime').innerHTML=EMPTY_PODIUM;
+  document.getElementById('tb-alltime').innerHTML=EMPTY_MSG;
+  document.getElementById('pi-alltime').textContent='Classement global disponible au lancement';
 }
-
 function initDaily(){
-  const d=genDaily();
-  podium('podium-daily',d);
-  renderRows('tb-daily',d,r=>`
-    <td style="font-weight:700">${r.score}</td>
-    <td>${r.words}/24</td>
-    <td><span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--lime)">${r.letter}</span></td>
-    <td><span class="pill ${r.tier==='Premium'?'p-gold':'p-blue'}">${r.tier}</span></td>
-    <td style="font-weight:700;color:${r.rank<=10?'var(--valid)':'var(--muted)'}">${r.gain}</td>
-    <td class="${r.change.includes('+')||r.change.includes('▲')?'change-up':r.change===('—')?'change-eq':'change-dn'}">${r.change}</td>`);
+  document.getElementById('podium-daily').innerHTML=EMPTY_PODIUM;
+  document.getElementById('tb-daily').innerHTML=EMPTY_MSG;
 }
-
 function initDuel(){
-  const d=genDuel();
-  podium('podium-duel',d);
-  renderRows('tb-duel',d,r=>`
-    <td>${r.duels}</td>
-    <td style="color:var(--valid)">${r.wins}</td>
-    <td style="color:${parseInt(r.wr)>=70?'var(--valid)':parseInt(r.wr)>=50?'var(--gold)':'var(--red)'}">${r.wr}</td>
-    <td style="font-weight:700;color:var(--valid)">${r.earned}</td>
-    <td style="color:var(--gold);font-weight:700">${r.maxWager}</td>
-    <td><span class="pill ${r.streak>=5?'p-lime':'p-muted'}">🔥 ${r.streak}</span></td>`);
+  document.getElementById('podium-duel').innerHTML=EMPTY_PODIUM;
+  document.getElementById('tb-duel').innerHTML=EMPTY_MSG;
 }
-
-function initCasual(){
-  const d=genCasual();
-  podium('podium-casual',d);
-  renderRows('tb-casual',d,r=>`
-    <td style="font-weight:700;color:var(--lime)">${r.best} pts</td>
-    <td>${r.games}</td>
-    <td>${r.avg} pts</td>
-    <td style="color:var(--purple)">${r.perfect}</td>
-    <td><span style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--lime)">${r.letters}</span></td>
-    <td><span class="pill ${r.streak>=5?'p-lime':'p-muted'}">🔥 ${r.streak}</span></td>`);
-}
-
 function initWeekly(){
-  const d=genWeekly();
-  renderRows('tb-weekly',d,r=>`
-    <td style="font-weight:700">${r.score.toLocaleString()}</td>
-    <td>${r.games}</td>
-    <td style="color:var(--valid)">${r.wins}</td>
-    <td style="font-weight:700;color:var(--valid)">${r.earned}</td>
-    <td><span class="pill ${r.streak>=5?'p-lime':'p-muted'}">🔥 ${r.streak}</span></td>
-    <td class="${r.change.includes('+')||r.change.includes('▲')?'change-up':r.change===('—')?'change-eq':'change-dn'}">${r.change}</td>`);
+  document.getElementById('tb-weekly').innerHTML=EMPTY_MSG;
 }
 
+// ─── STATS TAB (REAL DATA) ────────────────────────────────────
 function initStats(){
-  // Letters chart
-  const letters='ABCDEFGHIJKLMNOPRSTUVWXYZ'.split('');
-  const vals=letters.map(l=>Math.floor(Math.random()*100)+20);
-  const max=Math.max(...vals);
-  document.getElementById('letters-chart').innerHTML=letters.map((l,i)=>`
-    <div style="display:flex;flex-direction:column;align-items:center;gap:.18rem">
-      <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:var(--muted)">${vals[i]}%</div>
-      <div style="width:22px;border-radius:.2rem .2rem 0 0;height:${vals[i]/max*55}px;background:${vals[i]>75?'var(--lime)':vals[i]>50?'var(--gold)':'var(--surface3)'};min-height:4px;transition:height .4s ease" title="${l}: ${vals[i]}%"></div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:.75rem;color:var(--muted)">${l}</div>
-    </div>`).join('');
+  const games=loadGames();
+  const stats=computeLocalStats(games);
+  const total=stats.total;
 
-  // Cat stats
-  const cats=[['🐾 Animal',84],['🌍 Corntry',91],['👤 First Name',88],['🍎 Food',79],['💼 Profession',72],['🏷️ Brand',86],['⚽ Sport',81],['🎬 Movie/Series',65]];
-  document.getElementById('cat-stats').innerHTML=cats.map(([cat,pct])=>`
-    <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.45rem">
-      <span style="font-family:'Space Mono',monospace;font-size:.63rem;min-width:100px;color:var(--text)">${cat}</span>
-      <div style="flex:1;height:7px;background:var(--surface2);border-radius:4px;overflow:hidden"><div style="width:${pct}%;height:100%;background:${pct>=85?'var(--lime)':pct>=75?'var(--gold)':'var(--red)'};border-radius:4px"></div></div>
-      <span style="font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;color:${pct>=85?'var(--valid)':pct>=75?'var(--gold)':'var(--red)'}; min-width:32px">${pct}%</span>
-    </div>`).join('');
+  // Stat cards
+  const sc=document.querySelectorAll('.stat-card .sc-val');
+  if(sc[0])sc[0].textContent=total||'0';
+  if(sc[1])sc[1].textContent='—';
+  if(sc[2])sc[2].textContent=total>0?(stats.wr+'%'):'0%';
+  if(sc[3])sc[3].textContent=total>0?Math.round(games.reduce((s,g)=>s+g.score,0)/total)+'pts avg':'—';
+  if(sc[4])sc[4].textContent=total>0?games.filter(g=>g.words===0).length:'—';
+  if(sc[5])sc[5].textContent='—';
+
+  // Letters chart (real)
+  const allLetters='ABCDEFGHIJKLMNOPRSTUVWXYZ'.split('');
+  const letterCounts={};
+  games.forEach(g=>{if(g.letter)letterCounts[g.letter]=(letterCounts[g.letter]||0)+1;});
+  const maxL=Math.max(...allLetters.map(l=>letterCounts[l]||0),1);
+  document.getElementById('letters-chart').innerHTML=allLetters.map(l=>{
+    const cnt=letterCounts[l]||0;
+    return `<div style="display:flex;flex-direction:column;align-items:center;gap:.18rem">
+      <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:var(--muted)">${cnt||''}</div>
+      <div style="width:22px;border-radius:.2rem .2rem 0 0;height:${cnt>0?cnt/maxL*55:4}px;background:${cnt>0?'var(--lime)':'var(--surface3)'};min-height:4px"></div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:.75rem;color:var(--muted)">${l}</div>
+    </div>`;
+  }).join('');
+
+  // Cat stats (real)
+  const catStatsEl=document.getElementById('cat-stats');
+  if(catStatsEl){
+    if(stats.catList.length===0){catStatsEl.innerHTML='<div style="text-align:center;padding:1.5rem;font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted)">Joue des parties pour voir tes stats par catégorie</div>';return;}
+    catStatsEl.innerHTML=stats.catList.map(c=>`
+      <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.45rem">
+        <span style="font-family:'Space Mono',monospace;font-size:.63rem;min-width:100px;color:var(--text)">${c.cat}</span>
+        <div style="flex:1;height:7px;background:var(--surface2);border-radius:4px;overflow:hidden"><div style="width:${c.pct}%;height:100%;background:${c.pct>=85?'var(--lime)':c.pct>=70?'var(--gold)':'var(--red)'};border-radius:4px"></div></div>
+        <span style="font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;color:${c.pct>=85?'var(--valid)':c.pct>=70?'var(--gold)':'var(--red)'};min-width:32px">${c.pct}%</span>
+      </div>`).join('');
+  }
 }
 
+// ─── SIDEBAR (REAL DATA) ──────────────────────────────────────
 function initSidebar(){
-  // Top cats
-  const cats=[['🐾','Animal','petit_bac_pro','140pts'],['🌍','Corntry','lexique_queen','138pts'],['👤','First Name','crypto_gamer','135pts'],['🍎','Food','petit_bac_pro','132pts'],['💼','Profession','vocab_king','128pts'],['⚽','Sport','mrad-boop','125pts'],['🏷️','Brand','alphabeto','130pts'],['🎬','Film','lexique_queen','122pts']];
-  document.getElementById('top-cats').innerHTML=cats.map(([e,cat,player,score])=>`
-    <div class="cat-row">
-      <div class="cat-emoji">${e}</div>
-      <div class="cat-info">
-        <div class="cat-name">${cat}</div>
-        <div class="cat-player">${player}</div>
-      </div>
-      <div class="cat-score">${score}</div>
-    </div>`).join('');
+  const games=loadGames();
+  const stats=computeLocalStats(games);
+  const user=getUser();
+  const uname=user?.username||'—';
 
-  // Recent activity
-  const acts=[
-    {t:'💎 Duel gagné',u:'petit_bac_pro',a:'+$19',c:'var(--lime)'},
-    {t:'🏆 #1 Daily League',u:'lexique_queen',a:'+$170',c:'var(--gold)'},
-    {t:'⚡ Norveau record',u:'crypto_gamer',a:'140 pts',c:'var(--blue)'},
-    {t:'🎯 Streak ×10',u:'mrad-boop',a:'🔥×10',c:'var(--orange)'},
-    {t:'💎 Duel gagné',u:'vocab_king',a:'+$9.50',c:'var(--lime)'},
-  ];
-  document.getElementById('recent-activity').innerHTML=acts.map(a=>`
-    <div style="display:flex;align-items:center;gap:.6rem;padding:.38rem 0;border-bottom:1px solid var(--border)">
-      <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;color:var(--text)">${a.t}</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">${a.u}</div></div>
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:${a.c};line-height:1">${a.a}</div>
-    </div>`).join('');
+  // My rank card
+  const mrcRank=document.querySelector('.mrc-rank-big');
+  if(mrcRank)mrcRank.textContent=stats.total>0?'#1':'—';
+  const mrcRows=document.querySelectorAll('.mrc-row .mrc-val');
+  if(mrcRows[0])mrcRows[0].textContent=stats.total>0?(stats.total+' parties'):'—';
+  if(mrcRows[1]){mrcRows[1].textContent=stats.elo.toLocaleString();mrcRows[1].style.color='var(--lime)';}
+  if(mrcRows[2])mrcRows[2].textContent=stats.total>0?stats.wr+'%':'—';
+  if(mrcRows[3]){mrcRows[3].textContent='—';mrcRows[3].style.color='var(--valid)';}
+  if(mrcRows[4])mrcRows[4].textContent=stats.total>0?('Last: '+stats.best+' pts'):'—';
+  const sWrc=document.getElementById('sidebar-wrc');
+  if(sWrc)sWrc.textContent=parseInt(localStorage.getItem('wrc_balance')||'0').toLocaleString()+' WRC';
+
+  // Hero stats
+  const hsVals=document.querySelectorAll('.hs-val');
+  if(hsVals[0])hsVals[0].textContent=stats.total>0?stats.total.toLocaleString():'0';
+  if(hsVals[1])hsVals[1].textContent='—';
+
+  // Top cats (real)
+  const topCatsEl=document.getElementById('top-cats');
+  if(topCatsEl){
+    const ICONS={'Animal':'🐾','Country':'🌍','First Name':'👤','Food':'🍎','Profession':'💼','Brand':'🏷️','Sport':'⚽','Movie/Series':'🎬'};
+    if(stats.catList.length===0){topCatsEl.innerHTML='<div style="font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted);padding:.5rem 0">Joue des parties pour voir</div>';return;}
+    topCatsEl.innerHTML=stats.catList.slice(0,6).map(c=>`
+      <div class="cat-row">
+        <div class="cat-emoji">${ICONS[c.cat]||'📝'}</div>
+        <div class="cat-info"><div class="cat-name">${c.cat}</div><div class="cat-player">${uname}</div></div>
+        <div class="cat-score">${c.pct}%</div>
+      </div>`).join('');
+  }
+
+  // Recent activity (real games)
+  const actEl=document.getElementById('recent-activity');
+  if(actEl){
+    if(games.length===0){actEl.innerHTML='<div style="font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted);padding:.5rem 0">Aucune activité récente</div>';return;}
+    actEl.innerHTML=games.slice(0,5).map(g=>`
+      <div style="display:flex;align-items:center;gap:.6rem;padding:.38rem 0;border-bottom:1px solid var(--border)">
+        <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;color:var(--text)">${g.result==='win'?'🏆':'📚'} ${g.score}pts — Lettre ${g.letter}</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">${uname} · ${g.date}</div></div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:1rem;color:${g.result==='win'?'var(--lime)':'var(--muted)'};line-height:1">${g.result==='win'?'Win':'Loss'}</div>
+      </div>`).join('');
+  }
 }
 
 // ─── TABS ─────────────────────────────────────────────────────
@@ -733,13 +714,9 @@ function filterTable(mode,q){
   const rows=document.querySelectorAll('#tb-'+mode+' tr');
   rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none'});
 }
-function filterRegion(r){ showToast('🌍 Filtre région : '+r); }
-function switchDailyTier(t){ showToast('📅 Tier : '+(t==='std'?'Standard $0.20':'Premium $0.50')); }
-
-// ─── EXPORT ───────────────────────────────────────────────────
-function exportCSV(mode){
-  showToast('📤 Export CSV du classement '+mode+' en corrs...');
-}
+function filterRegion(r){showToast('🌍 Filtre région disponible au lancement multijoueur');}
+function switchDailyTier(t){showToast('📅 Daily League disponible au lancement P2E');}
+function exportCSV(mode){showToast('📤 Export disponible au lancement');}
 
 // ─── COUNTDOWN ────────────────────────────────────────────────
 function updateHeroTimer(){
@@ -752,23 +729,20 @@ function updateHeroTimer(){
 }
 
 // ─── PAGINATION (stub) ────────────────────────────────────────
-function prevPage(m){ showToast('← Page précédente'); }
-function nextPage(m){ showToast('→ Page suivante'); }
-function goPage(m,p){ showToast('→ Page '+p); }
+function prevPage(m){showToast('← Page précédente');}
+function nextPage(m){showToast('→ Page suivante');}
+function goPage(m,p){showToast('→ Page '+p);}
 
 // ─── TOAST ────────────────────────────────────────────────────
 function showToast(msg,dur=3000){
   const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';
   t.style.animation='none';requestAnimationFrame(()=>t.style.animation='su .3s ease');
-  clearTimeort(showToast._t);showToast._t=setTimeort(()=>t.style.display='none',dur);
+  clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.style.display='none',dur);
 }
 
-// ─── LIVE UPDATES ─────────────────────────────────────────────
-setInterval(()=>{ initAllTime(); initDaily(); }, 60000);
-setInterval(updateHeroTimer, 1000);
-
 // ─── INIT ─────────────────────────────────────────────────────
-initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats(); initSidebar(); updateHeroTimer();
+setInterval(updateHeroTimer,1000);
+initAllTime();initDaily();initDuel();initCasual();initWeekly();initStats();initSidebar();updateHeroTimer();
 </script>
 <script src="auth.js"></script>
 <script src="presence.js"></script>
