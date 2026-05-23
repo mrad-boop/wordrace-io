@@ -312,7 +312,7 @@ body{background:#F8F9F7;color:#1A1A1A;font-family:'Inter',sans-serif;min-height:
 // WORDRACE GAME ENGINE v3 — Clean, modular, AI-validated
 // ═══════════════════════════════════════════════════════════════
 
-const CATS = ['Animal','Country','First Name','Food','Profession','Brand','Sport','Movie/Series'];
+const CATS = ['Animal','City or Country','First Name','Food','Profession','Brand','Sport','Movie/Series'];
 const LETTERS = 'ABCDEFGHIJKLMNOPRSTUVWXYZ'.split('');
 const DURATION = 40;
 
@@ -671,7 +671,7 @@ async function checkWikipedia(word) {
 
 async function validateByCategory(cat, word) {
   const c = cat.toLowerCase();
-  if (c.includes('country'))                    return checkCountry(word);
+  if (c.includes('city') || c.includes('country')) return checkWikipedia(word);
   if (c.includes('first name'))                 return checkFirstName(word);
   if (c.includes('brand'))                      return checkWikipedia(word);
   if (c.includes('movie') || c.includes('series')) return checkWikipedia(word);
