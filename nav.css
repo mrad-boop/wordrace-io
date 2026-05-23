@@ -1,0 +1,301 @@
+/* ═══════════════════════════════════════════════════════
+   WORDRACE.IO — nav.css
+   Navigation: topnav, logo, user button, dropdown,
+   hamburger, mobile menu
+   ═══════════════════════════════════════════════════════ */
+
+/* ── TOPNAV ─────────────────────────────────────────────── */
+.topnav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(248,249,247,.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 1.1rem;
+  gap: .5rem;
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+/* ── NAV LOGO ─────────────────────────────────────────── */
+a.nav-logo, .nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.55rem;
+  letter-spacing: .04em;
+  color: #1A1A1A;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1;
+}
+a.nav-logo span, .nav-logo span { color: #9FE870; }
+
+/* ── NAV LINKS (desktop) ─────────────────────────────── */
+.nav-links {
+  display: flex;
+  gap: .4rem;
+  list-style: none;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+}
+.nav-link, .nav-links a {
+  font-family: 'Space Mono', monospace;
+  font-size: .6rem;
+  color: #6B7280;
+  text-decoration: none;
+  padding: .28rem .6rem;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: .4rem;
+  transition: background .15s;
+  white-space: nowrap;
+  background: transparent;
+}
+.nav-link:hover, .nav-links a:hover { background: #F0F2EE; color: #1A1A1A; }
+.nav-link.active, .nav-links a.active {
+  background: #E8F8DF;
+  border-color: rgba(159,232,112,.4);
+  color: #163300;
+}
+
+/* ── WRC BADGE ───────────────────────────────────────── */
+#nav-wrc-badge {
+  display: none; /* shown by auth.js after login */
+  align-items: center;
+  gap: .3rem;
+  font-family: 'Space Mono', monospace;
+  font-size: .6rem;
+  font-weight: 700;
+  padding: .25rem .65rem;
+  border-radius: 100px;
+  background: #E8F8DF;
+  border: 1px solid rgba(159,232,112,.35);
+  color: #163300;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── USER BUTTON ─────────────────────────────────────── */
+#wr-nav-user {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: 'Space Mono', monospace;
+  font-size: .6rem;
+  font-weight: 700;
+  padding: .28rem .65rem;
+  border-radius: 100px;
+  background: #F0F2EE;
+  border: 1px solid rgba(0,0,0,.1);
+  color: #1A1A1A;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+  /* Native button reset */
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  /* Touch */
+  -webkit-tap-highlight-color: rgba(159,232,112,.2);
+  touch-action: manipulation;
+  user-select: none;
+}
+#wr-nav-user:hover { background: #E8EBE5; }
+.user-av {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #9FE870;
+  color: #163300;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .65rem; font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ── USER DROPDOWN ───────────────────────────────────── */
+#wr-user-dropdown {
+  display: none;
+  position: fixed;
+  top: 54px;
+  right: .75rem;
+  z-index: 600;
+  background: #ffffff;
+  border: 1px solid rgba(0,0,0,.12);
+  border-radius: .75rem;
+  padding: .5rem;
+  box-shadow: 0 12px 32px rgba(0,0,0,.18);
+  min-width: 200px;
+}
+#wr-user-dropdown.open { display: block; }
+
+.wrud-header {
+  padding: .5rem .6rem .4rem;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+  margin-bottom: .3rem;
+  background: #F8F9F7;
+  border-radius: .45rem .45rem 0 0;
+}
+.wrud-name { font-family: 'Space Mono', monospace; font-size: .68rem; font-weight: 700; color: #1A1A1A; }
+.wrud-wallet { font-family: 'Space Mono', monospace; font-size: .54rem; color: #6B7280; margin-top: .1rem; }
+.wrud-wrc { font-family: 'Space Mono', monospace; font-size: .6rem; color: #9FE870; font-weight: 700; }
+.wrud-divider { height: 1px; background: rgba(0,0,0,.06); margin: .3rem 0; }
+.wrud-item {
+  display: flex; align-items: center; gap: .5rem;
+  padding: .48rem .6rem;
+  border-radius: .45rem;
+  font-family: 'Space Mono', monospace;
+  font-size: .65rem;
+  color: #1A1A1A;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .12s;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+}
+.wrud-item:hover { background: #F0F2EE; }
+.wrud-item.danger:hover { background: #FEE2E2; color: #EF4444; }
+
+/* ── HAMBURGER ───────────────────────────────────────── */
+#wr-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  width: 36px; height: 36px;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: .45rem;
+  background: #F8F9F7;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0,0,0,.05);
+}
+#wr-hamburger span {
+  display: block;
+  width: 16px; height: 2px;
+  background: #1A1A1A;
+  border-radius: 2px;
+  transition: transform .2s, opacity .2s;
+}
+#wr-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+#wr-hamburger.open span:nth-child(2) { opacity: 0; }
+#wr-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+/* ── MOBILE MENU ─────────────────────────────────────── */
+#wr-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 52px; left: 0; right: 0;
+  z-index: 500;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  padding: .6rem .8rem .8rem;
+}
+#wr-mobile-menu.open { display: block; }
+
+.wr-mn-wrc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .55rem .8rem;
+  border-radius: .52rem;
+  background: #E8F8DF;
+  border: 1px solid rgba(159,232,112,.35);
+  margin-bottom: .45rem;
+}
+.wr-mn-wrc-label { font-family: 'Space Mono', monospace; font-size: .58rem; color: #6B7280; }
+.wr-mn-wrc-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; color: #9FE870; }
+.wr-mn-wrc-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: .56rem;
+  font-weight: 700;
+  padding: .2rem .52rem;
+  border-radius: .32rem;
+  border: none;
+  background: #9FE870;
+  color: #163300;
+  cursor: pointer;
+}
+
+.wr-mn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .4rem;
+}
+.wr-mn-item {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .62rem .8rem;
+  border-radius: .52rem;
+  border: 1px solid rgba(0,0,0,.07);
+  background: #F0F2EE;
+  text-decoration: none;
+  color: #1A1A1A;
+  font-family: 'Space Mono', monospace;
+  font-size: .68rem;
+  font-weight: 700;
+  transition: background .15s;
+}
+.wr-mn-item:hover, .wr-mn-item.active {
+  background: #E8F8DF;
+  border-color: rgba(159,232,112,.4);
+  color: #163300;
+}
+.wr-mn-emoji { font-size: .95rem; flex-shrink: 0; }
+
+/* ══════════════════════════════════════════════════════
+   MOBILE ≤ 640px
+   ══════════════════════════════════════════════════════ */
+@media (max-width: 640px) {
+  /* Nav: Logo + user btn + hamburger only */
+  .nav-links { display: none !important; }
+  #nav-wrc-badge { display: none !important; }
+  #nav-middle-info { display: none !important; }
+  .nav-back { display: none !important; }
+  #mode-label { display: none !important; }
+  .score-strip { display: none !important; }
+
+  /* Show hamburger */
+  #wr-hamburger { display: flex !important; }
+
+  /* Topnav tight */
+  .topnav {
+    padding: 0 .8rem !important;
+    gap: .4rem !important;
+    height: 50px !important;
+  }
+
+  /* User button: compact circle */
+  #wr-nav-user {
+    padding: 0 !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    justify-content: center !important;
+    gap: 0 !important;
+  }
+  /* Hide text, show only avatar */
+  #wr-nav-user > span { display: none !important; }
+  #wr-nav-user .user-av {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: .72rem !important;
+  }
+}
