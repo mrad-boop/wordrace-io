@@ -291,11 +291,30 @@ a.nav-logo span, .nav-logo span { color: #9FE870; }
     justify-content: center !important;
     gap: 0 !important;
   }
-  /* Hide text, show only avatar */
-  #wr-nav-user > span { display: none !important; }
-  #wr-nav-user .user-av {
+  /* When logged in: show only avatar circle */
+  #wr-nav-user.logged-in > span:not(.user-av) { display: none !important; }
+  #wr-nav-user.logged-in {
+    padding: 0 !important;
+    border-radius: 50% !important;
+    width: 36px !important;
+    height: 36px !important;
+    min-width: 36px !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    background: #9FE870 !important;
+  }
+  #wr-nav-user.logged-in .user-av {
     width: 26px !important;
     height: 26px !important;
     font-size: .72rem !important;
+    background: transparent !important;
+  }
+  /* When NOT logged in: show compact sign-in button */
+  #wr-nav-user:not(.logged-in) {
+    font-size: .6rem !important;
+    padding: .25rem .6rem !important;
+    border-radius: 100px !important;
+    width: auto !important;
+    height: auto !important;
   }
 }
