@@ -629,27 +629,97 @@ function submitGame() {
   showResults();
 }
 
+// ── VALIDATION MODES ────────────────────────────────────────
+// 1. LOCAL: just checks first letter (instant, offline)
+// 2. AI: sends all words to Claude API for real validation
+
 function showResults() {
   showPage('results');
-  
-  // Calculate score
-  let score = 0;
-  const wordsHtml = CATS.map((cat, i) => {
+  // Show loading state while AI validates
+  document.getElementById('res-icon').textContent = '⏳';
+  document.getElementById('res-title').textContent = 'VALIDATING...';
+  document.getElementById('res-sub').textContent = 'Checking your words with AI...';
+  document.getElementById('res-score').textContent = '—';
+  document.getElementById('res-words').innerHTML = '<div style="text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:.65rem;color:#6B7280"><span style="display:inline-block;width:14px;height:14px;border:2px solid #9FE870;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:.5rem"></span>Validating with AI...</div>';
+  // Try AI validation, fall back to local
+  validateWithAI().then(showFinalResults).catch(() => {
+    // Fallback: local validation
+    const results = localValidate();
+    showFinalResults(results);
+  });
+}
+
+function localValidate() {
+  return CATS.map((cat, i) => {
     const ans = (G.answers[i] || '').trim();
-    const valid = ans.length > 0 && ans[0].toUpperCase() === G.letter;
-    if(valid) score += 10;
-    return `<div class="word-result ${valid ? 'valid' : ans ? 'invalid' : 'empty'}">
-      <span class="res-cat">${cat}</span>
-      <span class="res-word">${ans || '—'}</span>
-      <span class="res-pts">${valid ? '+10' : '+0'}</span>
-    </div>`;
-  }).join('');
+    const valid = ans.length >= 2 && ans[0].toUpperCase() === G.letter;
+    return { cat, ans, valid, pts: valid ? 10 : 0, reason: valid ? 'Accepted' : (!ans ? 'Empty' : 'Invalid') };
+  });
+}
+
+async function validateWithAI() {
+  const answers = CATS.map((cat, i) => ({
+    category: cat,
+    word: (G.answers[i] || '').trim(),
+    letter: G.letter
+  }));
+
+  const prompt = `You are validating answers in a Petit Bac / Stop word game.
+The letter of the round is: "${G.letter}"
+
+For each answer, check:
+1. Does it start with the letter "${G.letter}"? (case insensitive)
+2. Is it a real, valid word/name that genuinely belongs to that category in English or French?
+3. Minimum 2 characters.
+
+Answers to validate:
+${answers.map((a, i) => `${i+1}. Category: ${a.category} | Word: "${a.word || '(empty)'}"`).join('\n')}
+
+Respond ONLY with a JSON array of ${CATS.length} objects, one per answer, in order:
+[{"valid": true/false, "pts": 10/0, "reason": "brief reason"}]
+No markdown, no explanation, just the JSON array.`;
+
+  const response = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 500,
+      messages: [{ role: 'user', content: prompt }]
+    })
+  });
+
+  if(!response.ok) throw new Error('API error');
+  const data = await response.json();
+  const text = data.content[0].text.trim();
+  const parsed = JSON.parse(text);
+  return CATS.map((cat, i) => ({
+    cat,
+    ans: (G.answers[i] || '').trim(),
+    valid: parsed[i]?.valid || false,
+    pts: parsed[i]?.pts || 0,
+    reason: parsed[i]?.reason || ''
+  }));
+}
+
+function showFinalResults(results) {
+  const score = results.reduce((s, r) => s + (r.pts || 0), 0);
+
+  const wordsHtml = results.map(r => `
+    <div class="word-result ${r.valid ? 'valid' : r.ans ? 'invalid' : 'empty'}">
+      <div style="flex:1">
+        <div class="res-cat">${r.cat}</div>
+        ${r.reason ? '<div style="font-size:.52rem;opacity:.7;margin-top:.1rem">' + r.reason + '</div>' : ''}
+      </div>
+      <span class="res-word">${r.ans || '—'}</span>
+      <span class="res-pts" style="margin-left:.5rem">${r.valid ? '+10' : '+0'}</span>
+    </div>`).join('');
 
   document.getElementById('res-score').textContent = score;
   document.getElementById('res-words').innerHTML = wordsHtml;
-  document.getElementById('res-icon').textContent = score >= 50 ? '🏆' : score >= 20 ? '🎉' : '💪';
-  document.getElementById('res-title').textContent = score >= 50 ? 'EXCELLENT!' : score >= 20 ? 'GOOD JOB!' : 'KEEP GOING!';
-  document.getElementById('res-sub').textContent = 'Casual Training · Letter ' + G.letter + ' · ' + score + ' points';
+  document.getElementById('res-icon').textContent = score >= 70 ? '🏆' : score >= 40 ? '🎉' : score >= 20 ? '💪' : '📚';
+  document.getElementById('res-title').textContent = score >= 70 ? 'EXCELLENT!' : score >= 40 ? 'GOOD JOB!' : score >= 20 ? 'KEEP GOING!' : 'PRACTICE MORE!';
+  document.getElementById('res-sub').textContent = 'Casual Training · Letter ' + G.letter + ' · ' + score + ' pts · ' + results.filter(r=>r.valid).length + '/8 valid';
 }
 
 function playAgain() {
