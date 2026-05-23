@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <link rel="stylesheet" href="global.css"/>
+<link rel="stylesheet" href="nav.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>WordRace.io — Duel Arena</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -246,66 +247,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 
 
-<style id="duel-mobile-fix">
-@media(max-width:640px){
-  /* Hero: ensure full width, no cut-off */
-  .hero{padding:1.5rem .8rem 1.2rem!important}
-  .hero-inner{flex-direction:column!important;gap:.8rem!important}
-  .hero-right{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:.4rem!important;width:100%!important}
-  .hero-stat{padding:.45rem .6rem!important}
-  .hs-val{font-size:1.2rem!important}
 
-  /* Lobby: single column */
-  .lobby-wrap{
-    grid-template-columns:1fr!important;
-    padding:.75rem!important;
-    gap:.8rem!important;
-    margin-top:52px!important;
-  }
-
-  /* Form rows: stack */
-  .form-row{flex-direction:column!important;gap:.5rem!important}
-  .form-grorp{min-width:unset!important;width:100%!important}
-
-  /* Wager grid: 3 cols */
-  .wager-grid{grid-template-columns:repeat(3,1fr)!important;gap:.35rem!important}
-  .wager-opt{padding:.45rem .3rem!important;font-size:1rem!important}
-
-  /* Rooms card full width */
-  .rooms-card{width:100%!important}
-  .room-name{font-size:.6rem!important}
-
-  /* Room row: compress */
-  .room-row{padding:.55rem .75rem!important;gap:.5rem!important}
-  .room-icon{width:28px!important;height:28px!important}
-
-  /* Join by ID */
-  .form-input{font-size:.72rem!important}
-
-  /* Lobby pills badge text */
-  .hero-badge{font-size:.5rem!important;line-height:1.4!important}
-
-  /* No sidebar on mobile game */
-  .opp-sidebar{display:none!important}
-  .game-layort{
-    grid-template-columns:1fr!important;
-    padding:.6rem!important;
-  }
-
-  /* Game header compact */
-  .duel-header{
-    padding:.6rem .75rem!important;
-    gap:.4rem!important;
-    flex-wrap:wrap!important;
-  }
-  .letter-chip{width:36px!important;height:36px!important;font-size:1.6rem!important}
-  .timer-ring{width:42px!important;height:42px!important}
-
-  /* Submit wrap */
-  .submit-wrap{flex-direction:column!important;gap:.4rem!important}
-  .submit-btn{width:100%!important}
-}
-</style>
 </head>
 <body>
 <!-- BETA: COMING SOON OVERLAY -->
