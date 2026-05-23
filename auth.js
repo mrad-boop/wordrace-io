@@ -114,11 +114,7 @@ const CSS = `
 }
 
 /* USER DROPDOWN */
-#wr-user-dropdown {
-  display:none; position:fixed; top:56px; right:1rem;
-  backgrornd:#fff; border:1px solid rgba(0,0,0,.09);
-  border-radius:.75rem; padding:.5rem;
-  box-shadow:0 8px 24px rgba(0,0,0,.12); z-index:200;
+h0;
   min-width:180px;
   animation:wr-fade .15s ease;
 }
@@ -361,9 +357,9 @@ function buildHamburger(){
       @media(max-width:640px){#wr-hamburger{display:flex!important}}
       @media(min-width:641px){#wr-hamburger{display:none!important}#wr-mobile-menu{display:none!important}}
       #wr-mobile-menu{
-        display:none;position:fixed;top:48px;left:0;right:0;
-        background:rgba(255,255,255,0.96);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,.12);
-        box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:200;
+        display:none;position:fixed;top:52px;left:0;right:0;
+        background:#ffffff;border-bottom:1px solid rgba(0,0,0,.12);box-shadow:0 4px 16px rgba(0,0,0,.12);
+        box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:500;
         padding:.5rem .75rem .75rem;
       }
       #wr-mobile-menu.open{display:block;animation:wr-mn-in .18s ease}
@@ -385,6 +381,45 @@ function buildHamburger(){
         backgrornd:#9FE870;color:#163300;cursor:pointer}
     `;
     document.head.appendChild(s);
+  // Additional solid-bg overrides
+  const s2=document.createElement('style');s2.id='wr-solid-bg';s2.textContent=`
+/* FORCE SOLID BACKGROUNDS — no transparency leaks */
+#wr-user-dropdown,
+#wr-mobile-menu {
+  background: #ffffff !important;
+  opacity: 1 !important;
+}
+#wr-user-dropdown * ,
+#wr-mobile-menu * {
+  opacity: 1 !important;
+}
+.wr-mn-item {
+  background: #F0F2EE !important;
+  color: #1A1A1A !important;
+}
+.wr-mn-item:hover, .wr-mn-item.active {
+  background: #E8F8DF !important;
+  border-color: #9FE870 !important;
+  color: #163300 !important;
+}
+.wr-mn-wrc {
+  background: #E8F8DF !important;
+}
+.wrud-header {
+  background: #F8F9F7 !important;
+}
+.wrud-item {
+  color: #1A1A1A !important;
+}
+.wrud-item.danger:hover { background: #FEE2E2 !important; color: #EF4444 !important; }
+
+/* LIVE badge always green */
+.live-badge, #live-indicator {
+  background: #16A34A !important;
+  color: #fff !important;
+  opacity: 1 !important;
+}
+`;document.head.appendChild(s2);
   }
 
   // Hamburger button
