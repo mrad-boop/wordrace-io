@@ -119,7 +119,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 <div class="support-wrap" id="support-main">
   <div class="support-hero">
     <div class="sh-title">🎫 <span>SUPPORT</span></div>
-    <div class="sh-sub">Un problème ? Une question ? On vous répond sous 24h.<br/>Public beta — team available Mon–Fri.</div>
+    <div class="sh-sub">Got an issue? A question? We reply within 24h.<br/>Public beta — team available Mon–Fri.</div>
   </div>
 
   <!-- NEW TICKET FORM -->
@@ -148,7 +148,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
     </div>
     <div class="form-group">
       <label class="form-label">Description</label>
-      <textarea class="form-textarea" id="t-body" placeholder="Décrivez le problème en détail. Incluez les étapes pour le reproduire si possible."></textarea>
+      <textarea class="form-textarea" id="t-body" placeholder="Describe the issue in detail. Include steps to reproduce it if possible."></textarea>
     </div>
     <div class="form-group">
       <label class="form-label">Priority</label>
@@ -158,7 +158,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
         <option value="high">🔴 High — Blocking bug</option>
       </select>
     </div>
-    <button class="submit-btn" onclick="submitTicket()">🎫 Soumettre le ticket</button>
+    <button class="submit-btn" onclick="submitTicket()">🎫 Submit Ticket</button>
   </div>
 
   <!-- MY TICKETS -->
@@ -183,7 +183,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 <script src="presence.js"></script>
 <script>
 const STORAGE_KEY = 'wr_tickets';
-const CAT_LABELS = {bug:'🐛 Bug',account:'👤 Account',wrc:'🪙 WRC',game:'🎮 Jeu',feature:'💡 Suggestion',other:'📋 Other'};
+const CAT_LABELS = {bug:'🐛 Bug',account:'👤 Account',wrc:'🪙 WRC',game:'🎮 Game',feature:'💡 Suggestion',other:'📋 Other'};
 
 function getTickets(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch{return[]} }
 function saveTickets(t){ localStorage.setItem(STORAGE_KEY,JSON.stringify(t)) }
@@ -196,8 +196,8 @@ function submitTicket(){
   const body  = document.getElementById('t-body').value.trim();
   const prio  = document.getElementById('t-priority').value;
 
-  if(!subj){ toast('⚠️ Subject requis'); return; }
-  if(!body||body.length<10){ toast('⚠️ Description trop courte (min 10 caractères)'); return; }
+  if(!subj){ toast('⚠️ Subject is required'); return; }
+  if(!body||body.length<10){ toast('⚠️ Description too short (min 10 characters)'); return; }
 
   const id = 'TK-' + Date.now().toString(36).toUpperCase().slice(-6);
   const ticket = {
@@ -205,7 +205,7 @@ function submitTicket(){
     status:'open', createdAt:Date.now(),
     messages:[
       {from:'user', text:body, ts:Date.now()},
-      {from:'support', text:'Merci pour votre message ! Votre ticket #'+id+' a bien été reçu. Notre équipe vous répond sous 24h (lun–ven). En attendant, consultez notre FAQ ci-dessous.', ts:Date.now()+2000}
+      {from:'support', text:'Thank you for reaching out! Your ticket #'+id+' has been received. Our team will reply within 24h (Mon–Fri). In the meantime, check our FAQ below.', ts:Date.now()+2000}
     ]
   };
 
@@ -218,7 +218,7 @@ function submitTicket(){
   document.getElementById('t-cat').selectedIndex = 0;
   document.getElementById('t-priority').selectedIndex = 1;
 
-  toast('✅ Ticket '+id+' créé ! Réponse sous 24h.');
+  toast('✅ Ticket '+id+' created! We\'ll reply within 24h.');
   renderTickets();
 }
 
@@ -227,10 +227,10 @@ function renderTickets(){
   const tickets = getTickets();
   const el = document.getElementById('ticket-list');
   if(!tickets.length){
-    el.innerHTML='<div style="padding:1.2rem;text-align:center;font-family:\'Space Mono\',monospace;font-size:.65rem;color:var(--muted)">Aucun ticket — ouvrez votre premier ticket ci-dessus.</div>';
+    el.innerHTML='<div style="padding:1.2rem;text-align:center;font-family:\'Space Mono\',monospace;font-size:.65rem;color:var(--muted)">No tickets yet — open your first ticket above.</div>';
     return;
   }
-  const STATUS_LABELS = {open:'Open',progress:'En cours',resolved:'Resolved',closed:'Closed'};
+  const STATUS_LABELS = {open:'Open',progress:'In Progress',resolved:'Resolved',closed:'Closed'};
   const STATUS_CLASSES = {open:'b-open',progress:'b-progress',resolved:'b-resolved',closed:'b-closed'};
   const ICONS = {bug:'🐛',account:'👤',wrc:'🪙',game:'🎮',feature:'💡',other:'📋'};
 
@@ -239,7 +239,7 @@ function renderTickets(){
       <div class="tr-icon" style="background:${{open:'#EFF6FF',progress:'#FDF3CC',resolved:'#DCFCE7',closed:'#F0F2EE'}[t.status]||'#F0F2EE'}">${ICONS[t.cat]||'📋'}</div>
       <div class="tr-info">
         <div class="tr-title">${t.subject}</div>
-        <div class="tr-meta">${t.id} · ${CAT_LABELS[t.cat]||t.cat} · ${new Date(t.createdAt).toLocaleDateString('fr-FR')}</div>
+        <div class="tr-meta">${t.id} · ${CAT_LABELS[t.cat]||t.cat} · ${new Date(t.createdAt).toLocaleDateString('en-US')}</div>
       </div>
       <span class="tr-badge ${STATUS_CLASSES[t.status]||'b-open'}">${STATUS_LABELS[t.status]||t.status}</span>
     </div>`).join('');
@@ -261,28 +261,28 @@ function openTicket(id){
     </div>
     <div class="mc-meta">
       🎫 ${t.id} &nbsp;·&nbsp; ${CAT_LABELS[t.cat]||t.cat} &nbsp;·&nbsp; Priority: ${PRIO_LABELS[t.priority]||t.priority}
-      <br/>Ouvert le ${new Date(t.createdAt).toLocaleDateString('fr-FR',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}
+      <br/>Opened on ${new Date(t.createdAt).toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'})}
       &nbsp;·&nbsp; 👤 ${t.username||'—'}
     </div>
     <div class="message-thread" id="msg-thread">
       ${(t.messages||[]).map(m=>`
         <div class="msg ${m.from==='user'?'msg-user':'msg-support'}">
-          <div class="msg-sender">${m.from==='user'?'👤 Vous':'🎧 Support WordRace'} · ${new Date(m.ts).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+          <div class="msg-sender">${m.from==='user'?'👤 You':'🎧 Support WordRace'} · ${new Date(m.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})}</div>
           ${m.text}
         </div>`).join('')}
     </div>
     ${t.status!=='closed'?`
     <div class="reply-wrap">
-      <input class="reply-input" id="reply-input-${t.id}" placeholder="Votre réponse..." onkeydown="if(event.key==='Enter')sendReply('${t.id}')"/>
-      <button class="reply-btn" onclick="sendReply('${t.id}')">Envoyer</button>
-    </div>`:'<div style="font-family:\'Space Mono\',monospace;font-size:.63rem;color:var(--muted);text-align:center;padding:.5rem">Ce ticket est fermé.</div>'}
+      <input class="reply-input" id="reply-input-${t.id}" placeholder="Your reply..." onkeydown="if(event.key==='Enter')sendReply('${t.id}')"/>
+      <button class="reply-btn" onclick="sendReply('${t.id}')">Send</button>
+    </div>`:'<div style="font-family:\'Space Mono\',monospace;font-size:.63rem;color:var(--muted);text-align:center;padding:.5rem">This ticket is closed.</div>'}
   `;
   document.getElementById('ticket-modal').classList.add('open');
 }
 
 function renderBadge(status){
   const m={open:'b-open',progress:'b-progress',resolved:'b-resolved',closed:'b-closed'};
-  const l={open:'Open',progress:'En cours',resolved:'Resolved',closed:'Closed'};
+  const l={open:'Open',progress:'In Progress',resolved:'Resolved',closed:'Closed'};
   return `<span class="tr-badge ${m[status]||'b-open'}">${l[status]||status}</span>`;
 }
 
@@ -301,7 +301,7 @@ function sendReply(id){
     const tks = getTickets();
     const tk = tks.find(x=>x.id===id);
     if(tk){
-      tk.messages.push({from:'support', text:'Merci pour votre message. Notre équipe a bien reçu votre réponse et reviendra vers vous rapidement.', ts:Date.now()});
+      tk.messages.push({from:'support', text:'Thank you for your reply. Our team has received your message and will get back to you shortly.', ts:Date.now()});
       saveTickets(tks);
       if(document.getElementById('ticket-modal').classList.contains('open')) openTicket(id);
     }
@@ -312,12 +312,12 @@ function closeTicket(){ document.getElementById('ticket-modal').classList.remove
 
 // ─── FAQ ──────────────────────────────────────────────────────
 const FAQ = [
-  {q:'Comment jouer en mode Casual Training ?', a:'Connectez-vous avec un simple nom d\'utilisateur (sans email), choisissez la difficulté et cliquez sur "Play". Aucun wallet ni paiement requis.'},
-  {q:'Quand sera disponible le Duel Arena / Daily League ?', a:'Ces modes P2E sont en développement. Inscrivez-vous sur les pages Duel Arena ou Daily League pour être notifié au lancement (prévu Q3 2026).'},
-  {q:'Comment fonctionnent les crédits WRC ?', a:'1 WRC = $0.01 USDT. Les crédits permettent d\'utiliser des power-ups (Hint 5 WRC, Freeze 10 WRC). Les WRC ne sont pas encore actifs en bêta — ils seront utilisables lors du lancement P2E.'},
-  {q:'Mon compte a disparu après fermeture du navigateur ?', a:'En bêta, les comptes sont stockés en localStorage (données locales du navigateur). Effacer les données du navigateur efface le compte. Le système de comptes persistants sera déployé avec la version P2E.'},
-  {q:'Le timer ne fonctionne pas correctement.', a:'Vérifiez que la page est en premier plan — le timer se met en pause si l\'onglet est en arrière-plan (protection anti-triche). Si le problème persiste, ouvrez un ticket avec les détails de votre navigateur.'},
-  {q:'Comment signaler un bug ?', a:'Utilisez le formulaire ci-dessus, catégorie "🐛 Bug", avec les étapes pour reproduire le problème et votre navigateur/système d\'exploitation.'},
+  {q:'How do I play Casual Training?', a:'Log in with a username (no email needed), pick a difficulty and click "Play". No wallet or payment required — completely free.'},
+  {q:'When will Duel Arena / Daily League be available?', a:'These P2E modes are under development. Sign up on the Duel Arena or Daily League pages to be notified at launch (planned Q3 2026).'},
+  {q:'How do WRC Credits work?', a:'1 WRC = $0.01 USDT. Credits are used for power-ups (Hint = 5 WRC, Freeze = 10 WRC). WRC is not yet active in beta — it will be spendable at P2E launch.'},
+  {q:'My account disappeared after closing the browser?', a:'During beta, accounts are stored in localStorage (local browser data). Clearing your browser data will remove your account. Persistent accounts will be deployed with the P2E version.'},
+  {q:'The timer is not working correctly.', a:'Make sure the page is in the foreground — the timer pauses if the tab is in the background (anti-cheat protection). If the issue persists, open a ticket with your browser and OS details.'},
+  {q:'How do I report a bug?', a:'Use the form above, select category "🐛 Bug", and include the steps to reproduce the problem along with your browser and operating system.'},
 ];
 
 function renderFAQ(){
@@ -351,9 +351,9 @@ function showSupportLoginWall(){
     <div style="max-width:400px;margin:3rem auto;text-align:center;padding:0 1.5rem">
       <div style="font-size:3.5rem;margin-bottom:1rem">🎫</div>
       <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.04em;color:var(--text);margin-bottom:.4rem">SUPPORT</div>
-      <div style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);line-height:1.75;margin-bottom:2rem">Connecte-toi pour ouvrir un ticket<br>et suivre tes demandes.</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);line-height:1.75;margin-bottom:2rem">Log in to open a ticket<br>and track your requests.</div>
       <button onclick="openLogin()" style="width:100%;padding:.95rem;border-radius:.7rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;letter-spacing:.05em;margin-bottom:.8rem">🎯 Login / Sign Up</button>
-      <a href="index.html" style="display:block;font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.65rem">← Retour à l'accueil</a>
+      <a href="index.html" style="display:block;font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.65rem">← Back to Home</a>
     </div>`;
   if(typeof WRAuth !== 'undefined'){
     WRAuth.subscribe(u=>{ if(u) window.location.reload(); });
