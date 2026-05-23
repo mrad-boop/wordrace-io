@@ -193,12 +193,11 @@ function buildModals(){
   const dropdown = document.createElement('div');
   dropdown.id = 'wr-user-dropdown';
   document.body.appendChild(dropdown);
-  document.addEventListener('click', e => {
+  document.addEventListener('click', function(e){
     const nav = document.getElementById('wr-nav-user');
     const dd  = document.getElementById('wr-user-dropdown');
-    if(dd && !dd.contains(e.target) && nav && !nav.contains(e.target)){
+    if(dd && dd.classList.contains('open') && !dd.contains(e.target) && nav && !nav.contains(e.target)){
       dd.classList.remove('open');
-      dd.style.display = 'none';
     }
   });
 }
@@ -357,88 +356,9 @@ function buildHamburger(){
 
   // CSS
   if(!document.getElementById('wr-ham-css')){
-    const s = document.createElement('style');
-    s.id = 'wr-ham-css';
-    s.textContent = `
-      #wr-hamburger{
-        display:none;flex-direction:column;justify-content:center;
-        align-items:center;gap:4px;width:32px;height:32px;
-        border:1px solid rgba(0,0,0,.1);border-radius:.45rem;
-        background:transparent;cursor:pointer;padding:0;flex-shrink:0;
-        transition:background .15s;
-      }
-      #wr-hamburger:hover{background:rgba(0,0,0,.06)}
-      #wr-hamburger span{display:block;width:16px;height:2px;
-        background:var(--text,#1A1A1A);border-radius:2px;transition:all .2s}
-      #wr-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
-      #wr-hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
-      #wr-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-      @media(max-width:640px){#wr-hamburger{display:flex!important}}
-      @media(min-width:641px){#wr-hamburger{display:none!important}#wr-mobile-menu{display:none!important}}
-      #wr-mobile-menu{
-        display:none;position:fixed;top:52px;left:0;right:0;
-        background:#ffffff;border-bottom:1px solid rgba(0,0,0,.12);box-shadow:0 4px 16px rgba(0,0,0,.12);
-        box-shadow:0 8px 24px rgba(0,0,0,.15);z-index:500;
-        padding:.5rem .75rem .75rem;
-      }
-      #wr-mobile-menu.open{display:block;animation:wr-mn-in .18s ease}
-      @keyframes wr-mn-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
-      .wr-mn-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
-      .wr-mn-item{display:flex;align-items:center;gap:.5rem;padding:.6rem .8rem;
-        border-radius:.52rem;border:1px solid rgba(0,0,0,.07);
-        background:#F0F2EE;text-decoration:none;color:#1A1A1A;
-        font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;transition:all .15s}
-      .wr-mn-item:hover,.wr-mn-item.active{background:#E8F8DF;border-color:#9FE870;color:#163300}
-      .wr-mn-emoji{font-size:.95rem;flex-shrink:0}
-      .wr-mn-wrc{grid-column:1/-1;display:flex;align-items:center;
-        justify-content:space-between;padding:.52rem .8rem;border-radius:.52rem;
-        background:#E8F8DF;border:1px solid rgba(159,232,112,.35);margin-bottom:.2rem}
-      .wr-mn-wrc-label{font-family:'Space Mono',monospace;font-size:.58rem;color:#6B7280}
-      .wr-mn-wrc-val{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#9FE870}
-      .wr-mn-wrc-btn{font-family:'Space Mono',monospace;font-size:.56rem;font-weight:700;
-        padding:.18rem .5rem;border-radius:.32rem;border:none;
-        background:#9FE870;color:#163300;cursor:pointer}
-    `;
-    document.head.appendChild(s);
+    // CSS loaded from nav.css
   // DISABLED - was causing opacity issues
-  /* const s2=document.createElement('style');s2.id='wr-solid-bg';s2.textContent=`
-/* FORCE SOLID BACKGROUNDS — no transparency leaks */
-#wr-user-dropdown,
-#wr-mobile-menu {
-  background: #ffffff !important;
-  opacity: 1 !important;
-}
-#wr-user-dropdown * ,
-#wr-mobile-menu * {
-  opacity: 1 !important;
-}
-.wr-mn-item {
-  background: #F0F2EE !important;
-  color: #1A1A1A !important;
-}
-.wr-mn-item:hover, .wr-mn-item.active {
-  background: #E8F8DF !important;
-  border-color: #9FE870 !important;
-  color: #163300 !important;
-}
-.wr-mn-wrc {
-  background: #E8F8DF !important;
-}
-.wrud-header {
-  background: #F8F9F7 !important;
-}
-.wrud-item {
-  color: #1A1A1A !important;
-}
-.wrud-item.danger:hover { background: #FEE2E2 !important; color: #EF4444 !important; }
-
-/* LIVE badge always green */
-.live-badge, #live-indicator {
-  background: #16A34A !important;
-  color: #fff !important;
-  opacity: 1 !important;
-}
-`;document.head.appendChild(s2);
+  /* // (CSS in nav.css)
   }
 
   // Hamburger button
