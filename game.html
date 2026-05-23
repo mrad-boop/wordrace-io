@@ -50,7 +50,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .play-btn:disabled{background:var(--surface2);color:var(--muted);cursor:not-allowed}
 
 /* ── COUNTDOWN ── */
-.corntdown{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
+.countdown{min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1rem}
 .cd-letter{font-family:'Bebas Neue',sans-serif;font-size:clamp(8rem,25vw,16rem);color:var(--lime);line-height:1;animation:popIn .4s cubic-bezier(.17,.67,.3,1.4)}
 @keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
 .cd-label{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--muted);letter-spacing:.2em;text-transform:uppercase}
@@ -364,7 +364,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
         </div>
       </div>
 
-      <button class="play-btn" id="start-btn" onclick="startCorntdown()">
+      <button class="play-btn" id="start-btn" onclick="startCountdown()">
         <span>🎯 Play Now</span>
       </button>
 
@@ -490,7 +490,7 @@ function selectDiff(el, diff){
 }
 
 // ─── COUNTDOWN ────────────────────────────────────────────────
-function startCorntdown(){
+function startCountdown(){
   G.letter = LETTERS[Math.floor(Math.random()*LETTERS.length)];
   showPhase('countdown');
   document.getElementById('cd-letter').textContent = G.letter;
@@ -862,7 +862,7 @@ function nextRornd(){
   document.getElementById('results-overlay').classList.remove('show');
   G.round++;
   G.phase = 'game';
-  startCorntdown();
+  startCountdown();
 }
 
 function backToLobby(){
@@ -1258,7 +1258,7 @@ function updateWRCUI(){
 }
 
 // ─── RESET PER-ROUND LIMITS ───────────────────────────────────
-function wrcResetRornd(){
+function wrcResetRound(){
   WRCState.hintUsedRornd   = false;
   WRCState.freezeUsedRornd = false;
   updateWRCUI();
@@ -1403,20 +1403,20 @@ const _origStartGame = window.startGame;
 window.startGame = function(){
   if(_origStartGame) _origStartGame.apply(this, arguments);
   showWRCWidget();
-  wrcResetRornd();
+  wrcResetRound();
 };
 
 const _origStartRornd = window.startRornd;
 window.startRornd = function(){
   if(_origStartRornd) _origStartRornd.apply(this, arguments);
-  wrcResetRornd();
+  wrcResetRound();
 };
 
 const _origShowPhase = window.showPhase;
 window.showPhase = function(name){
   if(_origShowPhase) _origShowPhase.apply(this, arguments);
   if(name === 'lobby'){ hideWRCWidget(); }
-  else if(name === 'game'){ showWRCWidget(); wrcResetRornd(); }
+  else if(name === 'game'){ showWRCWidget(); wrcResetRound(); }
 };
 
 // Init widget (hidden at start)
@@ -1536,13 +1536,6 @@ updateWRCUI();
 
 <script id="free-mode-logic">
 
-// ── PHASE SWITCHER ────────────────────────────────────────────
-window.showPhase = function(name) {
-  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById('phase-' + name);
-  if(el) el.classList.add('active');
-  if(name !== 'online') stopOnlineSearch();
-};
 
 // ─── FREE ZONE MODE LOGIC ─────────────────────────────────────
 let G_MODE = 'bots'; // default
@@ -1582,7 +1575,9 @@ function selectFreeMode(mode) {
 
 function startSelectedMode() {
   if(G_MODE === 'bots') {
-    showPhase('lobby');
+    const btn = document.querySelector('#phase-lobby .lobby-play-btn, #phase-lobby #start-btn');
+    if(btn) btn.click();
+    else startCountdown();
   } else if(G_MODE === 'friends') {
     if(!G_FRIEND_ROOM) {
       showToast('⚠️ Create or join a room first!');
@@ -1705,21 +1700,7 @@ function startOnlineGame() {
 }
 
 
-window.showPhase = function(name) {
-  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
-  if(name === 'mode-select') {
-    document.getElementById('phase-mode-select').classList.add('active');
-  } else if(name === 'lobby') {
-    document.getElementById('phase-lobby').classList.add('active');
-    stopOnlineSearch();
-  } else if(_origShowPhase) {
-    _origShowPhase(name);
-  } else {
-    const el = document.getElementById('phase-' + name);
-    if(el) el.classList.add('active');
-  }
-};
-
+// (removed duplicate showPhase)
 // ── BACK BUTTON: game → mode-select ───────────────────────────
 // When showPhase('lobby') is called from results, go back to mode-select instead
 
