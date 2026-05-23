@@ -369,7 +369,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
       </button>
 
       <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);text-align:center;margin-top:.8rem;line-height:1.6">
-        ⚡ Instant Start · 🚫 Copy/Paste désactivé · 📵 Tab switch = Disqualification
+        ⚡ Instant Start · 🚫 Copy/Paste disabled · 📵 Tab switch = Disqualification
       </div>
     </div>
   </div>
@@ -492,7 +492,7 @@ function selectDiff(el, diff){
 // ─── COUNTDOWN ────────────────────────────────────────────────
 function startCorntdown(){
   G.letter = LETTERS[Math.floor(Math.random()*LETTERS.length)];
-  showPhase('corntdown');
+  showPhase('countdown');
   document.getElementById('cd-letter').textContent = G.letter;
 
   let n = 3;
@@ -1535,6 +1535,15 @@ updateWRCUI();
 </script>
 
 <script id="free-mode-logic">
+
+// ── PHASE SWITCHER ────────────────────────────────────────────
+window.showPhase = function(name) {
+  document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('phase-' + name);
+  if(el) el.classList.add('active');
+  if(name !== 'online') stopOnlineSearch();
+};
+
 // ─── FREE ZONE MODE LOGIC ─────────────────────────────────────
 let G_MODE = 'bots'; // default
 let G_FRIEND_ROOM = null;
@@ -1543,6 +1552,7 @@ let G_ONLINE_IV = null;
 
 function selectFreeMode(mode) {
   G_MODE = mode;
+  // If switching to bots, show the lobby (difficulty picker)
   // Update card styles
   ['bots','friends','online'].forEach(m => {
     const el = document.getElementById('mode-' + m);
@@ -1572,7 +1582,6 @@ function selectFreeMode(mode) {
 
 function startSelectedMode() {
   if(G_MODE === 'bots') {
-    // Go to existing lobby (bot difficulty selection)
     showPhase('lobby');
   } else if(G_MODE === 'friends') {
     if(!G_FRIEND_ROOM) {
@@ -1695,8 +1704,7 @@ function startOnlineGame() {
   }, 100);
 }
 
-// ── OVERRIDE showPhase to handle mode-select ───────────────────
-const _origShowPhase = window.showPhase;
+
 window.showPhase = function(name) {
   document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
   if(name === 'mode-select') {
