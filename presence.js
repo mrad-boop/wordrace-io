@@ -236,10 +236,10 @@ const CSS = `
 
 // ── ZONES CONFIG ───────────────────────────────────────────────
 const ZONES = [
-  { id:'total',        icon:'👥', name:'En ligne', sub:'Tous les joueurs', color:'#9FE870', bg:'#E8F8DF', href:null },
-  { id:'casual',       icon:'🎮', name:'Casual Training', sub:'Mode gratuit', color:'#3B82F6', bg:'#EFF6FF', href:'game.html' },
-  { id:'duel',         icon:'⚔️', name:'Duel Arena', sub:'Wager USDT', color:'#EF4444', bg:'#FEE2E2', href:'duel.html' },
-  { id:'daily_league', icon:'📅', name:'Daily League', sub:'Tournoi 24h', color:'#F5C842', bg:'#FDF3CC', href:'daily-league.html' },
+  { id:'total',        icon:'👥', name:'Online', sub:'Tous les players', color:'#9FE870', bg:'#E8F8DF', href:null },
+  { id:'casual',       icon:'🎮', name:'Casual Training', sub:'Free mode', color:'#3B82F6', bg:'#EFF6FF', href:'game.html' },
+  { id:'duel',         icon:'⚔️', name:'Duel Arena', sub:'USDT wager', color:'#EF4444', bg:'#FEE2E2', href:'duel.html' },
+  { id:'daily_league', icon:'📅', name:'Daily League', sub:'24h tournament', color:'#F5C842', bg:'#FDF3CC', href:'daily-league.html' },
 ];
 
 // ── BUILD DOM ──────────────────────────────────────────────────
@@ -254,7 +254,7 @@ function buildUI() {
   // ── Side tab (always visible) ──
   const tab = document.createElement('div');
   tab.id = 'wr-presence-tab';
-  tab.title = 'Joueurs en ligne — cliquez pour le détail';
+  tab.title = 'Players online — cliquez pour le détail';
   tab.onclick = openPanel;
 
   ZONES.forEach(z => {
@@ -286,9 +286,9 @@ function buildUI() {
       <div id="wr-panel-body">
         <div class="wr-total-card">
           <div>
-            <div class="wr-total-label">Joueurs en ligne</div>
+            <div class="wr-total-label">Players online</div>
             <div class="wr-total-num" id="wr-pv-total">—</div>
-            <div class="wr-total-sub">sur wordrace.io</div>
+            <div class="wr-total-sub">on wordrace.io</div>
           </div>
           <div style="font-size:2rem">🌐</div>
         </div>
@@ -304,7 +304,7 @@ function buildUI() {
               </div>
               <div class="wr-zone-count-wrap">
                 <div class="wr-zone-count" style="color:${z.color}" id="wr-pv-${z.id}">—</div>
-                <div class="wr-zone-count-label">joueurs</div>
+                <div class="wr-zone-count-label">players</div>
               </div>
             </div>
             <div class="wr-zone-bar">
@@ -313,9 +313,9 @@ function buildUI() {
           </a>
         `).join('')}
         <div class="wr-rooms-section">
-          <div class="wr-rooms-title">🟢 Rooms Duel Ouvertes</div>
+          <div class="wr-rooms-title">🟢 Open Duel Rooms</div>
           <div id="wr-rooms-list">
-            <div style="padding:12px;font-family:'Space Mono',monospace;font-size:.62rem;color:#9B9B9B;text-align:center">Chargement...</div>
+            <div style="padding:12px;font-family:'Space Mono',monospace;font-size:.62rem;color:#9B9B9B;text-align:center">Loading...</div>
           </div>
         </div>
       </div>
@@ -378,7 +378,7 @@ function updateUI(data) {
           ${r.wager ? `<div class="wr-room-wager">$${r.wager}</div>` : ''}
         </div>`).join('');
     } else {
-      roomsEl.innerHTML = `<div style="padding:10px 12px;font-family:'Space Mono',monospace;font-size:.6rem;color:#9B9B9B;text-align:center">Aucune room ouverte</div>`;
+      roomsEl.innerHTML = `<div style="padding:10px 12px;font-family:'Space Mono',monospace;font-size:.6rem;color:#9B9B9B;text-align:center">No open rooms</div>`;
     }
   } else if(roomsEl) {
     roomsEl.innerHTML = `
