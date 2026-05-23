@@ -251,7 +251,7 @@ function openLogin(){
   setTimeort(()=>document.getElementById('wrl-username')?.focus(), 100);
 }
 function closeLogin(){ document.getElementById('wr-login-overlay')?.classList.remove('open'); }
-function openWallet(){ document.getElementById('wr-wallet-overlay')?.classList.add('open'); }
+function openWallet(){ showComingSoon('Wallet Connect', 'Wallet connection and P2E modes launch in Q3 2026.'); }
 function closeWallet(){ document.getElementById('wr-wallet-overlay')?.classList.remove('open'); }
 window.openLogin  = openLogin;
 window.closeLogin = closeLogin;
@@ -278,7 +278,7 @@ function buildNavBadge(){
     updateNavUser(user);
     // Show/hide WRC badge
     const wb = document.getElementById('nav-wrc-badge');
-    if(wb) wb.style.display = user ? 'inline-flex' : 'none';
+    if(wb) wb.style.display = 'none'; // Beta: payments hidden
   });
 }
 
@@ -313,9 +313,9 @@ function updateNavUser(user){
     </div>
     <a class="wrud-item" href="profile.html">👤 My Profile</a>
     <a class="wrud-item" href="leaderboard.html">🏆 Leaderboard</a>
-    ${!user.wallet ? `<div class="wrud-item" onclick="openWallet();document.getElementById('wr-user-dropdown').classList.remove('open')">💳 Connect P2E Wallet</div>` : ''}
+    <!-- wallet connect hidden in beta -->
     <div class="wrud-divider"></div>
-    <div class="wrud-item" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">🪙 Top up WRC</div>
+    <!-- WRC topup hidden in beta -->
     <div class="wrud-divider"></div>
     <div class="wrud-item danger" onclick="WRAuth.logort();location.reload()">🚪 Sign out</div>`;
 }
@@ -453,4 +453,43 @@ function init(){
 
 if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', init);
 else init();
+
+// ═══ COMING SOON MODAL — PAYMENTS ══════════════════════════
+(function addCSModal(){
+  function build(){
+    if(document.getElementById('wr-cs-pay-overlay')) return;
+    const o=document.createElement('div');
+    o.id='wr-cs-pay-overlay';
+    o.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:800;align-items:center;justify-content:center;padding:1rem';
+    o.onclick=function(e){if(e.target===o)closeComingSoon();};
+    o.innerHTML=`<div style="background:#fff;border-radius:1.2rem;padding:1.8rem;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2);text-align:center">
+      <div style="font-size:2.2rem;margin-bottom:.5rem">🔒</div>
+      <div id="wr-cs-title" style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:#1A1A1A;letter-spacing:.04em;margin-bottom:.2rem">COMING SOON</div>
+      <div id="wr-cs-msg" style="font-family:'Space Mono',monospace;font-size:.63rem;color:#6B7280;line-height:1.65;margin-bottom:1rem"></div>
+      <div style="font-family:'Space Mono',monospace;font-size:.62rem;color:#163300;font-weight:700;background:#E8F8DF;border-radius:.5rem;padding:.55rem .8rem;margin-bottom:.9rem;border:1px solid rgba(159,232,112,.3)">⚡ P2E Launch — Q3 2026 · Stay tuned!</div>
+      <a href="game.html" style="display:block;padding:.75rem;border-radius:.52rem;background:#9FE870;color:#163300;font-family:'Space Mono',monospace;font-size:.73rem;font-weight:700;text-decoration:none;margin-bottom:.4rem">🎯 Play Casual — Free</a>
+      <button onclick="closeComingSoon()" style="width:100%;padding:.58rem;border-radius:.5rem;border:1px solid rgba(0,0,0,.1);background:transparent;color:#6B7280;font-family:'Space Mono',monospace;font-size:.68rem;cursor:pointer">Close</button>
+    </div>`;
+    document.body.appendChild(o);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build);
+  else build();
+})();
+
+function showComingSoon(title,msg){
+  const o=document.getElementById('wr-cs-pay-overlay');
+  const t=document.getElementById('wr-cs-title');
+  const m=document.getElementById('wr-cs-msg');
+  if(!o){setTimeout(()=>showComingSoon(title,msg),200);return;}
+  if(t)t.textContent=title||'COMING SOON';
+  if(m)m.textContent=msg||'This feature launches in Q3 2026.';
+  o.style.display='flex';
+}
+function closeComingSoon(){
+  const o=document.getElementById('wr-cs-pay-overlay');
+  if(o)o.style.display='none';
+}
+window.showComingSoon=showComingSoon;
+window.closeComingSoon=closeComingSoon;
+
 })();
