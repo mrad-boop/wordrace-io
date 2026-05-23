@@ -5,7 +5,8 @@
 <link rel="stylesheet" href="global.css"/>
 <link rel="stylesheet" href="nav.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WordRace.io — Player Profilee</title>
+<title>WordRace.io — Mon Profil</title>
+<style>body{opacity:0;transition:opacity .2s}</style>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -236,7 +237,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Play</a>
     <a class="nav-link" href="daily-league.html">📅 League</a>
-    <a class="nav-link active" href="#">👤 Profilee</a><span id="nav-wrc-badge" onclick="switchTab('wallet')" title="Balance WRC — cliquez porr recharger" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
+    <a class="nav-link active" href="#">👤 Profile</a><span id="nav-wrc-badge" onclick="switchTab('wallet')" title="Balance WRC — cliquez porr recharger" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
   </div>
 </nav>
 
@@ -1106,15 +1107,37 @@ WRCEngine.subscribe(function(bal){
 <script id="profile-init">
 // ── Load logged-in user into profile ─────────────────────────
 (function(){
+
+  function showProfileLoginWall(){
+    const tabs=document.querySelector('.tabs-bar');
+    const main=document.querySelector('.main');
+    const banner=document.querySelector('.profile-banner');
+    if(tabs)tabs.style.display='none';
+    if(banner)banner.innerHTML=`<div class="pb-bg"></div><div class="pb-inner" style="padding-bottom:2rem"><div class="pb-info"><div class="pb-username">Mon Profil</div><div class="pb-meta"><span class="pb-tag pt-lime">🆓 Free Zone</span><span class="pb-joined">Connecte-toi pour accéder à ton profil</span></div></div></div>`;
+    if(main)main.innerHTML=`<div style="max-width:400px;margin:3rem auto;text-align:center;padding:0 1.5rem">
+      <div style="font-size:3.5rem;margin-bottom:1rem">🔐</div>
+      <div style="font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.04em;color:var(--text);margin-bottom:.4rem">CONNECTE-TOI</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);line-height:1.75;margin-bottom:2rem">Crée un compte gratuit pour accéder à<br>ton profil, historique et statistiques.</div>
+      <button onclick="openLogin()" style="width:100%;padding:.95rem;border-radius:.7rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;letter-spacing:.05em;margin-bottom:.8rem">🎯 Créer un compte — Gratuit</button>
+      <a href="game.html" style="display:block;font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.65rem">← Retour au jeu</a>
+    </div>`;
+    if(typeof WRAuth!=='undefined'){
+      WRAuth.subscribe(u=>{if(u)window.location.reload();});
+    }else{
+      window.addEventListener('load',()=>{if(typeof WRAuth!=='undefined')WRAuth.subscribe(u=>{if(u)window.location.reload();});});
+    }
+  }
+
   function initProfile(){
     // Get user from auth system
     const user = (typeof WRAuth !== 'undefined' && WRAuth.user)
       ? WRAuth.user
       : (function(){ try{ return JSON.parse(localStorage.getItem('wr_user')||'null'); }catch{return null;} })();
 
+    document.body.style.opacity = '1';
+
     if(!user){
-      // Not logged in → redirect to home with login prompt
-      window.location.href = 'index.html';
+      showProfileLoginWall();
       return;
     }
 
@@ -1182,6 +1205,7 @@ WRCEngine.subscribe(function(bal){
       setTimeout(function(){ tryInitProfile(attempts+1); }, 200);
       return;
     }
+    document.body.style.opacity = '1';
     initProfile();
   }
 
