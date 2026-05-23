@@ -126,6 +126,34 @@ footer a{color:var(--forest);text-decoration:none}
   #wr-hamburger{display:flex!important}
   .topnav{flex-wrap:nowrap!important;padding:.6rem 1rem!important}
 }
+
+/* Nav logo fix */
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif !important;
+  font-size:1.6rem !important;
+  color:var(--text,#1A1A1A) !important;
+  text-decoration:none !important;
+  letter-spacing:.04em;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+.nav-logo span{ color:var(--lime,#9FE870) !important; }
+
+
+@media(max-width:640px){
+  /* Hide all text between logo and right side on mobile */
+  .topnav > span:not(#nav-wrc-badge):not(#wr-nav-user),
+  .topnav > div:not(#wr-hamburger):not(.nav-links) > span,
+  .nav-links { display:none !important; }
+  /* Keep topnav tight */
+  .topnav {
+    padding:.6rem 1rem !important;
+    gap:.5rem !important;
+    flex-wrap:nowrap !important;
+    justify-content:space-between;
+  }
+}
+
 </style>
 
 <script>
