@@ -286,15 +286,19 @@ function updateNavUser(user){
   const btn = document.getElementById('wr-nav-user');
   if(!btn) return;
   if(!user){
+    btn.classList.remove('logged-in');
     btn.innerHTML = `<span style="font-size:.85rem">👤</span> Sign in`;
+    btn.style.cssText = '';
     btn.onclick = openLogin;
     return;
   }
+  btn.classList.add('logged-in');
   btn.innerHTML = `
     <div class="user-av">${user.avatar||user.username[0].toUpperCase()}</div>
     <span>${user.username.length>10?user.username.slice(0,10)+'…':user.username}</span>
     <span style="font-size:.6rem;color:#9B9B9B">▾</span>`;
   btn.onclick = function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); };
+  btn.addEventListener('touchend', function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); }, {passive:false});
   btn.addEventListener('touchend', function(e){ e.stopPropagation(); e.preventDefault(); toggleUserDropdown(); }, {passive:false});
 
   // Update dropdown
