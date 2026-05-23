@@ -359,13 +359,6 @@ function buildHamburger(){
   const nav = document.querySelector('.topnav');
   if(!nav) return;
 
-  // CSS
-  if(!document.getElementById('wr-ham-css')){
-    // CSS loaded from nav.css
-  // DISABLED - was causing opacity issues
-  /* // (CSS in nav.css)
-  }
-
   // Hamburger button
   const btn = document.createElement('button');
   btn.id = 'wr-hamburger';
