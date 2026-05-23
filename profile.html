@@ -19,7 +19,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 /* NAV */
 .topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none;text-decoration:none!important;color:var(--text,#1A1A1A)!important}
 .nav-logo span{color:var(--lime)}
 .nav-links{display:flex;gap:.45rem}
 .nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
@@ -176,6 +176,28 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   .elo-wrap{flex-direction:column}
   .wr-ring-wrap{flex-direction:column}
 }
+
+@media(max-width:640px){
+  /* Hide all text between logo and right side on mobile */
+  .topnav > span:not(#nav-wrc-badge):not(#wr-nav-user),
+  .topnav > div:not(#wr-hamburger):not(.nav-links) > span,
+  .nav-links { display:none !important; }
+  /* Keep topnav tight */
+  .topnav {
+    padding:.6rem 1rem !important;
+    gap:.5rem !important;
+    flex-wrap:nowrap !important;
+    justify-content:space-between;
+  }
+}
+
+
+@media(max-width:640px){
+  #nav-middle-info { display:none !important; }
+  .nav-back { display:none !important; }
+  #mode-label { display:none !important; }
+}
+
 </style>
 
 <script>
@@ -288,7 +310,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
 <!-- NAV -->
 <nav class="topnav">
-  <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
+  <a class="nav-logo" href="index.html" style="text-decoration:none;color:var(--text,#1A1A1A);font-family:\'Bebas Neue\',sans-serif;font-size:1.6rem;letter-spacing:.04em">WORD<span>RACE</span>.IO</a>
   <div class="nav-links">
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Play</a>
