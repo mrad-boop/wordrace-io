@@ -640,19 +640,29 @@ function showValidating() {
     '<div class="validating-msg"><span class="spin"></span>Checking English dictionary...</div>';
 }
 
-// ── DICTIONARY VALIDATION (fallback tier 2) ───────────────────
-// Uses Free Dictionary API — English specialist, no key required
+// ── DICTIONARY VALIDATION ─────────────────────────────────────
+// Uses Free Dictionary API for common nouns.
+// Proper noun categories (Country, First Name, Brand, Movie…) are
+// validated by letter only — dictionaries don't cover proper nouns.
+const PROPER_NOUN_CATS = ['country','first name','city','brand','movie','series','singer','actor','celebrity','athlete'];
+
 async function validateDictionary() {
   const results = await Promise.all(CATS.map(async (cat, i) => {
     const w = (G.answers[i] || '').trim();
     if (!w || w.length < 2) return { cat, word: w, valid: false, pts: 0, reason: 'Empty' };
     if (w[0].toUpperCase() !== G.letter) return { cat, word: w, valid: false, pts: 0, reason: 'Wrong letter' };
+
+    const isProper = PROPER_NOUN_CATS.some(p => cat.toLowerCase().includes(p));
+    if (isProper) {
+      // Can't validate proper nouns with a dictionary — accept if letter is right
+      return { cat, word: w, valid: true, pts: 10, reason: '' };
+    }
+
     try {
       const r = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(w.toLowerCase())}`);
       const ok = r.ok;
       return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Not a valid English word' };
     } catch {
-      // network error — fall through to letter-only check
       const ok = w.length >= 2 && w[0].toUpperCase() === G.letter;
       return { cat, word: w, valid: ok, pts: ok ? 10 : 0, reason: ok ? '' : 'Does not start with ' + G.letter };
     }
