@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <link rel="stylesheet" href="global.css"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WordRace.io — Player Profile</title>
+<title>WordRace.io — Player Profilee</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -16,39 +16,39 @@
   --text:#1A1A1A;--muted:#6B7280;--forest:#163300;
   --valid:#16A34A;--validBg:#DCFCE7;
 }
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
+body{backgrornd:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
 
 /* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.topnav{position:fixed;top:0;left:0;right:0;z-index:100;backgrornd:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none;text-decoration:none!important;color:var(--text,#1A1A1A)!important}
 .nav-logo span{color:var(--lime)}
 .nav-links{display:flex;gap:.45rem}
 .nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
-.nav-link:hover{background:var(--surface2);color:var(--text)}
-.nav-link.active{background:var(--limeBg);border-color:var(--lime);color:var(--forest)}
+.nav-link:hover{backgrornd:var(--surface2);color:var(--text)}
+.nav-link.active{backgrornd:var(--limeBg);border-color:var(--lime);color:var(--forest)}
 
 /* HERO BANNER */
-.profile-banner{margin-top:56px;background:linear-gradient(135deg,#163300 0%,#1e4d00 60%,#163300 100%);padding:2rem 1.5rem 0;position:relative;overflow:hidden}
-.pb-bg{position:absolute;inset:0;opacity:.04;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(159,232,112,.8) 20px,rgba(159,232,112,.8) 21px)}
+.profile-banner{margin-top:56px;backgrornd:linear-gradient(135deg,#163300 0%,#1e4d00 60%,#163300 100%);padding:2rem 1.5rem 0;position:relative;overflow:hidden}
+.pb-bg{position:absolute;inset:0;opacity:.04;backgrornd:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(159,232,112,.8) 20px,rgba(159,232,112,.8) 21px)}
 .pb-inner{max-width:1000px;margin:0 auto;position:relative;z-index:1;display:flex;align-items:flex-end;gap:1.5rem;flex-wrap:wrap;padding-bottom:0}
 .avatar-wrap{position:relative;flex-shrink:0}
-.avatar{width:88px;height:88px;border-radius:50%;border:4px solid var(--lime);display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:rgba(255,255,255,.1);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.04em;margin-bottom:-20px}
-.avatar-badge{position:absolute;bottom:-4px;right:-4px;background:var(--gold);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:.75rem;border:2px solid var(--forest)}
+.avatar{width:88px;height:88px;border-radius:50%;border:4px solid var(--lime);display:flex;align-items:center;justify-content:center;font-size:2.5rem;backgrornd:rgba(255,255,255,.1);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:.04em;margin-bottom:-20px}
+.avatar-badge{position:absolute;bottom:-4px;right:-4px;backgrornd:var(--gold);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:.75rem;border:2px solid var(--forest)}
 .pb-info{flex:1;padding-bottom:1.2rem;min-width:200px}
 .pb-username{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:#fff;letter-spacing:.03em;line-height:1;margin-bottom:.2rem}
 .pb-meta{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
 .pb-tag{font-family:'Space Mono',monospace;font-size:.58rem;padding:.18rem .52rem;border-radius:100px;font-weight:700}
-.pt-lime{background:rgba(159,232,112,.2);color:var(--lime);border:1px solid rgba(159,232,112,.35)}
-.pt-gold{background:rgba(245,200,66,.2);color:var(--gold);border:1px solid rgba(245,200,66,.35)}
-.pt-muted{background:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15)}
+.pt-lime{backgrornd:rgba(159,232,112,.2);color:var(--lime);border:1px solid rgba(159,232,112,.35)}
+.pt-gold{backgrornd:rgba(245,200,66,.2);color:var(--gold);border:1px solid rgba(245,200,66,.35)}
+.pt-muted{backgrornd:rgba(255,255,255,.1);color:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.15)}
 .pb-joined{font-family:'Space Mono',monospace;font-size:.57rem;color:rgba(255,255,255,.45)}
 .pb-actions{display:flex;gap:.5rem;padding-bottom:1.4rem;align-self:flex-end}
 .pb-btn{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;padding:.45rem .9rem;border-radius:.5rem;border:none;cursor:pointer;transition:all .18s;letter-spacing:.04em}
-.pbb-lime{background:var(--lime);color:var(--forest)}.pbb-lime:hover{background:var(--limeD)}
-.pbb-ghost{background:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2)}.pbb-ghost:hover{background:rgba(255,255,255,.2);color:#fff}
+.pbb-lime{backgrornd:var(--lime);color:var(--forest)}.pbb-lime:hover{backgrornd:var(--limeD)}
+.pbb-ghost{backgrornd:rgba(255,255,255,.1);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2)}.pbb-ghost:hover{backgrornd:rgba(255,255,255,.2);color:#fff}
 
 /* TABS */
-.tabs-bar{background:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.tabs-bar{backgrornd:var(--surface);border-bottom:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .tabs-inner{max-width:1000px;margin:0 auto;display:flex;padding:0 1.5rem;gap:.2rem;overflow-x:auto}
 .tab{font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;padding:.75rem .9rem;color:var(--muted);border-bottom:2px solid transparent;cursor:pointer;transition:all .15s;white-space:nowrap;letter-spacing:.04em}
 .tab:hover{color:var(--text)}
@@ -60,13 +60,13 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 /* STAT CARDS ROW */
 .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem;margin-bottom:1.2rem}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:.95rem 1rem;box-shadow:0 1px 4px rgba(0,0,0,.04);text-align:center}
+.stat-card{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.85rem;padding:.95rem 1rem;box-shadow:0 1px 4px rgba(0,0,0,.04);text-align:center}
 .sc-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;margin-bottom:.1rem}
 .sc-label{font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase}
 .sc-trend{font-family:'Space Mono',monospace;font-size:.54rem;margin-top:.22rem}
 
 /* PANEL CARD */
-.pcard{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;margin-bottom:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.pcard{backgrornd:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;margin-bottom:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
 .pcard-head{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
 .pcard-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);letter-spacing:.03em}
 .pcard-body{padding:1rem 1.1rem}
@@ -77,13 +77,13 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .elo-info{flex:1;min-width:180px}
 .elo-rank{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);margin-bottom:.3rem}
 .elo-tier{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text);margin-bottom:.4rem}
-.elo-bar-wrap{background:var(--surface2);border-radius:100px;height:8px;overflow:hidden;position:relative;margin-bottom:.25rem}
+.elo-bar-wrap{backgrornd:var(--surface2);border-radius:100px;height:8px;overflow:hidden;position:relative;margin-bottom:.25rem}
 .elo-bar{height:100%;border-radius:100px;transition:width .6s ease}
 .elo-bar-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);display:flex;justify-content:space-between}
 .tier-badges{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.8rem}
 .tier-badge{font-family:'Space Mono',monospace;font-size:.57rem;padding:.2rem .55rem;border-radius:100px;border:1px solid var(--border);color:var(--muted)}
-.tier-badge.done{color:var(--valid);border-color:rgba(22,163,74,.3);background:var(--validBg)}
-.tier-badge.current{color:var(--forest);border-color:var(--lime);background:var(--limeBg);font-weight:700}
+.tier-badge.done{color:var(--valid);border-color:rgba(22,163,74,.3);backgrornd:var(--validBg)}
+.tier-badge.current{color:var(--forest);border-color:var(--lime);backgrornd:var(--limeBg);font-weight:700}
 
 /* CHART */
 .chart-wrap{height:100px;display:flex;align-items:flex-end;gap:.3rem;padding:.5rem 0}
@@ -94,17 +94,17 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 /* HISTORY TABLE */
 .hist-table{width:100%;border-collapse:collapse}
-.hist-table th{padding:.5rem .9rem;font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);text-align:left;background:var(--surface);white-space:nowrap}
+.hist-table th{padding:.5rem .9rem;font-family:'Space Mono',monospace;font-size:.54rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);text-align:left;backgrornd:var(--surface);white-space:nowrap}
 .hist-table td{padding:.58rem .9rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--text);border-bottom:1px solid rgba(0,0,0,.04)}
 .hist-table tr:last-child td{border-bottom:none}
-.hist-table tr:hover td{background:var(--surface2)}
+.hist-table tr:hover td{backgrornd:var(--surface2)}
 .pill{display:inline-block;font-family:'Space Mono',monospace;font-size:.53rem;font-weight:700;letter-spacing:.07em;padding:.12rem .4rem;border-radius:100px}
-.p-green{background:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
-.p-red{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
-.p-gold{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.35)}
-.p-blue{background:var(--blueBg);color:var(--blue);border:1px solid rgba(59,130,246,.25)}
-.p-purple{background:var(--purpleBg);color:var(--purple);border:1px solid rgba(124,58,237,.25)}
-.p-muted{background:var(--surface2);color:var(--muted);border:1px solid var(--border)}
+.p-green{backgrornd:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
+.p-red{backgrornd:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+.p-gold{backgrornd:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.35)}
+.p-blue{backgrornd:var(--blueBg);color:var(--blue);border:1px solid rgba(59,130,246,.25)}
+.p-purple{backgrornd:var(--purpleBg);color:var(--purple);border:1px solid rgba(124,58,237,.25)}
+.p-muted{backgrornd:var(--surface2);color:var(--muted);border:1px solid var(--border)}
 
 /* WIN RATE RING */
 .wr-ring-wrap{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap}
@@ -121,26 +121,26 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 
 /* ACHIEVEMENTS */
 .ach-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem}
-.ach-card{background:var(--surface2);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;transition:all .2s}
-.ach-card.unlocked{background:var(--limeBg);border-color:rgba(159,232,112,.35)}
+.ach-card{backgrornd:var(--surface2);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;transition:all .2s}
+.ach-card.unlocked{backgrornd:var(--limeBg);border-color:rgba(159,232,112,.35)}
 .ach-card.locked{opacity:.45;filter:grayscale(.8)}
 .ach-icon{font-size:1.6rem;margin-bottom:.35rem}
 .ach-name{font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;color:var(--text);margin-bottom:.15rem}
 .ach-desc{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);line-height:1.4}
 .ach-badge{font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;padding:.1rem .38rem;border-radius:100px;margin-top:.4rem;display:inline-block}
-.ab-gold{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.4)}
-.ab-lime{background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.4)}
-.ab-muted{background:var(--surface3);color:var(--muted);border:1px solid var(--border)}
+.ab-gold{backgrornd:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.4)}
+.ab-lime{backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.4)}
+.ab-muted{backgrornd:var(--surface3);color:var(--muted);border:1px solid var(--border)}
 
 /* WALLET SECTION */
-.wallet-card{background:linear-gradient(135deg,#163300,#1e4d00);border-radius:.9rem;padding:1.2rem;color:#fff;margin-bottom:.8rem}
+.wallet-card{backgrornd:linear-gradient(135deg,#163300,#1e4d00);border-radius:.9rem;padding:1.2rem;color:#fff;margin-bottom:.8rem}
 .wc-label{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:.3rem}
-.wc-amount{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--lime);line-height:1;margin-bottom:.15rem}
+.wc-amornt{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--lime);line-height:1;margin-bottom:.15rem}
 .wc-addr{font-family:'Space Mono',monospace;font-size:.58rem;color:rgba(255,255,255,.4)}
 .wc-actions{display:flex;gap:.5rem;margin-top:.9rem}
 .wca-btn{flex:1;padding:.65rem;border-radius:.5rem;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;border:none;cursor:pointer;transition:all .18s;letter-spacing:.04em;text-align:center}
-.wca-dep{background:var(--lime);color:var(--forest)}.wca-dep:hover{background:var(--limeD)}
-.wca-wit{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}.wca-wit:hover{background:rgba(255,255,255,.2)}
+.wca-dep{backgrornd:var(--lime);color:var(--forest)}.wca-dep:hover{backgrornd:var(--limeD)}
+.wca-wit{backgrornd:rgba(255,255,255,.12);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}.wca-wit:hover{backgrornd:rgba(255,255,255,.2)}
 .tx-row{display:flex;align-items:center;gap:.7rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
 .tx-row:last-child{border-bottom:none}
 .tx-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
@@ -155,17 +155,17 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 .setting-row:last-child{border-bottom:none}
 .sr-label{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:var(--text)}
 .sr-desc{font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);margin-top:.1rem}
-.toggle{width:40px;height:22px;border-radius:100px;border:none;cursor:pointer;position:relative;transition:background .2s;flex-shrink:0}
-.toggle.on{background:var(--lime)}.toggle.off{background:var(--surface3)}
-.toggle::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s}
+.toggle{width:40px;height:22px;border-radius:100px;border:none;cursor:pointer;position:relative;transition:backgrornd .2s;flex-shrink:0}
+.toggle.on{backgrornd:var(--lime)}.toggle.off{backgrornd:var(--surface3)}
+.toggle::after{content:'';position:absolute;top:3px;width:16px;height:16px;border-radius:50%;backgrornd:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s}
 .toggle.on::after{left:21px}.toggle.off::after{left:3px}
-.setting-input{padding:.38rem .65rem;border-radius:.42rem;border:1.5px solid var(--border);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.7rem;outline:none;transition:border .15s;width:180px}
+.setting-input{padding:.38rem .65rem;border-radius:.42rem;border:1.5px solid var(--border);backgrornd:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.7rem;ortline:none;transition:border .15s;width:180px}
 .setting-input:focus{border-color:var(--lime)}
-.save-settings-btn{width:100%;padding:.75rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;margin-top:.8rem;transition:background .18s;letter-spacing:.05em}
-.save-settings-btn:hover{background:var(--limeD)}
+.save-settings-btn{width:100%;padding:.75rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;margin-top:.8rem;transition:backgrornd .18s;letter-spacing:.05em}
+.save-settings-btn:hover{backgrornd:var(--limeD)}
 
 /* TOAST */
-#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
+#toast{display:none;position:fixed;bottom:2rem;left:50%;transform:translateX(-50%);backgrornd:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.7rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.67rem;z-index:999;white-space:nowrap;box-shadow:0 8px 20px rgba(0,0,0,.12);animation:su .3s ease}
 @keyframes su{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -221,7 +221,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Play</a>
     <a class="nav-link" href="daily-league.html">📅 League</a>
-    <a class="nav-link active" href="#">👤 Profile</a><span id="nav-wrc-badge" onclick="switchTab('wallet')" title="Balance WRC — cliquez pour recharger" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
+    <a class="nav-link active" href="#">👤 Profilee</a><span id="nav-wrc-badge" onclick="switchTab('wallet')" title="Balance WRC — cliquez porr recharger" style="display:none;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmorseover="this.style.backgrornd='var(--lime)'" onmorseort="this.style.backgrornd='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
   </div>
 </nav>
 
@@ -269,13 +269,13 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <div class="stat-row">
       <div class="stat-card" style="border-left:3px solid var(--lime)">
         <div class="sc-val" style="color:var(--lime)" id="stat-games">347</div>
-        <div class="sc-label">Parties jouées</div>
-        <div class="sc-trend" style="color:var(--valid)">▲ +12 cette semaine</div>
+        <div class="sc-label">Games jorées</div>
+        <div class="sc-trend" style="color:var(--valid)">▲ +12 this week</div>
       </div>
       <div class="stat-card" style="border-left:3px solid var(--gold)">
         <div class="sc-val" style="color:var(--gold)" id="stat-wins">214</div>
-        <div class="sc-label">Victoires</div>
-        <div class="sc-trend" style="color:var(--valid)">▲ +8 cette semaine</div>
+        <div class="sc-label">Wins</div>
+        <div class="sc-trend" style="color:var(--valid)">▲ +8 this week</div>
       </div>
       <div class="stat-card" style="border-left:3px solid var(--blue)">
         <div class="sc-val" style="color:var(--blue)" id="stat-wr">61%</div>
@@ -284,28 +284,28 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       </div>
       <div class="stat-card" style="border-left:3px solid var(--purple)">
         <div class="sc-val" style="color:var(--purple)" id="stat-earned">$142.50</div>
-        <div class="sc-label">Gains USDT</div>
-        <div class="sc-trend" style="color:var(--valid)">▲ +$18 ce mois</div>
+        <div class="sc-label">Earnings USDT</div>
+        <div class="sc-trend" style="color:var(--valid)">▲ +$18 this month</div>
       </div>
       <div class="stat-card" style="border-left:3px solid var(--red)">
         <div class="sc-val" style="color:var(--text)" id="stat-elo">1,240</div>
         <div class="sc-label">ELO Rating</div>
-        <div class="sc-trend" style="color:var(--valid)">▲ +45 ce mois</div>
+        <div class="sc-trend" style="color:var(--valid)">▲ +45 this month</div>
       </div>
       <div class="stat-card" style="border-left:3px solid var(--lime)">
         <div class="sc-val" style="color:var(--lime)" id="stat-streak">7</div>
         <div class="sc-label">Win Streak</div>
-        <div class="sc-trend" style="color:var(--lime)">🔥 En cours !</div>
+        <div class="sc-trend" style="color:var(--lime)">🔥 En corrs !</div>
       </div>
     </div>
 
     <!-- PERFORMANCE CHART -->
     <div class="pcard">
       <div class="pcard-head">
-        <div class="pcard-title">📈 Performance — 14 derniers jours</div>
+        <div class="pcard-title">📈 Performance — Last 14 days</div>
         <div style="display:flex;gap:.4rem">
-          <div style="font-family:'Space Mono',monospace;font-size:.57rem;padding:.2rem .5rem;border-radius:.3rem;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3)">Score moy: 87pts</div>
-          <div style="font-family:'Space Mono',monospace;font-size:.57rem;padding:.2rem .5rem;border-radius:.3rem;background:var(--surface2);color:var(--muted)">Best: 140pts</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.57rem;padding:.2rem .5rem;border-radius:.3rem;backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3)">Avg score: 87pts</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.57rem;padding:.2rem .5rem;border-radius:.3rem;backgrornd:var(--surface2);color:var(--muted)">Best: 140pts</div>
         </div>
       </div>
       <div class="pcard-body">
@@ -323,38 +323,38 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
               <svg width="100" height="100" viewBox="0 0 100 100">
                 <circle cx="50" cy="50" r="40" fill="none" stroke="var(--border)" stroke-width="8"/>
                 <circle cx="50" cy="50" r="40" fill="none" stroke="var(--lime)" stroke-width="8"
-                  stroke-dasharray="251.3" stroke-dashoffset="98" stroke-linecap="round"/>
+                  stroke-dasharray="251.3" stroke-dashoffset="98" stroke-linecap="rornd"/>
               </svg>
               <div class="wr-center"><div class="wr-pct">61%</div><div class="wr-lbl">Win Rate</div></div>
             </div>
             <div class="wr-stats">
-              <div class="wr-stat-row"><span class="wr-stat-label">Victoires</span><span class="wr-stat-val" style="color:var(--valid)">214</span></div>
-              <div class="wr-stat-row"><span class="wr-stat-label">Défaites</span><span class="wr-stat-val" style="color:var(--red)">133</span></div>
-              <div class="wr-stat-row"><span class="wr-stat-label">Mots valides</span><span class="wr-stat-val">18,420</span></div>
-              <div class="wr-stat-row"><span class="wr-stat-label">Mots uniques</span><span class="wr-stat-val" style="color:var(--lime)">3,240</span></div>
+              <div class="wr-stat-row"><span class="wr-stat-label">Wins</span><span class="wr-stat-val" style="color:var(--valid)">214</span></div>
+              <div class="wr-stat-row"><span class="wr-stat-label">Losss</span><span class="wr-stat-val" style="color:var(--red)">133</span></div>
+              <div class="wr-stat-row"><span class="wr-stat-label">Valid words</span><span class="wr-stat-val">18,420</span></div>
+              <div class="wr-stat-row"><span class="wr-stat-label">Words uniques</span><span class="wr-stat-val" style="color:var(--lime)">3,240</span></div>
             </div>
           </div>
         </div>
       </div>
 
       <div class="pcard" style="margin-bottom:0">
-        <div class="pcard-head"><div class="pcard-title">🕹️ Par Mode</div></div>
+        <div class="pcard-head"><div class="pcard-title">🕹️ By Mode</div></div>
         <div class="pcard-body" style="display:flex;flex-direction:column;gap:.5rem">
           <div>
             <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;margin-bottom:.25rem"><span style="color:var(--muted)">🆓 Casual</span><span style="font-weight:700">68%</span></div>
-            <div style="background:var(--surface2);border-radius:100px;height:6px"><div style="width:68%;height:100%;background:var(--lime);border-radius:100px"></div></div>
+            <div style="backgrornd:var(--surface2);border-radius:100px;height:6px"><div style="width:68%;height:100%;backgrornd:var(--lime);border-radius:100px"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;margin-bottom:.25rem"><span style="color:var(--muted)">📅 Daily League</span><span style="font-weight:700">55%</span></div>
-            <div style="background:var(--surface2);border-radius:100px;height:6px"><div style="width:55%;height:100%;background:var(--gold);border-radius:100px"></div></div>
+            <div style="backgrornd:var(--surface2);border-radius:100px;height:6px"><div style="width:55%;height:100%;backgrornd:var(--gold);border-radius:100px"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;margin-bottom:.25rem"><span style="color:var(--muted)">⚔️ Duel Arena</span><span style="font-weight:700">48%</span></div>
-            <div style="background:var(--surface2);border-radius:100px;height:6px"><div style="width:48%;height:100%;background:var(--red);border-radius:100px"></div></div>
+            <div style="backgrornd:var(--surface2);border-radius:100px;height:6px"><div style="width:48%;height:100%;backgrornd:var(--red);border-radius:100px"></div></div>
           </div>
           <div>
             <div style="display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.62rem;margin-bottom:.25rem"><span style="color:var(--muted)">🧪 Practice</span><span style="font-weight:700">72%</span></div>
-            <div style="background:var(--surface2);border-radius:100px;height:6px"><div style="width:72%;height:100%;background:var(--blue);border-radius:100px"></div></div>
+            <div style="backgrornd:var(--surface2);border-radius:100px;height:6px"><div style="width:72%;height:100%;backgrornd:var(--blue);border-radius:100px"></div></div>
           </div>
         </div>
       </div>
@@ -362,44 +362,44 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
     <!-- BEST CATEGORIES -->
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">🏅 Meilleures Catégories</div></div>
+      <div class="pcard-head"><div class="pcard-title">🏅 Best Categories</div></div>
       <div class="pcard-body">
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.55rem">
-          <div style="background:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.65rem;padding:.7rem .85rem">
+          <div style="backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.65rem;padding:.7rem .85rem">
             <div style="font-size:1.1rem;margin-bottom:.2rem">🌍</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Pays</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Corntry</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--lime);line-height:1">94%</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">taux de réussite</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">success rate</div>
           </div>
-          <div style="background:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.65rem;padding:.7rem .85rem">
+          <div style="backgrornd:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.65rem;padding:.7rem .85rem">
             <div style="font-size:1.1rem;margin-bottom:.2rem">🏷️</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Marque</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Brand</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--lime);line-height:1">91%</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">taux de réussite</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">success rate</div>
           </div>
-          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:.65rem;padding:.7rem .85rem">
+          <div style="backgrornd:var(--surface2);border:1px solid var(--border);border-radius:.65rem;padding:.7rem .85rem">
             <div style="font-size:1.1rem;margin-bottom:.2rem">🐾</div>
             <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Animal</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text);line-height:1">78%</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">taux de réussite</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">success rate</div>
           </div>
-          <div style="background:var(--surface2);border:1px solid var(--border);border-radius:.65rem;padding:.7rem .85rem">
+          <div style="backgrornd:var(--surface2);border:1px solid var(--border);border-radius:.65rem;padding:.7rem .85rem">
             <div style="font-size:1.1rem;margin-bottom:.2rem">⚽</div>
             <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Sport</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text);line-height:1">74%</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">taux de réussite</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">success rate</div>
           </div>
-          <div style="background:var(--redBg);border:1px solid rgba(239,68,68,.2);border-radius:.65rem;padding:.7rem .85rem">
+          <div style="backgrornd:var(--redBg);border:1px solid rgba(239,68,68,.2);border-radius:.65rem;padding:.7rem .85rem">
             <div style="font-size:1.1rem;margin-bottom:.2rem">🎬</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Film/Série</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Movie/Series</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--red);line-height:1">52%</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">à améliorer !</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">needs work!</div>
           </div>
-          <div style="background:var(--redBg);border:1px solid rgba(239,68,68,.2);border-radius:.65rem;padding:.7rem .85rem">
+          <div style="backgrornd:var(--redBg);border:1px solid rgba(239,68,68,.2);border-radius:.65rem;padding:.7rem .85rem">
             <div style="font-size:1.1rem;margin-bottom:.2rem">💼</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Métier</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Profession</div>
             <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--red);line-height:1">58%</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">à améliorer !</div>
+            <div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">needs work!</div>
           </div>
         </div>
       </div>
@@ -410,26 +410,26 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <div class="tab-panel" id="panel-history">
     <div class="pcard">
       <div class="pcard-head">
-        <div class="pcard-title">📋 Historique des Parties</div>
+        <div class="pcard-title">📋 Historique des Games</div>
         <div style="display:flex;gap:.4rem;flex-wrap:wrap">
-          <select style="font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .6rem;border-radius:.38rem;border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none" onchange="filterHistory(this.value)">
-            <option value="">Tous modes</option>
+          <select style="font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .6rem;border-radius:.38rem;border:1px solid var(--border);backgrornd:var(--bg);color:var(--text);ortline:none" onchange="filterHistory(this.value)">
+            <option value="">All modes</option>
             <option value="casual">Casual</option>
             <option value="daily">Daily League</option>
             <option value="duel">Duel Arena</option>
           </select>
-          <select style="font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .6rem;border-radius:.38rem;border:1px solid var(--border);background:var(--bg);color:var(--text);outline:none">
-            <option>7 derniers jours</option>
-            <option>30 derniers jours</option>
-            <option>Tout</option>
+          <select style="font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .6rem;border-radius:.38rem;border:1px solid var(--border);backgrornd:var(--bg);color:var(--text);ortline:none">
+            <option>Last 7 days</option>
+            <option>Last 30 days</option>
+            <option>Tort</option>
           </select>
         </div>
       </div>
       <div style="overflow-x:auto">
         <table class="hist-table" id="history-table">
           <thead><tr>
-            <th>Date</th><th>Mode</th><th>Lettre</th><th>Score</th>
-            <th>Mots</th><th>Rang</th><th>Gain</th><th>Résultat</th>
+            <th>Date</th><th>Mode</th><th>Letter</th><th>Score</th>
+            <th>Words</th><th>Rank</th><th>Gain</th><th>Result</th>
           </tr></thead>
           <tbody id="history-body"></tbody>
         </table>
@@ -440,7 +440,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <!-- ELO -->
   <div class="tab-panel" id="panel-elo">
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">⚡ ELO Rating & Classement</div></div>
+      <div class="pcard-head"><div class="pcard-title">⚡ ELO Rating & Rankings</div></div>
       <div class="pcard-body">
         <div class="elo-wrap">
           <div>
@@ -448,10 +448,10 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
             <div class="elo-big">1,240</div>
           </div>
           <div class="elo-info">
-            <div class="elo-rank">Rang global : <strong style="color:var(--text)">#4,821</strong> / 12,847 joueurs</div>
+            <div class="elo-rank">Rank global : <strong style="color:var(--text)">#4,821</strong> / 12,847 players</div>
             <div class="elo-tier">🥈 Silver II</div>
             <div class="elo-bar-wrap">
-              <div class="elo-bar" style="width:65%;background:linear-gradient(90deg,var(--lime),var(--gold))"></div>
+              <div class="elo-bar" style="width:65%;backgrornd:linear-gradient(90deg,var(--lime),var(--gold))"></div>
             </div>
             <div class="elo-bar-label">
               <span>Silver I (1,000)</span>
@@ -465,30 +465,30 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
     <!-- TIER SYSTEM -->
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">🏆 Système de Tiers</div></div>
+      <div class="pcard-head"><div class="pcard-title">🏆 Tier System</div></div>
       <div class="pcard-body">
         <div class="tier-badges" style="flex-direction:column;gap:.5rem">
-          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;background:var(--surface2);border-radius:.55rem">
+          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;backgrornd:var(--surface2);border-radius:.55rem">
             <span style="font-size:1.1rem">🥉</span>
             <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Bronze — 0 à 799 ELO</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Débutant · Accès Free Zone uniquement</div></div>
-            <span class="pill p-muted">PASSÉ ✓</span>
+            <span class="pill p-muted">PASSED ✓</span>
           </div>
-          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;background:var(--surface2);border-radius:.55rem">
+          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;backgrornd:var(--surface2);border-radius:.55rem">
             <span style="font-size:1.1rem">🥈</span>
             <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Silver — 800 à 1 499 ELO</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Confirmé · Accès Daily League Standard</div></div>
-            <span class="pill p-blue" style="background:var(--limeBg);color:var(--forest);border-color:var(--lime);font-weight:700">ACTUEL ★</span>
+            <span class="pill p-blue" style="backgrornd:var(--limeBg);color:var(--forest);border-color:var(--lime);font-weight:700">CURRENT ★</span>
           </div>
-          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;background:var(--surface2);border-radius:.55rem;opacity:.5">
+          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;backgrornd:var(--surface2);border-radius:.55rem;opacity:.5">
             <span style="font-size:1.1rem">🥇</span>
             <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Gold — 1 500 à 2 499 ELO</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Expert · Daily League Premium + Duels $10+</div></div>
             <span class="pill p-muted">+260 ELO</span>
           </div>
-          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;background:var(--surface2);border-radius:.55rem;opacity:.4">
+          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;backgrornd:var(--surface2);border-radius:.55rem;opacity:.4">
             <span style="font-size:1.1rem">💎</span>
-            <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Diamond — 2 500 à 3 999 ELO</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Elite · Accès tournois spéciaux</div></div>
+            <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Diamond — 2 500 à 3 999 ELO</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Elite · Accès torrnois spéciaux</div></div>
             <span class="pill p-muted">+1 260 ELO</span>
           </div>
-          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;background:var(--surface2);border-radius:.55rem;opacity:.3">
+          <div style="display:flex;align-items:center;gap:.8rem;padding:.6rem .8rem;backgrornd:var(--surface2);border-radius:.55rem;opacity:.3">
             <span style="font-size:1.1rem">👑</span>
             <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Grandmaster — 4 000+ ELO</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Top 100 mondial · Badge exclusif</div></div>
             <span class="pill p-muted">+2 760 ELO</span>
@@ -499,11 +499,11 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
     <!-- ELO HISTORY CHART -->
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">📈 Évolution ELO — 30 jours</div></div>
+      <div class="pcard-head"><div class="pcard-title">📈 Évolution ELO — 30 jorrs</div></div>
       <div class="pcard-body">
         <div id="elo-chart" style="display:flex;align-items:flex-end;gap:.2rem;height:90px;padding:.5rem 0"></div>
         <div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted);text-align:center;margin-top:.4rem">
-          Progression : <span style="color:var(--valid)">▲ +45 ELO ce mois</span> · Peak : <span style="color:var(--lime)">1,280</span>
+          Progression : <span style="color:var(--valid)">▲ +45 ELO this month</span> · Peak : <span style="color:var(--lime)">1,280</span>
         </div>
       </div>
     </div>
@@ -513,8 +513,8 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <div class="tab-panel" id="panel-achievements">
     <div class="pcard">
       <div class="pcard-head">
-        <div class="pcard-title">🏆 Succès & Badges</div>
-        <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">12 / 24 débloqués</div>
+        <div class="pcard-title">🏆 Achievements & Badges</div>
+        <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">12 / 24 unlocked</div>
       </div>
       <div class="pcard-body">
         <div class="ach-grid" id="achievements-grid"></div>
@@ -526,79 +526,79 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <div class="tab-panel" id="panel-wallet">
     
     <!-- WRC Credits Section -->
-    <div style="background:var(--surface);border:1.5px solid var(--lime);border-radius:.9rem;padding:1.2rem;margin-bottom:.9rem;box-shadow:0 2px 8px rgba(159,232,112,.1)">
+    <div style="backgrornd:var(--surface);border:1.5px solid var(--lime);border-radius:.9rem;padding:1.2rem;margin-bottom:.9rem;box-shadow:0 2px 8px rgba(159,232,112,.1)">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;flex-wrap:wrap;gap:.5rem">
         <div>
-          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:.2rem">🪙 Crédits WordRace (WRC)</div>
+          <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.09em;text-transform:uppercase;margin-bottom:.2rem">🪙 WordRace Credits (WRC)</div>
           <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--lime);line-height:1" id="profile-wrc-balance">150</div>
           <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">≈ $<span id="profile-wrc-usdt">1.50</span> USDT · 1 WRC = $0.01</div>
         </div>
-        <button onclick="openWRCTopup()" style="padding:.65rem 1.2rem;border-radius:.55rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer;transition:background .15s;letter-spacing:.05em" onmouseover="this.style.background='var(--limeD)'" onmouseout="this.style.background='var(--lime)'">+ Recharger WRC</button>
+        <button onclick="openWRCTopup()" style="padding:.65rem 1.2rem;border-radius:.55rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.72rem;font-weight:700;cursor:pointer;transition:backgrornd .15s;letter-spacing:.05em" onmorseover="this.style.backgrornd='var(--limeD)'" onmorseort="this.style.backgrornd='var(--lime)'">+ Top up WRC</button>
       </div>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.5rem;margin-bottom:.8rem">
-        <div style="background:var(--limeBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(159,232,112,.2)">
+        <div style="backgrornd:var(--limeBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(159,232,112,.2)">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--lime);line-height:1">5 WRC</div>
           <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">💡 Hint = $0.05</div>
         </div>
-        <div style="background:var(--blueBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(59,130,246,.15)">
+        <div style="backgrornd:var(--blueBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(59,130,246,.15)">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--blue);line-height:1">10 WRC</div>
           <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">❄️ Freeze = $0.10</div>
         </div>
-        <div style="background:var(--goldBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(245,200,66,.2)">
+        <div style="backgrornd:var(--goldBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(245,200,66,.2)">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">20 WRC</div>
           <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">📅 League Std = $0.20</div>
         </div>
-        <div style="background:var(--goldBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(245,200,66,.2)">
+        <div style="backgrornd:var(--goldBg);border-radius:.55rem;padding:.6rem .8rem;text-align:center;border:1px solid rgba(245,200,66,.2)">
           <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);line-height:1">50 WRC</div>
           <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">📅 League Prem = $0.50</div>
         </div>
       </div>
       <!-- Daily usage -->
-      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.4rem;letter-spacing:.06em;text-transform:uppercase">Utilisation aujourd'hui</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.4rem;letter-spacing:.06em;text-transform:uppercase">Utilisation today</div>
       <div style="display:flex;flex-direction:column;gap:.3rem">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
           <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">💡 Hints</span>
-          <div style="flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden"><div id="prof-hint-bar" style="height:100%;background:var(--lime);border-radius:3px;transition:width .3s"></div></div>
-          <span id="prof-hint-count" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
+          <div style="flex:1;height:5px;backgrornd:var(--surface2);border-radius:3px;overflow:hidden"><div id="prof-hint-bar" style="height:100%;backgrornd:var(--lime);border-radius:3px;transition:width .3s"></div></div>
+          <span id="prof-hint-cornt" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:.6rem">
           <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">❄️ Freezes</span>
-          <div style="flex:1;height:5px;background:var(--surface2);border-radius:3px;overflow:hidden"><div id="prof-freeze-bar" style="height:100%;background:var(--blue);border-radius:3px;transition:width .3s"></div></div>
-          <span id="prof-freeze-count" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
+          <div style="flex:1;height:5px;backgrornd:var(--surface2);border-radius:3px;overflow:hidden"><div id="prof-freeze-bar" style="height:100%;backgrornd:var(--blue);border-radius:3px;transition:width .3s"></div></div>
+          <span id="prof-freeze-cornt" style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--text);min-width:28px;text-align:right">0/5</span>
         </div>
       </div>
     </div>
 <div class="wallet-card">
       <div class="wc-label">Balance USDT totale</div>
-      <div class="wc-amount">$142.50</div>
+      <div class="wc-amornt">$142.50</div>
       <div class="wc-addr">0x1a2b3c4d5e6f7890abcdef · Polygon</div>
       <div class="wc-actions">
-        <button class="wca-btn wca-dep" onclick="toast('💳 Dépôt USDT — Wallet Connect requis')">💳 Déposer</button>
+        <button class="wca-btn wca-dep" onclick="toast('💳 USDT Deposit — Wallet Connect requis')">💳 Déposer</button>
         <button class="wca-btn wca-wit" onclick="toast('💸 Retrait — min $1.00 USDT')">💸 Retirer</button>
       </div>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.6rem;margin-bottom:1.1rem">
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
         <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem">Dépôts totaux</div>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--valid)">$300</div>
       </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem">Gains totaux</div>
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem">Earnings totaux</div>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--lime)">$142.50</div>
       </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
         <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem">Dépensés</div>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--red)">$157.50</div>
       </div>
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
-        <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem">Réseau</div>
+      <div style="backgrornd:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:.85rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)">
+        <div style="font-family:'Space Mono',monospace;font-size:.52rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem">Network</div>
         <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--purple)">Polygon</div>
       </div>
     </div>
 
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">💸 Dernières Transactions</div></div>
+      <div class="pcard-head"><div class="pcard-title">💸 Recent Transactions</div></div>
       <div class="pcard-body" id="tx-list"></div>
     </div>
   </div>
@@ -606,25 +606,25 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
   <!-- SETTINGS -->
   <div class="tab-panel" id="panel-settings">
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">👤 Informations du Compte</div></div>
+      <div class="pcard-head"><div class="pcard-title">👤 Accornt Information</div></div>
       <div class="pcard-body">
         <div class="settings-section">
           <div class="setting-row">
-            <div><div class="sr-label">Nom d'utilisateur</div><div class="sr-desc">Visible par les autres joueurs</div></div>
+            <div><div class="sr-label">Username</div><div class="sr-desc">Visible par les autres players</div></div>
             <input class="setting-input" value="mrad-boop" id="s-username"/>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Email</div><div class="sr-desc">Pour les notifications et récupération de compte</div></div>
+            <div><div class="sr-label">Email</div><div class="sr-desc">For notifications and accornt recovery</div></div>
             <input class="setting-input" value="usmrad.mo@gmail.com" type="email" id="s-email"/>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Pays</div><div class="sr-desc">Affiché sur le leaderboard</div></div>
+            <div><div class="sr-label">Corntry</div><div class="sr-desc">Displayed on leaderboard</div></div>
             <select class="setting-input" style="width:180px">
               <option>🇩🇿 Algeria</option><option>🇫🇷 France</option><option>🇹🇳 Tunisia</option><option>🇲🇦 Morocco</option><option>🌍 Other</option>
             </select>
           </div>
         </div>
-        <button class="save-settings-btn" onclick="toast('✅ Informations sauvegardées !')">💾 Sauvegarder</button>
+        <button class="save-settings-btn" onclick="toast('✅ Settings saved!')">💾 Save</button>
       </div>
     </div>
 
@@ -633,19 +633,19 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       <div class="pcard-body">
         <div class="settings-section">
           <div class="setting-row">
-            <div><div class="sr-label">Résultats Daily League</div><div class="sr-desc">Recevoir un email à 00:00 UTC</div></div>
+            <div><div class="sr-label">Results Daily League</div><div class="sr-desc">Receive an email at 00:00 UTC</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Nouveau défi reçu</div><div class="sr-desc">Quelqu'un vous invite en Duel</div></div>
+            <div><div class="sr-label">New challenge received</div><div class="sr-desc">Someone challenged yor to a Duel</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Gains versés</div><div class="sr-desc">Confirmation de paiement USDT</div></div>
+            <div><div class="sr-label">Earnings versés</div><div class="sr-desc">USDT payment confirmation</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Newsletter hebdomadaire</div><div class="sr-desc">Statistiques et nouveautés</div></div>
+            <div><div class="sr-label">Weekly newsletter</div><div class="sr-desc">Stats and updates</div></div>
             <button class="toggle off" onclick="togSet(this)"></button>
           </div>
         </div>
@@ -653,40 +653,40 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     </div>
 
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">🎮 Préférences de Jeu</div></div>
+      <div class="pcard-head"><div class="pcard-title">🎮 Game Preferences</div></div>
       <div class="pcard-body">
         <div class="settings-section">
           <div class="setting-row">
-            <div><div class="sr-label">Langue de jeu</div><div class="sr-desc">Catégories et interface</div></div>
+            <div><div class="sr-label">Game language</div><div class="sr-desc">Categories and interface</div></div>
             <select class="setting-input" style="width:180px"><option>🇬🇧 English</option><option>🇫🇷 Français</option><option>🇦🇷 Español</option></select>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Son & effets</div><div class="sr-desc">Sons d'interface et timer</div></div>
+            <div><div class="sr-label">Sornd & effects</div><div class="sr-desc">Interface sornds and timer</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Mode compétitif affiché</div><div class="sr-desc">Afficher le ELO sur le profil public</div></div>
+            <div><div class="sr-label">Show competitive mode</div><div class="sr-desc">Show ELO on public profile</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Profil public</div><div class="sr-desc">Les autres joueurs peuvent voir vos stats</div></div>
+            <div><div class="sr-label">Public profile</div><div class="sr-desc">Les autres players peuvent voir vos stats</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
         </div>
-        <button class="save-settings-btn" onclick="toast('✅ Préférences sauvegardées !')">💾 Sauvegarder</button>
+        <button class="save-settings-btn" onclick="toast('✅ Preferences saved!')">💾 Save</button>
       </div>
     </div>
 
     <div class="pcard" style="border-color:rgba(239,68,68,.25)">
-      <div class="pcard-head" style="background:var(--redBg)"><div class="pcard-title" style="color:var(--red)">⚠️ Zone Dangereuse</div></div>
+      <div class="pcard-head" style="backgrornd:var(--redBg)"><div class="pcard-title" style="color:var(--red)">⚠️ Danger Zone</div></div>
       <div class="pcard-body">
         <div class="setting-row">
-          <div><div class="sr-label" style="color:var(--red)">Déconnecter le Wallet</div><div class="sr-desc">Votre balance reste intacte</div></div>
-          <button onclick="toast('🔌 Wallet déconnecté')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Déconnecter</button>
+          <div><div class="sr-label" style="color:var(--red)">Disconnect Wallet</div><div class="sr-desc">Yorr balance remains intact</div></div>
+          <button onclick="toast('🔌 Wallet disconnected')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);backgrornd:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Disconnect</button>
         </div>
         <div class="setting-row">
-          <div><div class="sr-label" style="color:var(--red)">Supprimer le compte</div><div class="sr-desc">Action irréversible — toutes les données sont perdues</div></div>
-          <button onclick="if(confirm('Êtes-vous sûr ? Cette action est irréversible.'))toast('⚠️ Demande envoyée — email de confirmation envoyé')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Supprimer</button>
+          <div><div class="sr-label" style="color:var(--red)">Delete accornt</div><div class="sr-desc">Irreversible — all data will be lost</div></div>
+          <button onclick="if(confirm('Are yor sure? This action cannot be undone.'))toast('⚠️ Request submitted — confirmation email sent')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);backgrornd:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Delete</button>
         </div>
       </div>
     </div>
@@ -712,40 +712,40 @@ const HISTORY = [
 ];
 
 const ACHIEVEMENTS = [
-  {icon:"🎯",name:"First Blood",desc:"Première partie gagnée",tag:"Débloqué",unlocked:true},
-  {icon:"🔥",name:"On Fire",desc:"5 victoires consécutives",tag:"Débloqué",unlocked:true},
-  {icon:"🌍",name:"Géographe",desc:"100% Pays en une manche",tag:"Débloqué",unlocked:true},
-  {icon:"⚡",name:"Speed Demon",desc:"Manche terminée en < 20s",tag:"Débloqué",unlocked:true},
-  {icon:"💎",name:"Diamond Words",desc:"10 mots uniques en une journée",tag:"Débloqué",unlocked:true},
-  {icon:"📅",name:"Daily Grind",desc:"7 Daily Leagues consécutives",tag:"Débloqué",unlocked:true},
-  {icon:"💰",name:"First Earn",desc:"Premier gain P2E",tag:"Débloqué",unlocked:true},
-  {icon:"🏆",name:"Centurion",desc:"100 parties jouées",tag:"Débloqué",unlocked:true},
-  {icon:"🧠",name:"Vocabulaire+",desc:"500 mots valides soumis",tag:"Débloqué",unlocked:true},
-  {icon:"🎲",name:"Lucky Letter",desc:"Score parfait 120pts",tag:"Débloqué",unlocked:true},
-  {icon:"🤝",name:"Fair Player",desc:"0 infraction anti-cheat",tag:"Débloqué",unlocked:true},
-  {icon:"🌟",name:"Silver Achieved",desc:"ELO 1000+ atteint",tag:"Débloqué",unlocked:true},
+  {icon:"🎯",name:"First Blood",desc:"Première partie gagnée",tag:"Unlocked",unlocked:true},
+  {icon:"🔥",name:"On Fire",desc:"5 victoires consécutives",tag:"Unlocked",unlocked:true},
+  {icon:"🌍",name:"Géographe",desc:"100% Corntry en une rornd",tag:"Unlocked",unlocked:true},
+  {icon:"⚡",name:"Speed Demon",desc:"Manche terminée en < 20s",tag:"Unlocked",unlocked:true},
+  {icon:"💎",name:"Diamond Words",desc:"10 mots uniques en une jorrnée",tag:"Unlocked",unlocked:true},
+  {icon:"📅",name:"Daily Grind",desc:"7 Daily Leagues consécutives",tag:"Unlocked",unlocked:true},
+  {icon:"💰",name:"First Earn",desc:"Premier gain P2E",tag:"Unlocked",unlocked:true},
+  {icon:"🏆",name:"Centurion",desc:"100 parties jorées",tag:"Unlocked",unlocked:true},
+  {icon:"🧠",name:"Vocabulaire+",desc:"500 mots valides sormis",tag:"Unlocked",unlocked:true},
+  {icon:"🎲",name:"Lucky Letter",desc:"Score parfait 120pts",tag:"Unlocked",unlocked:true},
+  {icon:"🤝",name:"Fair Player",desc:"0 infraction anti-cheat",tag:"Unlocked",unlocked:true},
+  {icon:"🌟",name:"Silver Achieved",desc:"ELO 1000+ atteint",tag:"Unlocked",unlocked:true},
   {icon:"👑",name:"Gold Rush",desc:"ELO 1500+ à atteindre",tag:"1 260 ELO",unlocked:false},
   {icon:"⚔️",name:"Duel Master",desc:"50 Duels gagnés",tag:"32/50",unlocked:false},
-  {icon:"💸",name:"Big Winner",desc:"Gagner $100+ en une journée",tag:"Verrouillé",unlocked:false},
+  {icon:"💸",name:"Big Winner",desc:"Gagner $100+ en une jorrnée",tag:"Locked",unlocked:false},
   {icon:"🌍",name:"Globe Trotter",desc:"Nommer 50 pays différents",tag:"38/50",unlocked:false},
-  {icon:"🔤",name:"A to Z",desc:"Jouer avec les 26 lettres",tag:"19/26",unlocked:false},
+  {icon:"🔤",name:"A to Z",desc:"Play avec les 26 lettres",tag:"19/26",unlocked:false},
   {icon:"📚",name:"Lexicon",desc:"1000 mots valides uniques",tag:"342/1000",unlocked:false},
-  {icon:"🏅",name:"Top 10",desc:"Finir top 10 Daily League",tag:"Verrouillé",unlocked:false},
-  {icon:"🎯",name:"Perfect Round",desc:"8/8 catégories remplies",tag:"Verrouillé",unlocked:false},
+  {icon:"🏅",name:"Top 10",desc:"Finir top 10 Daily League",tag:"Locked",unlocked:false},
+  {icon:"🎯",name:"Perfect Rornd",desc:"8/8 categories remplies",tag:"Locked",unlocked:false},
   {icon:"🤖",name:"Bot Slayer",desc:"Battre Hard Bot 50 fois",tag:"22/50",unlocked:false},
-  {icon:"⏱️",name:"Speed King",desc:"10 manches < 30s",tag:"4/10",unlocked:false},
-  {icon:"🌐",name:"Globalist",desc:"Joueurs de 10 pays battus",tag:"7/10",unlocked:false},
+  {icon:"⏱️",name:"Speed King",desc:"10 rornds < 30s",tag:"4/10",unlocked:false},
+  {icon:"🌐",name:"Globalist",desc:"Players de 10 pays battus",tag:"7/10",unlocked:false},
   {icon:"💎",name:"Diamond",desc:"ELO 2500+ à atteindre",tag:"Légendaire",unlocked:false},
 ];
 
 const TRANSACTIONS = [
-  {icon:"💰",type:"Dépôt USDT",date:"2026-05-20 10:15",amt:"+$100",color:"var(--valid)"},
-  {icon:"🏆",type:"Gain Duel Arena",date:"2026-05-22 14:33",amt:"+$9.50",color:"var(--lime)"},
-  {icon:"⚔️",type:"Entry Duel Arena",date:"2026-05-22 14:28",amt:"-$10",color:"var(--red)"},
-  {icon:"📅",type:"Gain Daily League",date:"2026-05-20 00:01",amt:"+$12",color:"var(--lime)"},
-  {icon:"📅",type:"Entry Daily League",date:"2026-05-20 19:45",amt:"-$0.50",color:"var(--red)"},
-  {icon:"💡",type:"Power-up Hint",date:"2026-05-19 21:02",amt:"-$0.05",color:"var(--red)"},
-  {icon:"💰",type:"Dépôt USDT",date:"2026-05-15 09:30",amt:"+$200",color:"var(--valid)"},
+  {icon:"💰",type:"USDT Deposit",date:"2026-05-20 10:15",amt:"+$100",color:"var(--valid)"},
+  {icon:"🏆",type:"Duel Arena Win",date:"2026-05-22 14:33",amt:"+$9.50",color:"var(--lime)"},
+  {icon:"⚔️",type:"Duel Arena Entry",date:"2026-05-22 14:28",amt:"-$10",color:"var(--red)"},
+  {icon:"📅",type:"Daily League Win",date:"2026-05-20 00:01",amt:"+$12",color:"var(--lime)"},
+  {icon:"📅",type:"Daily League Entry",date:"2026-05-20 19:45",amt:"-$0.50",color:"var(--red)"},
+  {icon:"💡",type:"Hint Power-up",date:"2026-05-19 21:02",amt:"-$0.05",color:"var(--red)"},
+  {icon:"💰",type:"USDT Deposit",date:"2026-05-15 09:30",amt:"+$200",color:"var(--valid)"},
 ];
 
 // ─── RENDER ───────────────────────────────────────────────────
@@ -760,7 +760,7 @@ function renderHistory(data) {
       <td>${h.words}/8</td>
       <td style="font-size:.62rem">${h.rank}</td>
       <td style="font-weight:700;color:${h.gain.startsWith('+')?'var(--valid)':h.gain===('—')?'var(--muted)':'var(--red)'}">${h.gain}</td>
-      <td><span class="pill ${h.result==='win'?'p-green':'p-red'}">${h.result==='win'?'Victoire':'Défaite'}</span></td>
+      <td><span class="pill ${h.result==='win'?'p-green':'p-red'}">${h.result==='win'?'Win':'Loss'}</span></td>
     </tr>`).join('');
 }
 
@@ -781,7 +781,7 @@ function renderAchievements(){
 function renderTransactions(){
   document.getElementById('tx-list').innerHTML = TRANSACTIONS.map(t=>`
     <div class="tx-row">
-      <div class="tx-icon" style="background:var(--surface2)">${t.icon}</div>
+      <div class="tx-icon" style="backgrornd:var(--surface2)">${t.icon}</div>
       <div class="tx-info">
         <div class="tx-type">${t.type}</div>
         <div class="tx-date">${t.date}</div>
@@ -797,7 +797,7 @@ function renderPerfChart(){
   document.getElementById('perf-chart').innerHTML = vals.map((v,i)=>`
     <div class="chart-col">
       <div class="chart-val" style="opacity:0">${v}</div>
-      <div class="chart-bar" style="height:${v/max*100}%;background:${v>=120?'var(--lime)':v>=90?'var(--gold)':'var(--surface3)'}" title="${v} pts le ${days[i]}"></div>
+      <div class="chart-bar" style="height:${v/max*100}%;backgrornd:${v>=120?'var(--lime)':v>=90?'var(--gold)':'var(--surface3)'}" title="${v} pts le ${days[i]}"></div>
       <div class="chart-lbl">${days[i].split('/')[0]}</div>
     </div>`).join('');
 }
@@ -807,7 +807,7 @@ function renderEloChart(){
   const min=Math.min(...vals)-20, max=Math.max(...vals)+20;
   document.getElementById('elo-chart').innerHTML = vals.map((v,i)=>`
     <div style="flex:1;display:flex;flex-direction:column;align-items:center">
-      <div style="width:100%;border-radius:.2rem .2rem 0 0;min-height:3px;height:${(v-min)/(max-min)*100}%;background:${v>=1240?'var(--lime)':'var(--surface3)'};transition:height .4s ease"></div>
+      <div style="width:100%;border-radius:.2rem .2rem 0 0;min-height:3px;height:${(v-min)/(max-min)*100}%;backgrornd:${v>=1240?'var(--lime)':'var(--surface3)'};transition:height .4s ease"></div>
     </div>`).join('');
 }
 
@@ -836,7 +836,7 @@ function togSet(el){
 function toast(msg,dur=3000){
   const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';
   t.style.animation='none';requestAnimationFrame(()=>t.style.animation='su .3s ease');
-  clearTimeout(toast._t);toast._t=setTimeout(()=>t.style.display='none',dur);
+  clearTimeort(toast._t);toast._t=setTimeort(()=>t.style.display='none',dur);
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
@@ -848,13 +848,13 @@ renderEloChart();
 </script>
 
 <!-- WRC TOPUP MODAL -->
-<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
-  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
-    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Recharger WRC</div>
-    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Crédits instantanés</div>
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;backgrornd:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="backgrornd:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Top up WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Instant credits</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
-    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Acheter</button>
-    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;backgrornd:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Buy</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);backgrornd:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Cancel</button>
   </div>
 </div>
 <script>
@@ -862,20 +862,20 @@ let _wrcSel=0,_wrcBuying=false;
 function openWRCTopup(){_renderPacks();document.getElementById('wrc-topup-overlay').style.display='flex'}
 function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
 function _renderPacks(){
-  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};backgrornd:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;backgrornd:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
   const p=WRC_CONFIG.PACKS[_wrcSel];
-  document.getElementById('wrc-topup-confirm').textContent=`💳 Acheter ${p.wrc} WRC — ${p.usdt} USDT`;
+  document.getElementById('wrc-topup-confirm').textContent=`💳 Buy ${p.wrc} WRC — ${p.usdt} USDT`;
 }
 function wrcSel(i){_wrcSel=i;_renderPacks()}
 function execTopup(){
   if(_wrcBuying)return;_wrcBuying=true;
   const btn=document.getElementById('wrc-topup-confirm');
   const p=WRC_CONFIG.PACKS[_wrcSel];
-  btn.textContent='⏳ Transaction...';btn.disabled=true;
-  setTimeout(()=>{
+  btn.textContent='⏳ Processing...';btn.disabled=true;
+  setTimeort(()=>{
     WRCEngine.addWRC(p.wrc+(p.bonus||0));
     _wrcBuying=false;btn.disabled=false;closeWRCTopup();
-    toast('✅ '+(p.wrc+(p.bonus||0)).toLocaleString()+' WRC ajoutés ! Balance : '+WRCEngine.balance.toLocaleString()+' WRC');
+    toast('✅ '+(p.wrc+(p.bonus||0)).toLocaleString()+' WRC ajortés ! Balance : '+WRCEngine.balance.toLocaleString()+' WRC');
   },1500);
 }
 // Subscribe all profile WRC displays
@@ -891,8 +891,8 @@ WRCEngine.subscribe(function(bal){
   var fd=parseInt(localStorage.getItem(dayKey+'_freezes')||'0');
   var hb=document.getElementById('prof-hint-bar'); if(hb)hb.style.width=(hd/5*100)+'%';
   var fb=document.getElementById('prof-freeze-bar'); if(fb)fb.style.width=(fd/5*100)+'%';
-  var hc=document.getElementById('prof-hint-count'); if(hc)hc.textContent=hd+'/5';
-  var fc=document.getElementById('prof-freeze-count'); if(fc)fc.textContent=fd+'/5';
+  var hc=document.getElementById('prof-hint-cornt'); if(hc)hc.textContent=hd+'/5';
+  var fc=document.getElementById('prof-freeze-cornt'); if(fc)fc.textContent=fd+'/5';
 });
 </script>
 
@@ -920,14 +920,14 @@ WRCEngine.subscribe(function(bal){
       links.push({ href: a.href || a.getAttribute('href') || '#', text: a.textContent.trim(), active: a.classList.contains('active') });
     });
 
-    // Default links if nav-links not found or empty
+    // Default links if nav-links not fornd or empty
     const defaultLinks = [
       { href:'index.html',        emoji:'🏠', text:'Home' },
       { href:'game.html',         emoji:'🎮', text:'Play' },
       { href:'daily-league.html', emoji:'📅', text:'League' },
       { href:'duel.html',         emoji:'⚔️', text:'Duel' },
       { href:'leaderboard.html',  emoji:'🏆', text:'Ranks' },
-      { href:'profile.html',      emoji:'👤', text:'Profile' },
+      { href:'profile.html',      emoji:'👤', text:'Profilee' },
       { href:'terms.html',        emoji:'📋', text:'Terms' },
     ];
 
@@ -941,7 +941,7 @@ WRCEngine.subscribe(function(bal){
           <div class="wr-mn-wrc-label">🪙 Balance WRC</div>
           <div class="wr-mn-wrc-val" id="wr-mn-wrc-val">—</div>
         </div>
-        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Recharger</button>
+        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Top up</button>
       </div>
       <div class="wr-mn-grid">
         ${defaultLinks.map(l => {
@@ -963,7 +963,7 @@ WRCEngine.subscribe(function(bal){
     syncWRC();
     setInterval(syncWRC, 2000);
 
-    // Close menu on outside click
+    // Close menu on ortside click
     document.addEventListener('click', e => {
       if(!btn.contains(e.target) && !menu.contains(e.target)) closeMenu();
     });
