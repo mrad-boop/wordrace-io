@@ -192,6 +192,12 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
 @keyframes spin{to{transform:rotate(360deg)}}
 .spin{display:inline-block;width:12px;height:12px;border:2px solid #0002;border-top-color:#1a1400;border-radius:50%;animation:spin .7s linear infinite}
 </style>
+
+<script>
+const WRC_CONFIG={HINT_COST:5,FREEZE_COST:10,LEAGUE_STD:20,LEAGUE_PREM:50,MAX_PER_DAY:5,PACKS:[{wrc:100,usdt:'$1.00',label:'Starter',bonus:0},{wrc:525,usdt:'$5.00',label:'Popular',bonus:25,badge:'+5% bonus'},{wrc:1100,usdt:'$10.00',label:'Value',bonus:100,badge:'+10% bonus'},{wrc:2875,usdt:'$25.00',label:'Pro',bonus:375,badge:'+15% bonus'}]};
+const WRCEngine={get balance(){return parseInt(localStorage.getItem('wrc_balance')||'150')},set balance(v){localStorage.setItem('wrc_balance',String(Math.max(0,v)))},get dayKey(){return 'wrc_'+new Date().toISOString().slice(0,10)},getDay(t){return parseInt(localStorage.getItem(this.dayKey+'_'+t)||'0')},addDay(t){localStorage.setItem(this.dayKey+'_'+t,String(this.getDay(t)+1))},canAfford(c){return this.balance>=c},spend(c){if(!this.canAfford(c))return false;this.balance-=c;this.notifyAll();return true},addWRC(a){this.balance+=a;this.notifyAll()},_listeners:[],subscribe(fn){this._listeners.push(fn);fn(this.balance)},notifyAll(){this._listeners.forEach(fn=>fn(this.balance))}};
+window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
+</script>
 </head>
 <body>
 
@@ -201,7 +207,7 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   <div class="nav-links">
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Game</a>
-    <a class="nav-link active" href="#">📅 Daily League</a>
+    <a class="nav-link active" href="#">📅 Daily League</a><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Balance WRC" style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">150</span> WRC</span>
   </div>
 </nav>
 
@@ -465,10 +471,17 @@ function confirmEntry(){
   btn.innerHTML = '<span class="spin"></span> Transaction...';
   btn.disabled = true;
 
+  // Check WRC balance
+  const cost = S.selectedTier === '0.20' ? WRC_CONFIG.LEAGUE_STD : WRC_CONFIG.LEAGUE_PREM;
+  if(!WRCEngine.canAfford(cost)){
+    btn.innerHTML = '💳 Payer & Jouer'; btn.disabled = false;
+    openWRCTopup(); return;
+  }
   setTimeout(()=>{
+    WRCEngine.spend(cost);
     closeModal();
     S.hasEntered = true;
-    showToast(`✅ Entrée confirmée ! $${S.selectedTier} USDT débité · Bonne chance !`);
+    showToast(`✅ ${cost} WRC débités · Balance : ${WRCEngine.balance} WRC · Bonne chance !`);
     document.getElementById('ms-tier').textContent = `$${S.selectedTier}`;
     document.getElementById('my-score-section').style.display = 'block';
     document.getElementById('game-section').style.display = 'block';
@@ -864,6 +877,51 @@ window.confirmEntry = function() {
   }
 };
 </script>
+
+
+<!-- ═══ WRC TOPUP MODAL ═══ -->
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem;letter-spacing:.03em">🪙 Recharger WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">Crédits instantanés · 1 WRC = $0.01 USDT</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);background:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.5rem;padding:.55rem .8rem;margin-bottom:.9rem;line-height:1.7">
+      📅 Daily League Standard = <strong>20 WRC</strong> ($0.20)<br>
+      📅 Daily League Premium = <strong>50 WRC</strong> ($0.50)<br>
+      💡 Hint = <strong>5 WRC</strong> · ❄️ Freeze = <strong>10 WRC</strong>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em">💳 Acheter</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+  </div>
+</div>
+<script>
+let _wrcSel=0,_wrcBuying=false;
+function openWRCTopup(){_renderPacks();document.getElementById('wrc-topup-overlay').style.display='flex'}
+function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
+function _renderPacks(){
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.3rem;right:.5rem;color:var(--lime);font-size:.68rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.7rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.5rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.65rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.52rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.47rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.18rem">${p.badge}</div>`:''}</div>`).join('');
+  const p=WRC_CONFIG.PACKS[_wrcSel];
+  document.getElementById('wrc-topup-confirm').textContent=`💳 Acheter ${p.wrc} WRC — ${p.usdt} USDT`;
+}
+function wrcSel(i){_wrcSel=i;_renderPacks()}
+function execTopup(){
+  if(_wrcBuying)return;_wrcBuying=true;
+  const btn=document.getElementById('wrc-topup-confirm');
+  const p=WRC_CONFIG.PACKS[_wrcSel];
+  btn.textContent='⏳ Transaction...';btn.disabled=true;
+  setTimeout(()=>{
+    WRCEngine.addWRC(p.wrc+(p.bonus||0));
+    _wrcBuying=false;btn.disabled=false;closeWRCTopup();
+    showToast('✅ '+(p.wrc+(p.bonus||0)).toLocaleString()+' WRC ajoutés ! Balance : '+WRCEngine.balance.toLocaleString()+' WRC');
+  },1500);
+}
+// Init nav badge
+WRCEngine.subscribe(function(bal){
+  var el=document.getElementById('nav-wrc-val');
+  if(el)el.textContent=bal.toLocaleString();
+});
+</script>
+<style>@keyframes wrc-spin{to{transform:rotate(360deg)}}</style>
 
 </body>
 </html>
