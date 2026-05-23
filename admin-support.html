@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WordRace Admin — Tickets Support</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);
+  --lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--forest:#163300;
+  --gold:#F5C842;--goldBg:#FDF3CC;--red:#EF4444;--redBg:#FEE2E2;
+  --blue:#3B82F6;--blueBg:#EFF6FF;--text:#1A1A1A;--muted:#6B7280;
+  --valid:#16A34A;--validBg:#DCFCE7;
+}
+body{background:#0f172a;color:#e2e8f0;font-family:'Inter',sans-serif;min-height:100vh}
+
+/* LOGIN */
+#login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem;
+}
+.login-card{background:#1e293b;border:1px solid rgba(255,255,255,.08);border-radius:1.1rem;padding:2rem;max-width:340px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.lc-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:#fff;text-align:center;margin-bottom:.15rem}
+.lc-logo span{color:#9FE870}
+.lc-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:#64748b;text-align:center;margin-bottom:1.4rem;letter-spacing:.08em;text-transform:uppercase}
+.lc-input{width:100%;padding:.72rem .9rem;border-radius:.5rem;border:1.5px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#e2e8f0;font-family:'Space Mono',monospace;font-size:.88rem;outline:none;margin-bottom:.7rem;transition:border .2s}
+.lc-input:focus{border-color:#9FE870}
+.lc-btn{width:100%;padding:.82rem;border-radius:.55rem;border:none;background:#9FE870;color:#163300;font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;letter-spacing:.05em}
+.lc-btn:hover{background:#7DD45A}
+.lc-error{font-family:'Space Mono',monospace;font-size:.6rem;color:#EF4444;text-align:center;margin-top:.5rem;display:none}
+
+/* ADMIN LAYOUT */
+#admin-app{display:none;min-height:100vh}
+.admin-nav{
+  background:#1e293b;border-bottom:1px solid rgba(255,255,255,.07);
+  padding:.75rem 1.5rem;display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:50;
+}
+.an-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#fff}
+.an-logo span{color:#9FE870}
+.an-badge{font-family:'Space Mono',monospace;font-size:.58rem;color:#64748b;margin-left:.5rem}
+.an-right{display:flex;gap:.6rem;align-items:center}
+.an-btn{font-family:'Space Mono',monospace;font-size:.62rem;font-weight:700;padding:.3rem .7rem;border-radius:.38rem;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#94a3b8;cursor:pointer;transition:all .15s}
+.an-btn:hover{background:rgba(255,255,255,.12);color:#fff}
+
+.admin-body{display:grid;grid-template-columns:280px 1fr;min-height:calc(100vh - 52px)}
+@media(max-width:768px){.admin-body{grid-template-columns:1fr}}
+
+/* SIDEBAR */
+.admin-sidebar{background:#1e293b;border-right:1px solid rgba(255,255,255,.07);padding:1rem 0}
+.sidebar-section{padding:.5rem 1rem .25rem;font-family:'Space Mono',monospace;font-size:.52rem;color:#475569;letter-spacing:.1em;text-transform:uppercase}
+.sidebar-item{
+  display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;
+  font-family:'Space Mono',monospace;font-size:.65rem;color:#94a3b8;
+  cursor:pointer;transition:all .15s;border-left:3px solid transparent;
+}
+.sidebar-item:hover{background:rgba(255,255,255,.05);color:#e2e8f0}
+.sidebar-item.active{background:rgba(159,232,112,.08);color:#9FE870;border-left-color:#9FE870}
+.si-badge{margin-left:auto;font-size:.52rem;font-weight:700;padding:.1rem .38rem;border-radius:100px;background:rgba(239,68,68,.2);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+
+/* MAIN PANEL */
+.admin-main{padding:1.2rem;overflow-y:auto;background:#0f172a}
+
+/* STATS ROW */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.7rem;margin-bottom:1.2rem}
+.stat-box{background:#1e293b;border:1px solid rgba(255,255,255,.07);border-radius:.75rem;padding:.9rem 1rem}
+.sb-val{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;margin-bottom:.1rem}
+.sb-lbl{font-family:'Space Mono',monospace;font-size:.53rem;color:#64748b;letter-spacing:.08em;text-transform:uppercase}
+
+/* TICKET TABLE */
+.ticket-table-wrap{background:#1e293b;border:1px solid rgba(255,255,255,.07);border-radius:.85rem;overflow:hidden}
+.tt-head{padding:.8rem 1rem;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.tt-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:#e2e8f0;letter-spacing:.03em}
+.tt-filters{display:flex;gap:.4rem;flex-wrap:wrap}
+.filter-btn{font-family:'Space Mono',monospace;font-size:.58rem;padding:.25rem .58rem;border-radius:.38rem;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:#94a3b8;cursor:pointer;transition:all .15s}
+.filter-btn:hover,.filter-btn.active{background:rgba(159,232,112,.12);border-color:rgba(159,232,112,.3);color:#9FE870}
+
+table.at{width:100%;border-collapse:collapse}
+.at th{padding:.5rem .9rem;font-family:'Space Mono',monospace;font-size:.52rem;letter-spacing:.09em;text-transform:uppercase;color:#475569;border-bottom:1px solid rgba(255,255,255,.06);text-align:left;white-space:nowrap}
+.at td{padding:.6rem .9rem;font-family:'Space Mono',monospace;font-size:.63rem;color:#cbd5e1;border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle}
+.at tr:last-child td{border-bottom:none}
+.at tr:hover td{background:rgba(255,255,255,.03)}
+.at tr.urgent td{background:rgba(239,68,68,.04)}
+.pill{display:inline-block;font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;letter-spacing:.06em;padding:.1rem .38rem;border-radius:100px}
+.p-open{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.25)}
+.p-prog{background:rgba(245,200,66,.15);color:#fde68a;border:1px solid rgba(245,200,66,.25)}
+.p-res{background:rgba(22,163,74,.15);color:#86efac;border:1px solid rgba(22,163,74,.25)}
+.p-cls{background:rgba(255,255,255,.07);color:#64748b;border:1px solid rgba(255,255,255,.1)}
+.p-high{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.25)}
+.p-med{background:rgba(245,200,66,.15);color:#fde68a;border:1px solid rgba(245,200,66,.25)}
+.p-low{background:rgba(22,163,74,.15);color:#86efac;border:1px solid rgba(22,163,74,.25)}
+.action-btn{font-family:'Space Mono',monospace;font-size:.55rem;font-weight:700;padding:.18rem .48rem;border-radius:.32rem;border:none;cursor:pointer;transition:all .15s}
+.ab-view{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.2)}
+.ab-view:hover{background:rgba(59,130,246,.25)}
+.ab-resolve{background:rgba(22,163,74,.15);color:#86efac;border:1px solid rgba(22,163,74,.2)}
+.ab-resolve:hover{background:rgba(22,163,74,.25)}
+.ab-close{background:rgba(255,255,255,.06);color:#64748b;border:1px solid rgba(255,255,255,.1)}
+.ab-close:hover{background:rgba(255,255,255,.1)}
+
+/* DETAIL PANEL */
+.detail-panel{background:#1e293b;border:1px solid rgba(255,255,255,.07);border-radius:.85rem;padding:1.2rem;margin-top:1rem}
+.dp-title{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:#e2e8f0;letter-spacing:.03em;margin-bottom:.6rem}
+.message-thread-admin{display:flex;flex-direction:column;gap:.6rem;margin-bottom:.9rem;max-height:250px;overflow-y:auto}
+.msg-a{padding:.6rem .8rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.63rem;line-height:1.55}
+.msg-user-a{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);margin-left:1.5rem}
+.msg-sup-a{background:rgba(159,232,112,.07);border:1px solid rgba(159,232,112,.15);margin-right:1.5rem}
+.msg-sender-a{font-size:.52rem;color:#64748b;margin-bottom:.2rem;font-weight:700}
+.reply-admin-wrap{display:flex;gap:.5rem}
+.reply-admin-input{flex:1;padding:.55rem .75rem;border-radius:.42rem;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#e2e8f0;font-family:'Space Mono',monospace;font-size:.72rem;outline:none}
+.reply-admin-input:focus{border-color:#9FE870}
+.reply-admin-btn{padding:.55rem .9rem;border-radius:.42rem;border:none;background:#9FE870;color:#163300;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;cursor:pointer;flex-shrink:0}
+.status-select{padding:.35rem .6rem;border-radius:.38rem;border:1px solid rgba(255,255,255,.1);background:#0f172a;color:#e2e8f0;font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer;outline:none}
+
+/* TOAST */
+#atost{display:none;position:fixed;bottom:1.5rem;right:1.5rem;background:#1e293b;border:1.5px solid #9FE870;color:#e2e8f0;padding:.65rem 1rem;border-radius:.55rem;font-family:'Space Mono',monospace;font-size:.65rem;z-index:999;box-shadow:0 8px 20px rgba(0,0,0,.3)}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="lc-logo">WORD<span>RACE</span>.IO</div>
+    <div class="lc-sub">Administration — Support</div>
+    <input class="lc-input" id="admin-pass" type="password" placeholder="Mot de passe admin"
+      onkeydown="if(event.key==='Enter')adminLogin()"/>
+    <button class="lc-btn" onclick="adminLogin()">🔐 Connexion Admin</button>
+    <div class="lc-error" id="login-err">❌ Mot de passe incorrect</div>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="admin-app">
+  <nav class="admin-nav">
+    <div>
+      <span class="an-logo">WORD<span>RACE</span>.IO</span>
+      <span class="an-badge">Admin Panel · Support</span>
+    </div>
+    <div class="an-right">
+      <span id="an-time" style="font-family:'Space Mono',monospace;font-size:.6rem;color:#64748b"></span>
+      <button class="an-btn" onclick="location.href='index.html'">← Site</button>
+      <button class="an-btn" onclick="adminLogout()" style="color:#fca5a5;border-color:rgba(239,68,68,.2)">Déco.</button>
+    </div>
+  </nav>
+
+  <div class="admin-body">
+    <!-- SIDEBAR -->
+    <div class="admin-sidebar" id="admin-sidebar">
+      <div class="sidebar-section">Navigation</div>
+      <div class="sidebar-item active" onclick="showSection('tickets')">🎫 Tickets Support <span class="si-badge" id="sb-open-count">0</span></div>
+      <div class="sidebar-item" onclick="showSection('notifs')">🔔 Inscriptions Notif.</div>
+      <div class="sidebar-item" onclick="showSection('stats')">📊 Statistiques</div>
+
+      <div class="sidebar-section" style="margin-top:.8rem">Filtres rapides</div>
+      <div class="sidebar-item" onclick="filterTickets('open')">🔵 Ouverts</div>
+      <div class="sidebar-item" onclick="filterTickets('progress')">🟡 En cours</div>
+      <div class="sidebar-item" onclick="filterTickets('high','priority')">🔴 Haute priorité</div>
+      <div class="sidebar-item" onclick="filterTickets('')">📋 Tous</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="admin-main">
+
+      <!-- SECTION: TICKETS -->
+      <div id="section-tickets">
+        <div class="stats-row" id="admin-stats-row"></div>
+
+        <div class="ticket-table-wrap">
+          <div class="tt-head">
+            <div class="tt-title">🎫 Tickets Support</div>
+            <div class="tt-filters">
+              <button class="filter-btn active" onclick="filterTickets('')">Tous</button>
+              <button class="filter-btn" onclick="filterTickets('open')">Ouverts</button>
+              <button class="filter-btn" onclick="filterTickets('progress')">En cours</button>
+              <button class="filter-btn" onclick="filterTickets('resolved')">Résolus</button>
+              <button class="filter-btn" onclick="filterTickets('high','priority')">🔴 Urgents</button>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="at">
+              <thead><tr>
+                <th>ID</th><th>Sujet</th><th>Catégorie</th>
+                <th>Email</th><th>Priorité</th><th>Statut</th>
+                <th>Date</th><th>Actions</th>
+              </tr></thead>
+              <tbody id="admin-ticket-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- DETAIL PANEL -->
+        <div class="detail-panel" id="admin-detail" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.8rem">
+            <div class="dp-title" id="detail-title">—</div>
+            <button onclick="document.getElementById('admin-detail').style.display='none'" style="background:none;border:none;color:#64748b;cursor:pointer;font-size:1rem">✕</button>
+          </div>
+          <div id="detail-meta" style="font-family:'Space Mono',monospace;font-size:.58rem;color:#64748b;margin-bottom:.8rem;line-height:1.7"></div>
+          <div class="message-thread-admin" id="admin-thread"></div>
+          <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.7rem;flex-wrap:wrap">
+            <span style="font-family:'Space Mono',monospace;font-size:.58rem;color:#64748b">Statut:</span>
+            <select class="status-select" id="detail-status-select" onchange="updateTicketStatus(currentTicketId,this.value)">
+              <option value="open">🔵 Ouvert</option>
+              <option value="progress">🟡 En cours</option>
+              <option value="resolved">✅ Résolu</option>
+              <option value="closed">⬛ Fermé</option>
+            </select>
+          </div>
+          <div class="reply-admin-wrap">
+            <input class="reply-admin-input" id="admin-reply-input" placeholder="Réponse support..." onkeydown="if(event.key==='Enter')sendAdminReply()"/>
+            <button class="reply-admin-btn" onclick="sendAdminReply()">📨 Envoyer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: NOTIFS -->
+      <div id="section-notifs" style="display:none">
+        <div class="ticket-table-wrap">
+          <div class="tt-head"><div class="tt-title">🔔 Inscriptions Notifications</div></div>
+          <div style="overflow-x:auto">
+            <table class="at">
+              <thead><tr><th>Email</th><th>Fonctionnalité</th><th>Date</th></tr></thead>
+              <tbody id="notif-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION: STATS -->
+      <div id="section-stats" style="display:none">
+        <div class="stats-row" id="stats-section-row"></div>
+        <div class="ticket-table-wrap" style="margin-top:.9rem">
+          <div class="tt-head"><div class="tt-title">📊 Tickets par Catégorie</div></div>
+          <div id="cat-chart" style="padding:1rem;display:flex;flex-direction:column;gap:.45rem"></div>
+        </div>
+      </div>
+
+    </div><!-- end admin-main -->
+  </div>
+</div>
+
+<div id="atost"></div>
+
+<script>
+const ADMIN_PASS = 'wordrace2026';
+const STORAGE_KEY = 'wr_tickets';
+let currentTicketId = null;
+let currentFilter = {field:'',val:''};
+
+// ─── AUTH ─────────────────────────────────────────────────────
+function adminLogin(){
+  const p=document.getElementById('admin-pass').value;
+  const err=document.getElementById('login-err');
+  if(p===ADMIN_PASS){
+    sessionStorage.setItem('wr_admin','1');
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('admin-app').style.display='block';
+    initAdmin();
+  } else {
+    err.style.display='block';
+    setTimeout(()=>err.style.display='none',3000);
+  }
+}
+function adminLogout(){ sessionStorage.removeItem('wr_admin'); location.reload(); }
+
+// ─── INIT ─────────────────────────────────────────────────────
+function initAdmin(){
+  if(sessionStorage.getItem('wr_admin')==='1'){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('admin-app').style.display='block';
+  }
+  renderAdminStats();
+  renderAdminTickets();
+  // Clock
+  setInterval(()=>{
+    const el=document.getElementById('an-time');
+    if(el){const n=new Date();el.textContent=n.toLocaleTimeString('fr-FR')+' · '+n.toLocaleDateString('fr-FR')}
+  },1000);
+}
+
+function getTickets(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]')}catch{return[]} }
+function saveTickets(t){ localStorage.setItem(STORAGE_KEY,JSON.stringify(t)) }
+
+// ─── STATS ────────────────────────────────────────────────────
+function renderAdminStats(){
+  const tks=getTickets();
+  const open=tks.filter(t=>t.status==='open').length;
+  const prog=tks.filter(t=>t.status==='progress').length;
+  const res=tks.filter(t=>t.status==='resolved').length;
+  const high=tks.filter(t=>t.priority==='high').length;
+
+  document.getElementById('sb-open-count').textContent=open;
+
+  const row=document.getElementById('admin-stats-row');
+  row.innerHTML=[
+    {val:tks.length,lbl:'Total Tickets',color:'#9FE870'},
+    {val:open,lbl:'Ouverts',color:'#3B82F6'},
+    {val:prog,lbl:'En cours',color:'#F5C842'},
+    {val:res,lbl:'Résolus',color:'#16A34A'},
+    {val:high,lbl:'Haute Priorité',color:'#EF4444'},
+  ].map(s=>`<div class="stat-box" style="border-left:3px solid ${s.color}">
+    <div class="sb-val" style="color:${s.color}">${s.val}</div>
+    <div class="sb-lbl">${s.lbl}</div>
+  </div>`).join('');
+}
+
+// ─── TICKET TABLE ─────────────────────────────────────────────
+function renderAdminTickets(filter){
+  let tks=getTickets();
+  if(filter){
+    if(filter.field==='priority') tks=tks.filter(t=>t.priority===filter.val);
+    else if(filter.val) tks=tks.filter(t=>t.status===filter.val);
+  }
+
+  const CATS={bug:'🐛 Bug',account:'👤 Compte',wrc:'🪙 WRC',game:'🎮 Jeu',feature:'💡 Suggestion',other:'📋 Autre'};
+  const SPILL={open:'p-open',progress:'p-prog',resolved:'p-res',closed:'p-cls'};
+  const SLBL={open:'Ouvert',progress:'En cours',resolved:'Résolu',closed:'Fermé'};
+  const PPILL={high:'p-high',medium:'p-med',low:'p-low'};
+  const PLBL={high:'🔴 Haute',medium:'🟡 Moy.',low:'🟢 Basse'};
+
+  document.getElementById('admin-ticket-tbody').innerHTML = tks.length
+    ? tks.map(t=>`
+      <tr class="${t.priority==='high'?'urgent':''}">
+        <td style="font-weight:700;color:#9FE870">${t.id}</td>
+        <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.subject}</td>
+        <td>${CATS[t.cat]||t.cat}</td>
+        <td style="color:#64748b">${t.email}</td>
+        <td><span class="pill ${PPILL[t.priority]}">${PLBL[t.priority]}</span></td>
+        <td><span class="pill ${SPILL[t.status]}">${SLBL[t.status]}</span></td>
+        <td style="color:#64748b;font-size:.58rem">${new Date(t.createdAt).toLocaleDateString('fr-FR')}</td>
+        <td>
+          <button class="action-btn ab-view" onclick="viewTicket('${t.id}')">Voir</button>
+          ${t.status!=='resolved'?`<button class="action-btn ab-resolve" onclick="quickResolve('${t.id}')">✅</button>`:''}
+          ${t.status!=='closed'?`<button class="action-btn ab-close" onclick="quickClose('${t.id}')">✕</button>`:''}
+        </td>
+      </tr>`).join('')
+    : '<tr><td colspan="8" style="text-align:center;padding:1.5rem;color:#475569">Aucun ticket</td></tr>';
+}
+
+function filterTickets(val,field='status'){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  currentFilter={field,val};
+  renderAdminTickets(val?{field,val}:null);
+}
+
+// ─── VIEW TICKET ──────────────────────────────────────────────
+function viewTicket(id){
+  const tks=getTickets();
+  const t=tks.find(tk=>tk.id===id);
+  if(!t)return;
+  currentTicketId=id;
+
+  document.getElementById('detail-title').textContent=t.subject+' — '+t.id;
+  document.getElementById('detail-meta').innerHTML=`
+    Email: <strong style="color:#e2e8f0">${t.email}</strong> &nbsp;·&nbsp;
+    Catégorie: <strong style="color:#e2e8f0">${t.cat}</strong> &nbsp;·&nbsp;
+    Priorité: <strong style="color:${t.priority==='high'?'#fca5a5':t.priority==='medium'?'#fde68a':'#86efac'}">${t.priority}</strong><br/>
+    Créé: ${new Date(t.createdAt).toLocaleString('fr-FR')} &nbsp;·&nbsp; Messages: ${(t.messages||[]).length}
+  `;
+
+  document.getElementById('admin-thread').innerHTML=(t.messages||[]).map(m=>`
+    <div class="msg-a ${m.from==='user'?'msg-user-a':'msg-sup-a'}">
+      <div class="msg-sender-a">${m.from==='user'?'👤 '+t.email:'🎧 Support WordRace'} · ${new Date(m.ts).toLocaleString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+      ${m.text}
+    </div>`).join('');
+
+  const sel=document.getElementById('detail-status-select');
+  sel.value=t.status;
+
+  document.getElementById('admin-detail').style.display='block';
+  document.getElementById('admin-detail').scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function sendAdminReply(){
+  const inp=document.getElementById('admin-reply-input');
+  if(!inp.value.trim()||!currentTicketId)return;
+  const tks=getTickets();
+  const t=tks.find(tk=>tk.id===currentTicketId);
+  if(!t)return;
+  t.messages=t.messages||[];
+  t.messages.push({from:'support',text:inp.value.trim(),ts:Date.now()});
+  if(t.status==='open') t.status='progress';
+  saveTickets(tks);
+  inp.value='';
+  viewTicket(currentTicketId);
+  renderAdminTickets(currentFilter.val?currentFilter:null);
+  renderAdminStats();
+  atoast('✅ Réponse envoyée');
+}
+
+function updateTicketStatus(id,status){
+  if(!id)return;
+  const tks=getTickets();
+  const t=tks.find(tk=>tk.id===id);
+  if(t){t.status=status;saveTickets(tks);}
+  renderAdminTickets(currentFilter.val?currentFilter:null);
+  renderAdminStats();
+  atoast('Statut mis à jour: '+status);
+}
+
+function quickResolve(id){ updateTicketStatus(id,'resolved'); if(currentTicketId===id)viewTicket(id); }
+function quickClose(id){ updateTicketStatus(id,'closed'); if(currentTicketId===id){document.getElementById('admin-detail').style.display='none';currentTicketId=null;} }
+
+// ─── SECTIONS ─────────────────────────────────────────────────
+function showSection(name){
+  ['tickets','notifs','stats'].forEach(s=>document.getElementById('section-'+s).style.display='none');
+  document.querySelectorAll('.sidebar-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('section-'+name).style.display='block';
+  event.target.classList.add('active');
+
+  if(name==='notifs') renderNotifs();
+  if(name==='stats') renderStatSection();
+}
+
+function renderNotifs(){
+  const notifs=JSON.parse(localStorage.getItem('wr_notify_list')||'[]');
+  document.getElementById('notif-tbody').innerHTML=notifs.length
+    ? notifs.map(n=>`<tr><td>${n.email}</td><td>${n.feature}</td><td style="color:#64748b">${new Date(n.ts).toLocaleDateString('fr-FR')}</td></tr>`).join('')
+    : '<tr><td colspan="3" style="text-align:center;padding:1rem;color:#475569">Aucune inscription</td></tr>';
+}
+
+function renderStatSection(){
+  const tks=getTickets();
+  const CATS={bug:'🐛 Bug',account:'👤 Compte',wrc:'🪙 WRC',game:'🎮 Jeu',feature:'💡 Suggestion',other:'📋 Autre'};
+  const counts={};
+  tks.forEach(t=>{counts[t.cat]=(counts[t.cat]||0)+1});
+  const max=Math.max(...Object.values(counts),1);
+
+  document.getElementById('stats-section-row').innerHTML=[
+    {val:tks.length,lbl:'Total',color:'#9FE870'},
+    {val:Math.round(tks.filter(t=>t.status==='resolved').length/Math.max(tks.length,1)*100)+'%',lbl:'Taux résolution',color:'#16A34A'},
+    {val:tks.filter(t=>t.status==='open'||t.status==='progress').length,lbl:'En attente',color:'#3B82F6'},
+    {val:JSON.parse(localStorage.getItem('wr_notify_list')||'[]').length,lbl:'Inscriptions notif.',color:'#F5C842'},
+  ].map(s=>`<div class="stat-box" style="border-left:3px solid ${s.color}"><div class="sb-val" style="color:${s.color}">${s.val}</div><div class="sb-lbl">${s.lbl}</div></div>`).join('');
+
+  document.getElementById('cat-chart').innerHTML=Object.entries(counts).map(([cat,n])=>`
+    <div style="display:flex;align-items:center;gap:.7rem">
+      <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:#94a3b8;min-width:90px">${CATS[cat]||cat}</span>
+      <div style="flex:1;height:7px;background:rgba(255,255,255,.07);border-radius:4px;overflow:hidden">
+        <div style="width:${n/max*100}%;height:100%;background:#9FE870;border-radius:4px"></div>
+      </div>
+      <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:#e2e8f0;min-width:24px">${n}</span>
+    </div>`).join('') || '<div style="font-family:\'Space Mono\',monospace;font-size:.63rem;color:#475569;text-align:center;padding:1rem">Aucune donnée</div>';
+}
+
+// ─── TOAST ────────────────────────────────────────────────────
+function atoast(msg){
+  const t=document.getElementById('atost');t.textContent=msg;t.style.display='block';
+  clearTimeout(atoast._t);atoast._t=setTimeout(()=>t.style.display='none',3000);
+}
+
+// ─── AUTO-INIT ────────────────────────────────────────────────
+if(sessionStorage.getItem('wr_admin')==='1'){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('admin-app').style.display='block';
+  initAdmin();
+}
+</script>
+</body>
+</html>
