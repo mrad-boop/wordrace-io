@@ -692,6 +692,28 @@ function showFinal(results) {
   const score = results.reduce((s,r) => s + (r.pts||0), 0);
   const valid = results.filter(r => r.valid).length;
 
+  // Save game to localStorage
+  try {
+    const now = new Date();
+    const p2 = n => String(n).padStart(2,'0');
+    const dateStr = now.getFullYear()+'-'+p2(now.getMonth()+1)+'-'+p2(now.getDate())+' '+p2(now.getHours())+':'+p2(now.getMinutes());
+    const game = {
+      ts: now.getTime(),
+      date: dateStr,
+      mode: G.mode,
+      diff: G.diff || null,
+      letter: G.letter,
+      score: score,
+      words: valid,
+      result: score >= 50 ? 'win' : 'loss',
+      cats: results.map(r => ({cat: r.cat, word: r.word, valid: r.valid, pts: r.pts||0}))
+    };
+    const games = JSON.parse(localStorage.getItem('wr_games') || '[]');
+    games.unshift(game);
+    if(games.length > 500) games.length = 500;
+    localStorage.setItem('wr_games', JSON.stringify(games));
+  } catch(e) {}
+
   document.getElementById('r-score').textContent = score;
   document.getElementById('r-em').textContent = score>=70?'🏆':score>=40?'🎉':score>=20?'💪':'📚';
   document.getElementById('r-title').textContent = score>=70?'EXCELLENT!':score>=40?'GOOD JOB!':score>=20?'KEEP GOING!':'PRACTICE MORE!';
