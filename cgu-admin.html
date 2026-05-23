@@ -82,7 +82,7 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
   <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
   <div class="nav-links">
     <a class="nav-link" href="admin-2026.html">← Admin</a>
-    <a class="nav-link active" href="#">📋 CGU / Guide</a>
+    <span style="font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .65rem;border-radius:.4rem;background:var(--limeBg);border:1px solid var(--lime);color:var(--forest)">📋 CGU / Guide</span>
     <a class="nav-link" href="terms.html" target="_blank">🌐 Version EN</a>
   </div>
   <span class="admin-badge">🛡️ ADMIN</span>
@@ -104,6 +104,7 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
     <a class="toc-link" href="#powerups">Power-Ups</a>
     <a class="toc-link" href="#wrc">🪙 Crédits WRC</a>
     <a class="toc-link" href="#validation">Validation des Mots</a>
+    <a class="toc-link" href="#duel-arena">⚔️ Duel Arena</a>
     <a class="toc-link" href="#leaderboard">🏆 Leaderboard</a>
     <a class="toc-link" href="#anticheat">Règles Fair Play</a>
     <a class="toc-link" href="#wallet">Wallet & USDT</a>
@@ -219,14 +220,14 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
         </table>
         <p><strong>Distribution des prix (top 10) :</strong> 1er 30% · 2e 18% · 3e 12% · 4e–5e 5% chacun · 6e–10e 4% chacun.</p>
 
-        <span class="sa" id="duel"></span>
+        <span class="sa" id="duel-mode"></span>
         <h3>⚔️ Duel Arena <span class="badge b-red">P2E</span></h3>
-        <p>Rooms multijoueur en temps réel (2–8 joueurs). Le créateur de la room fixe la mise USDT. Un smart contract bloque les fonds et distribue automatiquement les gains.</p>
+        <p>Rooms multijoueur en temps réel (2–8 joueurs). Le créateur fixe la mise USDT, le nombre de joueurs et les manches. <a href="#duel-arena">→ Voir les règles complètes</a></p>
         <ul>
-          <li>Mise : de <strong>1 $ à 50 $ USDT</strong></li>
+          <li>Mise : de <strong>1 $ à 50 $ USDT</strong> (ou personnalisée)</li>
           <li>Rake plateforme : <strong>5%</strong> — le gagnant reçoit 95% de la pool</li>
-          <li>Escrow en smart contract — sans intermédiaire, paiement instantané sur Polygon</li>
-          <li>Maximum 8 joueurs par room</li>
+          <li>Escrow smart contract — sans intermédiaire, paiement instantané sur Polygon</li>
+          <li>2–8 joueurs · 1, 3 ou 5 manches</li>
         </ul>
         <div class="callout c-blue"><span class="ci">🔐</span><span>Tous les fonds du Duel Arena sont conservés dans un smart contract vérifié. WordRace n'a jamais accès direct à vos USDT pendant une partie.</span></div>
       </div>
@@ -311,6 +312,42 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
 
     <!-- FAIR PLAY -->
     
+    
+    <div class="section">
+      <span class="sa" id="duel-arena"></span>
+      <div class="s-title">⚔️ Duel Arena</div>
+      <div class="s-sub">Multijoueur temps réel — Escrow Smart Contract Polygon</div>
+      <div class="s-body">
+        <p>Le Duel Arena permet à 2–8 joueurs de s'affronter en temps réel avec une mise USDT. Tous les fonds sont verrouillés dans un smart contract Polygon dès la création de la room et libérés automatiquement au gagnant à la fin de la partie.</p>
+
+        <h3>Fonctionnement</h3>
+        <div class="steps">
+          <div class="step"><div class="sn">1</div><div><div class="st">Créer ou rejoindre une room</div><div class="sd">Définissez la mise (1–50 $ USDT), le nombre de joueurs (2–8) et les manches (1, 3 ou 5). Partagez l'ID de room avec vos adversaires.</div></div></div>
+          <div class="step"><div class="sn">2</div><div><div class="st">Fonds verrouillés en escrow</div><div class="sd">La mise de chaque joueur est prélevée immédiatement et verrouillée dans un smart contract Polygon vérifié. WordRace ne détient jamais les fonds directement.</div></div></div>
+          <div class="step"><div class="sn">3</div><div><div class="st">Jeu — manches de 40 secondes</div><div class="sd">Remplissez 8 catégories commençant par la lettre du tour. Navigation Tab sur ordinateur, défilement sur mobile. Les réponses de l'adversaire sont masquées pendant le jeu.</div></div></div>
+          <div class="step"><div class="sn">4</div><div><div class="st">Paiement automatique</div><div class="sd">Le joueur avec le score le plus élevé reçoit 95% de la prize pool. Le rake de 5% est retenu par WordRace. Le paiement est déclenché automatiquement par le smart contract.</div></div></div>
+        </div>
+
+        <h3>Règles de Mise</h3>
+        <table class="dt">
+          <thead><tr><th>Paramètre</th><th>Options</th></tr></thead>
+          <tbody>
+            <tr><td>Mise par joueur</td><td>$1 · $2 · $5 · $10 · $20 · $50 USDT (ou personnalisée $1–$50)</td></tr>
+            <tr><td>Joueurs par room</td><td>2 · 4 · 6 · 8 (défini par le créateur)</td></tr>
+            <tr><td>Manches</td><td>1 · 3 · 5 (format Best-of)</td></tr>
+            <tr><td>Rake plateforme</td><td>5% de la prize pool totale</td></tr>
+            <tr><td>Réseau</td><td>Polygon USDT (principal) · Solana USDT</td></tr>
+            <tr><td>Paiement</td><td>Automatique via smart contract à la fin</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Politique de Déconnexion</h3>
+        <p>Si un joueur se déconnecte ou change d'onglet pendant un match Duel Arena, son score de manche est soumis immédiatement avec les réponses saisies à ce moment. La partie continue pour les autres joueurs. <strong>Aucun remboursement n'est accordé pour les déconnexions.</strong></p>
+
+        <div class="callout c-red"><span class="ci">⚠️</span><span>Le Duel Arena implique un risque financier réel. Ne misez jamais plus que ce que vous pouvez vous permettre de perdre. Les mises sont non remboursables une fois la partie commencée. L'exécution du smart contract est irréversible.</span></div>
+      </div>
+    </div>
+
     <div class="section">
       <span class="sa" id="leaderboard"></span>
       <div class="s-title">🏆 Leaderboard Global</div>
@@ -416,7 +453,7 @@ table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space M
         <h3>Article 2 — Jeu Basé sur la Compétence</h3>
         <p>WordRace.io est un <strong>jeu de compétence</strong>. Les résultats dépendent des connaissances en vocabulaire, de la vitesse de frappe et de l'utilisation stratégique des power-ups. Il n'est pas classé comme jeu de hasard dans la plupart des juridictions. Les utilisateurs sont seuls responsables du respect des lois locales relatives aux jeux de compétence en ligne et à l'utilisation des cryptomonnaies.</p>
 
-        <h3>Article 3 — Frais de Plateforme & Crédits WRC</h3>
+        <h3>Article 3 — Frais de Plateforme, Duel Arena & Crédits WRC</h3>
         <p>WordRace prélève les frais suivants : <strong>5% de rake sur le Duel Arena</strong> et <strong>10% de frais sur le total des entrées Daily League</strong>. Ces frais financent les opérations de la plateforme, le développement et les coûts serveur. Tous les frais sont clairement affichés avant tout achat.</p>
         <p>Les Crédits WordRace (WRC) sont achetés à un taux fixe de <strong>1 WRC = 0,01 $ USDT</strong>. Les WRC sont non remboursables, n'ont aucune valeur monétaire et ne peuvent être ni transférés entre comptes, ni retirés. Les WRC bonus inclus dans les packs sont promotionnels et susceptibles d'être modifiés.</p>
 
