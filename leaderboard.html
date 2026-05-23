@@ -165,6 +165,106 @@ table.lt{width:100%;border-collapse:collapse}
 @keyframes su{from{opacity:0;transform:translateX(-50%) translateY(8px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 </style>
+
+<style id="wr-mobile-nav-style">
+/* ── MOBILE NAV OVERRIDES ─────────────────────────────────── */
+
+/* Hide nav links on mobile, show hamburger */
+@media(max-width:640px){
+  .nav-links, .nav-links a, .nav-links li { display:none !important; }
+  #wr-hamburger { display:flex !important; }
+  .topnav { padding:.6rem 1rem; gap:.5rem; flex-wrap:nowrap; }
+  /* WRC badge: compact on mobile */
+  #nav-wrc-badge { padding:.2rem .45rem; font-size:.55rem; }
+  #nav-wrc-badge::before { content:'🪙 '; }
+}
+@media(min-width:641px){
+  #wr-hamburger { display:none !important; }
+  #wr-mobile-menu { display:none !important; }
+}
+
+/* Hamburger button */
+#wr-hamburger {
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:4px;
+  width:36px; height:36px;
+  border:1px solid rgba(0,0,0,.1);
+  border-radius:.5rem;
+  background:transparent;
+  cursor:pointer;
+  padding:0;
+  flex-shrink:0;
+  transition:background .15s;
+}
+#wr-hamburger:hover { background:rgba(0,0,0,.05); }
+#wr-hamburger span {
+  display:block; width:18px; height:2px;
+  background:var(--text,#1A1A1A);
+  border-radius:2px;
+  transition:all .2s;
+}
+#wr-hamburger.open span:nth-child(1){ transform:translateY(6px) rotate(45deg); }
+#wr-hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
+#wr-hamburger.open span:nth-child(3){ transform:translateY(-6px) rotate(-45deg); }
+
+/* Mobile dropdown menu */
+#wr-mobile-menu {
+  position:fixed;
+  top:56px; left:0; right:0;
+  background:var(--surface,#fff);
+  border-bottom:1px solid rgba(0,0,0,.08);
+  box-shadow:0 8px 24px rgba(0,0,0,.12);
+  z-index:99;
+  padding:.5rem .75rem .75rem;
+  animation:wr-mn-in .18s ease;
+  display:none;
+}
+#wr-mobile-menu.open { display:block; }
+@keyframes wr-mn-in{ from{opacity:0;transform:translateY(-8px)} to{opacity:1;transform:none} }
+
+.wr-mn-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.4rem;
+}
+.wr-mn-item {
+  display:flex;
+  align-items:center;
+  gap:.5rem;
+  padding:.62rem .8rem;
+  border-radius:.55rem;
+  border:1px solid rgba(0,0,0,.07);
+  background:var(--surface2,#F0F2EE);
+  text-decoration:none;
+  color:var(--text,#1A1A1A);
+  font-family:'Space Mono',monospace;
+  font-size:.68rem;
+  font-weight:700;
+  transition:all .15s;
+}
+.wr-mn-item:hover { background:var(--limeBg,#E8F8DF); border-color:var(--lime,#9FE870); color:var(--forest,#163300); }
+.wr-mn-item.active { background:var(--limeBg,#E8F8DF); border-color:var(--lime,#9FE870); color:var(--forest,#163300); }
+.wr-mn-item.danger { background:#FEE2E2; border-color:rgba(239,68,68,.25); color:#EF4444; }
+.wr-mn-emoji { font-size:1rem; flex-shrink:0; }
+
+/* WRC balance row */
+.wr-mn-wrc {
+  grid-column:1/-1;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:.55rem .8rem;
+  border-radius:.55rem;
+  background:var(--limeBg,#E8F8DF);
+  border:1px solid rgba(159,232,112,.35);
+  margin-bottom:.2rem;
+}
+.wr-mn-wrc-label { font-family:'Space Mono',monospace; font-size:.6rem; color:var(--muted,#6B7280); }
+.wr-mn-wrc-val { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--lime,#9FE870); }
+.wr-mn-wrc-btn { font-family:'Space Mono',monospace; font-size:.58rem; font-weight:700; padding:.2rem .55rem; border-radius:.35rem; border:none; background:var(--lime,#9FE870); color:var(--forest,#163300); cursor:pointer; }
+</style>
+
 </head>
 <body>
 
@@ -740,5 +840,95 @@ setInterval(updateHeroTimer, 1000);
 initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats(); initSidebar(); updateHeroTimer();
 </script>
 <script src="presence.js"></script>
+
+<script id="wr-mobile-nav-script">
+(function(){
+  // Build hamburger + mobile menu
+  function buildMobileNav(){
+    const nav = document.querySelector('.topnav');
+    if(!nav || document.getElementById('wr-hamburger')) return;
+
+    // Hamburger button
+    const btn = document.createElement('button');
+    btn.id = 'wr-hamburger';
+    btn.setAttribute('aria-label','Menu');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+    btn.onclick = toggleMenu;
+    nav.appendChild(btn);
+
+    // Build menu links from existing nav-links
+    const links = [];
+    document.querySelectorAll('.nav-links a, .nav-links .nav-link').forEach(a => {
+      links.push({ href: a.href || a.getAttribute('href') || '#', text: a.textContent.trim(), active: a.classList.contains('active') });
+    });
+
+    // Default links if nav-links not found or empty
+    const defaultLinks = [
+      { href:'index.html',        emoji:'🏠', text:'Home' },
+      { href:'game.html',         emoji:'🎮', text:'Play' },
+      { href:'daily-league.html', emoji:'📅', text:'League' },
+      { href:'duel.html',         emoji:'⚔️', text:'Duel' },
+      { href:'leaderboard.html',  emoji:'🏆', text:'Ranks' },
+      { href:'profile.html',      emoji:'👤', text:'Profile' },
+      { href:'terms.html',        emoji:'📋', text:'Terms' },
+    ];
+
+    const cur = window.location.pathname;
+
+    const menu = document.createElement('div');
+    menu.id = 'wr-mobile-menu';
+    menu.innerHTML = `
+      <div class="wr-mn-wrc">
+        <div>
+          <div class="wr-mn-wrc-label">🪙 Balance WRC</div>
+          <div class="wr-mn-wrc-val" id="wr-mn-wrc-val">—</div>
+        </div>
+        <button class="wr-mn-wrc-btn" onclick="if(typeof openWRCTopup==='function')openWRCTopup()">+ Recharger</button>
+      </div>
+      <div class="wr-mn-grid">
+        ${defaultLinks.map(l => {
+          const isActive = cur.includes(l.href.replace('.html','')) || (l.href==='index.html' && (cur==='/'||cur.endsWith('index.html')));
+          return `<a href="${l.href}" class="wr-mn-item${isActive?' active':''}">
+            <span class="wr-mn-emoji">${l.emoji}</span>${l.text}
+          </a>`;
+        }).join('')}
+      </div>
+    `;
+    document.body.appendChild(menu);
+
+    // Sync WRC balance
+    function syncWRC(){
+      const bal = parseInt(localStorage.getItem('wrc_balance')||'150');
+      const el = document.getElementById('wr-mn-wrc-val');
+      if(el) el.textContent = bal.toLocaleString() + ' WRC';
+    }
+    syncWRC();
+    setInterval(syncWRC, 2000);
+
+    // Close menu on outside click
+    document.addEventListener('click', e => {
+      if(!btn.contains(e.target) && !menu.contains(e.target)) closeMenu();
+    });
+    // Close on nav link click
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  }
+
+  function toggleMenu(){
+    const btn  = document.getElementById('wr-hamburger');
+    const menu = document.getElementById('wr-mobile-menu');
+    if(!btn||!menu) return;
+    const open = menu.classList.toggle('open');
+    btn.classList.toggle('open', open);
+  }
+  function closeMenu(){
+    document.getElementById('wr-hamburger')?.classList.remove('open');
+    document.getElementById('wr-mobile-menu')?.classList.remove('open');
+  }
+
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', buildMobileNav);
+  else buildMobileNav();
+})();
+</script>
+
 </body>
 </html>
