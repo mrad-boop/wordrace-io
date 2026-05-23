@@ -121,6 +121,12 @@ footer a{color:var(--forest);text-decoration:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
 </style>
+
+<script>
+const WRC_CONFIG={PACKS:[{wrc:100,usdt:'$1.00',label:'Starter',bonus:0},{wrc:525,usdt:'$5.00',label:'Popular',bonus:25,badge:'+5% bonus'},{wrc:1100,usdt:'$10.00',label:'Value',bonus:100,badge:'+10% bonus'},{wrc:2875,usdt:'$25.00',label:'Pro',bonus:375,badge:'+15% bonus'}]};
+const WRCEngine={get balance(){return parseInt(localStorage.getItem('wrc_balance')||'150')},set balance(v){localStorage.setItem('wrc_balance',String(Math.max(0,v)))},canAfford(c){return this.balance>=c},addWRC(a){this.balance+=a;this.notifyAll()},_listeners:[],subscribe(fn){this._listeners.push(fn);fn(this.balance)},notifyAll(){this._listeners.forEach(fn=>fn(this.balance))}};
+window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
+</script>
 </head>
 <body>
 <nav>
@@ -129,7 +135,7 @@ footer a{color:var(--forest);text-decoration:none}
     <li><a href="index.html" id="nav-landing" class="active" style="text-decoration:none">Home</a></li><li><a href="profile.html" style="font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.3rem .6rem;border-radius:.4rem;border:1px solid var(--border);transition:all .15s" onmouseover="this.style.background='var(--surface2)'" onmouseout="this.style.background='transparent'">👤 Profile</a></li>
     <li><a href="game.html" id="nav-game">🎮 Game</a></li>
     
-  </ul>
+  </ul><span id="nav-wrc-badge" onclick="openWRCTopup()" title="Recharger WRC" style="display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest);cursor:pointer;transition:all .15s;margin-left:.5rem" onmouseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">🪙 <span id="nav-wrc-val">—</span> WRC</span>
 </nav>
 
 <!-- LANDING -->
@@ -369,6 +375,37 @@ function initBatch(){const c=document.getElementById('batch-results');if(c.child
 async function runBatch(){const btn=document.getElementById('batch-btn');btn.innerHTML='⏳...';btn.disabled=true;initBatch();BTESTS.forEach((_,i)=>{document.getElementById(`bi-${i}`).textContent='⬜';document.getElementById(`br-${i}`).style.background='var(--surface2)';document.getElementById(`binfo-${i}`).textContent=BTESTS[i].desc;document.getElementById(`btag-${i}`).innerHTML=''});
   for(let i=0;i<BTESTS.length;i++){const t=BTESTS[i];document.getElementById(`bi-${i}`).textContent='⏳';const r=await validate(t.word,t.cat,t.letter,()=>{});document.getElementById(`bi-${i}`).textContent=r.valid?'✅':'❌';document.getElementById(`br-${i}`).style.background=r.valid?'var(--validBg)':'var(--invalidBg)';document.getElementById(`binfo-${i}`).textContent=`${r.reason} · ${r.ms}ms · Tier ${r.tier||'—'}`;if(r.tier)document.getElementById(`btag-${i}`).innerHTML=`<span style="font-family:'Space Mono',monospace;font-size:.52rem;padding:.11rem .36rem;border-radius:100px;background:${TB[r.tier]};color:${TC[r.tier]}">T${r.tier}</span>`;await sleep(160)}
   btn.innerHTML='▶ Run All';btn.disabled=false}
+</script>
+
+<div id="wrc-topup-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:800;align-items:center;justify-content:center;padding:1rem" onclick="if(event.target===this)closeWRCTopup()">
+  <div style="background:var(--surface);border-radius:1.2rem;padding:1.8rem;max-width:400px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.2)">
+    <div style="font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);margin-bottom:.15rem">🪙 Crédits WRC</div>
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.9rem">1 WRC = $0.01 USDT · Utilisez vos WRC dans le jeu</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.9rem" id="wrc-packs-grid"></div>
+    <button id="wrc-topup-confirm" onclick="execTopup()" style="width:100%;padding:.82rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;cursor:pointer">💳 Acheter</button>
+    <button onclick="closeWRCTopup()" style="width:100%;padding:.6rem;border-radius:.55rem;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;margin-top:.4rem">Annuler</button>
+  </div>
+</div>
+<script>
+let _wrcSel=0,_wrcBuying=false;
+function openWRCTopup(){_rp();document.getElementById('wrc-topup-overlay').style.display='flex'}
+function closeWRCTopup(){document.getElementById('wrc-topup-overlay').style.display='none'}
+function _rp(){
+  document.getElementById('wrc-packs-grid').innerHTML=WRC_CONFIG.PACKS.map((p,i)=>`<div onclick="wrcSel(${i})" style="border:2px solid ${i===_wrcSel?'var(--lime)':'var(--border)'};background:${i===_wrcSel?'var(--limeBg)':'var(--surface2)'};border-radius:.7rem;padding:.82rem;text-align:center;cursor:pointer;transition:all .18s;position:relative">${i===_wrcSel?'<span style="position:absolute;top:.28rem;right:.48rem;color:var(--lime);font-size:.65rem;font-weight:700">✓</span>':''}<div style="font-family:Bebas Neue,sans-serif;font-size:1.65rem;color:var(--lime);line-height:1">${p.wrc.toLocaleString()}</div><div style="font-family:Space Mono,monospace;font-size:.49rem;color:var(--muted)">WRC</div><div style="font-family:Space Mono,monospace;font-size:.63rem;color:var(--gold);font-weight:700;margin:.1rem 0">${p.usdt}</div><div style="font-family:Space Mono,monospace;font-size:.51rem;color:var(--muted)">${p.label}</div>${p.badge?`<div style="font-family:Space Mono,monospace;font-size:.46rem;font-weight:700;padding:.07rem .3rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.3);display:inline-block;margin-top:.16rem">${p.badge}</div>`:''}</div>`).join('');
+  const p=WRC_CONFIG.PACKS[_wrcSel];
+  document.getElementById('wrc-topup-confirm').textContent=`💳 ${p.wrc} WRC — ${p.usdt} USDT`;
+}
+function wrcSel(i){_wrcSel=i;_rp()}
+function execTopup(){
+  if(_wrcBuying)return;_wrcBuying=true;
+  const btn=document.getElementById('wrc-topup-confirm');
+  const p=WRC_CONFIG.PACKS[_wrcSel];
+  btn.textContent='⏳...';btn.disabled=true;
+  setTimeout(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();},1500);
+}
+WRCEngine.subscribe(function(bal){
+  var el=document.getElementById('nav-wrc-val');if(el)el.textContent=bal.toLocaleString();
+});
 </script>
 </body>
 </html>
