@@ -628,39 +628,98 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
   <!-- SETTINGS -->
   <div class="tab-panel" id="panel-settings">
+
+    <!-- ACCOUNT INFORMATION -->
     <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">👤 Accornt Information</div></div>
+      <div class="pcard-head"><div class="pcard-title">👤 Account Information</div></div>
       <div class="pcard-body">
         <div class="settings-section">
-          
-            <button class="toggle on" onclick="togSet(this)"></button>
+          <div class="setting-row">
+            <div><div class="sr-label">Username</div><div class="sr-desc">Visible to other players</div></div>
+            <input class="setting-input" id="s-username" placeholder="Your username"/>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Show competitive mode</div><div class="sr-desc">Show ELO on public profile</div></div>
-            <button class="toggle on" onclick="togSet(this)"></button>
+            <div><div class="sr-label">Email</div><div class="sr-desc">For notifications and account recovery</div></div>
+            <input class="setting-input" id="s-email" type="email" placeholder="your@email.com"/>
           </div>
           <div class="setting-row">
-            <div><div class="sr-label">Public profile</div><div class="sr-desc">Les autres players peuvent voir vos stats</div></div>
-            <button class="toggle on" onclick="togSet(this)"></button>
+            <div><div class="sr-label">Country</div><div class="sr-desc">Displayed on leaderboard</div></div>
+            <select class="setting-input" id="s-country" style="width:180px">
+              <option>🇩🇿 Algeria</option>
+              <option>🇫🇷 France</option>
+              <option>🇹🇳 Tunisia</option>
+              <option>🇲🇦 Morocco</option>
+              <option>🇨🇦 Canada</option>
+              <option>🌍 Other</option>
+            </select>
           </div>
         </div>
-        <button class="save-settings-btn" onclick="toast('✅ Preferences saved!')">💾 Save</button>
+        <button class="save-settings-btn" onclick="saveSettings()">💾 Save</button>
       </div>
     </div>
 
+    <!-- NOTIFICATIONS -->
+    <div class="pcard">
+      <div class="pcard-head"><div class="pcard-title">🔔 Notifications</div></div>
+      <div class="pcard-body">
+        <div class="settings-section">
+          <div class="setting-row">
+            <div><div class="sr-label">Daily League results</div><div class="sr-desc">Receive an email at 00:00 UTC</div></div>
+            <button class="toggle on" id="toggle-league-results" onclick="togSet(this)"></button>
+          </div>
+          <div class="setting-row">
+            <div><div class="sr-label">New challenge received</div><div class="sr-desc">Someone challenges you to a Duel</div></div>
+            <button class="toggle on" id="toggle-duel-invite" onclick="togSet(this)"></button>
+          </div>
+          <div class="setting-row">
+            <div><div class="sr-label">Earnings paid</div><div class="sr-desc">USDT payment confirmation</div></div>
+            <button class="toggle on" id="toggle-payment" onclick="togSet(this)"></button>
+          </div>
+          <div class="setting-row">
+            <div><div class="sr-label">Weekly newsletter</div><div class="sr-desc">Stats and platform updates</div></div>
+            <button class="toggle off" id="toggle-newsletter" onclick="togSet(this)"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAME PREFERENCES — no language selector -->
+    <div class="pcard">
+      <div class="pcard-head"><div class="pcard-title">🎮 Game Preferences</div></div>
+      <div class="pcard-body">
+        <div class="settings-section">
+          <div class="setting-row">
+            <div><div class="sr-label">Sound & effects</div><div class="sr-desc">Interface sounds and timer</div></div>
+            <button class="toggle on" id="toggle-sound" onclick="togSet(this)"></button>
+          </div>
+          <div class="setting-row">
+            <div><div class="sr-label">Show competitive mode</div><div class="sr-desc">Show ELO on public profile</div></div>
+            <button class="toggle on" id="toggle-show-elo" onclick="togSet(this)"></button>
+          </div>
+          <div class="setting-row">
+            <div><div class="sr-label">Public profile</div><div class="sr-desc">Other players can see your stats</div></div>
+            <button class="toggle on" id="toggle-public" onclick="togSet(this)"></button>
+          </div>
+        </div>
+        <button class="save-settings-btn" onclick="saveSettings()">💾 Save</button>
+      </div>
+    </div>
+
+    <!-- DANGER ZONE -->
     <div class="pcard" style="border-color:rgba(239,68,68,.25)">
       <div class="pcard-head" style="background:var(--redBg)"><div class="pcard-title" style="color:var(--red)">⚠️ Danger Zone</div></div>
       <div class="pcard-body">
         <div class="setting-row">
-          <div><div class="sr-label" style="color:var(--red)">Disconnect Wallet</div><div class="sr-desc">Yorr balance remains intact</div></div>
-          <button onclick="toast('🔌 Wallet disconnected')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Disconnect</button>
+          <div><div class="sr-label" style="color:var(--red)">Disconnect Wallet</div><div class="sr-desc">Your balance remains intact</div></div>
+          <button onclick="showComingSoon('Disconnect Wallet','Wallet features launch in Q3 2026.')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Disconnect</button>
         </div>
         <div class="setting-row">
-          <div><div class="sr-label" style="color:var(--red)">Delete accornt</div><div class="sr-desc">Irreversible — all data will be lost</div></div>
-          <button onclick="if(confirm('Are yor sure? This action cannot be undone.'))toast('⚠️ Request submitted — confirmation email sent')" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Delete</button>
+          <div><div class="sr-label" style="color:var(--red)">Delete account</div><div class="sr-desc">Irreversible — all data will be lost</div></div>
+          <button onclick="if(confirm('Are you sure? This cannot be undone.'))WRAuth.logout();location.href='index.html'" style="padding:.38rem .8rem;border-radius:.42rem;border:1px solid rgba(239,68,68,.35);background:var(--redBg);color:var(--red);font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;cursor:pointer">Delete</button>
         </div>
       </div>
     </div>
+
   </div>
 
 </div><!-- end main -->
