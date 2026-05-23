@@ -193,6 +193,23 @@ table.lt{width:100%;border-collapse:collapse}
 
 
 
+<style id="lb-mobile-css">
+#lb-mobile-cards{display:none;flex-direction:column;gap:.42rem;padding:.6rem .75rem}
+.lb-m-card{display:flex;align-items:center;gap:.55rem;background:#fff;border:1px solid rgba(0,0,0,.07);border-radius:.7rem;padding:.6rem .75rem;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.lb-m-card.you{background:#E8F8DF;border-color:rgba(159,232,112,.4)}
+.lb-m-card.top3{background:#FDF3CC;border-color:rgba(245,200,66,.3)}
+.lb-m-rank{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;min-width:28px;text-align:center;line-height:1}
+.lb-m-av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;flex-shrink:0}
+.lb-m-info{flex:1;min-width:0}
+.lb-m-name{font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;color:#1A1A1A;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lb-m-meta{font-family:'Space Mono',monospace;font-size:.54rem;color:#6B7280;margin-top:.1rem}
+.lb-m-right{text-align:right;flex-shrink:0}
+.lb-m-score{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:#1A1A1A;line-height:1}
+.lb-m-gain{font-family:'Space Mono',monospace;font-size:.56rem;color:#16A34A;font-weight:700}
+.lb-m-chg{font-family:'Space Mono',monospace;font-size:.52rem;margin-top:.1rem}
+@media(min-width:641px){#lb-mobile-cards{display:none!important}}
+@media(max-width:640px){#lb-mobile-cards{display:flex!important}.lb-table-wrap table{display:none!important}.pagination{display:none!important}}
+</style>
 </head>
 <body>
 
@@ -271,7 +288,8 @@ table.lt{width:100%;border-collapse:collapse}
           </tr></thead>
           <tbody id="tb-alltime"></tbody></table>
         </div>
-        <div class="pagination">
+        <div id="lb-mobile-cards"></div>
+<div class="pagination">
           <div class="page-info" id="pi-alltime">1–20 sur 12,847</div>
           <div class="page-btns">
             <button class="page-btn" onclick="prevPage('alltime')" id="prev-alltime" disabled>← Préc.</button>
@@ -863,6 +881,51 @@ initAllTime(); initDaily(); initDuel(); initCasual(); initWeekly(); initStats();
 (function(){
   function syncM(){var bal=parseInt(localStorage.getItem('wrc_balance')||'0');var el=document.getElementById('nav-wrc-mobile-val');if(el)el.textContent=bal>0?bal.toLocaleString()+' WRC':'—';var user=null;try{user=JSON.parse(localStorage.getItem('wr_user')||'null')}catch(e){}var chip=document.getElementById('nav-wrc-mobile');if(chip)chip.style.display=(user&&window.innerWidth<=640)?'inline-flex':'none'}
   syncM();setInterval(syncM,2000);window.addEventListener('resize',syncM);
+})();
+</script>
+<script id="lb-mobile-script">
+(function(){
+  var COLORS=['#9FE870','#F5C842','#EF4444','#3B82F6','#7C3AED','#F97316','#14B8A6','#EC4899','#84CC16','#06B6D4'];
+  function renderCards(data){
+    var el=document.getElementById('lb-mobile-cards');
+    if(!el||!data)return;
+    el.innerHTML=data.map(function(p,i){
+      var medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1);
+      var rankColor=i===0?'#D4AF37':i===1?'#9BA5B0':i===2?'#CD8C52':'#9B9B9B';
+      var cls=p.you?'you':i<3?'top3':'';
+      var col=COLORS[i%COLORS.length];
+      var ch=p.change||'—';
+      var chCol=ch.includes('+')||ch.includes('▲')?'#16A34A':ch==='—'?'#9B9B9B':'#EF4444';
+      var score=(p.score||p.best||0).toLocaleString();
+      var meta=(p.games||p.duels||0)+' parties · '+(p.wr||'—')+' WR · ELO '+(p.elo||'—');
+      return '<div class="lb-m-card '+cls+'">'
+        +'<div class="lb-m-rank" style="color:'+rankColor+'">'+medal+'</div>'
+        +'<div class="lb-m-av" style="background:'+col+'22;color:'+col+'">'+((p.name||'?')[0].toUpperCase())+'</div>'
+        +'<div class="lb-m-info">'
+          +'<div class="lb-m-name">'+(p.name||'?')+(p.you?' <span style="font-size:.46rem;color:#9FE870">(vous)</span>':'')+'</div>'
+          +'<div class="lb-m-meta">'+meta+'</div>'
+        +'</div>'
+        +'<div class="lb-m-right">'
+          +'<div class="lb-m-score">'+score+'</div>'
+          +'<div class="lb-m-gain">'+(p.earned||p.gain||'—')+'</div>'
+          +'<div class="lb-m-chg" style="color:'+chCol+'">'+ch+'</div>'
+        +'</div>'
+      +'</div>';
+    }).join('');
+  }
+  window._renderLbCards=renderCards;
+  // Hook switchTab
+  var _orig=window.switchTab;
+  window.switchTab=function(name,el){
+    if(_orig)_orig(name,el);
+    setTimeout(function(){
+      var fn={alltime:window.genAllTime,daily:window.genDaily,duel:window.genDuel,casual:window.genCasual,weekly:window.genWeekly}[name];
+      if(fn)renderCards(fn());
+    },50);
+  };
+  window.addEventListener('load',function(){
+    setTimeout(function(){if(window.genAllTime)renderCards(window.genAllTime())},200);
+  });
 })();
 </script>
 </body>
