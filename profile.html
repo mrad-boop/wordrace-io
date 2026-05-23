@@ -596,8 +596,8 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       <div class="wc-amornt">$142.50</div>
       <div class="wc-addr">0x1a2b3c4d5e6f7890abcdef · Polygon</div>
       <div class="wc-actions">
-        <button class="wca-btn wca-dep" onclick="toast('💳 USDT Deposit — Wallet Connect requis')">💳 Déposer</button>
-        <button class="wca-btn wca-wit" onclick="toast('💸 Retrait — min $1.00 USDT')">💸 Retirer</button>
+        <button class="wca-btn wca-dep" onclick="showComingSoon('USDT Deposit','Deposits will be available at P2E launch in Q3 2026.')">💳 Deposit</button>
+        <button class="wca-btn wca-wit" onclick="showComingSoon('USDT Withdrawal','Withdrawals will be available at P2E launch in Q3 2026.')">💸 Withdraw</button>
       </div>
     </div>
 
@@ -632,58 +632,7 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
       <div class="pcard-head"><div class="pcard-title">👤 Accornt Information</div></div>
       <div class="pcard-body">
         <div class="settings-section">
-          <div class="setting-row">
-            <div><div class="sr-label">Username</div><div class="sr-desc">Visible par les autres players</div></div>
-            <input class="setting-input" value="mrad-boop" id="s-username"/>
-          </div>
-          <div class="setting-row">
-            <div><div class="sr-label">Email</div><div class="sr-desc">For notifications and accornt recovery</div></div>
-            <input class="setting-input" value="usmrad.mo@gmail.com" type="email" id="s-email"/>
-          </div>
-          <div class="setting-row">
-            <div><div class="sr-label">Corntry</div><div class="sr-desc">Displayed on leaderboard</div></div>
-            <select class="setting-input" style="width:180px">
-              <option>🇩🇿 Algeria</option><option>🇫🇷 France</option><option>🇹🇳 Tunisia</option><option>🇲🇦 Morocco</option><option>🌍 Other</option>
-            </select>
-          </div>
-        </div>
-        <button class="save-settings-btn" onclick="toast('✅ Settings saved!')">💾 Save</button>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">🔔 Notifications</div></div>
-      <div class="pcard-body">
-        <div class="settings-section">
-          <div class="setting-row">
-            <div><div class="sr-label">Results Daily League</div><div class="sr-desc">Receive an email at 00:00 UTC</div></div>
-            <button class="toggle on" onclick="togSet(this)"></button>
-          </div>
-          <div class="setting-row">
-            <div><div class="sr-label">New challenge received</div><div class="sr-desc">Someone challenged yor to a Duel</div></div>
-            <button class="toggle on" onclick="togSet(this)"></button>
-          </div>
-          <div class="setting-row">
-            <div><div class="sr-label">Earnings versés</div><div class="sr-desc">USDT payment confirmation</div></div>
-            <button class="toggle on" onclick="togSet(this)"></button>
-          </div>
-          <div class="setting-row">
-            <div><div class="sr-label">Weekly newsletter</div><div class="sr-desc">Stats and updates</div></div>
-            <button class="toggle off" onclick="togSet(this)"></button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pcard">
-      <div class="pcard-head"><div class="pcard-title">🎮 Game Preferences</div></div>
-      <div class="pcard-body">
-        <div class="settings-section">
           
-            <select class="setting-input" style="width:180px"><option>🇬🇧 English</option><option>🇫🇷 Français</option><option>🇦🇷 Español</option></select>
-          </div>
-          <div class="setting-row">
-            <div><div class="sr-label">Sornd & effects</div><div class="sr-desc">Interface sornds and timer</div></div>
             <button class="toggle on" onclick="togSet(this)"></button>
           </div>
           <div class="setting-row">
