@@ -171,6 +171,23 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
 
 </head>
 <body>
+<div id="beta-banner" style="
+  position:fixed;top:52px;left:0;right:0;z-index:90;
+  background:linear-gradient(90deg,#163300,#1e5200,#163300);
+  padding:.38rem 1rem;display:flex;align-items:center;justify-content:center;
+  gap:.7rem;font-family:'Space Mono',monospace;font-size:.6rem;
+  color:rgba(255,255,255,.8);border-bottom:1px solid rgba(159,232,112,.2);
+">
+  <span style="width:7px;height:7px;border-radius:50%;background:#9FE870;animation:pulse2 1.5s infinite;flex-shrink:0;display:inline-block"></span>
+  <span><strong style="color:#9FE870">BÊTA PUBLIQUE</strong> · Casual Training gratuit · Duel Arena & Daily League <strong style="color:#F5C842">Coming Soon Q3 2026</strong></span>
+  <button onclick="document.getElementById('beta-banner').style.display='none'" style="background:none;border:none;color:rgba(255,255,255,.4);cursor:pointer;font-size:.85rem;padding:0;flex-shrink:0">✕</button>
+</div>
+<style>
+@keyframes pulse2{0%,100%{opacity:1}50%{opacity:.3}}
+/* Push content below banner */
+.hero-section,.landing-hero,.page-hero{margin-top:calc(52px + 28px)!important}
+</style>
+
 <nav class="topnav">
   <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
   <ul class="nav-links">
@@ -235,9 +252,9 @@ window.WRCEngine=WRCEngine;window.WRC_CONFIG=WRC_CONFIG;
     <div class="modes-title">4 Game Arenas</div>
     <div class="modes-grid">
       <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #9FE870;cursor:pointer"><span class="mode-emoji">🆓</span><div><div class="mode-name">Casual Training</div><div class="mode-sub">vs AI bots</div></div><span class="mode-tag" style="background:#9FE870;color:#163300">FREE</span></div></a>
-      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #3B82F6;cursor:pointer"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="background:#3B82F6">P2E</span></div></a>
-      <a href="daily-league.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #F5C842;cursor:pointer"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="background:#F5C842;color:#1a1400">P2E</span></div></a>
-      <a href="duel.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #EF4444;cursor:pointer"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="background:#EF4444">P2E</span></div></a>
+      <a href="game.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #3B82F6;cursor:pointer"><span class="mode-emoji">🧪</span><div><div class="mode-name">Practice Zone</div><div class="mode-sub">Power-ups enabled</div></div><span class="mode-tag" style="background:#3B82F6">P2E</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;background:rgba(245,200,66,.15);color:#F5C842;border:1px solid rgba(245,200,66,.25);margin-left:.3rem">BIENTÔT</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;background:rgba(239,68,68,.15);color:#EF4444;border:1px solid rgba(239,68,68,.25);margin-left:.3rem">BIENTÔT</span></div></a>
+      <a href="daily-league.html" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #F5C842;cursor:pointer"><span class="mode-emoji">📅</span><div><div class="mode-name">Daily League</div><div class="mode-sub">$0.20–$0.50 entry</div></div><span class="mode-tag" style="background:#F5C842;color:#1a1400">P2E</span><span style="font-family:\'Space Mono\',monospace;font-size:.5rem;font-weight:700;padding:.1rem .35rem;border-radius:100px;background:rgba(245,200,66,.15);color:#F5C842;border:1px solid rgba(245,200,66,.25);margin-left:.3rem">BIENTÔT</span></div></a>
+      <a href="duel.html" onclick="event.preventDefault();window.location.href='duel.html'" style="text-decoration:none"><div class="mode-card" style="border-left:3px solid #EF4444;cursor:pointer"><span class="mode-emoji">⚔️</span><div><div class="mode-name">Duel Arena</div><div class="mode-sub">$1–$50 wagers</div></div><span class="mode-tag" style="background:#EF4444">P2E</span></div></a>
     </div>
   </div>
   <footer>© 2026 WordRace.io &middot; <a href="terms.html">Terms</a> &middot; <a href="terms.html#privacy">Privacy</a> &middot; <a href="terms.html">User Guide</a><br><span style="opacity:.4">WordRace is a skill-based game. Results vary. Play responsibly.</span></footer>
