@@ -217,7 +217,7 @@ table.lt{width:100%;border-collapse:collapse}
     <div class="hero-left">
       <div class="hero-badge">🏆 Global Leaderboard</div>
       <div class="hero-title">WORD<span>RACE</span><br/>RANKINGS</div>
-      <div class="hero-sub">Updated every 60 seconds · Season 1 · May 2026</div>
+      <div class="hero-sub" id="hero-season-sub">Updated every 60 seconds · Season 1 · May 2026</div>
     </div>
     <div class="hero-stats">
       <div class="hs"><div class="hs-val">12,847</div><div class="hs-label">Players</div></div>
@@ -236,7 +236,7 @@ table.lt{width:100%;border-collapse:collapse}
     <div class="tab" onclick="switchTab('duel',this)">⚔️ Duel Arena</div>
     <div class="tab" onclick="switchTab('casual',this)">🆓 Casual</div>
     <div class="tab" onclick="switchTab('weekly',this)">📆 This Week</div>
-    <div class="tab" onclick="switchTab('stats',this)">📊 Statistiques</div>
+    <div class="tab" onclick="switchTab('stats',this)">📊 Stats</div>
   </div>
 </div>
 
@@ -260,7 +260,7 @@ table.lt{width:100%;border-collapse:collapse}
           <div class="lb-controls">
             <input class="lb-search" placeholder="🔍 Search..." oninput="filterTable('alltime',this.value)"/>
             <select class="lb-sel" onchange="filterRegion(this.value)">
-              <option>🌍 Global</option><option>🇩🇿 Algérie</option><option>🇫🇷 France</option><option>🇹🇳 Tunisie</option><option>🇲🇦 Maroc</option>
+              <option>🌍 Global</option><option>🇩🇿 Algeria</option><option>🇫🇷 France</option><option>🇹🇳 Tunisia</option><option>🇲🇦 Morocco</option>
             </select>
             <button class="page-btn" onclick="exportCSV('alltime')">📤 CSV</button>
           </div>
@@ -274,7 +274,7 @@ table.lt{width:100%;border-collapse:collapse}
         </div>
         <div id="lb-mobile-cards"></div>
 <div class="pagination">
-          <div class="page-info" id="pi-alltime">1–20 sur 12,847</div>
+          <div class="page-info" id="pi-alltime">1–20 of 12,847</div>
           <div class="page-btns">
             <button class="page-btn" onclick="prevPage('alltime')" id="prev-alltime" disabled>← Prev</button>
             <button class="page-btn active" id="p1-alltime">1</button>
@@ -294,7 +294,7 @@ table.lt{width:100%;border-collapse:collapse}
       <div class="lb-table-wrap">
         <div class="lb-table-head">
           <div style="display:flex;align-items:center;gap:.7rem">
-            <div class="lbth-title">📅 Daily League — Aujorrd'hui</div>
+            <div class="lbth-title">📅 Daily League — Today</div>
             <div class="live-dot">LIVE</div>
           </div>
           <div class="lb-controls">
@@ -312,7 +312,7 @@ table.lt{width:100%;border-collapse:collapse}
           <tbody id="tb-daily"></tbody></table>
         </div>
         <div class="pagination">
-          <div class="page-info">1–20 sur 1,262</div>
+          <div class="page-info">1–20 of 1,262</div>
           <div class="page-btns">
             <button class="page-btn" disabled>← Prev</button>
             <button class="page-btn active">1</button>
@@ -337,7 +337,7 @@ table.lt{width:100%;border-collapse:collapse}
           </div>
           <div class="lb-controls">
             <select class="lb-sel">
-              <option>Ce mois</option><option>Cette semaine</option><option>Aujorrd'hui</option><option>All Time</option>
+              <option>This Month</option><option>This Week</option><option>Today</option><option>All Time</option>
             </select>
             <input class="lb-search" placeholder="🔍 Search..." oninput="filterTable('duel',this.value)"/>
           </div>
@@ -377,17 +377,17 @@ table.lt{width:100%;border-collapse:collapse}
       <div class="lb-table-wrap">
         <div class="lb-table-head">
           <div style="display:flex;align-items:center;gap:.7rem">
-            <div class="lbth-title">📆 Weekly Rankings — 19–25 Mai 2026</div>
+            <div class="lbth-title" id="weekly-title">📆 Weekly Rankings</div>
             <div class="live-dot">LIVE</div>
           </div>
           <div class="lb-controls">
             <input class="lb-search" placeholder="🔍 Search..."/>
-            <button class="page-btn" style="background:var(--limeBg);border-color:var(--lime);color:var(--forest)">🏆 Mes stats</button>
+            <button class="page-btn" style="background:var(--limeBg);border-color:var(--lime);color:var(--forest)">🏆 My Stats</button>
           </div>
         </div>
         <div style="overflow-x:auto">
           <table class="lt"><thead><tr>
-            <th>Rank</th><th>Player</th><th>Score Sem.</th><th>Games</th>
+            <th>Rank</th><th>Player</th><th>Weekly Score</th><th>Games</th>
             <th>Wins</th><th>Earnings</th><th>Best Streak</th><th>Change</th>
           </tr></thead>
           <tbody id="tb-weekly"></tbody></table>
@@ -399,7 +399,7 @@ table.lt{width:100%;border-collapse:collapse}
     <div class="tab-panel" id="panel-stats">
       <div class="stats-grid">
         <div class="stat-card" style="border-left:3px solid var(--lime)">
-          <div class="sc-val" style="color:var(--lime)">12,847</div><div class="sc-label">Players Inscrits</div>
+          <div class="sc-val" style="color:var(--lime)">12,847</div><div class="sc-label">Registered Players</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--gold)">
           <div class="sc-val" style="color:var(--gold)">$48,210</div><div class="sc-label">Total Paid Out</div>
@@ -436,7 +436,7 @@ table.lt{width:100%;border-collapse:collapse}
 
     <!-- MY RANK -->
     <div class="my-rank-card">
-      <div class="mrc-title">📍 Mon Rankings</div>
+      <div class="mrc-title">📍 My Rankings</div>
       <div style="display:flex;align-items:flex-end;gap:.6rem;margin-bottom:.8rem">
         <div><div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Global Rank</div><div class="mrc-rank-big">#4,821</div></div>
         <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--valid);margin-bottom:.35rem">▲ +24 this week</div>
@@ -444,7 +444,7 @@ table.lt{width:100%;border-collapse:collapse}
       <div class="mrc-row"><span class="mrc-label">All-Time Score</span><span class="mrc-val">18,400</span></div>
       <div class="mrc-row"><span class="mrc-label">WR Score</span><span class="mrc-val" style="color:var(--lime)">1,240</span></div>
       <div class="mrc-row"><span class="mrc-label">Win Rate</span><span class="mrc-val">61%</span></div>
-      <div class="mrc-row"><span class="mrc-label">Earnings Totaux</span><span class="mrc-val" style="color:var(--valid)">$142.50</span></div>
+      <div class="mrc-row"><span class="mrc-label">Total Earnings</span><span class="mrc-val" style="color:var(--valid)">$142.50</span></div>
       <div class="mrc-row"><span class="mrc-label">Daily League</span><span class="mrc-val">#14 (today)</span></div>
       <div class="mrc-row"><span class="mrc-label">WRC Balance</span><span class="mrc-val" style="color:var(--lime)" id="sidebar-wrc">150 WRC</span></div>
       <a href="profile.html" style="display:block;text-align:center;margin-top:.9rem;font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;padding:.6rem;border-radius:.5rem;background:var(--limeBg);color:var(--forest);text-decoration:none;border:1px solid rgba(159,232,112,.3);transition:background .15s" onmorseover="this.style.background='var(--lime)'" onmouseout="this.style.background='var(--limeBg)'">👤 View my Profile →</a>
@@ -452,15 +452,15 @@ table.lt{width:100%;border-collapse:collapse}
 
     <!-- PRIZE POOL -->
     <div class="prize-card">
-      <div class="pc-label">🏆 Daily Prize Pool — Aujorrd'hui</div>
+      <div class="pc-label">🏆 Daily Prize Pool — Today</div>
       <div class="pc-amornt">$631</div>
       <div class="pc-sub">1,262 participants · 90% redistributed</div>
       <div class="pc-dist">
-        <div class="pc-row"><span class="pc-rank">🥇 1er</span><span class="pc-pct">30%</span><span class="pc-prize">$170</span></div>
-        <div class="pc-row"><span class="pc-rank">🥈 2ème</span><span class="pc-pct">18%</span><span class="pc-prize">$102</span></div>
-        <div class="pc-row"><span class="pc-rank">🥉 3ème</span><span class="pc-pct">12%</span><span class="pc-prize">$68</span></div>
-        <div class="pc-row"><span class="pc-rank">4–5ème</span><span class="pc-pct">5% ×2</span><span class="pc-prize">$28 ×2</span></div>
-        <div class="pc-row"><span class="pc-rank">6–10ème</span><span class="pc-pct">4% ×5</span><span class="pc-prize">$22 ×5</span></div>
+        <div class="pc-row"><span class="pc-rank">🥇 1st</span><span class="pc-pct">30%</span><span class="pc-prize">$170</span></div>
+        <div class="pc-row"><span class="pc-rank">🥈 2nd</span><span class="pc-pct">18%</span><span class="pc-prize">$102</span></div>
+        <div class="pc-row"><span class="pc-rank">🥉 3rd</span><span class="pc-pct">12%</span><span class="pc-prize">$68</span></div>
+        <div class="pc-row"><span class="pc-rank">4th–5th</span><span class="pc-pct">5% ×2</span><span class="pc-prize">$28 ×2</span></div>
+        <div class="pc-row"><span class="pc-rank">6th–10th</span><span class="pc-pct">4% ×5</span><span class="pc-prize">$22 ×5</span></div>
       </div>
     </div>
 
@@ -510,7 +510,7 @@ function execTopup(){
   if(_wrcBuying)return;_wrcBuying=true;
   const btn=document.getElementById('wrc-topup-confirm'),p=WRC_CONFIG.PACKS[_wrcSel];
   btn.textContent='⏳...';btn.disabled=true;
-  setTimeort(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();showToast('✅ '+(p.wrc+(p.bonus||0))+' WRC ajortés !')},1500);
+  setTimeout(()=>{WRCEngine.addWRC(p.wrc+(p.bonus||0));_wrcBuying=false;btn.disabled=false;closeWRCTopup();showToast('✅ '+(p.wrc+(p.bonus||0))+' WRC added!')},1500);
 }
 WRCEngine.subscribe(bal=>{
   const nb=document.getElementById('nav-wrc-val');if(nb)nb.textContent=bal.toLocaleString();
@@ -541,8 +541,8 @@ function computeLocalStats(games){
 }
 
 // ─── EMPTY STATE ──────────────────────────────────────────────
-const EMPTY_MSG=`<tr><td colspan="8" style="text-align:center;padding:3rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">🔒 Classement multijoueur — disponible au lancement global<br><a href="game.html" style="color:var(--lime);font-weight:700;text-decoration:none;margin-top:.5rem;display:inline-block">🎮 Joue en Casual pour voir tes stats ici →</a></td></tr>`;
-const EMPTY_PODIUM=`<div style="text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">Podium disponible au lancement</div>`;
+const EMPTY_MSG=`<tr><td colspan="8" style="text-align:center;padding:3rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">🔒 Multiplayer rankings — available at global launch<br><a href="game.html" style="color:var(--lime);font-weight:700;text-decoration:none;margin-top:.5rem;display:inline-block">🎮 Play Casual to see your stats here →</a></td></tr>`;
+const EMPTY_PODIUM=`<div style="text-align:center;padding:2rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">Podium available at launch</div>`;
 
 // ─── CASUAL INIT (REAL DATA) ───────────────────────────────────
 function initCasual(){
@@ -567,7 +567,7 @@ function initCasual(){
   // Table
   const tbody=document.getElementById('tb-casual');
   if(!tbody)return;
-  if(stats.total===0){tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:3rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">Aucune partie jouée — <a href="game.html" style="color:var(--lime);font-weight:700;text-decoration:none">joue maintenant →</a></td></tr>`;return;}
+  if(stats.total===0){tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:3rem;font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted)">No games played yet — <a href="game.html" style="color:var(--lime);font-weight:700;text-decoration:none">play now →</a></td></tr>`;return;}
 
   // Group by date for best score per session (show each game as a row)
   const rows=games.slice(0,20).map((g,i)=>({
@@ -581,7 +581,7 @@ function initCasual(){
   tbody.innerHTML=rows.map(r=>`
     <tr class="yor">
       <td><span class="rank-num" style="color:${r.rank===1?'var(--gold)':'var(--muted)'}">${r.rank===1?'🥇':r.rank}</span></td>
-      <td><div class="player-cell"><div class="player-av" style="background:#9FE87022;color:#9FE870">${r.name[0].toUpperCase()}</div><div><div class="player-name">${r.name} <span style="font-size:.5rem;color:var(--lime)">(vous)</span></div><div class="player-country">${r.flag}</div></div></div></td>
+      <td><div class="player-cell"><div class="player-av" style="background:#9FE87022;color:#9FE870">${r.name[0].toUpperCase()}</div><div><div class="player-name">${r.name} <span style="font-size:.5rem;color:var(--lime)">(you)</span></div><div class="player-country">${r.flag}</div></div></div></td>
       <td style="font-weight:700;color:var(--lime)">${r.best} pts</td>
       <td>${r.games}</td>
       <td>${r.avg} pts</td>
@@ -595,7 +595,7 @@ function initCasual(){
 function initAllTime(){
   document.getElementById('podium-alltime').innerHTML=EMPTY_PODIUM;
   document.getElementById('tb-alltime').innerHTML=EMPTY_MSG;
-  document.getElementById('pi-alltime').textContent='Classement global disponible au lancement';
+  document.getElementById('pi-alltime').textContent='Global rankings available at launch';
 }
 function initDaily(){
   document.getElementById('podium-daily').innerHTML=EMPTY_PODIUM;
@@ -641,7 +641,7 @@ function initStats(){
   // Cat stats (real)
   const catStatsEl=document.getElementById('cat-stats');
   if(catStatsEl){
-    if(stats.catList.length===0){catStatsEl.innerHTML='<div style="text-align:center;padding:1.5rem;font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted)">Joue des parties pour voir tes stats par catégorie</div>';return;}
+    if(stats.catList.length===0){catStatsEl.innerHTML='<div style="text-align:center;padding:1.5rem;font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted)">Play some games to see your stats by category</div>';return;}
     catStatsEl.innerHTML=stats.catList.map(c=>`
       <div style="display:flex;align-items:center;gap:.7rem;margin-bottom:.45rem">
         <span style="font-family:'Space Mono',monospace;font-size:.63rem;min-width:100px;color:var(--text)">${c.cat}</span>
@@ -662,7 +662,7 @@ function initSidebar(){
   const mrcRank=document.querySelector('.mrc-rank-big');
   if(mrcRank)mrcRank.textContent=stats.total>0?'#1':'—';
   const mrcRows=document.querySelectorAll('.mrc-row .mrc-val');
-  if(mrcRows[0])mrcRows[0].textContent=stats.total>0?(stats.total+' parties'):'—';
+  if(mrcRows[0])mrcRows[0].textContent=stats.total>0?(stats.total+' games'):'—';
   if(mrcRows[1]){mrcRows[1].textContent=stats.elo.toLocaleString();mrcRows[1].style.color='var(--lime)';}
   if(mrcRows[2])mrcRows[2].textContent=stats.total>0?stats.wr+'%':'—';
   if(mrcRows[3]){mrcRows[3].textContent='—';mrcRows[3].style.color='var(--valid)';}
@@ -679,7 +679,7 @@ function initSidebar(){
   const topCatsEl=document.getElementById('top-cats');
   if(topCatsEl){
     const ICONS={'Animal':'🐾','Country':'🌍','First Name':'👤','Food':'🍎','Profession':'💼','Brand':'🏷️','Sport':'⚽','Movie/Series':'🎬'};
-    if(stats.catList.length===0){topCatsEl.innerHTML='<div style="font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted);padding:.5rem 0">Joue des parties pour voir</div>';return;}
+    if(stats.catList.length===0){topCatsEl.innerHTML='<div style="font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted);padding:.5rem 0">Play games to see your stats</div>';return;}
     topCatsEl.innerHTML=stats.catList.slice(0,6).map(c=>`
       <div class="cat-row">
         <div class="cat-emoji">${ICONS[c.cat]||'📝'}</div>
@@ -691,7 +691,7 @@ function initSidebar(){
   // Recent activity (real games)
   const actEl=document.getElementById('recent-activity');
   if(actEl){
-    if(games.length===0){actEl.innerHTML='<div style="font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted);padding:.5rem 0">Aucune activité récente</div>';return;}
+    if(games.length===0){actEl.innerHTML='<div style="font-family:\'Space Mono\',monospace;font-size:.6rem;color:var(--muted);padding:.5rem 0">No recent activity</div>';return;}
     actEl.innerHTML=games.slice(0,5).map(g=>`
       <div style="display:flex;align-items:center;gap:.6rem;padding:.38rem 0;border-bottom:1px solid var(--border)">
         <div style="flex:1"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;color:var(--text)">${g.result==='win'?'🏆':'📚'} ${g.score}pts — Lettre ${g.letter}</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">${uname} · ${g.date}</div></div>
@@ -713,9 +713,9 @@ function filterTable(mode,q){
   const rows=document.querySelectorAll('#tb-'+mode+' tr');
   rows.forEach(r=>{r.style.display=r.textContent.toLowerCase().includes(q.toLowerCase())?'':'none'});
 }
-function filterRegion(r){showToast('🌍 Filtre région disponible au lancement multijoueur');}
-function switchDailyTier(t){showToast('📅 Daily League disponible au lancement P2E');}
-function exportCSV(mode){showToast('📤 Export disponible au lancement');}
+function filterRegion(r){showToast('🌍 Region filter available at multiplayer launch');}
+function switchDailyTier(t){showToast('📅 Daily League available at P2E launch');}
+function exportCSV(mode){showToast('📤 Export available at launch');}
 
 // ─── COUNTDOWN ────────────────────────────────────────────────
 function updateHeroTimer(){
@@ -728,8 +728,8 @@ function updateHeroTimer(){
 }
 
 // ─── PAGINATION (stub) ────────────────────────────────────────
-function prevPage(m){showToast('← Page précédente');}
-function nextPage(m){showToast('→ Page suivante');}
+function prevPage(m){showToast('← Previous page');}
+function nextPage(m){showToast('→ Next page');}
 function goPage(m,p){showToast('→ Page '+p);}
 
 // ─── TOAST ────────────────────────────────────────────────────
@@ -739,8 +739,29 @@ function showToast(msg,dur=3000){
   clearTimeout(showToast._t);showToast._t=setTimeout(()=>t.style.display='none',dur);
 }
 
+// ─── SEASON SYSTEM ────────────────────────────────────────────
+function getCurrentSeason(){
+  const now=new Date();
+  return (now.getFullYear()-2026)*12+now.getMonth()+1; // Season 1 = Jan 2026
+}
+function updateSeasonInfo(){
+  const now=new Date();
+  const season=getCurrentSeason();
+  const month=now.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  const sub=document.getElementById('hero-season-sub');
+  if(sub)sub.textContent='Updated every 60 seconds · Season '+season+' · '+month;
+  // Weekly title: Mon–Sun of current week
+  const day=now.getDay(),diff=now.getDate()-day+(day===0?-6:1);
+  const mon=new Date(now.setDate(diff));
+  const sun=new Date(new Date(mon).setDate(mon.getDate()+6));
+  const fmt=d=>d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+  const wt=document.getElementById('weekly-title');
+  if(wt)wt.textContent='📆 Weekly Rankings — '+fmt(mon)+' – '+fmt(sun)+' '+sun.getFullYear();
+}
+
 // ─── INIT ─────────────────────────────────────────────────────
 setInterval(updateHeroTimer,1000);
+updateSeasonInfo();
 initAllTime();initDaily();initDuel();initCasual();initWeekly();initStats();initSidebar();updateHeroTimer();
 </script>
 <script src="auth.js"></script>
@@ -775,6 +796,7 @@ initAllTime();initDaily();initDuel();initCasual();initWeekly();initStats();initS
       { href:'duel.html',         emoji:'⚔️', text:'Duel' },
       { href:'leaderboard.html',  emoji:'🏆', text:'Ranks' },
       { href:'profile.html',      emoji:'👤', text:'Profile' },
+      { href:'support.html',      emoji:'🎫', text:'Support' },
       { href:'terms.html',        emoji:'📋', text:'Terms' },
     ];
 
@@ -860,7 +882,7 @@ initAllTime();initDaily();initDuel();initCasual();initWeekly();initStats();initS
         +'<div class="lb-m-rank" style="color:'+rankColor+'">'+medal+'</div>'
         +'<div class="lb-m-av" style="background:'+col+'22;color:'+col+'">'+((p.name||'?')[0].toUpperCase())+'</div>'
         +'<div class="lb-m-info">'
-          +'<div class="lb-m-name">'+(p.name||'?')+(p.yor?' <span style="font-size:.46rem;color:#9FE870">(vors)</span>':'')+'</div>'
+          +'<div class="lb-m-name">'+(p.name||'?')+(p.yor?' <span style="font-size:.46rem;color:#9FE870">(you)</span>':'')+'</div>'
           +'<div class="lb-m-meta">'+meta+'</div>'
         +'</div>'
         +'<div class="lb-m-right">'
@@ -876,13 +898,13 @@ initAllTime();initDaily();initDuel();initCasual();initWeekly();initStats();initS
   var _orig=window.switchTab;
   window.switchTab=function(name,el){
     if(_orig)_orig(name,el);
-    setTimeort(function(){
+    setTimeout(function(){
       var fn={alltime:window.genAllTime,daily:window.genDaily,duel:window.genDuel,casual:window.genCasual,weekly:window.genWeekly}[name];
       if(fn)renderCards(fn());
     },50);
   };
   window.addEventListener('load',function(){
-    setTimeort(function(){if(window.genAllTime)renderCards(window.genAllTime())},200);
+    setTimeout(function(){if(window.genAllTime)renderCards(window.genAllTime())},200);
   });
 })();
 </script>
