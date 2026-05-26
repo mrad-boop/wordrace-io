@@ -241,34 +241,33 @@ table.at{width:100%;border-collapse:collapse}
 
 <div id="atost"></div>
 
+<script src="admin-session.js"></script>
 <script>
-const ADMIN_PASS = 'wordrace2026';
 const STORAGE_KEY = 'wr_tickets';
 let currentTicketId = null;
 let currentFilter = {field:'',val:''};
 
 // ─── AUTH ─────────────────────────────────────────────────────
+function showAdminApp(){ document.getElementById('login-screen').style.display='none'; document.getElementById('admin-app').style.display='block'; initAdmin(); }
+function showAdminLogin(){ document.getElementById('admin-app').style.display='none'; document.getElementById('login-screen').style.display='flex'; }
+function onAdminLogout(){ showAdminLogin(); }
+
+WRAdminSession.guard(showAdminApp, showAdminLogin);
+
 function adminLogin(){
   const p=document.getElementById('admin-pass').value;
   const err=document.getElementById('login-err');
-  if(p===ADMIN_PASS){
-    sessionStorage.setItem('wr_admin','1');
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('admin-app').style.display='block';
-    initAdmin();
+  if(WRAdminSession.login(p)){
+    showAdminApp();
   } else {
     err.style.display='block';
     setTimeout(()=>err.style.display='none',3000);
   }
 }
-function adminLogout(){ sessionStorage.removeItem('wr_admin'); location.reload(); }
+function adminLogout(){ WRAdminSession.logout(); }
 
 // ─── INIT ─────────────────────────────────────────────────────
 function initAdmin(){
-  if(sessionStorage.getItem('wr_admin')==='1'){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('admin-app').style.display='block';
-  }
   renderAdminStats();
   renderAdminTickets();
   // Clock
@@ -450,12 +449,7 @@ function atoast(msg){
   clearTimeout(atoast._t);atoast._t=setTimeout(()=>t.style.display='none',3000);
 }
 
-// ─── AUTO-INIT ────────────────────────────────────────────────
-if(sessionStorage.getItem('wr_admin')==='1'){
-  document.getElementById('login-screen').style.display='none';
-  document.getElementById('admin-app').style.display='block';
-  initAdmin();
-}
+// guard handles init — no manual auto-init needed
 </script>
 </body>
 </html>

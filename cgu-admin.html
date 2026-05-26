@@ -321,10 +321,10 @@ body{
   </div>
 </div>
 
+<script src="admin-session.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────
-const ADMIN_PASSWORD = 'wordrace2026';
 const GITHUB_OWNER   = 'mrad-boop';
 const GITHUB_REPO    = 'wordrace-io';
 const TERMS_FILE     = 'terms.html';
@@ -332,17 +332,19 @@ const MARKER_START   = '<!-- CGU_CONTENT_START -->';
 const MARKER_END     = '<!-- CGU_CONTENT_END -->';
 const DATE_MARKER_ID = 'cgu-last-updated';
 
-// GitHub token — set via prompt or store in sessionStorage
 let GH_TOKEN = '';
 
 // ─── LOGIN ─────────────────────────────────────────────────────────────
+function showCGUAdmin(){ document.getElementById('login-wall').style.display='none'; document.getElementById('main').style.display='block'; if(!quill) initEditor(); }
+function showCGULogin(){ document.getElementById('main').style.display='none'; document.getElementById('login-wall').style.display='flex'; }
+function onAdminLogout(){ showCGULogin(); }
+
+WRAdminSession.guard(showCGUAdmin, showCGULogin);
+
 function doLogin(){
   const val = document.getElementById('pwd-input').value;
-  if(val === ADMIN_PASSWORD){
-    sessionStorage.setItem('wr_admin','1');
-    document.getElementById('login-wall').style.display='none';
-    document.getElementById('main').style.display='block';
-    initEditor();
+  if(WRAdminSession.login(val)){
+    showCGUAdmin();
   } else {
     document.getElementById('login-err').style.display='block';
     document.getElementById('pwd-input').value='';
@@ -350,16 +352,7 @@ function doLogin(){
   }
 }
 document.getElementById('pwd-input').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
-function doLogout(){
-  sessionStorage.removeItem('wr_admin');
-  sessionStorage.removeItem('gh_token');
-  location.reload();
-}
-if(sessionStorage.getItem('wr_admin')==='1'){
-  document.getElementById('login-wall').style.display='none';
-  document.getElementById('main').style.display='block';
-  window.addEventListener('DOMContentLoaded',initEditor);
-}
+function doLogout(){ sessionStorage.removeItem('gh_token'); WRAdminSession.logout(); }
 
 // ─── QUILL ─────────────────────────────────────────────────────────────
 let quill;

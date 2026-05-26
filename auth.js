@@ -440,11 +440,32 @@ function closeHamburger(){
 }
 window.closeHamburger = closeHamburger;
 
+// ── USER INACTIVITY LOGOUT (15 min) ──────────────────────────
+const USER_TIMEOUT = 15 * 60 * 1000;
+const ACTIVITY_KEY = 'wr_last_activity';
+
+function touchActivity(){
+  if(AUTH.isLoggedIn) localStorage.setItem(ACTIVITY_KEY, Date.now());
+}
+function checkUserInactivity(){
+  if(!AUTH.isLoggedIn) return;
+  const last = parseInt(localStorage.getItem(ACTIVITY_KEY)||'0');
+  if(last && (Date.now() - last) > USER_TIMEOUT){
+    AUTH.logort();
+    localStorage.removeItem(ACTIVITY_KEY);
+  }
+}
+['mousemove','keydown','mousedown','touchstart','scroll'].forEach(ev =>
+  document.addEventListener(ev, touchActivity, {passive:true})
+);
+setInterval(checkUserInactivity, 60_000);
+
 function init(){
   if(window.location.pathname.includes('admin')||window.location.pathname.includes('cgu-admin')) return;
   buildModals();
   buildNavBadge();
   buildHamburger();
+  touchActivity();
 
   // Auto-show login on game page and paid pages if not logged in
   const isPaidPage = window.location.pathname.includes('duel') ||

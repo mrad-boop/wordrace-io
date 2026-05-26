@@ -508,33 +508,38 @@ tr:hover td{background:var(--surface2)}
 </div>
 <div id="admin-toast"></div>
 
+<script src="admin-session.js"></script>
 <script>
 // ─── AUTH ─────────────────────────────────────────────────────
-const PWD = "wordrace2026";
+function showAdmin(){ document.getElementById('login-screen').style.display='none'; document.getElementById('admin-screen').style.display='block'; initAdmin(); }
+function showLogin(){ document.getElementById('admin-screen').style.display='none'; document.getElementById('login-screen').style.display='flex'; document.getElementById('pwd').value=''; }
+function onAdminLogout(){ showLogin(); }
+
+WRAdminSession.guard(showAdmin, showLogin);
+
 function tryLogin(){
-  if(document.getElementById('pwd').value===PWD){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('admin-screen').style.display='block';
-    initAdmin();
+  if(WRAdminSession.login(document.getElementById('pwd').value)){
+    showAdmin();
   } else {
     const e=document.getElementById('login-err'); e.style.display='block';
     document.getElementById('pwd').value='';
     setTimeout(()=>e.style.display='none',3000);
   }
 }
-function logout(){
-  document.getElementById('admin-screen').style.display='none';
-  document.getElementById('login-screen').style.display='flex';
-  document.getElementById('pwd').value='';
-}
+function logout(){ WRAdminSession.logout(); }
 document.getElementById('pwd').onkeydown=e=>{if(e.key==='Enter')tryLogin()};
 
 // ─── DATA ─────────────────────────────────────────────────────
-const DICT={Animal:["aigle","baleine","chameau","dauphin","éléphant","faucon","girafe","hippopotame","jaguar","kangourou","léopard","lion","lynx","mamba","narval","ocelot","panthère","requin","serpent","tigre","tortue","zèbre"],Pays:["algérie","allemagne","argentine","australie","brésil","canada","chili","chine","france","inde","italie","japon","maroc","mexique","norvège","portugal","russie","sénégal","suisse","tunisie","turquie"],"Prénom":["alice","benjamin","camille","daniel","emma","fatima","gabriel","hugo","isabelle","julien","kenza","lucas","marie","nicolas","omar","pierre","rachid","sarah","thomas","yasmine"],Aliment:["avocat","banane","carotte","chocolat","citron","fraise","grenade","jambon","kiwi","lait","mangue","noix","orange","poire","raisin","saumon","tomate","vanille","yaourt"],"Métier":["architecte","biologiste","chimiste","dentiste","enseignant","fermier","ingénieur","journaliste","médecin","notaire","pharmacien","pilote","policier","pompier","professeur","vétérinaire"],Marque:["adidas","apple","bmw","canon","disney","ferrari","google","hermès","intel","lamborghini","mercedes","netflix","openai","rolex","samsung","tesla","uber","youtube","zoom"],Sport:["athlétisme","badminton","basketball","cyclisme","escalade","football","golf","handball","judo","marathon","natation","rugby","ski","tennis","triathlon","volleyball"]};
-const USERS=[{id:"u001",name:"mrad-boop",email:"usmrad.mo@gmail.com",wallet:"0x1a2b...3c4d",net:"polygon",bal:142.50,games:87,elo:1240,status:"active"},{id:"u002",name:"crypto_gamer",email:"cg@ex.com",wallet:"0x5e6f...7g8h",net:"polygon",bal:38.20,games:234,elo:1580,status:"active"},{id:"u003",name:"wordmaster_99",email:"wm@ex.com",wallet:"phantom...xyz",net:"solana",bal:0,games:12,elo:820,status:"suspended"},{id:"u004",name:"petit_bac_pro",email:"pb@ex.com",wallet:"0xabc...def",net:"polygon",bal:510,games:1240,elo:2100,status:"active"},{id:"u005",name:"cheat_bot_420",email:"cb@spam.com",wallet:"",net:"none",bal:0,games:3,elo:500,status:"banned"},{id:"u006",name:"lexique_queen",email:"lq@ex.com",wallet:"phantom...abc",net:"solana",bal:89.75,games:456,elo:1890,status:"active"}];
-const ROOMS=[{id:"rm-001",mode:"duel",players:"4/4",prize:"$38",letter:"M",status:"in_progress"},{id:"rm-002",mode:"daily_league",players:"128",prize:"$640",letter:"A",status:"in_progress"},{id:"rm-003",mode:"casual",players:"1/4",prize:"$0",letter:"B",status:"waiting"},{id:"rm-004",mode:"duel",players:"2/2",prize:"$9.50",letter:"S",status:"completed"},{id:"rm-005",mode:"casual",players:"3/8",prize:"$0",letter:"T",status:"in_progress"}];
-const TX=[{hash:"0x1a2b...3c4d",user:"crypto_gamer",type:"deposit",amt:"+$50",net:"Polygon",status:"confirmed",t:"10:32"},{hash:"0x5e6f...7g8h",user:"petit_bac_pro",type:"payout",amt:"+$38",net:"Polygon",status:"confirmed",t:"10:28"},{hash:"0x9i0j...1k2l",user:"lexique_queen",type:"entry_fee",amt:"-$0.50",net:"Solana",status:"confirmed",t:"10:25"},{hash:"0x3m4n...5o6p",user:"mrad-boop",type:"withdrawal",amt:"-$20",net:"Polygon",status:"pending",t:"10:20"},{hash:"0x7q8r...9s0t",user:"wordmaster_99",type:"rake",amt:"+$2",net:"Polygon",status:"confirmed",t:"10:15"}];
-const LB=[{rank:1,user:"petit_bac_pro",score:48200,games:1240,wr:"78%",earned:"$2,840"},{rank:2,user:"lexique_queen",score:38940,games:456,wr:"71%",earned:"$1,240"},{rank:3,user:"crypto_gamer",score:29100,games:234,wr:"65%",earned:"$890"},{rank:4,user:"mrad-boop",score:18400,games:87,wr:"58%",earned:"$340"}];
+const DICT_DEFAULTS={Animal:["aigle","baleine","chameau","dauphin","éléphant","faucon","girafe","hippopotame","jaguar","kangourou","léopard","lion","lynx","mamba","narval","ocelot","panthère","requin","serpent","tigre","tortue","zèbre"],Pays:["algérie","allemagne","argentine","australie","brésil","canada","chili","chine","france","inde","italie","japon","maroc","mexique","norvège","portugal","russie","sénégal","suisse","tunisie","turquie"],"Prénom":["alice","benjamin","camille","daniel","emma","fatima","gabriel","hugo","isabelle","julien","kenza","lucas","marie","nicolas","omar","pierre","rachid","sarah","thomas","yasmine"],Aliment:["avocat","banane","carotte","chocolat","citron","fraise","grenade","jambon","kiwi","lait","mangue","noix","orange","poire","raisin","saumon","tomate","vanille","yaourt"],"Métier":["architecte","biologiste","chimiste","dentiste","enseignant","fermier","ingénieur","journaliste","médecin","notaire","pharmacien","pilote","policier","pompier","professeur","vétérinaire"],Marque:["adidas","apple","bmw","canon","disney","ferrari","google","hermès","intel","lamborghini","mercedes","netflix","openai","rolex","samsung","tesla","uber","youtube","zoom"],Sport:["athlétisme","badminton","basketball","cyclisme","escalade","football","golf","handball","judo","marathon","natation","rugby","ski","tennis","triathlon","volleyball"]};
+// Load persisted DICT from localStorage, fall back to defaults
+let DICT=(()=>{try{const s=localStorage.getItem('wr_dict');return s?JSON.parse(s):JSON.parse(JSON.stringify(DICT_DEFAULTS));}catch{return JSON.parse(JSON.stringify(DICT_DEFAULTS));}})();
+function saveDict(){localStorage.setItem('wr_dict',JSON.stringify(DICT));}
+
+// Real data from localStorage — no demo users/rooms/transactions
+const USERS=JSON.parse(localStorage.getItem('wr_users')||'[]');
+const ROOMS=[];
+const TX=[];
+const LB=JSON.parse(localStorage.getItem('wr_leaderboard')||'[]');
 const WALLETS=[{user:"petit_bac_pro",addr:"0xabc...def",net:"Polygon",bal:"$510",dep:"$1,200",wit:"$690"},{user:"lexique_queen",addr:"phantom...abc",net:"Solana",bal:"$89.75",dep:"$350",wit:"$260"},{user:"crypto_gamer",addr:"0x5e6f...7g8h",net:"Polygon",bal:"$38.20",dep:"$200",wit:"$162"},{user:"mrad-boop",addr:"0x1a2b...3c4d",net:"Polygon",bal:"$142.50",dep:"$300",wit:"$157"}];
 const BTESTS=[{word:"Lion",cat:"Animal",letter:"L",desc:"Exact match"},{word:"Lino",cat:"Animal",letter:"L",desc:"Fuzzy (Lion)"},{word:"Lybié",cat:"Pays",letter:"L",desc:"Fuzzy (Libye)"},{word:"Lucas",cat:"Prénom",letter:"L",desc:"Exact prénom"},{word:"Zlion",cat:"Animal",letter:"L",desc:"Mauvaise lettre"},{word:"Lamborghini",cat:"Marque",letter:"L",desc:"Exact marque"}];
 
@@ -656,8 +661,8 @@ function renderDict(){
       <div class="dict-add"><input class="dict-add-inp" id="da-${cat}" placeholder="Nouveau mot..." onkeydown="if(event.key==='Enter')addWord('${cat}')"/><button class="dict-add-btn" onclick="addWord('${cat}')">+</button></div>
     </div>`).join('');
 }
-function addWord(cat){const inp=document.getElementById('da-'+cat),w=inp.value.trim().toLowerCase();if(!w)return;if(DICT[cat].includes(w)){toast('⚠️ Déjà présent');return}DICT[cat].push(w);DICT[cat].sort();inp.value='';renderDict();toast('✅ "'+w+'" ajouté à '+cat)}
-function rmWord(cat,word,el){if(!confirm('Supprimer "'+word+'" ?'))return;DICT[cat]=DICT[cat].filter(w=>w!==word);el.remove();toast('🗑️ "'+word+'" supprimé')}
+function addWord(cat){const inp=document.getElementById('da-'+cat),w=inp.value.trim().toLowerCase();if(!w)return;if(DICT[cat].includes(w)){toast('⚠️ Déjà présent');return}DICT[cat].push(w);DICT[cat].sort();inp.value='';saveDict();renderDict();toast('✅ "'+w+'" ajouté à '+cat)}
+function rmWord(cat,word,el){if(!confirm('Supprimer "'+word+'" ?'))return;DICT[cat]=DICT[cat].filter(w=>w!==word);el.remove();saveDict();toast('🗑️ "'+word+'" supprimé')}
 function exportDict(){const b=new Blob([JSON.stringify(DICT,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wordrace-dictionary.json';a.click();toast('📤 Dictionnaire exporté')}
 function doBatchImport(){
   const cat=document.getElementById('bi-cat')?.value;
@@ -671,6 +676,7 @@ function doBatchImport(){
     DICT[cat].push(w);added++;
   });
   DICT[cat].sort();
+  saveDict();
   closeModal();
   renderDict();
   toast('✅ '+added+' mot(s) ajouté(s) à '+cat+(dupes?' · '+dupes+' doublon(s) ignoré(s)':''));
