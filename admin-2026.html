@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>WordRace Admin</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.7/quill.snow.css"/>
+<style>
+.ql-toolbar.ql-snow{background:var(--surface2)!important;border:1px solid var(--border2)!important;border-radius:.45rem .45rem 0 0!important}
+.ql-container.ql-snow{background:var(--bg)!important;border:1px solid var(--border2)!important;border-top:none!important;border-radius:0 0 .45rem .45rem!important}
+.ql-editor{min-height:320px;font-family:'Inter',sans-serif!important;font-size:.9rem!important;color:var(--text)!important;line-height:1.7!important}
+.ql-editor.ql-blank::before{color:var(--muted)!important;font-style:italic}
+.ql-snow .ql-stroke{stroke:var(--muted)!important}.ql-snow .ql-fill{fill:var(--muted)!important}
+.ql-snow .ql-picker{color:var(--muted)!important}.ql-snow .ql-picker-options{background:var(--surface)!important;border-color:var(--border2)!important}
+.ql-snow button:hover .ql-stroke,.ql-snow button.ql-active .ql-stroke{stroke:var(--forest)!important}
+.status-dot{background:var(--muted)}.status-dot.ok{background:var(--valid)}.status-dot.err{background:var(--red)}.status-dot.loading{background:var(--gold);animation:cgu-pulse 1s infinite}
+@keyframes cgu-pulse{0%,100%{opacity:1}50%{opacity:.35}}
+</style>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -248,8 +260,8 @@ tr:hover td{background:var(--surface2)}
     <div class="sb-section">Contenu</div>
     <div class="sb-item" onclick="nav('dictionary',this)"><span class="ic">📚</span>Dictionnaire</div>
     <div class="sb-item" onclick="nav('validation',this)"><span class="ic">✅</span>Validation Engine</div>
-    <div class="sb-item" onclick="window.open('/cgu-admin','_blank')"><span class="ic">📄</span>CGU Editor ↗</div>
-    <div class="sb-item" onclick="window.open('/admin-support','_blank')"><span class="ic">🎫</span>Support Tickets ↗</div>
+    <div class="sb-item" onclick="nav('cgu',this)"><span class="ic">📄</span>CGU Editor</div>
+    <div class="sb-item" onclick="nav('support',this)"><span class="ic">🎫</span>Support Tickets</div>
 
     <div class="sb-section">Configuration</div>
     <div class="sb-item" onclick="nav('zones',this)"><span class="ic">⚙️</span>Zones Free/P2E</div>
@@ -505,6 +517,67 @@ tr:hover td{background:var(--surface2)}
 </div><!-- end admin -->
 
 <!-- MODAL -->
+    <!-- CGU EDITOR -->
+    <div class="panel" id="panel-cgu">
+      <div class="tbl-wrap" style="margin-bottom:1rem">
+        <div class="tbl-head">
+          <div class="tbl-title">🔑 Token GitHub</div>
+          <div class="tbl-actions">
+            <input class="t-search" id="cgu-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:220px" oninput="sessionStorage.setItem('gh_token',this.value)"/>
+            <button class="t-btn btn-lime" onclick="cguLoad()">↺ Charger CGU</button>
+            <a href="/terms" target="_blank" class="t-btn btn-ghost" style="text-decoration:none">↗ Voir page CGU</a>
+          </div>
+        </div>
+        <div style="padding:.65rem 1.1rem;display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.62rem">
+          <div class="status-dot loading" id="cgu-dot" style="width:8px;height:8px;border-radius:50%;flex-shrink:0"></div>
+          <span id="cgu-status" style="color:var(--muted)">Entrez votre token GitHub puis cliquez "Charger CGU"</span>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-head">
+          <div class="tbl-title">✏️ Contenu des CGU</div>
+          <div class="tbl-actions">
+            <div style="display:flex;align-items:center;gap:.5rem">
+              <span style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Dernière MàJ :</span>
+              <input class="t-search" id="cgu-date" value="May 26, 2026" style="width:130px"/>
+            </div>
+          </div>
+        </div>
+        <div style="padding:1rem">
+          <div id="cgu-quill-editor"></div>
+        </div>
+        <div style="padding:.8rem 1.1rem;border-top:1px solid var(--border);display:flex;gap:.5rem">
+          <button class="t-btn btn-lime" id="cgu-save-btn" onclick="cguSave()" disabled>💾 Enregistrer &amp; Déployer</button>
+          <button class="t-btn btn-ghost" onclick="cguLoad()">↺ Annuler</button>
+        </div>
+        <div id="cgu-result" style="display:none;margin:.5rem 1.1rem .8rem;padding:.55rem .8rem;border-radius:.45rem;font-family:'Space Mono',monospace;font-size:.6rem"></div>
+      </div>
+      <div style="background:var(--limeBg);border:1px solid rgba(159,232,112,.35);border-radius:.7rem;padding:.8rem 1rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);line-height:1.7">
+        <strong>Comment ça marche :</strong> Entrez votre token GitHub (scope <code style="background:rgba(22,51,0,.1);padding:.05rem .25rem;border-radius:.2rem">repo</code>) → Chargez → Modifiez → Enregistrez. Vercel redéploie automatiquement en 30–60 sec.
+      </div>
+    </div>
+
+    <!-- SUPPORT PANEL -->
+    <div class="panel" id="panel-support">
+      <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);margin-bottom:1rem">
+        <div class="stat-card" style="border-left:3px solid var(--blue)"><div class="stat-icon">🎫</div><div class="stat-val" id="sp-total" style="color:var(--blue)">0</div><div class="stat-label">Total</div></div>
+        <div class="stat-card" style="border-left:3px solid var(--red)"><div class="stat-icon">🔴</div><div class="stat-val" id="sp-open" style="color:var(--red)">0</div><div class="stat-label">Ouverts</div></div>
+        <div class="stat-card" style="border-left:3px solid var(--gold)"><div class="stat-icon">🟡</div><div class="stat-val" id="sp-progress" style="color:#92600A">0</div><div class="stat-label">En cours</div></div>
+        <div class="stat-card" style="border-left:3px solid var(--valid)"><div class="stat-icon">✅</div><div class="stat-val" id="sp-resolved" style="color:var(--valid)">0</div><div class="stat-label">Résolus</div></div>
+      </div>
+      <div class="tbl-wrap">
+        <div class="tbl-head">
+          <div class="tbl-title">🎫 Tickets Support</div>
+          <div class="tbl-actions">
+            <select class="t-search" onchange="renderSupportTickets(this.value)"><option value="">Tous statuts</option><option value="open">Open</option><option value="progress">In Progress</option><option value="resolved">Resolved</option><option value="closed">Closed</option></select>
+            <button class="t-btn btn-ghost" onclick="renderSupport()">↺ Actualiser</button>
+          </div>
+        </div>
+        <table><thead><tr><th>#</th><th>Utilisateur</th><th>Catégorie</th><th>Sujet</th><th>Statut</th><th>Date</th><th>Actions</th></tr></thead>
+        <tbody id="support-tb"></tbody></table>
+      </div>
+    </div>
+
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-card" id="modal-content"></div>
 </div>
@@ -546,7 +619,7 @@ const WALLETS=USERS.filter(u=>u.wallet);
 const BTESTS=[{word:"Lion",cat:"Animal",letter:"L",desc:"Exact match"},{word:"Lino",cat:"Animal",letter:"L",desc:"Fuzzy (Lion)"},{word:"Lybié",cat:"Pays",letter:"L",desc:"Fuzzy (Libye)"},{word:"Lucas",cat:"Prénom",letter:"L",desc:"Exact prénom"},{word:"Zlion",cat:"Animal",letter:"L",desc:"Mauvaise lettre"},{word:"Lamborghini",cat:"Marque",letter:"L",desc:"Exact marque"}];
 
 // ─── NAV ──────────────────────────────────────────────────────
-const TITLES={dashboard:["Vue Globale","Aperçu complet de la plateforme"],users:["Utilisateurs","Gestion & modération des comptes"],wallets:["Wallets & USDT","Portefeuilles et transactions"],rooms:["Rooms & Sessions","Parties en temps réel"],leaderboard:["Leaderboard","Classements et gains"],transactions:["Transactions","Historique USDT complet"],dictionary:["Dictionnaire","Mots par catégorie"],validation:["Validation Engine","3 tiers de validation"],zones:["Zones Free/P2E","Configuration des modes"],platform:["Paramètres","Configuration globale"]};
+const TITLES={dashboard:["Vue Globale","Aperçu complet de la plateforme"],users:["Utilisateurs","Gestion & modération des comptes"],wallets:["Wallets & USDT","Portefeuilles et transactions"],rooms:["Rooms & Sessions","Parties en temps réel"],leaderboard:["Leaderboard","Classements et gains"],transactions:["Transactions","Historique USDT complet"],dictionary:["Dictionnaire","Mots par catégorie"],validation:["Validation Engine","3 tiers de validation"],cgu:["CGU Editor","Conditions Générales d'Utilisation"],support:["Support Tickets","Tickets soumis par les utilisateurs"],zones:["Zones Free/P2E","Configuration des modes"],platform:["Paramètres","Configuration globale"]};
 function nav(name,el){
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('active'));
@@ -557,12 +630,25 @@ function nav(name,el){
   document.getElementById('psub').textContent=s;
   document.getElementById('sidebar').classList.remove('open');
   if(name==='validation')initBatch();
+  if(name==='cgu')initCGU();
+  if(name==='support')renderSupport();
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
 function initAdmin(){
   setInterval(()=>{const el=document.getElementById('clock');if(el)el.textContent=new Date().toLocaleTimeString('fr-FR')},1000);
-  renderDashboard(); renderUsers(USERS); renderWallets(); renderRooms(ROOMS); renderLB(); renderTX(); renderDict();
+  // Isolate each render so one crash never blocks the rest
+  [
+    renderDashboard,
+    ()=>renderUsers(USERS),
+    renderWallets,
+    ()=>renderRooms(ROOMS),
+    renderLB,
+    renderTX,
+    renderDict,
+    renderSupport,
+    initCGU
+  ].forEach(fn=>{try{fn()}catch(e){console.warn('[initAdmin]',fn.name||'fn',e)}});
   fetchLiveStats();
 }
 
@@ -791,6 +877,120 @@ function closeModal(){document.getElementById('modal').classList.remove('show')}
 
 // ─── TOAST ────────────────────────────────────────────────────
 function toast(msg){const t=document.getElementById('admin-toast');t.textContent=msg;t.style.display='block';t.style.animation='none';requestAnimationFrame(()=>t.style.animation='su .3s ease');clearTimeout(toast._t);toast._t=setTimeout(()=>t.style.display='none',3000)}
+
+// ─── SUPPORT PANEL ────────────────────────────────────────────
+function renderSupport(){ renderSupportTickets(''); }
+function renderSupportTickets(filter){
+  const tks=JSON.parse(localStorage.getItem('wr_tickets')||'[]');
+  const filtered=filter?tks.filter(t=>t.status===filter):tks;
+  document.getElementById('sp-total').textContent=tks.length;
+  document.getElementById('sp-open').textContent=tks.filter(t=>t.status==='open').length;
+  document.getElementById('sp-progress').textContent=tks.filter(t=>t.status==='progress').length;
+  document.getElementById('sp-resolved').textContent=tks.filter(t=>t.status==='resolved'||t.status==='closed').length;
+  const SLABELS={open:'Open',progress:'In Progress',resolved:'Resolved',closed:'Closed'};
+  const SPILLS={open:'p-red',progress:'p-gold',resolved:'p-green',closed:'p-muted'};
+  document.getElementById('support-tb').innerHTML=filtered.length
+    ? filtered.slice().reverse().map(t=>`<tr>
+        <td style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">#${t.id||'—'}</td>
+        <td style="font-weight:700">${t.username||'—'}</td>
+        <td><span class="pill p-muted">${t.cat||'—'}</span></td>
+        <td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.subject||'—'}</td>
+        <td><span class="pill ${SPILLS[t.status]||'p-muted'}">${SLABELS[t.status]||t.status}</span></td>
+        <td style="color:var(--muted)">${t.createdAt?new Date(t.createdAt).toLocaleDateString('fr-FR'):'—'}</td>
+        <td><div class="act-btns">
+          <button class="act-btn" onclick="spSetStatus('${t.id}','progress')" title="In Progress">🔄</button>
+          <button class="act-btn" onclick="spSetStatus('${t.id}','resolved')" title="Résoudre">✅</button>
+          <button class="act-btn danger" onclick="spSetStatus('${t.id}','closed')" title="Fermer">🚫</button>
+        </div></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:1.5rem;color:var(--muted);font-family:\'Space Mono\',monospace;font-size:.63rem">Aucun ticket</td></tr>';
+}
+function spSetStatus(id,status){
+  const tks=JSON.parse(localStorage.getItem('wr_tickets')||'[]');
+  const t=tks.find(x=>x.id===id||x.id===parseInt(id));
+  if(!t){toast('⚠️ Ticket introuvable');return;}
+  t.status=status;
+  localStorage.setItem('wr_tickets',JSON.stringify(tks));
+  renderSupportTickets('');
+  toast('✅ Ticket #'+id+' → '+status);
+}
+
+// ─── CGU PANEL ────────────────────────────────────────────────
+const CGU_OWNER='mrad-boop',CGU_REPO='wordrace-io',CGU_FILE='terms.html';
+const CGU_START='<!-- CGU_CONTENT_START -->',CGU_END='<!-- CGU_CONTENT_END -->',CGU_DATE_ID='cgu-last-updated';
+let cguQuill=null, cguSHA='';
+
+function initCGU(){
+  if(cguQuill) return;
+  const tok=sessionStorage.getItem('gh_token')||'';
+  if(tok) document.getElementById('cgu-token').value=tok;
+  cguQuill=new Quill('#cgu-quill-editor',{
+    theme:'snow',
+    placeholder:'Cliquez "Charger CGU" pour commencer…',
+    modules:{toolbar:[[{header:[1,2,3,false]}],['bold','italic','underline'],['link'],['clean']]}
+  });
+}
+function cguSetStatus(state,msg){
+  const dot=document.getElementById('cgu-dot'),st=document.getElementById('cgu-status');
+  dot.className='status-dot '+state; st.textContent=msg;
+}
+async function cguGH(path,opts={}){
+  const tok=sessionStorage.getItem('gh_token')||document.getElementById('cgu-token').value.trim();
+  if(!tok){cguSetStatus('err','Token GitHub manquant');throw new Error('No token');}
+  sessionStorage.setItem('gh_token',tok);
+  const res=await fetch(`https://api.github.com/repos/${CGU_OWNER}/${CGU_REPO}/contents/${path}`,{
+    headers:{'Authorization':'token '+tok,'Accept':'application/vnd.github.v3+json',...(opts.headers||{})},
+    ...opts
+  });
+  if(!res.ok){const e=await res.json().catch(()=>({message:res.statusText}));throw new Error(e.message);}
+  return res.json();
+}
+async function cguLoad(){
+  if(!cguQuill) initCGU();
+  cguSetStatus('loading','Chargement depuis GitHub…');
+  document.getElementById('cgu-save-btn').disabled=true;
+  try{
+    const data=await cguGH(CGU_FILE);
+    cguSHA=data.sha;
+    const raw=decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    const si=raw.indexOf(CGU_START),ei=raw.indexOf(CGU_END);
+    if(si===-1||ei===-1)throw new Error('Marqueurs CGU introuvables');
+    cguQuill.clipboard.dangerouslyPasteHTML(raw.slice(si+CGU_START.length,ei).trim());
+    const dm=raw.match(new RegExp(`id="${CGU_DATE_ID}"[^>]*>([^<]+)<`));
+    if(dm)document.getElementById('cgu-date').value=dm[1].trim();
+    cguSetStatus('ok','Contenu chargé · SHA '+cguSHA.slice(0,7));
+    document.getElementById('cgu-save-btn').disabled=false;
+  }catch(e){cguSetStatus('err','Erreur : '+e.message);}
+}
+async function cguSave(){
+  if(!cguSHA){cguSetStatus('err','Chargez d\'abord le contenu');return;}
+  const btn=document.getElementById('cgu-save-btn');
+  btn.disabled=true;btn.textContent='⏳…';
+  cguSetStatus('loading','Enregistrement sur GitHub…');
+  try{
+    const data=await cguGH(CGU_FILE);
+    const raw=decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    const newDate=document.getElementById('cgu-date').value.trim()||new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    const si=raw.indexOf(CGU_START),ei=raw.indexOf(CGU_END);
+    if(si===-1||ei===-1)throw new Error('Marqueurs introuvables');
+    let updated=raw.slice(0,si+CGU_START.length)+'\n'+cguQuill.root.innerHTML+'\n'+raw.slice(ei);
+    updated=updated.replace(new RegExp(`(<span id="${CGU_DATE_ID}"[^>]*>)[^<]+(</span>)`),'$1'+newDate+'$2');
+    await cguGH(CGU_FILE,{method:'PUT',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:'CGU mise à jour — '+newDate,content:btoa(unescape(encodeURIComponent(updated))),sha:data.sha})});
+    cguSHA='';
+    cguSetStatus('ok','✓ Enregistré — Vercel redéploie dans 30–60 sec');
+    const r=document.getElementById('cgu-result');
+    r.style.display='block';r.className='';r.style.cssText='display:block;margin:.5rem 1.1rem .8rem;padding:.55rem .8rem;border-radius:.45rem;font-family:\'Space Mono\',monospace;font-size:.6rem;background:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)';
+    r.textContent='✓ CGU mis à jour. Vercel redéploie automatiquement.';
+    setTimeout(()=>{r.style.display='none';cguLoad();},6000);
+  }catch(e){
+    cguSetStatus('err','Erreur : '+e.message);
+    const r=document.getElementById('cgu-result');
+    r.style.display='block';r.style.cssText='display:block;margin:.5rem 1.1rem .8rem;padding:.55rem .8rem;border-radius:.45rem;font-family:\'Space Mono\',monospace;font-size:.6rem;background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)';
+    r.textContent='✗ '+e.message;
+  }finally{btn.disabled=false;btn.innerHTML='💾 Enregistrer &amp; Déployer';}
+}
 </script>
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 </body>
 </html>
