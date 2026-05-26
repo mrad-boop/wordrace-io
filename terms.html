@@ -263,5 +263,36 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   headings.forEach(h => obs.observe(h));
 })();
 </script>
+<script>
+// Fetch live CGU from backend (static HTML above is the fallback)
+(function(){
+  const BACKEND='https://wordrace-io.onrender.com';
+  fetch(BACKEND+'/api/cgu')
+    .then(r=>r.ok?r.json():Promise.reject())
+    .then(d=>{
+      if(!d||!d.content) return;
+      const body=document.getElementById('cgu-body');
+      if(body){
+        const tmp=document.createElement('div');
+        tmp.innerHTML=d.content;
+        const inner=tmp.querySelector('#cgu-body')||tmp;
+        body.innerHTML=inner.innerHTML;
+      }
+      const lu=document.getElementById('cgu-last-updated');
+      if(lu&&d.lastUpdated) lu.textContent=d.lastUpdated;
+      // Rebuild TOC with fresh headings
+      const toc=document.getElementById('toc-links');
+      const newBody=document.getElementById('cgu-body');
+      if(toc&&newBody){
+        const headings=newBody.querySelectorAll('h2');
+        toc.innerHTML=Array.from(headings).map(h=>{
+          if(!h.id)h.id='h-'+Math.random().toString(36).slice(2,7);
+          return `<a href="#${h.id}">${h.textContent}</a>`;
+        }).join('');
+      }
+    })
+    .catch(()=>{}); // silent — static content stays
+})();
+</script>
 </body>
 </html>

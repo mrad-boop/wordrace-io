@@ -9,6 +9,8 @@ const http       = require('http');
 const { Server } = require('socket.io');
 const cors       = require('cors');
 const { v4: uuidv4 } = require('uuid');
+const fs         = require('fs');
+const path       = require('path');
 
 const app    = express();
 const server = http.createServer(app);
@@ -30,7 +32,8 @@ const io = new Server(server, {
 
 // ─── MIDDLEWARE ───────────────────────────────────────────────
 app.use(cors({
-  origin: ['https://wordrace-io.vercel.app','http://localhost:3000'],
+  origin: ['https://wordrace-io.vercel.app','http://localhost:3000','http://localhost:5500'],
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
   credentials: true,
 }));
 app.use(express.json());
@@ -44,7 +47,23 @@ const store = {
   leaderboard:  [],          // [{userId,username,score,rank}]
   dailyEntries: new Map(),   // userId   → {tier, score, submittedAt}
   anticheat:    new Map(),   // socketId → AnticheatState
+  cgu:          null,        // {content, lastUpdated}
 };
+
+// ─── CGU PERSISTENCE ──────────────────────────────────────────
+const CGU_PATH = path.join(__dirname, 'cgu.json');
+const CGU_DEFAULT_CONTENT = `<div id="cgu-body"><h2>Terms &amp; Conditions</h2><p>Content not yet loaded.</p></div>`;
+
+function cguRead(){
+  try{ return JSON.parse(fs.readFileSync(CGU_PATH,'utf8')); }
+  catch{ return { content: CGU_DEFAULT_CONTENT, lastUpdated: 'May 26, 2026' }; }
+}
+function cguWrite(d){
+  try{ fs.writeFileSync(CGU_PATH, JSON.stringify(d), 'utf8'); }
+  catch(e){ console.error('[CGU] Write error:', e.message); }
+}
+store.cgu = cguRead();
+console.log('[CGU] Loaded, lastUpdated:', store.cgu.lastUpdated);
 
 // ─── GAME CONFIG ──────────────────────────────────────────────
 const CONFIG = {
@@ -659,6 +678,22 @@ app.get('/api/stats', (req, res) => {
 // Presence stats (detailed)
 app.get('/api/presence', (_, res) => {
   res.json(getPresenceStats());
+});
+
+// CGU — read (public)
+app.get('/api/cgu', (_,res) => res.json(store.cgu));
+
+// CGU — write (admin only)
+app.put('/api/cgu', (req,res) => {
+  const {password,content,lastUpdated} = req.body;
+  if(password !== 'wordrace2026') return res.status(401).json({error:'Unauthorized'});
+  if(!content || !content.trim()) return res.status(400).json({error:'Content required'});
+  const newDate = (lastUpdated||'').trim() ||
+    new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  store.cgu = {content, lastUpdated: newDate};
+  cguWrite(store.cgu);
+  console.log('[CGU] Updated, lastUpdated:', newDate);
+  res.json({ok:true, lastUpdated:newDate});
 });
 
 // ─── START ────────────────────────────────────────────────────

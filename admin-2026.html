@@ -533,13 +533,9 @@ tr:hover td{background:var(--surface2)}
           <input class="t-search" id="cgu-date" value="May 26, 2026" style="width:140px"/>
         </div>
         <div style="padding:.5rem 1rem 1rem"><div id="cgu-quill-editor"></div></div>
-        <div style="padding:.8rem 1.1rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:.5rem;flex-wrap:wrap">
-          <button class="t-btn btn-lime" id="cgu-save-btn" onclick="cguSave()" disabled>💾 Enregistrer &amp; Déployer</button>
+        <div style="padding:.8rem 1.1rem;border-top:1px solid var(--border);display:flex;align-items:center;gap:.5rem">
+          <button class="t-btn btn-lime" id="cgu-save-btn" onclick="cguSave()" disabled>💾 Enregistrer</button>
           <button class="t-btn btn-ghost" onclick="cguLoad()">↺ Annuler</button>
-          <div style="margin-left:auto;display:flex;align-items:center;gap:.4rem">
-            <span id="cgu-token-status" style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)"></span>
-            <input class="t-search" id="cgu-token" type="password" placeholder="Token GitHub (pour sauvegarder)" style="width:200px" oninput="cguTokenInput(this.value)"/>
-          </div>
         </div>
         <div id="cgu-result" style="display:none;margin:.5rem 1.1rem .8rem;padding:.55rem .8rem;border-radius:.45rem;font-family:'Space Mono',monospace;font-size:.6rem"></div>
       </div>
@@ -906,16 +902,9 @@ function spSetStatus(id,status){
 }
 
 // ─── CGU PANEL ────────────────────────────────────────────────
-const CGU_OWNER='mrad-boop',CGU_REPO='wordrace-io',CGU_FILE='terms.html';
-const CGU_START='<!-- CGU_CONTENT_START -->',CGU_END='<!-- CGU_CONTENT_END -->',CGU_DATE_ID='cgu-last-updated';
+const WR_BACKEND='https://wordrace-io.onrender.com';
 let cguQuill=null;
 
-function cguTokenInput(val){
-  const v=val.trim();
-  localStorage.setItem('gh_token',v);
-  const s=document.getElementById('cgu-token-status');
-  if(s) s.textContent=v?'✓ Token sauvegardé':'';
-}
 function initCGU(){
   if(cguQuill) return;
   cguQuill=new Quill('#cgu-quill-editor',{
@@ -923,48 +912,22 @@ function initCGU(){
     placeholder:'Chargement en cours…',
     modules:{toolbar:[[{header:[1,2,3,false]}],['bold','italic','underline','strike'],[{list:'ordered'},{list:'bullet'}],['link','blockquote'],['clean']]}
   });
-  // Restore saved token into field (for saving later)
-  const tok=localStorage.getItem('gh_token')||'';
-  const tf=document.getElementById('cgu-token');
-  if(tok&&tf){ tf.value=tok; const s=document.getElementById('cgu-token-status'); if(s) s.textContent='✓ Token sauvegardé'; }
   cguLoad();
 }
 function cguSetStatus(state,msg){
   const dot=document.getElementById('cgu-dot'),st=document.getElementById('cgu-status');
   dot.className='status-dot '+state; st.textContent=msg;
 }
-async function cguGHPut(path,body){
-  const tok=localStorage.getItem('gh_token')||document.getElementById('cgu-token').value.trim();
-  if(!tok){throw new Error('Token GitHub manquant — entrez votre token dans le champ en bas à droite');}
-  localStorage.setItem('gh_token',tok);
-  // We need SHA from GitHub to perform the PUT
-  const shaRes=await fetch(`https://api.github.com/repos/${CGU_OWNER}/${CGU_REPO}/contents/${path}`,{
-    headers:{'Authorization':'token '+tok,'Accept':'application/vnd.github.v3+json'}
-  });
-  if(!shaRes.ok){const e=await shaRes.json().catch(()=>({message:shaRes.statusText}));throw new Error(e.message);}
-  const shaData=await shaRes.json();
-  const putRes=await fetch(`https://api.github.com/repos/${CGU_OWNER}/${CGU_REPO}/contents/${path}`,{
-    method:'PUT',
-    headers:{'Authorization':'token '+tok,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
-    body:JSON.stringify({...body,sha:shaData.sha})
-  });
-  if(!putRes.ok){const e=await putRes.json().catch(()=>({message:putRes.statusText}));throw new Error(e.message);}
-  return putRes.json();
-}
 async function cguLoad(){
   if(!cguQuill) initCGU();
   cguSetStatus('loading','Chargement du contenu…');
   document.getElementById('cgu-save-btn').disabled=true;
   try{
-    // Read directly from the deployed site — no token needed
-    const res=await fetch('/terms.html?_='+Date.now());
-    if(!res.ok) throw new Error('HTTP '+res.status+' — terms.html introuvable');
-    const raw=await res.text();
-    const si=raw.indexOf(CGU_START),ei=raw.indexOf(CGU_END);
-    if(si===-1||ei===-1) throw new Error('Marqueurs CGU introuvables dans terms.html');
-    cguQuill.clipboard.dangerouslyPasteHTML(raw.slice(si+CGU_START.length,ei).trim());
-    const dm=raw.match(new RegExp(`id="${CGU_DATE_ID}"[^>]*>([^<]+)<`));
-    if(dm) document.getElementById('cgu-date').value=dm[1].trim();
+    const res=await fetch(WR_BACKEND+'/api/cgu');
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const data=await res.json();
+    if(data.content) cguQuill.clipboard.dangerouslyPasteHTML(data.content);
+    if(data.lastUpdated) document.getElementById('cgu-date').value=data.lastUpdated;
     cguSetStatus('ok','Contenu chargé');
     document.getElementById('cgu-save-btn').disabled=false;
   }catch(e){cguSetStatus('err','Erreur : '+e.message);}
@@ -973,23 +936,21 @@ async function cguSave(){
   if(!cguQuill){cguSetStatus('err','Éditeur non initialisé');return;}
   const btn=document.getElementById('cgu-save-btn');
   btn.disabled=true;btn.textContent='⏳…';
-  cguSetStatus('loading','Enregistrement sur GitHub…');
+  cguSetStatus('loading','Enregistrement…');
   try{
-    // Re-read current file via fetch to preserve non-CGU content
-    const res=await fetch('/terms.html?_='+Date.now());
-    if(!res.ok) throw new Error('HTTP '+res.status);
-    const raw=await res.text();
-    const newDate=document.getElementById('cgu-date').value.trim()||new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-    const si=raw.indexOf(CGU_START),ei=raw.indexOf(CGU_END);
-    if(si===-1||ei===-1) throw new Error('Marqueurs introuvables dans terms.html');
-    let updated=raw.slice(0,si+CGU_START.length)+'\n'+cguQuill.root.innerHTML+'\n'+raw.slice(ei);
-    updated=updated.replace(new RegExp(`(<span id="${CGU_DATE_ID}"[^>]*>)[^<]+(</span>)`),'$1'+newDate+'$2');
-    await cguGHPut(CGU_FILE,{message:'CGU mise à jour — '+newDate,content:btoa(unescape(encodeURIComponent(updated)))});
-    cguSetStatus('ok','✓ Enregistré — Vercel redéploie dans 30–60 sec');
+    const newDate=document.getElementById('cgu-date').value.trim()||
+      new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    const res=await fetch(WR_BACKEND+'/api/cgu',{
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({password:'wordrace2026',content:cguQuill.root.innerHTML,lastUpdated:newDate})
+    });
+    if(!res.ok){const e=await res.json().catch(()=>({error:res.statusText}));throw new Error(e.error||res.statusText);}
+    cguSetStatus('ok','✓ Enregistré');
     const r=document.getElementById('cgu-result');
     r.style.display='block';r.style.cssText='display:block;margin:.5rem 1.1rem .8rem;padding:.55rem .8rem;border-radius:.45rem;font-family:\'Space Mono\',monospace;font-size:.6rem;background:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)';
-    r.textContent='✓ CGU mis à jour. Vercel redéploie automatiquement.';
-    setTimeout(()=>{r.style.display='none';cguLoad();},6000);
+    r.textContent='✓ CGU mis à jour.';
+    setTimeout(()=>{r.style.display='none';cguLoad();},4000);
   }catch(e){
     cguSetStatus('err','Erreur : '+e.message);
     const r=document.getElementById('cgu-result');
