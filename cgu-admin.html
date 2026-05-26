@@ -260,16 +260,12 @@ function doLogin(){
   }
 }
 document.getElementById('pwd').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
-function doLogout(){ sessionStorage.removeItem('gh_token'); WRAdminSession.logout(); }
+function doLogout(){ localStorage.removeItem('gh_token'); WRAdminSession.logout(); }
 
 // ─── QUILL ────────────────────────────────────────────────────
 let quill;
 function initEditor(){
-  GH_TOKEN = sessionStorage.getItem('gh_token')||'';
-  if(!GH_TOKEN){
-    GH_TOKEN = prompt('Token GitHub (scope: repo) :') || '';
-    if(GH_TOKEN) sessionStorage.setItem('gh_token', GH_TOKEN);
-  }
+  GH_TOKEN = localStorage.getItem('gh_token')||'';
   quill = new Quill('#quill-editor', {
     theme:'snow',
     placeholder:'Chargement du contenu CGU…',
@@ -285,7 +281,8 @@ function initEditor(){
       ]
     }
   });
-  loadContent();
+  if(GH_TOKEN) loadContent();
+  else setStatus('loading','Token GitHub non trouvé — entrez-le dans le panneau admin ou rechargez après l\'avoir sauvegardé.');
 }
 
 // ─── GITHUB API ───────────────────────────────────────────────

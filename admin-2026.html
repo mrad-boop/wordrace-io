@@ -520,7 +520,7 @@ tr:hover td{background:var(--surface2)}
         <div class="tbl-head">
           <div class="tbl-title">🔑 Token GitHub</div>
           <div class="tbl-actions">
-            <input class="t-search" id="cgu-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:220px" oninput="sessionStorage.setItem('gh_token',this.value)"/>
+            <input class="t-search" id="cgu-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:220px" oninput="localStorage.setItem('gh_token',this.value)"/>
             <button class="t-btn btn-lime" onclick="cguLoad()">↺ Charger CGU</button>
             <a href="/terms" target="_blank" class="t-btn btn-ghost" style="text-decoration:none">↗ Voir CGU</a>
           </div>
@@ -917,22 +917,24 @@ let cguQuill=null, cguSHA='';
 
 function initCGU(){
   if(cguQuill) return;
-  const tok=sessionStorage.getItem('gh_token')||'';
+  const tok=localStorage.getItem('gh_token')||'';
   if(tok) document.getElementById('cgu-token').value=tok;
   cguQuill=new Quill('#cgu-quill-editor',{
     theme:'snow',
-    placeholder:'Cliquez "Charger CGU" pour commencer…',
-    modules:{toolbar:[[{header:[1,2,3,false]}],['bold','italic','underline'],['link'],['clean']]}
+    placeholder:'Chargement en cours…',
+    modules:{toolbar:[[{header:[1,2,3,false]}],['bold','italic','underline','strike'],[{list:'ordered'},{list:'bullet'}],['link','blockquote'],['clean']]}
   });
+  // Auto-load if token already saved
+  if(tok) cguLoad();
 }
 function cguSetStatus(state,msg){
   const dot=document.getElementById('cgu-dot'),st=document.getElementById('cgu-status');
   dot.className='status-dot '+state; st.textContent=msg;
 }
 async function cguGH(path,opts={}){
-  const tok=sessionStorage.getItem('gh_token')||document.getElementById('cgu-token').value.trim();
-  if(!tok){cguSetStatus('err','Token GitHub manquant');throw new Error('No token');}
-  sessionStorage.setItem('gh_token',tok);
+  const tok=localStorage.getItem('gh_token')||document.getElementById('cgu-token').value.trim();
+  if(!tok){cguSetStatus('err','Token GitHub manquant — entrez votre token et cliquez Charger CGU');throw new Error('No token');}
+  localStorage.setItem('gh_token',tok);
   const res=await fetch(`https://api.github.com/repos/${CGU_OWNER}/${CGU_REPO}/contents/${path}`,{
     headers:{'Authorization':'token '+tok,'Accept':'application/vnd.github.v3+json',...(opts.headers||{})},
     ...opts
