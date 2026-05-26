@@ -248,6 +248,8 @@ tr:hover td{background:var(--surface2)}
     <div class="sb-section">Contenu</div>
     <div class="sb-item" onclick="nav('dictionary',this)"><span class="ic">📚</span>Dictionnaire</div>
     <div class="sb-item" onclick="nav('validation',this)"><span class="ic">✅</span>Validation Engine</div>
+    <div class="sb-item" onclick="window.open('/cgu-admin','_blank')"><span class="ic">📄</span>CGU Editor ↗</div>
+    <div class="sb-item" onclick="window.open('/admin-support','_blank')"><span class="ic">🎫</span>Support Tickets ↗</div>
 
     <div class="sb-section">Configuration</div>
     <div class="sb-item" onclick="nav('zones',this)"><span class="ic">⚙️</span>Zones Free/P2E</div>
@@ -279,28 +281,28 @@ tr:hover td{background:var(--surface2)}
     <div class="panel active" id="panel-dashboard">
       <div class="stat-grid">
         <div class="stat-card" style="border-left:3px solid var(--lime)">
-          <div class="stat-icon">👥</div><div class="stat-val" style="color:var(--lime)">12,847</div>
-          <div class="stat-label">Total Users</div><div class="stat-trend" style="color:var(--valid)">▲ +342 cette semaine</div>
+          <div class="stat-icon">👥</div><div class="stat-val" id="s-users" style="color:var(--lime)">—</div>
+          <div class="stat-label">Total Users</div><div class="stat-trend" id="s-users-sub" style="color:var(--muted)">localStorage</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--gold)">
-          <div class="stat-icon">💰</div><div class="stat-val" style="color:var(--gold)">$48,210</div>
-          <div class="stat-label">Volume USDT</div><div class="stat-trend" style="color:var(--gold)">▲ +$3,840 aujourd'hui</div>
+          <div class="stat-icon">💰</div><div class="stat-val" id="s-vol" style="color:var(--gold)">—</div>
+          <div class="stat-label">Volume USDT</div><div class="stat-trend" style="color:var(--muted)">Backend requis</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--blue)">
-          <div class="stat-icon">🎮</div><div class="stat-val" style="color:var(--blue)">2,341</div>
-          <div class="stat-label">Rooms Actives</div><div class="stat-trend" style="color:var(--muted)">↔ Stable</div>
+          <div class="stat-icon">🎮</div><div class="stat-val" id="s-games" style="color:var(--blue)">—</div>
+          <div class="stat-label">Parties jouées</div><div class="stat-trend" id="s-games-sub" style="color:var(--muted)">localStorage</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--purple)">
-          <div class="stat-icon">📅</div><div class="stat-val" style="color:var(--purple)">$2,840</div>
-          <div class="stat-label">Prize Pool Daily</div><div class="stat-trend" style="color:var(--purple)">▲ +180 entrées</div>
+          <div class="stat-icon">📚</div><div class="stat-val" id="s-words" style="color:var(--purple)">—</div>
+          <div class="stat-label">Mots dictionnaire</div><div class="stat-trend" id="s-words-sub" style="color:var(--muted)">toutes catégories</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--red)">
-          <div class="stat-icon">🛡️</div><div class="stat-val" style="color:var(--red)">23</div>
-          <div class="stat-label">Alertes Anti-Cheat</div><div class="stat-trend" style="color:var(--red)">▲ +5 dernière heure</div>
+          <div class="stat-icon">🎫</div><div class="stat-val" id="s-tickets" style="color:var(--red)">—</div>
+          <div class="stat-label">Tickets Support</div><div class="stat-trend" id="s-tickets-sub" style="color:var(--muted)">ouverts</div>
         </div>
         <div class="stat-card" style="border-left:3px solid var(--orange)">
-          <div class="stat-icon">💎</div><div class="stat-val" style="color:var(--orange)">$2,410</div>
-          <div class="stat-label">Rake Plateforme</div><div class="stat-trend" style="color:var(--orange)">▲ +$340 aujourd'hui</div>
+          <div class="stat-icon">💬</div><div class="stat-val" id="s-notif" style="color:var(--orange)">—</div>
+          <div class="stat-label">Inscriptions Notif.</div><div class="stat-trend" style="color:var(--muted)">liste d'attente</div>
         </div>
       </div>
       <div class="chart-wrap">
@@ -334,10 +336,10 @@ tr:hover td{background:var(--surface2)}
     <!-- WALLETS -->
     <div class="panel" id="panel-wallets">
       <div class="wallet-grid">
-        <div class="wallet-card"><div class="wc-label">Dépôts Totaux</div><div class="wc-val">$94,280</div><div class="wc-sub">Polygon + Solana</div></div>
-        <div class="wallet-card"><div class="wc-label">Retraits Totaux</div><div class="wc-val" style="color:var(--red)">$46,070</div><div class="wc-sub">Traités</div></div>
-        <div class="wallet-card"><div class="wc-label">En Escrow</div><div class="wc-val" style="color:var(--gold)">$12,450</div><div class="wc-sub">Smart contracts actifs</div></div>
-        <div class="wallet-card"><div class="wc-label">Rake Collecté</div><div class="wc-val" style="color:var(--purple)">$2,410</div><div class="wc-sub">5% Duel · 10% League</div></div>
+        <div class="wallet-card"><div class="wc-label">Dépôts Totaux</div><div class="wc-val">—</div><div class="wc-sub">Backend requis</div></div>
+        <div class="wallet-card"><div class="wc-label">Retraits Totaux</div><div class="wc-val" style="color:var(--red)">—</div><div class="wc-sub">Backend requis</div></div>
+        <div class="wallet-card"><div class="wc-label">En Escrow</div><div class="wc-val" style="color:var(--gold)">—</div><div class="wc-sub">Backend requis</div></div>
+        <div class="wallet-card"><div class="wc-label">Rake Collecté</div><div class="wc-val" style="color:var(--purple)">—</div><div class="wc-sub">5% Duel · 10% League</div></div>
       </div>
       <div class="tbl-wrap">
         <div class="tbl-head"><div class="tbl-title">💰 Wallets Utilisateurs</div><div class="tbl-actions"><input class="t-search" placeholder="🔍 Adresse..."/><select class="t-search"><option>Tous réseaux</option><option>Polygon</option><option>Solana</option></select></div></div>
@@ -540,7 +542,7 @@ const USERS=JSON.parse(localStorage.getItem('wr_users')||'[]');
 const ROOMS=[];
 const TX=[];
 const LB=JSON.parse(localStorage.getItem('wr_leaderboard')||'[]');
-const WALLETS=[{user:"petit_bac_pro",addr:"0xabc...def",net:"Polygon",bal:"$510",dep:"$1,200",wit:"$690"},{user:"lexique_queen",addr:"phantom...abc",net:"Solana",bal:"$89.75",dep:"$350",wit:"$260"},{user:"crypto_gamer",addr:"0x5e6f...7g8h",net:"Polygon",bal:"$38.20",dep:"$200",wit:"$162"},{user:"mrad-boop",addr:"0x1a2b...3c4d",net:"Polygon",bal:"$142.50",dep:"$300",wit:"$157"}];
+const WALLETS=USERS.filter(u=>u.wallet);
 const BTESTS=[{word:"Lion",cat:"Animal",letter:"L",desc:"Exact match"},{word:"Lino",cat:"Animal",letter:"L",desc:"Fuzzy (Lion)"},{word:"Lybié",cat:"Pays",letter:"L",desc:"Fuzzy (Libye)"},{word:"Lucas",cat:"Prénom",letter:"L",desc:"Exact prénom"},{word:"Zlion",cat:"Animal",letter:"L",desc:"Mauvaise lettre"},{word:"Lamborghini",cat:"Marque",letter:"L",desc:"Exact marque"}];
 
 // ─── NAV ──────────────────────────────────────────────────────
@@ -575,39 +577,84 @@ function fetchLiveStats(){
 
 // ─── DASHBOARD ────────────────────────────────────────────────
 function renderDashboard(){
-  const days=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],vals=[280,340,190,420,380,510,340],max=Math.max(...vals);
-  document.getElementById('chart-bars').innerHTML=vals.map((v,i)=>`<div class="bar" style="height:${v/max*100}%;background:var(--lime);opacity:${.5+i*.07}" title="$${v}"></div>`).join('');
-  document.getElementById('chart-labels').innerHTML=days.map(d=>`<div class="bar-lbl">${d}</div>`).join('');
-  const acts=[{ev:"💎 Duel terminé",user:"petit_bac_pro",amt:"+$38",type:"payout",t:"2 min"},{ev:"💰 Dépôt",user:"crypto_gamer",amt:"+$50",type:"deposit",t:"10 min"},{ev:"🚫 Anti-cheat",user:"cheat_bot_420",amt:"Disqualifié",type:"cheat",t:"25 min"},{ev:"📅 League entry",user:"mrad-boop",amt:"-$0.50",type:"entry",t:"31 min"}];
-  document.getElementById('activity-tb').innerHTML=acts.map(a=>`<tr><td>${a.ev}</td><td style="color:var(--lime)">${a.user}</td><td style="font-weight:700;color:${a.amt.startsWith('+')?'var(--valid)':a.amt.startsWith('-')?'var(--red)':'var(--text)'}">${a.amt}</td><td><span class="pill ${a.type==='cheat'?'p-red':'p-green'}">${a.type}</span></td><td style="color:var(--muted)">${a.t} ago</td></tr>`).join('');
+  // Real stats from localStorage
+  const users  = JSON.parse(localStorage.getItem('wr_users')||'[]');
+  const games  = JSON.parse(localStorage.getItem('wr_games')||'[]');
+  const tickets= JSON.parse(localStorage.getItem('wr_tickets')||'[]');
+  const notifs = JSON.parse(localStorage.getItem('wr_notify_list')||'[]');
+  const totalWords = Object.values(DICT).reduce((s,a)=>s+a.length,0);
+  const openTickets= tickets.filter(t=>t.status==='open'||t.status==='progress').length;
+
+  document.getElementById('s-users').textContent   = users.length || '0';
+  document.getElementById('s-users-sub').textContent = 'inscrits';
+  document.getElementById('s-games').textContent   = games.length || '0';
+  document.getElementById('s-games-sub').textContent = games.length+' enregistrées';
+  document.getElementById('s-words').textContent   = totalWords;
+  document.getElementById('s-words-sub').textContent = Object.keys(DICT).length+' catégories';
+  document.getElementById('s-tickets').textContent = openTickets || '0';
+  document.getElementById('s-tickets-sub').textContent = tickets.length+' total';
+  document.getElementById('s-notif').textContent   = notifs.length || '0';
+
+  // Chart: games per day last 7 days
+  const days=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const counts=Array(7).fill(0);
+  const now=Date.now();
+  games.forEach(g=>{
+    const diff=Math.floor((now-(g.ts||0))/(864e5));
+    if(diff>=0&&diff<7) counts[6-diff]++;
+  });
+  const max=Math.max(...counts,1);
+  document.getElementById('chart-bars').innerHTML=counts.map((v,i)=>`<div class="bar" style="height:${v/max*100}%;background:var(--lime);min-height:4px" title="${v} parties"></div>`).join('');
+  const today=new Date().getDay();
+  const ord=[1,2,3,4,5,6,0];
+  const rotated=[...days.slice(today),...days.slice(0,today)];
+  document.getElementById('chart-labels').innerHTML=rotated.map(d=>`<div class="bar-lbl">${d}</div>`).join('');
+
+  // Activity: real recent game events
+  const recent=games.slice(-5).reverse();
+  document.getElementById('activity-tb').innerHTML=recent.length
+    ? recent.map(g=>`<tr>
+        <td>🎮 Partie terminée</td>
+        <td style="color:var(--lime)">${g.username||'—'}</td>
+        <td style="font-weight:700;color:var(--valid)">${g.score||0} pts</td>
+        <td><span class="pill p-green">${g.mode||'casual'}</span></td>
+        <td style="color:var(--muted)">${g.ts?new Date(g.ts).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}):'—'}</td>
+      </tr>`).join('')
+    : '<tr><td colspan="5" style="text-align:center;padding:1.5rem;color:var(--muted);font-family:\'Space Mono\',monospace;font-size:.65rem">Aucune activité enregistrée</td></tr>';
 }
 
 // ─── USERS ────────────────────────────────────────────────────
 function renderUsers(users){
-  document.getElementById('users-tb').innerHTML=users.map(u=>`<tr>
-    <td><div style="font-weight:700">${u.name}</div><div style="font-size:.56rem;color:var(--muted)">${u.email}</div></td>
-    <td style="font-size:.58rem;color:var(--muted)">${u.wallet||'—'}</td>
-    <td style="font-weight:700;color:var(--lime)">$${u.bal.toFixed(2)}</td>
-    <td>${u.games}</td>
-    <td style="color:${u.elo>=1500?'var(--gold)':u.elo>=1000?'var(--valid)':'var(--muted)'}">${u.elo}</td>
-    <td><span class="pill ${u.status==='active'?'p-green':u.status==='suspended'?'p-gold':'p-red'}">${u.status}</span></td>
-    <td><div class="act-btns"><button class="act-btn" onclick="openModal('edit-user')">✏️</button><button class="act-btn" onclick="toast('💰 Balance modifiée')">💰</button><button class="act-btn danger" onclick="if(confirm('Bannir ?'))toast('✅ Statut mis à jour')">${u.status==='banned'?'🔓':'🚫'}</button></div></td>
-  </tr>`).join('');
+  document.getElementById('users-tb').innerHTML=users.length
+    ? users.map(u=>`<tr>
+        <td><div style="font-weight:700">${u.username||u.name||'—'}</div><div style="font-size:.56rem;color:var(--muted)">ID: ${u.id||'—'}</div></td>
+        <td style="font-size:.58rem;color:var(--muted)">${u.wallet||'—'}</td>
+        <td style="font-weight:700;color:var(--lime)">${u.wrc||0} WRC</td>
+        <td>${u.games||0}</td>
+        <td style="color:var(--muted)">—</td>
+        <td><span class="pill p-green">active</span></td>
+        <td><div class="act-btns"><button class="act-btn" onclick="openModal('edit-user')">✏️</button><button class="act-btn danger" onclick="toast('🚫 Action non disponible')">🚫</button></div></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:1.5rem;color:var(--muted);font-family:\'Space Mono\',monospace;font-size:.65rem">Aucun utilisateur enregistré</td></tr>';
 }
-function filterUsers(q){renderUsers(USERS.filter(u=>u.name.includes(q)||u.email.includes(q)))}
+function filterUsers(q){renderUsers(USERS.filter(u=>(u.username||u.name||'').toLowerCase().includes(q.toLowerCase())))}
+
 function filterStatus(s){renderUsers(s?USERS.filter(u=>u.status===s):USERS)}
 
 // ─── WALLETS ─────────────────────────────────────────────────
 function renderWallets(){
-  document.getElementById('wallets-tb').innerHTML=WALLETS.map(w=>`<tr>
-    <td style="font-weight:700;color:var(--lime)">${w.user}</td>
-    <td style="font-size:.6rem;color:var(--muted)">${w.addr}</td>
-    <td><span class="pill ${w.net==='Polygon'?'p-purple':'p-blue'}">${w.net}</span></td>
-    <td style="font-weight:700;color:var(--lime)">${w.bal}</td>
-    <td style="color:var(--valid)">▲ ${w.dep}</td>
-    <td style="color:var(--red)">▼ ${w.wit}</td>
-    <td><div class="act-btns"><button class="act-btn" onclick="toast('💰 Ajustement ouvert')">💰 Ajuster</button><button class="act-btn danger" onclick="if(confirm('Geler ?'))toast('🧊 Wallet gelé')">🧊 Geler</button></div></td>
-  </tr>`).join('');
+  const data=USERS.filter(u=>u.wallet);
+  document.getElementById('wallets-tb').innerHTML=data.length
+    ? data.map(u=>`<tr>
+        <td style="font-weight:700;color:var(--lime)">${u.username||u.name||'—'}</td>
+        <td style="font-size:.6rem;color:var(--muted)">${u.wallet||'—'}</td>
+        <td><span class="pill p-purple">Polygon</span></td>
+        <td style="font-weight:700;color:var(--lime)">—</td>
+        <td style="color:var(--valid)">—</td>
+        <td style="color:var(--red)">—</td>
+        <td><div class="act-btns"><button class="act-btn" onclick="toast('💰 Ajustement ouvert')">💰 Ajuster</button><button class="act-btn danger" onclick="if(confirm('Geler ?'))toast('🧊 Wallet gelé')">🧊 Geler</button></div></td>
+      </tr>`).join('')
+    : '<tr><td colspan="7" style="text-align:center;padding:1.5rem;color:var(--muted);font-family:\'Space Mono\',monospace;font-size:.65rem">Aucun wallet connecté</td></tr>';
 }
 
 // ─── ROOMS ────────────────────────────────────────────────────
