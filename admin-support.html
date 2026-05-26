@@ -181,7 +181,7 @@ table.at{width:100%;border-collapse:collapse}
             <table class="at">
               <thead><tr>
                 <th>ID</th><th>Sujet</th><th>Catégorie</th>
-                <th>Email</th><th>Priorité</th><th>Statut</th>
+                <th>Username</th><th>Priorité</th><th>Statut</th>
                 <th>Date</th><th>Actions</th>
               </tr></thead>
               <tbody id="admin-ticket-tbody"></tbody>
@@ -324,7 +324,7 @@ function renderAdminTickets(filter){
         <td style="font-weight:700;color:#9FE870">${t.id}</td>
         <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${t.subject}</td>
         <td>${CATS[t.cat]||t.cat}</td>
-        <td style="color:#64748b">${t.email}</td>
+        <td style="color:#64748b">${t.username||'—'}</td>
         <td><span class="pill ${PPILL[t.priority]}">${PLBL[t.priority]}</span></td>
         <td><span class="pill ${SPILL[t.status]}">${SLBL[t.status]}</span></td>
         <td style="color:#64748b;font-size:.58rem">${new Date(t.createdAt).toLocaleDateString('fr-FR')}</td>
@@ -353,7 +353,7 @@ function viewTicket(id){
 
   document.getElementById('detail-title').textContent=t.subject+' — '+t.id;
   document.getElementById('detail-meta').innerHTML=`
-    Email: <strong style="color:#e2e8f0">${t.email}</strong> &nbsp;·&nbsp;
+    User: <strong style="color:#e2e8f0">${t.username||'—'}</strong> &nbsp;·&nbsp;
     Catégorie: <strong style="color:#e2e8f0">${t.cat}</strong> &nbsp;·&nbsp;
     Priorité: <strong style="color:${t.priority==='high'?'#fca5a5':t.priority==='medium'?'#fde68a':'#86efac'}">${t.priority}</strong><br/>
     Créé: ${new Date(t.createdAt).toLocaleString('fr-FR')} &nbsp;·&nbsp; Messages: ${(t.messages||[]).length}
@@ -361,7 +361,7 @@ function viewTicket(id){
 
   document.getElementById('admin-thread').innerHTML=(t.messages||[]).map(m=>`
     <div class="msg-a ${m.from==='user'?'msg-user-a':'msg-sup-a'}">
-      <div class="msg-sender-a">${m.from==='user'?'👤 '+t.email:'🎧 Support WordRace'} · ${new Date(m.ts).toLocaleString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
+      <div class="msg-sender-a">${m.from==='user'?'👤 '+(t.username||'User'):'🎧 Support WordRace'} · ${new Date(m.ts).toLocaleString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</div>
       ${m.text}
     </div>`).join('');
 
