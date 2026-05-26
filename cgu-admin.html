@@ -175,7 +175,7 @@ body{background:var(--bg);color:var(--text);font-family:'Calibri','Gill Sans MT'
       <div class="card-body" style="padding:.8rem 1.1rem">
         <div class="status-bar">
           <div class="status-dot loading" id="status-dot"></div>
-          <span id="status-text">Chargement du contenu depuis GitHub…</span>
+          <span id="status-text">Chargement du contenu…</span>
           <button class="t-btn btn-ghost" onclick="loadContent()">↺ Recharger</button>
         </div>
       </div>
@@ -203,9 +203,13 @@ body{background:var(--bg);color:var(--text);font-family:'Calibri','Gill Sans MT'
           <div id="quill-editor"></div>
         </div>
         <div class="card-body" style="padding-top:0">
-          <div class="actions">
+          <div class="actions" style="flex-wrap:wrap;gap:.5rem">
             <button class="action-btn primary" id="save-btn" onclick="saveContent()" disabled>💾 Enregistrer &amp; Déployer</button>
             <button class="action-btn secondary" onclick="loadContent()">↺ Annuler</button>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:.45rem;flex-wrap:wrap">
+              <span style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">Token GitHub (requis pour sauvegarder) :</span>
+              <input id="gh-token-input" type="password" placeholder="ghp_xxxxxxxxxx" style="padding:.38rem .7rem;border:1.5px solid var(--border2);border-radius:.4rem;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.7rem;width:200px;outline:none" oninput="localStorage.setItem('gh_token',this.value.trim())"/>
+            </div>
           </div>
           <div id="save-result"></div>
         </div>
@@ -224,7 +228,7 @@ body{background:var(--bg);color:var(--text);font-family:'Calibri','Gill Sans MT'
 
     <!-- INFO -->
     <div class="info-box">
-      <strong>Comment ça marche :</strong> L'éditeur charge <code>terms.html</code> depuis GitHub, extrait le contenu entre les marqueurs <code>&lt;!-- CGU_CONTENT_START --&gt;</code> et <code>&lt;!-- CGU_CONTENT_END --&gt;</code>, et vous permet de le modifier. En enregistrant, Vercel redéploie automatiquement en 30–60 sec.
+      <strong>Comment ça marche :</strong> Le contenu CGU est chargé directement depuis le site déployé — aucun token requis pour la lecture. Pour <strong>sauvegarder</strong>, un Personal Access Token GitHub (scope <code>repo</code>) est requis. Vercel redéploie automatiquement en 30–60 sec après chaque sauvegarde.
     </div>
   </div>
 </div>
@@ -241,8 +245,6 @@ const TERMS_FILE     = 'terms.html';
 const MARKER_START   = '<!-- CGU_CONTENT_START -->';
 const MARKER_END     = '<!-- CGU_CONTENT_END -->';
 const DATE_MARKER_ID = 'cgu-last-updated';
-let GH_TOKEN = '';
-
 // ─── SESSION ──────────────────────────────────────────────────
 function showCGUAdmin(){ document.getElementById('login-screen').style.display='none'; document.getElementById('main').style.display='block'; if(!quill) initEditor(); }
 function showCGULogin(){ document.getElementById('main').style.display='none'; document.getElementById('login-screen').style.display='flex'; }
@@ -260,12 +262,11 @@ function doLogin(){
   }
 }
 document.getElementById('pwd').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
-function doLogout(){ localStorage.removeItem('gh_token'); WRAdminSession.logout(); }
+function doLogout(){ WRAdminSession.logout(); }
 
 // ─── QUILL ────────────────────────────────────────────────────
 let quill;
 function initEditor(){
-  GH_TOKEN = localStorage.getItem('gh_token')||'';
   quill = new Quill('#quill-editor', {
     theme:'snow',
     placeholder:'Chargement du contenu CGU…',
@@ -281,36 +282,29 @@ function initEditor(){
       ]
     }
   });
-  if(GH_TOKEN) loadContent();
-  else setStatus('loading','Token GitHub non trouvé — entrez-le dans le panneau admin ou rechargez après l\'avoir sauvegardé.');
+  // Pre-fill saved token in the save field
+  const tok=localStorage.getItem('gh_token')||'';
+  const tf=document.getElementById('gh-token-input');
+  if(tok&&tf) tf.value=tok;
+  // Always load from the deployed site — no token needed
+  loadContent();
 }
 
-// ─── GITHUB API ───────────────────────────────────────────────
-let currentSHA = '';
-
-async function ghFetch(path, opts={}){
-  const res = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,{
-    headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json',...(opts.headers||{})},
-    ...opts
-  });
-  if(!res.ok){ const e=await res.json().catch(()=>({message:res.statusText})); throw new Error(e.message||res.statusText); }
-  return res.json();
-}
-
+// ─── LOAD (direct fetch — no GitHub token needed) ─────────────
 async function loadContent(){
-  setStatus('loading','Chargement depuis GitHub…');
+  setStatus('loading','Chargement du contenu…');
   document.getElementById('save-btn').disabled=true;
   try {
-    const data = await ghFetch(TERMS_FILE);
-    currentSHA = data.sha;
-    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    const res = await fetch('/terms.html?_='+Date.now());
+    if(!res.ok) throw new Error('HTTP '+res.status+' — terms.html introuvable');
+    const raw = await res.text();
     const si=raw.indexOf(MARKER_START), ei=raw.indexOf(MARKER_END);
     if(si===-1||ei===-1) throw new Error('Marqueurs CGU introuvables dans terms.html');
     const content = raw.slice(si+MARKER_START.length, ei).trim();
     const dm = raw.match(new RegExp(`id="${DATE_MARKER_ID}"[^>]*>([^<]+)<`));
     if(dm) document.getElementById('last-updated-input').value = dm[1].trim();
     quill.clipboard.dangerouslyPasteHTML(content);
-    setStatus('ok','Contenu chargé · SHA '+currentSHA.slice(0,7)+' · '+TERMS_FILE);
+    setStatus('ok','Contenu chargé');
     document.getElementById('save-btn').disabled=false;
     updateSections();
   } catch(e){
@@ -318,24 +312,40 @@ async function loadContent(){
   }
 }
 
+// ─── SAVE (GitHub API — token required) ───────────────────────
+async function ghPut(path, body){
+  const tok = localStorage.getItem('gh_token')||'';
+  if(!tok) throw new Error('Token GitHub manquant — entrez votre Personal Access Token (scope: repo)');
+  const shaRes = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,{
+    headers:{'Authorization':'token '+tok,'Accept':'application/vnd.github.v3+json'}
+  });
+  if(!shaRes.ok){ const e=await shaRes.json().catch(()=>({message:shaRes.statusText})); throw new Error(e.message); }
+  const shaData = await shaRes.json();
+  const putRes = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,{
+    method:'PUT',
+    headers:{'Authorization':'token '+tok,'Accept':'application/vnd.github.v3+json','Content-Type':'application/json'},
+    body:JSON.stringify({...body, sha:shaData.sha})
+  });
+  if(!putRes.ok){ const e=await putRes.json().catch(()=>({message:putRes.statusText})); throw new Error(e.message); }
+  return putRes.json();
+}
+
 async function saveContent(){
-  if(!currentSHA){ setStatus('err','SHA manquant — rechargez'); return; }
   const btn=document.getElementById('save-btn');
   btn.disabled=true; btn.textContent='⏳ Enregistrement…';
   setStatus('loading','Enregistrement sur GitHub…');
   try {
-    const data   = await ghFetch(TERMS_FILE);
-    const raw    = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    // Re-read current live file to preserve non-CGU sections
+    const res = await fetch('/terms.html?_='+Date.now());
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const raw = await res.text();
     const newDate= document.getElementById('last-updated-input').value.trim() ||
                    new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-    let updated  = raw;
-    const si=updated.indexOf(MARKER_START), ei=updated.indexOf(MARKER_END);
+    const si=raw.indexOf(MARKER_START), ei=raw.indexOf(MARKER_END);
     if(si===-1||ei===-1) throw new Error('Marqueurs introuvables');
-    updated = updated.slice(0,si+MARKER_START.length)+'\n'+quill.root.innerHTML+'\n'+updated.slice(ei);
+    let updated = raw.slice(0,si+MARKER_START.length)+'\n'+quill.root.innerHTML+'\n'+raw.slice(ei);
     updated = updated.replace(new RegExp(`(<span id="${DATE_MARKER_ID}"[^>]*>)[^<]+(</span>)`),'$1'+newDate+'$2');
-    await ghFetch(TERMS_FILE,{method:'PUT',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({message:'CGU mise à jour — '+newDate,content:btoa(unescape(encodeURIComponent(updated))),sha:data.sha})});
-    currentSHA='';
+    await ghPut(TERMS_FILE,{message:'CGU mise à jour — '+newDate, content:btoa(unescape(encodeURIComponent(updated)))});
     setStatus('ok','✓ Enregistré ! Vercel redéploie dans 30–60 sec…');
     showResult('ok','✓ CGU mis à jour. Vercel redéploie automatiquement.');
     setTimeout(loadContent,5000);
