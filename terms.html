@@ -2,100 +2,62 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WordRace.io — Terms & Conditions</title>
+<meta name="description" content="WordRace.io Terms and Conditions — rules, fair play policy, privacy, and user rights."/>
 <link rel="stylesheet" href="global.css"/>
 <link rel="stylesheet" href="nav.css"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WordRace.io — Terms & User Guide</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);--lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--gold:#F5C842;--goldBg:#FDF3CC;--red:#EF4444;--redBg:#FEE2E2;--blue:#3B82F6;--blueBg:#EFF6FF;--text:#1A1A1A;--muted:#6B7280;--forest:#163300}
+:root{
+  --bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);
+  --lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--forest:#163300;
+  --gold:#F5C842;--text:#1A1A1A;--muted:#6B7280;
+}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
-/* NAV */
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none}
-.nav-logo span{color:var(--lime)}
-.nav-links{display:flex;gap:.5rem}
-.nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
-.nav-link:hover{background:var(--surface2);color:var(--text)}
-/* LAYOUT */
-.wrap{max-width:900px;margin:0 auto;padding:5.5rem 1.5rem 4rem;display:grid;grid-template-columns:220px 1fr;gap:2rem}
-@media(max-width:768px){.wrap{grid-template-columns:1fr;padding:5rem 1rem 3rem}}
-/* SIDEBAR TOC */
-.toc{position:sticky;top:5rem;height:fit-content;background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-@media(max-width:768px){.toc{display:none}}
-.toc-title{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.7rem;font-weight:700}
-.toc-link{display:block;font-family:'Space Mono',monospace;font-size:.63rem;color:var(--muted);text-decoration:none;padding:.32rem .5rem;border-radius:.35rem;margin-bottom:.1rem;transition:all .15s;border-left:2px solid transparent}
-.toc-link:hover{background:var(--limeBg);color:var(--forest);border-left-color:var(--lime)}
-.toc-link.active{background:var(--limeBg);color:var(--forest);border-left-color:var(--lime);font-weight:700}
-.toc-sub{padding-left:.8rem;font-size:.59rem}
-/* CONTENT */
-.content{display:flex;flex-direction:column;gap:2rem}
+
 /* HERO */
-.doc-hero{background:linear-gradient(135deg,#163300,#1a4a00);border-radius:1.2rem;padding:2rem;color:#fff}
-.doc-hero-badge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);margin-bottom:.5rem}
-.doc-hero-title{font-family:'Bebas Neue',sans-serif;font-size:2.5rem;color:#fff;line-height:.92;margin-bottom:.5rem;letter-spacing:.02em}
-.doc-hero-title span{color:var(--lime)}
-.doc-hero-sub{font-family:'Space Mono',monospace;font-size:.65rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:1.2rem}
-.doc-hero-pills{display:flex;gap:.5rem;flex-wrap:wrap}
-.hero-pill{font-family:'Space Mono',monospace;font-size:.58rem;padding:.25rem .65rem;border-radius:100px;font-weight:700}
-.hp-green{background:rgba(159,232,112,.15);color:var(--lime);border:1px solid rgba(159,232,112,.3)}
-.hp-gold{background:rgba(245,200,66,.15);color:var(--gold);border:1px solid rgba(245,200,66,.3)}
-.hp-blue{background:rgba(59,130,246,.15);color:#93c5fd;border:1px solid rgba(59,130,246,.3)}
-/* SECTIONS */
-.section{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.6rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.section-anchor{display:block;position:relative;top:-5rem;visibility:hidden}
-.s-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);letter-spacing:.03em;margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem}
-.s-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);letter-spacing:.06em;margin-bottom:1.1rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
-.s-body{font-size:.88rem;color:#374151;line-height:1.75}
-.s-body p{margin-bottom:.8rem}
-.s-body p:last-child{margin-bottom:0}
-.s-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--text);letter-spacing:.03em;margin:1.2rem 0 .4rem}
-.s-body ul,.s-body ol{padding-left:1.2rem;margin-bottom:.8rem}
-.s-body li{margin-bottom:.35rem}
-.s-body strong{color:var(--text)}
-.s-body a{color:var(--forest);font-weight:600;text-decoration:underline}
-/* CALLOUT */
-.callout{border-radius:.6rem;padding:.85rem 1rem;margin:1rem 0;display:flex;gap:.65rem;align-items:flex-start;font-family:'Space Mono',monospace;font-size:.66rem;line-height:1.55}
-.callout-icon{font-size:1rem;flex-shrink:0;margin-top:.05rem}
-.c-lime{background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest)}
-.c-gold{background:var(--goldBg);border:1px solid rgba(245,200,66,.35);color:#92600A}
-.c-red{background:var(--redBg);border:1px solid rgba(239,68,68,.25);color:#991B1B}
-.c-blue{background:var(--blueBg);border:1px solid rgba(59,130,246,.25);color:#1E40AF}
-/* GAME MODES */
-.mode-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.7rem;margin:1rem 0}
-.mode-card{border-radius:.75rem;padding:.95rem;border:1px solid var(--border);transition:all .2s}
-.mode-card:hover{box-shadow:0 4px 12px rgba(0,0,0,.08)}
-.mc-icon{font-size:1.4rem;margin-bottom:.35rem}
-.mc-name{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text);letter-spacing:.03em;margin-bottom:.15rem}
-.mc-tag{font-family:'Space Mono',monospace;font-size:.52rem;font-weight:700;padding:.1rem .38rem;border-radius:100px;display:inline-block;margin-bottom:.35rem}
-.mc-desc{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);line-height:1.5}
-/* STEPS */
-.steps{display:flex;flex-direction:column;gap:.6rem;margin:1rem 0}
-.step{display:flex;gap:.8rem;align-items:flex-start;padding:.8rem;background:var(--surface2);border-radius:.6rem}
-.step-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--lime);line-height:1;min-width:28px}
-.step-body{flex:1}
-.step-title{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;color:var(--text);margin-bottom:.15rem}
-.step-desc{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);line-height:1.5}
-/* PRIZE TABLE */
-.prize-table{width:100%;border-collapse:collapse;margin:1rem 0;font-family:'Space Mono',monospace;font-size:.65rem}
-.prize-table th{padding:.5rem .8rem;background:var(--surface2);border:1px solid var(--border);color:var(--muted);letter-spacing:.07em;text-transform:uppercase;font-size:.57rem;text-align:left}
-.prize-table td{padding:.5rem .8rem;border:1px solid var(--border);color:var(--text)}
-.prize-table tr:nth-child(even) td{background:var(--surface2)}
-/* KEYBOARD */
-.kbd{font-family:'Space Mono',monospace;font-size:.6rem;background:var(--surface2);border:1px solid var(--border2,var(--border));border-bottom:2px solid var(--border2,var(--border));border-radius:.3rem;padding:.12rem .4rem;color:var(--text)}
-/* BADGE */
-.badge{display:inline-flex;align-items:center;gap:.3rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;padding:.2rem .55rem;border-radius:100px}
-.b-lime{background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.4)}
-.b-gold{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.4)}
-.b-red{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.3)}
-/* FOOTER */
-.doc-footer{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.4rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.df-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text);margin-bottom:.3rem}
-.df-sub{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);line-height:1.6;margin-bottom:1rem}
-.df-links{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap}
-.df-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
-.df-link:hover{background:var(--limeBg);border-color:var(--lime);color:var(--forest)}
+.doc-hero{margin-top:56px;background:linear-gradient(135deg,#163300 0%,#1e5200 60%,#163300 100%);padding:2.5rem 1.5rem;position:relative;overflow:hidden;text-align:center}
+.doc-hero::before{content:'';position:absolute;inset:0;opacity:.04;background:repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(159,232,112,.8) 20px,rgba(159,232,112,.8) 21px)}
+.doc-hero-inner{max-width:700px;margin:0 auto;position:relative;z-index:1}
+.dh-badge{font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);margin-bottom:.5rem}
+.dh-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,6vw,3.5rem);color:#fff;letter-spacing:.04em;line-height:1;margin-bottom:.4rem}
+.dh-title span{color:var(--lime)}
+.dh-meta{font-family:'Space Mono',monospace;font-size:.62rem;color:rgba(255,255,255,.45);margin-top:.5rem}
+
+/* LAYOUT */
+.wrap{max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 5rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start}
+@media(max-width:768px){.wrap{grid-template-columns:1fr;padding:2rem 1rem 4rem}}
+
+/* TOC */
+.toc{position:sticky;top:72px;background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+@media(max-width:768px){.toc{display:none}}
+.toc-title{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.65rem;font-weight:700}
+.toc a{display:block;font-family:'Space Mono',monospace;font-size:.61rem;color:var(--muted);text-decoration:none;padding:.28rem .45rem;border-radius:.32rem;margin-bottom:.08rem;transition:all .13s;border-left:2px solid transparent}
+.toc a:hover,.toc a.active{background:var(--limeBg);color:var(--forest);border-left-color:var(--lime)}
+.toc a.sub{padding-left:1rem;font-size:.58rem}
+
+/* CONTENT */
+.cgu-content{display:flex;flex-direction:column;gap:0}
+
+/* This div is the editable zone via cgu-admin */
+#cgu-body h1{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.03em;color:var(--text);margin:2rem 0 .7rem;padding-bottom:.45rem;border-bottom:2px solid var(--lime)}
+#cgu-body h2{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.03em;color:var(--text);margin:1.8rem 0 .55rem;padding-top:1rem}
+#cgu-body h3{font-family:'Space Mono',monospace;font-size:.78rem;font-weight:700;color:var(--text);margin:1.2rem 0 .4rem}
+#cgu-body p{font-family:'Inter',sans-serif;font-size:.9rem;color:#374151;line-height:1.75;margin-bottom:.8rem}
+#cgu-body ul,#cgu-body ol{padding-left:1.4rem;margin-bottom:.8rem}
+#cgu-body li{font-family:'Inter',sans-serif;font-size:.9rem;color:#374151;line-height:1.75;margin-bottom:.25rem}
+#cgu-body strong{color:var(--text);font-weight:700}
+#cgu-body a{color:var(--forest);font-weight:600;text-decoration:underline}
+#cgu-body blockquote{border-left:3px solid var(--lime);background:var(--limeBg);padding:.7rem 1rem;border-radius:0 .5rem .5rem 0;margin:.8rem 0;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--forest)}
+#cgu-body .section-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:.5rem;font-weight:700;padding:.1rem .45rem;border-radius:100px;background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.4);letter-spacing:.06em;margin-bottom:.3rem}
+
+/* FOOTER STRIP */
+.cgu-footer{background:var(--surface2);border:1px solid var(--border);border-radius:.8rem;padding:1rem 1.2rem;margin-top:2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem}
+.cf-text{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)}
+.cf-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);font-weight:700;text-decoration:none}
+.cf-link:hover{text-decoration:underline}
 </style>
 </head>
 <body>
@@ -105,494 +67,201 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-h
   <div class="nav-links">
     <a class="nav-link" href="index.html">← Home</a>
     <a class="nav-link" href="game.html">🎮 Play</a>
-    <a class="nav-link" href="daily-league.html">📅 Daily League</a>
+    <a class="nav-link active" href="#">📋 Terms</a>
   </div>
+  <span id="nav-wrc-badge" style="display:none"></span>
 </nav>
+
+<div class="doc-hero">
+  <div class="doc-hero-inner">
+    <div class="dh-badge">📋 Legal</div>
+    <div class="dh-title">TERMS &amp; <span>CONDITIONS</span></div>
+    <div class="dh-meta">WordRace.io · Last updated: <span id="cgu-last-updated">May 26, 2026</span> · Version 1.0</div>
+  </div>
+</div>
 
 <div class="wrap">
 
-  <!-- TABLE OF CONTENTS -->
-  <aside class="toc">
+  <!-- TOC — auto-generated from h2 tags -->
+  <aside class="toc" id="toc-sidebar">
     <div class="toc-title">Contents</div>
-    <a class="toc-link active" href="#intro">Introduction</a>
-    <a class="toc-link" href="#how-to-play">How to Play</a>
-    <a class="toc-link toc-sub" href="#categories">Categories</a>
-    <a class="toc-link toc-sub" href="#scoring">Scoring</a>
-    <a class="toc-link" href="#game-modes">Game Modes</a>
-    <a class="toc-link toc-sub" href="#casual">Casual Training</a>
-    <a class="toc-link toc-sub" href="#practice">Practice Zone</a>
-    <a class="toc-link toc-sub" href="#daily">Daily League</a>
-    <a class="toc-link toc-sub" href="#duel">Duel Arena</a>
-    <a class="toc-link" href="#powerups">Power-Ups</a>
-    <a class="toc-link" href="#wrc">🪙 WRC Credits</a>
-    <a class="toc-link" href="#validation">Word Validation</a>
-    <a class="toc-link" href="#duel">⚔️ Duel Arena</a>
-    <a class="toc-link" href="#leaderboard">🏆 Leaderboard</a>
-    <a class="toc-link" href="#anticheat">Fair Play Rules</a>
-    <a class="toc-link" href="#wallet">Wallet & USDT</a>
-    <a class="toc-link" href="#payouts">Payouts</a>
-    <a class="toc-link" href="#terms">Terms of Service</a>
-    <a class="toc-link" href="#privacy">Privacy Policy</a>
-    <a class="toc-link" href="#contact">Contact</a>
+    <div id="toc-links"></div>
   </aside>
 
-  <!-- CONTENT -->
-  <main class="content">
+  <div class="cgu-content">
+    <!-- CGU_CONTENT_START -->
+<div id="cgu-body">
 
-    <!-- HERO -->
-    <div class="doc-hero">
-      <div class="doc-hero-badge">📋 Official Documentation · v1.0 · 2026</div>
-      <div class="doc-hero-title">WORD<span>RACE</span>.IO<br/>User Guide & Terms</div>
-      <div class="doc-hero-sub">Everything you need to know to play, win, and earn on WordRace.io — the competitive vocabulary game powered by blockchain.</div>
-      <div class="doc-hero-pills">
-        <span class="hero-pill hp-green">✅ Free to Play</span>
-        <span class="hero-pill hp-gold">💎 Play-to-Earn</span>
-        <span class="hero-pill hp-blue">🔐 Blockchain Powered</span>
-        <span class="hero-pill hp-green">🛡️ Anti-Cheat Protected</span>
+<div class="section-badge">SECTION 1</div>
+<h2 id="s-intro">Introduction</h2>
+<p>Welcome to <strong>WordRace.io</strong> ("the Platform", "we", "us", "our"). WordRace.io is a competitive online vocabulary game inspired by the classic Petit Bac format, where players race to fill categories starting with a given letter.</p>
+<p>These Terms and Conditions ("Terms") govern your access to and use of the Platform, including all game modes, features, virtual currency, and future Play-to-Earn (P2E) functionality. Please read them carefully.</p>
+<p>By accessing or using WordRace.io, you confirm that you have read, understood, and agreed to be bound by these Terms. If you do not agree, please do not use the Platform.</p>
+
+<div class="section-badge">SECTION 2</div>
+<h2 id="s-eligibility">Eligibility</h2>
+<p>To use WordRace.io you must:</p>
+<ul>
+  <li>Be at least <strong>13 years old</strong>. Users under 18 must have parental or guardian consent.</li>
+  <li>Provide accurate information when creating an account.</li>
+  <li>Not be prohibited from using the Platform under applicable laws.</li>
+</ul>
+<p>By using the Platform, you represent that you meet all eligibility requirements. We reserve the right to suspend accounts that do not comply.</p>
+
+<div class="section-badge">SECTION 3</div>
+<h2 id="s-accounts">User Accounts</h2>
+<h3>Beta Phase</h3>
+<p>WordRace.io is currently in <strong>public beta</strong>. During this phase, user accounts and game data are stored locally in your browser (localStorage). This means:</p>
+<ul>
+  <li>Your account data is <strong>not synced</strong> across devices or browsers.</li>
+  <li>Clearing your browser data will permanently delete your account.</li>
+  <li>Persistent server-side accounts will be introduced at the official P2E launch.</li>
+</ul>
+<h3>Account Security</h3>
+<p>You are responsible for maintaining the confidentiality of your username and any credentials. You agree to notify us immediately of any unauthorized use of your account via the <a href="support.html">Support page</a>.</p>
+<h3>Account Termination</h3>
+<p>We reserve the right to suspend or terminate any account that violates these Terms, without prior notice.</p>
+
+<div class="section-badge">SECTION 4</div>
+<h2 id="s-game">Game Rules &amp; Modes</h2>
+<p>WordRace.io offers the following game modes:</p>
+<ul>
+  <li><strong>🆓 Casual Training</strong> — Free mode. Play against AI bots, friends, or random players. No entry fee.</li>
+  <li><strong>⚔️ Duel Arena</strong> — Competitive 1v1 duels with real USDT wagers. <em>Coming in Q3 2026.</em></li>
+  <li><strong>📅 Daily League</strong> — Daily tournament with prize pool redistribution. <em>Coming in Q3 2026.</em></li>
+</ul>
+<h3>Core Rules</h3>
+<ul>
+  <li>Players must type words starting with the letter shown for each category.</li>
+  <li>Words are validated by the platform's dictionary and category-specific systems.</li>
+  <li>Each valid word scores <strong>10 points</strong>. Empty or invalid words score 0.</li>
+  <li>The game lasts <strong>40 seconds</strong> per round.</li>
+  <li>Copy/paste and tab-switching are prohibited and trigger automatic forfeit.</li>
+</ul>
+
+<div class="section-badge">SECTION 5</div>
+<h2 id="s-fairplay">Fair Play &amp; Anti-Cheat</h2>
+<p>We are committed to maintaining a fair competitive environment. The following are strictly prohibited:</p>
+<ul>
+  <li>Using bots, scripts, or automation tools.</li>
+  <li>Exploiting bugs or vulnerabilities for an unfair advantage.</li>
+  <li>Collusion with other players.</li>
+  <li>Sharing accounts or multiple account abuse.</li>
+  <li>Attempting to manipulate rankings or prize distribution.</li>
+</ul>
+<p>Violations may result in immediate account suspension, forfeiture of winnings, and permanent ban. We use automated and manual detection systems.</p>
+
+<div class="section-badge">SECTION 6</div>
+<h2 id="s-wrc">WRC Credits &amp; Virtual Currency</h2>
+<p><strong>WRC Credits ("WRC")</strong> are the Platform's virtual in-game currency. Key terms:</p>
+<ul>
+  <li>1 WRC = $0.01 USD (reference value).</li>
+  <li>WRC can be used to purchase power-ups (💡 Hint = 5 WRC, ❄️ Freeze = 10 WRC) and enter paid game modes.</li>
+  <li>During the beta phase, WRC transactions are <strong>simulated</strong> and have no real monetary value.</li>
+  <li>WRC Credits are <strong>non-transferable</strong> and cannot be converted to cash during beta.</li>
+  <li>We reserve the right to modify WRC values, pricing, and usage rules at any time.</li>
+</ul>
+
+<div class="section-badge">SECTION 7</div>
+<h2 id="s-p2e">Play-to-Earn (P2E) Features</h2>
+<p>WordRace.io intends to launch P2E features in <strong>Q3 2026</strong>, including real USDT wagers and prize pool distributions. When these features launch:</p>
+<ul>
+  <li>A separate and updated set of financial terms will apply.</li>
+  <li>KYC (Know Your Customer) verification may be required for withdrawals.</li>
+  <li>Minimum and maximum wager limits will be clearly disclosed.</li>
+  <li>All transactions will be processed on the <strong>Polygon</strong> blockchain network.</li>
+  <li>Tax obligations arising from winnings are the sole responsibility of the user.</li>
+</ul>
+<blockquote>P2E features are not yet active. Any current display of potential earnings is illustrative only.</blockquote>
+
+<div class="section-badge">SECTION 8</div>
+<h2 id="s-ip">Intellectual Property</h2>
+<p>All content on WordRace.io — including but not limited to the game mechanics, name, logo, design, code, graphics, and text — is the exclusive property of WordRace.io and its creators, protected by copyright and intellectual property laws.</p>
+<p>You are granted a limited, non-exclusive, non-transferable license to access and use the Platform for personal, non-commercial purposes. You may not:</p>
+<ul>
+  <li>Copy, reproduce, or distribute any Platform content without prior written permission.</li>
+  <li>Reverse engineer, decompile, or extract the Platform's source code.</li>
+  <li>Create derivative works based on Platform content.</li>
+</ul>
+
+<div class="section-badge">SECTION 9</div>
+<h2 id="s-privacy">Privacy &amp; Data</h2>
+<h3>Beta Phase</h3>
+<p>During the current beta phase, <strong>no personal data is stored on our servers</strong>. All account information, game history, and preferences are stored exclusively in your browser's localStorage.</p>
+<p>We do not collect, process, or share personal data at this stage.</p>
+<h3>Future Privacy Policy</h3>
+<p>When server-side accounts and P2E features launch, a comprehensive Privacy Policy (compliant with GDPR and applicable data protection laws) will be published and will govern how we handle your personal data.</p>
+<p>By continuing to use the Platform after the launch of server-side features, you consent to the updated Privacy Policy.</p>
+
+<div class="section-badge">SECTION 10</div>
+<h2 id="s-liability">Disclaimers &amp; Limitation of Liability</h2>
+<p>WordRace.io is provided <strong>"as is"</strong> and <strong>"as available"</strong> during the beta phase, without warranty of any kind, express or implied.</p>
+<p>To the maximum extent permitted by law, WordRace.io and its operators shall not be liable for:</p>
+<ul>
+  <li>Loss of data due to browser cache clearing or device changes.</li>
+  <li>Interruptions, bugs, or errors in the Platform.</li>
+  <li>Any indirect, incidental, or consequential damages arising from use of the Platform.</li>
+  <li>Actions of third parties, including other players.</li>
+</ul>
+<p>Our total liability shall not exceed the amount paid by you to the Platform in the 30 days preceding the claim, or $10 USD, whichever is greater.</p>
+
+<div class="section-badge">SECTION 11</div>
+<h2 id="s-changes">Changes to Terms</h2>
+<p>We reserve the right to modify these Terms at any time. Changes will be posted on this page with an updated date. Continued use of the Platform after changes constitutes acceptance of the new Terms.</p>
+<p>For significant changes affecting P2E features or financial terms, we will provide at least <strong>14 days' notice</strong> via the Platform or registered email.</p>
+
+<div class="section-badge">SECTION 12</div>
+<h2 id="s-contact">Contact</h2>
+<p>For questions, concerns, or disputes regarding these Terms, please contact us:</p>
+<ul>
+  <li>📧 Via the <a href="support.html">Support page</a> on WordRace.io</li>
+  <li>🎫 Open a ticket with category "Other" for legal inquiries</li>
+</ul>
+<p>We aim to respond within <strong>48 hours</strong> on business days (Monday–Friday).</p>
+
+</div>
+    <!-- CGU_CONTENT_END -->
+
+    <div class="cgu-footer">
+      <span class="cf-text">© 2026 WordRace.io · All rights reserved</span>
+      <div style="display:flex;gap:1rem">
+        <a class="cf-link" href="support.html">🎫 Support</a>
+        <a class="cf-link" href="game.html">🎮 Play Now</a>
       </div>
     </div>
+  </div>
 
-    <!-- INTRO -->
-    <div class="section">
-      <span class="section-anchor" id="intro"></span>
-      <div class="s-title">👋 Welcome to WordRace.io</div>
-      <div class="s-sub">What is WordRace?</div>
-      <div class="s-body">
-        <p>WordRace.io is a <strong>competitive vocabulary game</strong> inspired by the classic "Petit Bac" (Categories) format. Players race against the clock to fill in words starting with a randomly drawn letter across 8 different categories — all in just 40 seconds.</p>
-        <p>WordRace offers two distinct zones: a completely <strong>Free Zone</strong> for casual play against AI bots, and a <strong>Play-to-Earn Zone</strong> where players wager real USDT and compete for cash prizes on Polygon and Solana blockchains.</p>
-        <div class="callout c-lime"><span class="callout-icon">🎯</span><span>No registration required for the Free Zone. Just click "Play Now" and you're in within seconds.</span></div>
-      </div>
-    </div>
-
-    <!-- HOW TO PLAY -->
-    <div class="section">
-      <span class="section-anchor" id="how-to-play"></span>
-      <div class="s-title">🎮 How to Play</div>
-      <div class="s-sub">The basics of every round</div>
-      <div class="s-body">
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">A random letter is drawn</div><div class="step-desc">At the start of each round, a letter is randomly selected (e.g. "M"). All your answers must begin with this letter.</div></div></div>
-          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">40-second Blitz Timer starts</div><div class="step-desc">You have exactly 40 seconds to fill in as many of the 8 categories as possible. Speed and vocabulary are both rewarded.</div></div></div>
-          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Type your answers</div><div class="step-desc">On desktop, use <span class="kbd">Tab</span> to move between categories. On mobile, swipe between category cards. All inputs enforce the correct first letter automatically.</div></div></div>
-          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Validation happens instantly</div><div class="step-desc">Each word is validated in real-time using our 3-tier engine: exact dictionary match, fuzzy correction, and AI arbitration as fallback.</div></div></div>
-          <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Results & scores revealed</div><div class="step-desc">After the round, scores are shown per category. Unique words (only you answered with that word) earn bonus points.</div></div></div>
-        </div>
-
-        <span class="section-anchor" id="categories"></span>
-        <h3>📋 The 8 Categories</h3>
-        <p>Every round uses all 8 categories simultaneously:</p>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.5rem;margin:.8rem 0">
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">🐾 Animal</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any animal species</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">🌍 Country</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any sovereign nation</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">👤 First Name</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any given name</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">🍎 Food & Drink</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any edible item</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">💼 Profession</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any job or occupation</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">🏷️ Brand</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any company or brand</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">⚽ Sport</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any sport or discipline</div></div>
-          <div style="background:var(--surface2);padding:.6rem .8rem;border-radius:.5rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">🎬 Film / TV Show</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">Any movie or series</div></div>
-        </div>
-
-        <span class="section-anchor" id="scoring"></span>
-        <h3>🏆 Scoring System</h3>
-        <table class="prize-table">
-          <thead><tr><th>Situation</th><th>Points</th></tr></thead>
-          <tbody>
-            <tr><td>Valid word — correct letter ✅</td><td style="color:var(--forest);font-weight:700">+10 pts</td></tr>
-            <tr><td>Unique word (only you answered it)</td><td style="color:var(--forest);font-weight:700">+5 pts bonus</td></tr>
-            <tr><td>Word auto-corrected (fuzzy match)</td><td style="color:var(--forest);font-weight:700">+10 pts</td></tr>
-            <tr><td>Invalid word / wrong letter</td><td style="color:var(--red)">0 pts</td></tr>
-            <tr><td>Empty answer</td><td style="color:var(--muted)">0 pts</td></tr>
-          </tbody>
-        </table>
-        <div class="callout c-gold"><span class="callout-icon">💡</span><span>Max score per round: 120 pts (8 categories × 15 pts with unique bonus). In Daily League, 3 rounds = 360 pts maximum.</span></div>
-      </div>
-    </div>
-
-    <!-- GAME MODES -->
-    <div class="section">
-      <span class="section-anchor" id="game-modes"></span>
-      <div class="s-title">🕹️ Game Modes</div>
-      <div class="s-sub">Four arenas — from free casual play to high-stakes duels</div>
-
-      <span class="section-anchor" id="casual"></span>
-      <div class="s-body">
-        <h3>🆓 Casual Training <span class="badge b-lime">FREE</span></h3>
-        <p>Play unlimited rounds against AI bots. No wallet, no fees, no registration required. Perfect for practising vocabulary before entering paid modes.</p>
-        <ul>
-          <li>3 bot difficulty levels: <strong>Easy</strong>, <strong>Medium</strong>, <strong>Hard</strong></li>
-          <li>Bots fill answers progressively throughout the round — more realistic and challenging</li>
-          <li>Unlimited replays — every round uses a new random letter</li>
-          <li>Personal score tracked locally within your session</li>
-        </ul>
-
-        <span class="section-anchor" id="practice"></span>
-        <h3>🧪 Practice Zone <span class="badge b-gold">P2E</span></h3>
-        <p>Free games against bots or friends, but with access to purchasable power-ups using small USDT amounts. Requires a connected wallet.</p>
-        <ul>
-          <li>💡 <strong>Hint</strong> — reveals the first 3 letters of a valid answer: <strong>$0.05 USDT</strong></li>
-          <li>❄️ <strong>Time Freeze</strong> — pauses the timer for 5 seconds: <strong>$0.10 USDT</strong></li>
-        </ul>
-
-        <span class="section-anchor" id="daily"></span>
-        <h3>📅 Daily League <span class="badge b-gold">P2E</span></h3>
-        <p>A global asynchronous tournament that resets every 24 hours at <strong>00:00 UTC</strong>. Players have one attempt per tier per day. The top 10 players split the prize pool.</p>
-        <table class="prize-table">
-          <thead><tr><th>Tier</th><th>Entry Fee</th><th>Format</th><th>Platform Fee</th><th>Prize Pool</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Standard</strong></td><td style="color:var(--gold)">$0.20 USDT</td><td>3 rounds · 8 cats · 40s</td><td>10%</td><td>90% of entries</td></tr>
-            <tr><td><strong>Premium</strong></td><td style="color:var(--gold)">$0.50 USDT</td><td>3 rounds · 8 cats · 40s</td><td>10%</td><td>90% of entries</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Prize distribution (top 10):</strong> 1st 30% · 2nd 18% · 3rd 12% · 4th–5th 5% each · 6th–10th 4% each.</p>
-
-        <span class="section-anchor" id="duel-mode"></span>
-        <h3>⚔️ Duel Arena <span class="badge b-red">P2E</span></h3>
-        <p>Real-time multiplayer rooms (2–8 players). The room creator sets the USDT wager. A smart contract locks all funds and automatically distributes winnings. <a href="#duel">→ See full Duel Arena rules</a></p>
-        <ul>
-          <li>Wager range: <strong>$1 to $50 USDT</strong> (or custom)</li>
-          <li>Platform rake: <strong>5%</strong> — winner receives 95% of the pool</li>
-          <li>Smart contract escrow — trustless, instant payout on Polygon</li>
-          <li>2–8 players · 1, 3, or 5 rounds</li>
-        </ul>
-        <div class="callout c-blue"><span class="callout-icon">🔐</span><span>All Duel Arena funds are held in a verified smart contract. WordRace never has direct custody of your USDT during a game.</span></div>
-      </div>
-    </div>
-
-    <!-- POWERUPS -->
-    <div class="section">
-      <span class="section-anchor" id="powerups"></span>
-      <div class="s-title">⚡ Power-Ups</div>
-      <div class="s-sub">Available in Practice Zone and P2E modes</div>
-      <div class="s-body">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.8rem 0">
-          <div style="background:var(--limeBg);border:1px solid rgba(159,232,112,.3);border-radius:.8rem;padding:1rem">
-            <div style="font-size:1.6rem;margin-bottom:.4rem">💡</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text)">HINT</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);font-weight:700;margin-bottom:.35rem">$0.05 USDT</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">Reveals the first 3 characters of a valid word for the selected category. One use per round.</div>
-          </div>
-          <div style="background:var(--blueBg);border:1px solid rgba(59,130,246,.2);border-radius:.8rem;padding:1rem">
-            <div style="font-size:1.6rem;margin-bottom:.4rem">❄️</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--text)">TIME FREEZE</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--gold);font-weight:700;margin-bottom:.35rem">$0.10 USDT</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">Pauses the round timer for exactly 5 seconds. Only you benefit from the pause. One use per round.</div>
-          </div>
-        </div>
-        <div class="callout c-gold"><span class="callout-icon">⚠️</span><span>Power-up purchases are final and non-refundable. They are consumed upon use regardless of the round outcome.</span></div>
-      </div>
-    </div>
-
-    <!-- VALIDATION -->
-    
-    <!-- WRC CREDITS -->
-    <div class="section">
-      <span class="section-anchor" id="wrc"></span>
-      <div class="s-title">🪙 WordRace Credits (WRC)</div>
-      <div class="s-sub">Instant in-game currency — no transaction delays</div>
-      <div class="s-body">
-        <p>WordRace Credits (WRC) are the platform's internal currency. They allow players to purchase power-ups and pay entry fees <strong>instantly</strong>, without waiting for a blockchain transaction to confirm. WRC are pre-purchased with USDT and stored in your account balance.</p>
-
-        <h3>Exchange Rate</h3>
-        <p style="font-family:'Space Mono',monospace;font-size:.85rem;background:var(--limeBg);padding:.6rem .9rem;border-radius:.5rem;border:1px solid rgba(159,232,112,.3);color:var(--forest)"><strong>1 WRC = $0.01 USDT</strong> (100 WRC = $1.00)</p>
-
-        <h3>WRC Packs</h3>
-        <table class="prize-table">
-          <thead><tr><th>Pack</th><th>WRC Received</th><th>Price (USDT)</th><th>Bonus</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Starter</strong></td><td>100 WRC</td><td>$1.00</td><td>—</td></tr>
-            <tr><td><strong>Popular</strong></td><td>525 WRC</td><td>$5.00</td><td>+5% (25 WRC)</td></tr>
-            <tr><td><strong>Value</strong></td><td>1,100 WRC</td><td>$10.00</td><td>+10% (100 WRC)</td></tr>
-            <tr><td><strong>Pro</strong></td><td>2,875 WRC</td><td>$25.00</td><td>+15% (375 WRC)</td></tr>
-          </tbody>
-        </table>
-
-        <h3>WRC Cost of Actions</h3>
-        <table class="prize-table">
-          <thead><tr><th>Action</th><th>WRC Cost</th><th>USDT Equivalent</th><th>Limit</th></tr></thead>
-          <tbody>
-            <tr><td>💡 Hint power-up</td><td><strong>5 WRC</strong></td><td>$0.05</td><td>1 per round · 5 per day</td></tr>
-            <tr><td>❄️ Time Freeze power-up</td><td><strong>10 WRC</strong></td><td>$0.10</td><td>1 per round · 5 per day</td></tr>
-            <tr><td>📅 Daily League Standard</td><td><strong>20 WRC</strong></td><td>$0.20</td><td>1 per tier per day</td></tr>
-            <tr><td>📅 Daily League Premium</td><td><strong>50 WRC</strong></td><td>$0.50</td><td>1 per tier per day</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout c-gold"><span class="callout-icon">⚠️</span><span>WRC purchases are final and non-refundable. WRC have no monetary value outside of the WordRace platform and cannot be withdrawn or exchanged back to USDT.</span></div>
-        <div class="callout c-lime"><span class="callout-icon">⚡</span><span>New players receive 150 WRC as a welcome bonus (equivalent to $1.50). This bonus is for demo purposes and may be adjusted or removed at any time.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <span class="section-anchor" id="validation"></span>
-      <div class="s-title">✅ Word Validation Engine</div>
-      <div class="s-sub">3-tier system · Target response time under 500ms</div>
-      <div class="s-body">
-        <p>WordRace uses a proprietary 3-tier validation engine to ensure fast, fair and accurate word checking:</p>
-        <div class="steps">
-          <div class="step"><div class="step-num" style="color:var(--lime)">T1</div><div class="step-body"><div class="step-title">🔍 Exact Dictionary Match</div><div class="step-desc">Word is checked against our categorised local dictionary (~600+ words per category). Response time: ~80ms. If matched, word is instantly validated.</div></div></div>
-          <div class="step"><div class="step-num" style="color:var(--gold)">T2</div><div class="step-body"><div class="step-title">🔧 Fuzzy Match (Levenshtein Distance)</div><div class="step-desc">Tolerates typos based on word length — 0 typos for 3–5 letter words, 1 for 6–8 letters, 2 for 9+ letters. Automatically corrects to the closest valid word. Response time: ~200ms.</div></div></div>
-          <div class="step"><div class="step-num" style="color:var(--blue)">T3</div><div class="step-body"><div class="step-title">🤖 AI Arbitrator (Fallback)</div><div class="step-desc">For slang, rare names, or words not in our dictionary. A Claude AI model evaluates the word and its category fit. Result is cached to avoid future API costs. Response time: ~400ms.</div></div></div>
-        </div>
-        <div class="callout c-lime"><span class="callout-icon">✏️</span><span>When a word is auto-corrected by Tier 2, you receive full points. The corrected word is shown in your results.</span></div>
-      </div>
-    </div>
-
-    <!-- FAIR PLAY -->
-    
-    <!-- LEADERBOARD -->
-    
-    <!-- DUEL ARENA -->
-    <div class="section">
-      <span class="section-anchor" id="duel"></span>
-      <div class="s-title">⚔️ Duel Arena</div>
-      <div class="s-sub">Real-time multiplayer wagering — Smart contract escrow</div>
-      <div class="s-body">
-        <p>The Duel Arena allows 2 to 8 players to compete in real-time vocabulary rounds with a USDT wager. All funds are locked in a Polygon smart contract immediately upon room creation and released automatically to the winner at game end.</p>
-
-        <h3>How It Works</h3>
-        <div class="steps">
-          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Create or join a room</div><div class="step-desc">Set your wager ($1–$50 USDT), number of players (2–8), and rounds (1, 3, or 5). Share the Room ID with opponents.</div></div></div>
-          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Funds locked in escrow</div><div class="step-desc">Each player's wager is deducted immediately and locked in a verified Polygon smart contract. WordRace never holds funds directly.</div></div></div>
-          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Play — 40s rounds</div><div class="step-desc">Fill 8 categories starting with the round's letter. Tab to navigate on desktop, swipe on mobile. Opponent's answers are hidden during play.</div></div></div>
-          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Automatic payout</div><div class="step-desc">The player with the highest score wins 95% of the prize pool. The 5% rake is retained by WordRace. Payout is triggered automatically by the smart contract.</div></div></div>
-        </div>
-
-        <h3>Wager Rules</h3>
-        <table class="prize-table">
-          <thead><tr><th>Setting</th><th>Options</th></tr></thead>
-          <tbody>
-            <tr><td>Wager per player</td><td>$1 · $2 · $5 · $10 · $20 · $50 USDT (or custom $1–$50)</td></tr>
-            <tr><td>Players per room</td><td>2 · 4 · 6 · 8 (set by room creator)</td></tr>
-            <tr><td>Rounds</td><td>1 · 3 · 5 (Best-of format)</td></tr>
-            <tr><td>Platform rake</td><td>5% of total prize pool</td></tr>
-            <tr><td>Network</td><td>Polygon USDT (primary) · Solana USDT</td></tr>
-            <tr><td>Payout</td><td>Automatic via smart contract at game end</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Disconnection Policy</h3>
-        <p>If a player disconnects or switches tabs during a Duel Arena match, their round score is submitted immediately with whatever answers were entered at that moment. The match continues for remaining players. <strong>No refunds are issued for disconnections.</strong></p>
-
-        <div class="callout c-red"><span class="callout-icon">⚠️</span><span>Duel Arena involves real financial risk. Never wager more than you can afford to lose. Wagers are non-refundable once the match begins. Smart contract execution is irreversible.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <span class="section-anchor" id="leaderboard"></span>
-      <div class="s-title">🏆 Global Leaderboard</div>
-      <div class="s-sub">Real-time rankings across all game modes</div>
-      <div class="s-body">
-        <p>The WordRace Global Leaderboard tracks player performance across all game modes in real-time, updated every 60 seconds.</p>
-
-        <h3>Leaderboard Tabs</h3>
-        <table class="prize-table">
-          <thead><tr><th>Tab</th><th>Content</th><th>Reset</th></tr></thead>
-          <tbody>
-            <tr><td><strong>🌍 All Time</strong></td><td>Cumulative score since account creation</td><td>Never</td></tr>
-            <tr><td><strong>📅 Daily League</strong></td><td>Today's league rankings (Standard & Premium)</td><td>Daily 00:00 UTC</td></tr>
-            <tr><td><strong>⚔️ Duel Arena</strong></td><td>Top earners by net USDT gains</td><td>Monthly option</td></tr>
-            <tr><td><strong>🆓 Casual</strong></td><td>All-time high scores in free mode</td><td>Never</td></tr>
-            <tr><td><strong>📆 Weekly</strong></td><td>Scores from Mon–Sun current week</td><td>Weekly Monday 00:00 UTC</td></tr>
-            <tr><td><strong>📊 Stats</strong></td><td>Platform-wide analytics (letters, categories)</td><td>Live</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Leaderboard Integrity</h3>
-        <ul>
-          <li>Players found to have cheated are removed from all leaderboards immediately upon detection.</li>
-          <li>WordRace reserves the right to adjust rankings in cases of verified fraud or technical errors.</li>
-          <li>Prize distributions are calculated from the <strong>final snapshot</strong> taken at reset time, not from intermediate rankings.</li>
-          <li>Leaderboard positions are <strong>not guaranteed</strong> — they reflect live competition and may change at any moment.</li>
-        </ul>
-
-        <div class="callout c-blue"><span class="callout-icon">📊</span><span>The leaderboard is publicly visible. Your username, score, win rate, and earnings are displayed to all users. You can make your profile private in Settings, which hides your stats from the public leaderboard.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <span class="section-anchor" id="anticheat"></span>
-      <div class="s-title">🛡️ Fair Play Rules & Anti-Cheat</div>
-      <div class="s-sub">WordRace operates a zero-tolerance policy against cheating</div>
-      <div class="s-body">
-        <h3>Prohibited Actions</h3>
-        <ul>
-          <li><strong>Tab switching:</strong> Leaving the browser tab or switching apps during a round is detected instantly. First offence = warning. Second offence = round forfeited (score = 0).</li>
-          <li><strong>Copy & Paste:</strong> All text inputs block paste events. Attempting to paste is logged and may trigger review.</li>
-          <li><strong>Automated scripts / macros:</strong> Keystroke timing is analysed in real-time. Typing speeds inconsistent with human behaviour result in immediate disqualification.</li>
-          <li><strong>VPN / IP manipulation:</strong> Using VPNs to bypass regional restrictions or create multiple accounts is prohibited.</li>
-          <li><strong>Multiple accounts:</strong> Each player is permitted one account. Duplicate accounts are permanently banned.</li>
-        </ul>
-        <div class="callout c-red"><span class="callout-icon">🚫</span><span>Players found cheating in paid modes (Daily League, Duel Arena) will be permanently banned and all associated funds may be forfeited. There is no appeal process for bot-detected disqualifications.</span></div>
-        <h3>Consequences</h3>
-        <table class="prize-table">
-          <thead><tr><th>Offence</th><th>Action</th></tr></thead>
-          <tbody>
-            <tr><td>Tab switch (1st)</td><td>Warning toast — round continues</td></tr>
-            <tr><td>Tab switch (2nd+)</td><td>Round forfeited — score = 0</td></tr>
-            <tr><td>Paste attempt</td><td>Warning — logged</td></tr>
-            <tr><td>Bot/macro detected</td><td>Immediate disqualification</td></tr>
-            <tr><td>Repeated violations</td><td>Permanent account ban</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- WALLET -->
-    <div class="section">
-      <span class="section-anchor" id="wallet"></span>
-      <div class="s-title">💰 Wallet & USDT</div>
-      <div class="s-sub">Supported wallets and networks</div>
-      <div class="s-body">
-        <h3>Supported Wallets</h3>
-        <div style="display:flex;gap:.7rem;flex-wrap:wrap;margin:.8rem 0">
-          <div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--surface2);border-radius:.6rem;border:1px solid var(--border)"><span style="font-size:1.2rem">🦊</span><div><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">MetaMask</div><div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">Polygon USDT</div></div></div>
-          <div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--surface2);border-radius:.6rem;border:1px solid var(--border)"><span style="font-size:1.2rem">👻</span><div><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">Phantom</div><div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">Solana USDT</div></div></div>
-          <div style="display:flex;align-items:center;gap:.5rem;padding:.6rem .9rem;background:var(--surface2);border-radius:.6rem;border:1px solid var(--border)"><span style="font-size:1.2rem">🔗</span><div><div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700">WalletConnect</div><div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted)">Any compatible wallet</div></div></div>
-        </div>
-        <h3>Networks & Fees</h3>
-        <table class="prize-table">
-          <thead><tr><th>Network</th><th>Token</th><th>Avg Gas Fee</th><th>Confirmation</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Polygon (MATIC)</strong></td><td>USDT (PoS)</td><td>~$0.001</td><td>~3 seconds</td></tr>
-            <tr><td><strong>Solana</strong></td><td>USDT (SPL)</td><td>~$0.0001</td><td>~1 second</td></tr>
-          </tbody>
-        </table>
-        <div class="callout c-blue"><span class="callout-icon">ℹ️</span><span>Network gas fees are paid by the user and are separate from WordRace platform fees. We recommend Polygon for lower fees on smaller amounts.</span></div>
-
-        <span class="section-anchor" id="payouts"></span>
-        <h3>💸 Payouts</h3>
-        <ul>
-          <li><strong>Daily League:</strong> Prizes distributed automatically at 00:00 UTC to winners' wallets. No manual claim required.</li>
-          <li><strong>Duel Arena:</strong> Smart contract releases funds immediately when the game ends. Winner receives 95% of pool.</li>
-          <li><strong>Withdrawal:</strong> Available at any time from your wallet dashboard. Minimum withdrawal: $1.00 USDT.</li>
-          <li><strong>Processing time:</strong> On-chain transactions confirm within seconds on Polygon and Solana.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- TERMS -->
-    <div class="section">
-      <span class="section-anchor" id="terms"></span>
-      <div class="s-title">📄 Terms of Service</div>
-      <div class="s-sub">Last updated: May 2026 · Effective immediately</div>
-      <div class="s-body">
-        <h3>1. Eligibility</h3>
-        <p>You must be at least <strong>18 years of age</strong> (or the legal gambling/gaming age in your jurisdiction, whichever is higher) to participate in Play-to-Earn modes. The Free Zone is available to all ages. By using WordRace.io you confirm that you meet these requirements.</p>
-
-        <h3>2. Skill-Based Competition</h3>
-        <p>WordRace.io is a <strong>skill-based game</strong>. Outcomes depend on vocabulary knowledge, typing speed, and strategic use of power-ups. It is not classified as gambling under most jurisdictions. However, users are solely responsible for ensuring compliance with local laws regarding online skill gaming and cryptocurrency use.</p>
-
-        <h3>3. Platform Fees & WRC Credits</h3>
-        <p>WordRace charges the following platform fees: <strong>5% rake on Duel Arena</strong> prize pools and <strong>10% fee on Daily League</strong> entry totals. These fees fund platform operations, development, and server costs. All fees are disclosed clearly before any purchase.</p>
-        <p>WordRace Credits (WRC) are purchased at a fixed rate of <strong>1 WRC = $0.01 USDT</strong>. WRC are non-refundable, have no cash value, and cannot be transferred between accounts or withdrawn. Bonus WRC included in packs are promotional and subject to change.</p>
-
-        <h3>4. No Refunds</h3>
-        <p>All entry fees and power-up purchases are <strong>final and non-refundable</strong> once a game session has started. In cases of documented technical failure on our part, credits may be issued at WordRace's sole discretion.</p>
-
-        <h3>5. Account Suspension</h3>
-        <p>WordRace reserves the right to suspend or permanently ban accounts that violate fair play rules, engage in fraud, attempt to exploit technical vulnerabilities, or breach these Terms. Banned accounts forfeit any unclaimed balance.</p>
-
-        <h3>6. Blockchain Transactions</h3>
-        <p>All USDT transactions are processed on public blockchains (Polygon, Solana). WordRace is not responsible for: lost funds due to incorrect wallet addresses, network congestion, wallet provider outages, or errors made by the user.</p>
-
-        <h3>7. Limitation of Liability</h3>
-        <p>WordRace.io is provided "as is." We make no guarantees of uninterrupted availability. Maximum liability for any claim is limited to the amount deposited in the 30 days preceding the claim.</p>
-
-        <h3>8. Modifications</h3>
-        <p>We may update these Terms at any time. Continued use of the platform following notice of changes constitutes acceptance. Material changes will be communicated via email and in-app notification.</p>
-
-        <div class="callout c-red"><span class="callout-icon">⚠️</span><span>WordRace involves financial risk. Never wager more than you can afford to lose. If you feel you may have a problem with gaming, please seek help from a qualified support organisation.</span></div>
-      </div>
-    </div>
-
-    <!-- PRIVACY -->
-    <div class="section">
-      <span class="section-anchor" id="privacy"></span>
-      <div class="s-title">🔒 Privacy Policy</div>
-      <div class="s-sub">Your data, our responsibility</div>
-      <div class="s-body">
-        <h3>Data We Collect</h3>
-        <ul>
-          <li><strong>Account data:</strong> Username, email (optional), wallet address</li>
-          <li><strong>Game data:</strong> Round scores, answers submitted, session history</li>
-          <li><strong>Technical data:</strong> IP address, browser type, device type (for anti-cheat)</li>
-          <li><strong>Keystroke timing:</strong> Interval data used exclusively for bot detection — not stored after analysis</li>
-        </ul>
-        <h3>Data We Do NOT Collect</h3>
-        <ul>
-          <li>Private keys or seed phrases (never share these with anyone)</li>
-          <li>Payment card information</li>
-          <li>Sensitive personal documents</li>
-        </ul>
-        <h3>Data Retention</h3>
-        <p>Game history is retained for 12 months. Account data is retained until account deletion. Anti-cheat logs are retained for 90 days.</p>
-        <h3>Third Parties</h3>
-        <p>We use: <strong>Vercel</strong> (hosting), <strong>Render.com</strong> (backend), <strong>Anthropic Claude API</strong> (word validation AI). No data is sold to advertisers.</p>
-        <div class="callout c-lime"><span class="callout-icon">✅</span><span>WordRace.io does not display advertisements and does not sell user data to any third party.</span></div>
-      </div>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="section">
-      <span class="section-anchor" id="contact"></span>
-      <div class="s-title">📬 Contact & Support</div>
-      <div class="s-sub">We're here to help</div>
-      <div class="s-body">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:.7rem;margin:.8rem 0">
-          <div style="background:var(--surface2);padding:.9rem;border-radius:.7rem;border:1px solid var(--border)">
-            <div style="font-size:1.3rem;margin-bottom:.3rem">✉️</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;margin-bottom:.15rem">Support</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">support@wordrace.io</div>
-          </div>
-          <div style="background:var(--surface2);padding:.9rem;border-radius:.7rem;border:1px solid var(--border)">
-            <div style="font-size:1.3rem;margin-bottom:.3rem">🐦</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;margin-bottom:.15rem">Community</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">@WordRaceIO</div>
-          </div>
-          <div style="background:var(--surface2);padding:.9rem;border-radius:.7rem;border:1px solid var(--border)">
-            <div style="font-size:1.3rem;margin-bottom:.3rem">📋</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;margin-bottom:.15rem">Bug Reports</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">bugs@wordrace.io</div>
-          </div>
-          <div style="background:var(--surface2);padding:.9rem;border-radius:.7rem;border:1px solid var(--border)">
-            <div style="font-size:1.3rem;margin-bottom:.3rem">⚖️</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;margin-bottom:.15rem">Legal</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted)">legal@wordrace.io</div>
-          </div>
-        </div>
-        <p>Response time for support tickets: <strong>24–48 hours</strong> on business days. For urgent issues involving lost funds, please include your wallet address and transaction hash.</p>
-      </div>
-    </div>
-
-    <!-- FOOTER DOC -->
-    <div class="doc-footer">
-      <div class="df-title">© 2026 WordRace.io</div>
-      <div class="df-sub">Built on Polygon & Solana · Powered by Claude AI · Hosted on Vercel & Render<br/>WordRace is a skill-based game. Play responsibly. Results are not guaranteed.</div>
-      <div class="df-links">
-        <a class="df-link" href="index.html">🏠 Home</a>
-        <a class="df-link" href="game.html">🎮 Play Now</a>
-        <a class="df-link" href="daily-league.html">📅 Daily League</a>
-        <a class="df-link" href="https://twitter.com/WordRaceIO" target="_blank" rel="noopener">🐦 Twitter</a>
-        <a class="df-link" href="https://discord.gg/wordrace" target="_blank" rel="noopener">💬 Discord</a>
-      </div>
-    </div>
-
-  </main>
 </div>
 
-<script>
-// Smooth TOC active state on scroll
-const sections = document.querySelectorAll('.section-anchor');
-const links = document.querySelectorAll('.toc-link');
-window.addEventListener('scroll', () => {
-  let current = '';
-  sections.forEach(s => { if(window.scrollY >= s.offsetTop - 120) current = s.id; });
-  links.forEach(l => {
-    l.classList.remove('active');
-    if(l.getAttribute('href') === '#'+current) l.classList.add('active');
-  });
-});
-</script>
+<script src="auth.js"></script>
 <script src="presence.js"></script>
+<script>
+// Auto-generate TOC from h2 tags inside cgu-body
+(function(){
+  const toc = document.getElementById('toc-links');
+  const body = document.getElementById('cgu-body');
+  if(!toc || !body) return;
+
+  const headings = body.querySelectorAll('h2');
+  toc.innerHTML = Array.from(headings).map(h => {
+    if(!h.id) h.id = 'h-' + Math.random().toString(36).slice(2,7);
+    return `<a href="#${h.id}">${h.textContent}</a>`;
+  }).join('');
+
+  // Highlight active section on scroll
+  const links = toc.querySelectorAll('a');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        links.forEach(l => l.classList.remove('active'));
+        const match = toc.querySelector(`a[href="#${e.target.id}"]`);
+        if(match) match.classList.add('active');
+      }
+    });
+  }, {rootMargin:'-20% 0px -70% 0px'});
+
+  headings.forEach(h => obs.observe(h));
+})();
+</script>
 </body>
 </html>

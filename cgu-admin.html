@@ -1,546 +1,542 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>WordRace — CGU & Guide (Admin)</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CGU Admin — WordRace</title>
+<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.7/quill.snow.css">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--border:rgba(0,0,0,0.08);--lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;--gold:#F5C842;--goldBg:#FDF3CC;--red:#EF4444;--redBg:#FEE2E2;--blue:#3B82F6;--blueBg:#EFF6FF;--purple:#7C3AED;--purpleBg:#F5F3FF;--text:#1A1A1A;--muted:#6B7280;--forest:#163300;--valid:#16A34A;--validBg:#DCFCE7}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh}
-.topnav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(248,249,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:.75rem 1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--text);text-decoration:none}
-.nav-logo span{color:var(--lime)}
-.nav-links{display:flex;gap:.5rem}
-.nav-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.3rem .65rem;border:1px solid var(--border);border-radius:.4rem;transition:all .15s}
-.nav-link:hover,.nav-link.active{background:var(--limeBg);border-color:var(--lime);color:var(--forest)}
-.admin-badge{font-family:'Space Mono',monospace;font-size:.55rem;background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.3);border-radius:100px;padding:.18rem .5rem;font-weight:700;letter-spacing:.08em}
-.wrap{max-width:920px;margin:0 auto;padding:5.5rem 1.5rem 4rem;display:grid;grid-template-columns:215px 1fr;gap:2rem}
-@media(max-width:768px){.wrap{grid-template-columns:1fr;padding:5rem 1rem 3rem}}
-.toc{position:sticky;top:5rem;height:fit-content;background:var(--surface);border:1px solid var(--border);border-radius:.9rem;padding:1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-@media(max-width:768px){.toc{display:none}}
-.toc-title{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.65rem;font-weight:700}
-.toc-link{display:block;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);text-decoration:none;padding:.3rem .48rem;border-radius:.32rem;margin-bottom:.08rem;transition:all .13s;border-left:2px solid transparent}
-.toc-link:hover,.toc-link.active{background:var(--limeBg);color:var(--forest);border-left-color:var(--lime)}
-.toc-sub{padding-left:.75rem;font-size:.58rem}
-.content{display:flex;flex-direction:column;gap:1.8rem}
-.doc-hero{background:linear-gradient(135deg,#163300,#1e5c00);border-radius:1.2rem;padding:2rem;color:#fff}
-.dh-badge{font-family:'Space Mono',monospace;font-size:.56rem;letter-spacing:.15em;text-transform:uppercase;color:var(--lime);margin-bottom:.5rem}
-.dh-title{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;color:#fff;line-height:.92;margin-bottom:.4rem;letter-spacing:.02em}
-.dh-title span{color:var(--lime)}
-.dh-sub{font-family:'Space Mono',monospace;font-size:.63rem;color:rgba(255,255,255,.6);line-height:1.6;margin-bottom:1rem}
-.dh-pills{display:flex;gap:.45rem;flex-wrap:wrap}
-.dp{font-family:'Space Mono',monospace;font-size:.56rem;padding:.22rem .6rem;border-radius:100px;font-weight:700}
-.dp-lime{background:rgba(159,232,112,.15);color:var(--lime);border:1px solid rgba(159,232,112,.3)}
-.dp-gold{background:rgba(245,200,66,.15);color:var(--gold);border:1px solid rgba(245,200,66,.3)}
-.dp-red{background:rgba(239,68,68,.15);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
-.section{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.sa{display:block;position:relative;top:-5rem;visibility:hidden}
-.s-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--text);letter-spacing:.03em;margin-bottom:.25rem;display:flex;align-items:center;gap:.45rem}
-.s-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.06em;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
-.s-body{font-size:.87rem;color:#374151;line-height:1.75}
-.s-body p{margin-bottom:.75rem}
-.s-body p:last-child{margin-bottom:0}
-.s-body h3{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--text);letter-spacing:.03em;margin:1.1rem 0 .38rem}
-.s-body ul,.s-body ol{padding-left:1.2rem;margin-bottom:.75rem}
-.s-body li{margin-bottom:.32rem}
-.s-body strong{color:var(--text)}
-.callout{border-radius:.55rem;padding:.8rem .95rem;margin:.9rem 0;display:flex;gap:.6rem;align-items:flex-start;font-family:'Space Mono',monospace;font-size:.64rem;line-height:1.55}
-.ci{font-size:.95rem;flex-shrink:0;margin-top:.04rem}
-.c-lime{background:var(--limeBg);border:1px solid rgba(159,232,112,.35);color:var(--forest)}
-.c-gold{background:var(--goldBg);border:1px solid rgba(245,200,66,.35);color:#92600A}
-.c-red{background:var(--redBg);border:1px solid rgba(239,68,68,.25);color:#991B1B}
-.c-blue{background:var(--blueBg);border:1px solid rgba(59,130,246,.25);color:#1E40AF}
-.c-purple{background:var(--purpleBg);border:1px solid rgba(124,58,237,.25);color:var(--purple)}
-.steps{display:flex;flex-direction:column;gap:.55rem;margin:.9rem 0}
-.step{display:flex;gap:.75rem;align-items:flex-start;padding:.75rem;background:var(--surface2);border-radius:.55rem}
-.sn{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--lime);line-height:1;min-width:26px}
-.st{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);margin-bottom:.12rem}
-.sd{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);line-height:1.5}
-table.dt{width:100%;border-collapse:collapse;margin:.9rem 0;font-family:'Space Mono',monospace;font-size:.63rem}
-.dt th{padding:.48rem .8rem;background:var(--surface2);border:1px solid var(--border);color:var(--muted);letter-spacing:.07em;text-transform:uppercase;font-size:.55rem;text-align:left}
-.dt td{padding:.48rem .8rem;border:1px solid var(--border);color:var(--text)}
-.dt tr:nth-child(even) td{background:rgba(248,249,247,.7)}
-.badge{display:inline-flex;align-items:center;gap:.28rem;font-family:'Space Mono',monospace;font-size:.58rem;font-weight:700;padding:.18rem .5rem;border-radius:100px}
-.b-lime{background:var(--limeBg);color:var(--forest);border:1px solid rgba(159,232,112,.4)}
-.b-gold{background:var(--goldBg);color:#92600A;border:1px solid rgba(245,200,66,.4)}
-.b-red{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.3)}
-.kbd{font-family:'Space Mono',monospace;font-size:.58rem;background:var(--surface2);border:1px solid var(--border);border-bottom:2px solid var(--border);border-radius:.28rem;padding:.1rem .38rem;color:var(--text)}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:.8rem 0}
-@media(max-width:500px){.grid2{grid-template-columns:1fr}}
-.card-sm{border-radius:.7rem;padding:.9rem;border:1px solid var(--border)}
-.doc-footer{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.3rem;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.04)}
-.df-links{display:flex;gap:.45rem;justify-content:center;flex-wrap:wrap;margin-top:.8rem}
-.df-link{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);text-decoration:none;padding:.28rem .6rem;border:1px solid var(--border);border-radius:.38rem;transition:all .13s}
-.df-link:hover{background:var(--limeBg);border-color:var(--lime);color:var(--forest)}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0f0f13;
+  --surface:#1a1a22;
+  --border:#2a2a38;
+  --accent:#6c63ff;
+  --text:#e8e8f0;
+  --muted:#7a7a95;
+  --danger:#ff4757;
+  --success:#2ed573;
+}
+body{
+  font-family:'Calibri','Gill Sans','Gill Sans MT',Calibri,'Trebuchet MS',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+}
+
+/* LOGIN WALL */
+#login-wall{
+  position:fixed;inset:0;background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  z-index:1000;
+}
+.login-box{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:48px 40px;
+  width:360px;
+  text-align:center;
+}
+.login-box .logo{font-size:2rem;font-weight:800;color:var(--accent);margin-bottom:8px}
+.login-box p{color:var(--muted);margin-bottom:32px;font-size:.95rem}
+.login-box input{
+  width:100%;padding:12px 16px;
+  background:#0f0f13;border:1px solid var(--border);border-radius:8px;
+  color:var(--text);font-family:inherit;font-size:1rem;
+  outline:none;margin-bottom:16px;
+  transition:border-color .2s;
+}
+.login-box input:focus{border-color:var(--accent)}
+.login-box button{
+  width:100%;padding:13px;
+  background:var(--accent);border:none;border-radius:8px;
+  color:#fff;font-family:inherit;font-size:1rem;font-weight:700;
+  cursor:pointer;transition:opacity .2s;
+}
+.login-box button:hover{opacity:.85}
+.login-error{color:var(--danger);font-size:.85rem;margin-top:8px;display:none}
+
+/* MAIN */
+#main{display:none}
+
+.topbar{
+  background:var(--surface);
+  border-bottom:1px solid var(--border);
+  padding:16px 32px;
+  display:flex;align-items:center;gap:16px;
+}
+.topbar .brand{font-size:1.2rem;font-weight:800;color:var(--accent)}
+.topbar .title{font-size:.95rem;color:var(--muted)}
+.topbar .spacer{flex:1}
+.topbar a{
+  color:var(--muted);text-decoration:none;font-size:.875rem;
+  padding:6px 14px;border:1px solid var(--border);border-radius:6px;
+  transition:color .2s,border-color .2s;
+}
+.topbar a:hover{color:var(--text);border-color:var(--muted)}
+.topbar .logout-btn{
+  background:none;border:1px solid var(--border);border-radius:6px;
+  color:var(--muted);font-family:inherit;font-size:.875rem;
+  padding:6px 14px;cursor:pointer;transition:color .2s;
+}
+.topbar .logout-btn:hover{color:var(--danger)}
+
+.container{max-width:1100px;margin:0 auto;padding:32px 24px}
+
+.page-header{margin-bottom:28px}
+.page-header h1{font-size:1.6rem;font-weight:700;margin-bottom:4px}
+.page-header p{color:var(--muted);font-size:.9rem}
+
+.card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  overflow:hidden;
+  margin-bottom:24px;
+}
+.card-header{
+  padding:16px 24px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:12px;
+}
+.card-header h2{font-size:1rem;font-weight:600}
+.card-header .badge{
+  font-size:.75rem;padding:3px 10px;
+  background:#6c63ff22;color:var(--accent);
+  border-radius:20px;border:1px solid #6c63ff44;
+}
+.card-body{padding:24px}
+
+/* STATUS BAR */
+.status-bar{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 20px;
+  background:#0f0f13;
+  border-radius:8px;
+  margin-bottom:20px;
+  font-size:.85rem;
+}
+.status-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--muted);flex-shrink:0;
+}
+.status-dot.ok{background:var(--success)}
+.status-dot.err{background:var(--danger)}
+.status-dot.loading{background:#ffa502;animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+#status-text{color:var(--muted);flex:1}
+
+/* QUILL OVERRIDE */
+.ql-toolbar.ql-snow{
+  background:#1a1a22!important;
+  border:1px solid var(--border)!important;
+  border-radius:8px 8px 0 0;
+}
+.ql-container.ql-snow{
+  background:#0f0f13!important;
+  border:1px solid var(--border)!important;
+  border-top:none!important;
+  border-radius:0 0 8px 8px;
+  font-family:'Calibri','Gill Sans',sans-serif!important;
+  font-size:1rem;
+}
+.ql-editor{
+  min-height:420px;
+  color:#e8e8f0!important;
+  font-family:'Calibri','Gill Sans',sans-serif!important;
+  font-size:1rem!important;
+  line-height:1.7!important;
+}
+.ql-editor.ql-blank::before{color:#4a4a62!important}
+.ql-snow .ql-stroke{stroke:#7a7a95!important}
+.ql-snow .ql-fill{fill:#7a7a95!important}
+.ql-snow .ql-picker{color:#7a7a95!important}
+.ql-snow .ql-picker-options{background:#1a1a22!important;border-color:var(--border)!important}
+.ql-snow .ql-picker-item:hover,.ql-snow .ql-picker-item.ql-selected{color:var(--text)!important}
+.ql-snow button:hover .ql-stroke,.ql-snow button.ql-active .ql-stroke{stroke:#6c63ff!important}
+.ql-snow button:hover .ql-fill,.ql-snow button.ql-active .ql-fill{fill:#6c63ff!important}
+.ql-snow button:hover,.ql-snow button.ql-active{color:#6c63ff!important}
+.ql-editor h1,.ql-editor h2,.ql-editor h3{color:#e8e8f0!important;margin:1.2em 0 .4em}
+.ql-editor p{margin:.5em 0}
+.ql-editor a{color:#6c63ff}
+.ql-editor ul,.ql-editor ol{padding-left:1.5em}
+
+/* ACTIONS */
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.btn{
+  padding:11px 24px;border-radius:8px;font-family:inherit;font-size:.9rem;font-weight:600;
+  cursor:pointer;border:none;transition:opacity .2s,transform .1s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn:hover{opacity:.85}
+.btn:active{transform:scale(.98)}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-secondary{background:var(--border);color:var(--text)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* SAVE STATUS */
+#save-result{
+  margin-top:16px;padding:12px 18px;border-radius:8px;
+  font-size:.875rem;display:none;
+}
+#save-result.ok{background:#2ed57320;color:#2ed573;border:1px solid #2ed57340}
+#save-result.err{background:#ff475720;color:#ff4757;border:1px solid #ff475740}
+
+/* LAST UPDATED */
+.meta-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:20px}
+.meta-field{display:flex;align-items:center;gap:10px;font-size:.875rem}
+.meta-field label{color:var(--muted)}
+.meta-field input{
+  padding:7px 12px;background:#0f0f13;border:1px solid var(--border);
+  border-radius:6px;color:var(--text);font-family:inherit;font-size:.875rem;outline:none;
+}
+.meta-field input:focus{border-color:var(--accent)}
+
+/* PREVIEW */
+.preview-link{
+  color:var(--accent);font-size:.875rem;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.preview-link:hover{opacity:.8}
+
+/* NAV TABS */
+.nav-tabs{display:flex;gap:2px;padding:0 24px;border-bottom:1px solid var(--border)}
+.nav-tab{
+  padding:12px 18px;font-size:.875rem;font-family:inherit;
+  background:none;border:none;cursor:pointer;color:var(--muted);
+  border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s;
+}
+.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-tab:hover:not(.active){color:var(--text)}
+
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* SECTIONS helper */
+.section-list{list-style:none}
+.section-list li{
+  padding:10px 14px;border-radius:8px;font-size:.875rem;
+  display:flex;align-items:center;gap:10px;cursor:pointer;
+  transition:background .15s;
+}
+.section-list li:hover{background:#ffffff08}
+.section-list li .sec-num{
+  width:24px;height:24px;border-radius:50%;background:#6c63ff22;
+  color:var(--accent);font-size:.75rem;font-weight:700;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
 </style>
 </head>
 <body>
 
-<nav class="topnav">
-  <a class="nav-logo" href="index.html">WORD<span>RACE</span>.IO</a>
-  <div class="nav-links">
-    <a class="nav-link" href="admin-2026.html">← Admin</a>
-    <span style="font-family:'Space Mono',monospace;font-size:.6rem;padding:.3rem .65rem;border-radius:.4rem;background:var(--limeBg);border:1px solid var(--lime);color:var(--forest)">📋 CGU / Guide</span>
-    <a class="nav-link" href="terms.html" target="_blank">🌐 Version EN</a>
+<!-- LOGIN WALL -->
+<div id="login-wall">
+  <div class="login-box">
+    <div class="logo">⚡ WordRace</div>
+    <p>Administration — Accès restreint</p>
+    <input type="password" id="pwd-input" placeholder="Mot de passe admin" autocomplete="off">
+    <button onclick="doLogin()">Connexion</button>
+    <div class="login-error" id="login-err">Mot de passe incorrect</div>
   </div>
-  <span class="admin-badge">🛡️ ADMIN</span>
-</nav>
-
-<div class="wrap">
-
-  <aside class="toc">
-    <div class="toc-title">Sommaire</div>
-    <a class="toc-link active" href="#intro">Introduction</a>
-    <a class="toc-link" href="#jouer">Comment Jouer</a>
-    <a class="toc-link toc-sub" href="#categories">Catégories</a>
-    <a class="toc-link toc-sub" href="#scoring">Système de Points</a>
-    <a class="toc-link" href="#modes">Modes de Jeu</a>
-    <a class="toc-link toc-sub" href="#casual">Casual Training</a>
-    <a class="toc-link toc-sub" href="#practice">Practice Zone</a>
-    <a class="toc-link toc-sub" href="#daily">Daily League</a>
-    <a class="toc-link toc-sub" href="#duel">Duel Arena</a>
-    <a class="toc-link" href="#powerups">Power-Ups</a>
-    <a class="toc-link" href="#wrc">🪙 Crédits WRC</a>
-    <a class="toc-link" href="#validation">Validation des Mots</a>
-    <a class="toc-link" href="#duel-arena">⚔️ Duel Arena</a>
-    <a class="toc-link" href="#leaderboard">🏆 Leaderboard</a>
-    <a class="toc-link" href="#anticheat">Règles Fair Play</a>
-    <a class="toc-link" href="#wallet">Wallet & USDT</a>
-    <a class="toc-link" href="#payouts">Paiements</a>
-    <a class="toc-link" href="#cgu">CGU</a>
-    <a class="toc-link" href="#confidentialite">Confidentialité</a>
-    <a class="toc-link" href="#contact">Contact</a>
-  </aside>
-
-  <main class="content">
-
-    <div class="doc-hero">
-      <div class="dh-badge">📋 Documentation Officielle · v1.0 · 2026 · VERSION ADMIN FR</div>
-      <div class="dh-title">WORD<span>RACE</span>.IO<br/>CGU & Guide Utilisateur</div>
-      <div class="dh-sub">Document interne — Version française réservée à l'administration. La version anglaise publique est disponible sur /terms.html</div>
-      <div class="dh-pills">
-        <span class="dp dp-lime">✅ Gratuit à jouer</span>
-        <span class="dp dp-gold">💎 Play-to-Earn</span>
-        <span class="dp dp-red">🔐 Blockchain</span>
-        <span class="dp dp-lime">🛡️ Anti-Cheat</span>
-      </div>
-    </div>
-
-    <!-- INTRO -->
-    <div class="section">
-      <span class="sa" id="intro"></span>
-      <div class="s-title">👋 Présentation de WordRace.io</div>
-      <div class="s-sub">Qu'est-ce que WordRace ?</div>
-      <div class="s-body">
-        <p>WordRace.io est un <strong>jeu de vocabulaire compétitif</strong> inspiré du Petit Bac classique. Les joueurs s'affrontent contre la montre pour remplir des mots commençant par une lettre tirée au hasard dans 8 catégories différentes — tout ça en seulement 40 secondes.</p>
-        <p>La plateforme propose deux zones distinctes : une <strong>Zone Gratuite</strong> pour jouer sans inscription contre des bots IA, et une <strong>Zone Play-to-Earn</strong> où les joueurs misent de vrais USDT et concourent pour des prix en crypto sur les blockchains Polygon et Solana.</p>
-        <div class="callout c-lime"><span class="ci">🎯</span><span>Aucune inscription requise pour la Zone Gratuite. Un clic sur "Jouer" suffit pour commencer en quelques secondes.</span></div>
-      </div>
-    </div>
-
-    <!-- COMMENT JOUER -->
-    <div class="section">
-      <span class="sa" id="jouer"></span>
-      <div class="s-title">🎮 Comment Jouer</div>
-      <div class="s-sub">Les bases de chaque manche</div>
-      <div class="s-body">
-        <div class="steps">
-          <div class="step"><div class="sn">1</div><div><div class="st">Une lettre aléatoire est tirée</div><div class="sd">Au début de chaque manche, une lettre est sélectionnée aléatoirement (ex. "M"). Toutes les réponses doivent commencer par cette lettre.</div></div></div>
-          <div class="step"><div class="sn">2</div><div><div class="st">Le timer Blitz de 40 secondes démarre</div><div class="sd">Vous avez exactement 40 secondes pour remplir un maximum des 8 catégories. La rapidité et le vocabulaire sont tous les deux récompensés.</div></div></div>
-          <div class="step"><div class="sn">3</div><div><div class="st">Saisissez vos réponses</div><div class="sd">Sur ordinateur, utilisez <span class="kbd">Tab</span> pour naviguer entre les catégories. Sur mobile, faites défiler entre les cartes. Les inputs imposent automatiquement la première lettre correcte.</div></div></div>
-          <div class="step"><div class="sn">4</div><div><div class="st">La validation se fait en temps réel</div><div class="sd">Chaque mot est validé instantanément via notre moteur 3 niveaux : correspondance exacte en dictionnaire, correction fuzzy, et arbitrage IA en dernier recours.</div></div></div>
-          <div class="step"><div class="sn">5</div><div><div class="st">Résultats et scores révélés</div><div class="sd">Après la manche, les scores sont affichés par catégorie. Les mots uniques (seul joueur à avoir soumis ce mot) rapportent des points bonus.</div></div></div>
-        </div>
-
-        <span class="sa" id="categories"></span>
-        <h3>📋 Les 8 Catégories</h3>
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.45rem;margin:.75rem 0">
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">🐾 Animal</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Toute espèce animale</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">🌍 Pays</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Tout pays souverain</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">👤 Prénom</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Tout prénom</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">🍎 Aliment</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Tout aliment ou boisson</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">💼 Métier</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Tout emploi ou profession</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">🏷️ Marque</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Toute entreprise ou marque</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">⚽ Sport</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Tout sport ou discipline</div></div>
-          <div style="background:var(--surface2);padding:.55rem .75rem;border-radius:.48rem;border:1px solid var(--border)"><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">🎬 Film / Série</div><div style="font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted)">Tout film ou série TV</div></div>
-        </div>
-
-        <span class="sa" id="scoring"></span>
-        <h3>🏆 Système de Points</h3>
-        <table class="dt">
-          <thead><tr><th>Situation</th><th>Points</th></tr></thead>
-          <tbody>
-            <tr><td>Mot valide — bonne lettre ✅</td><td style="color:var(--forest);font-weight:700">+10 pts</td></tr>
-            <tr><td>Mot unique (seul à l'avoir soumis)</td><td style="color:var(--forest);font-weight:700">+5 pts bonus</td></tr>
-            <tr><td>Mot auto-corrigé (fuzzy match)</td><td style="color:var(--forest);font-weight:700">+10 pts</td></tr>
-            <tr><td>Mot invalide / mauvaise lettre</td><td style="color:var(--red)">0 pt</td></tr>
-            <tr><td>Case vide</td><td style="color:var(--muted)">0 pt</td></tr>
-          </tbody>
-        </table>
-        <div class="callout c-gold"><span class="ci">💡</span><span>Score maximum par manche : 120 pts (8 catégories × 15 pts avec bonus unique). En Daily League (3 manches) : 360 pts maximum.</span></div>
-      </div>
-    </div>
-
-    <!-- MODES DE JEU -->
-    <div class="section">
-      <span class="sa" id="modes"></span>
-      <div class="s-title">🕹️ Modes de Jeu</div>
-      <div class="s-sub">Quatre arènes — du jeu gratuit aux duels à enjeux</div>
-      <div class="s-body">
-
-        <span class="sa" id="casual"></span>
-        <h3>🆓 Casual Training <span class="badge b-lime">GRATUIT</span></h3>
-        <p>Jouez des parties illimitées contre des bots IA. Aucun wallet, aucun frais, aucune inscription. Idéal pour s'entraîner avant de rejoindre les modes payants.</p>
-        <ul>
-          <li>3 niveaux de bots : <strong>Easy</strong> (lent), <strong>Medium</strong> (modéré), <strong>Hard</strong> (rapide)</li>
-          <li>Les bots remplissent leurs réponses progressivement — plus réaliste</li>
-          <li>Parties illimitées — nouvelle lettre à chaque manche</li>
-          <li>Score personnel suivi localement dans la session</li>
-        </ul>
-
-        <span class="sa" id="practice"></span>
-        <h3>🧪 Practice Zone <span class="badge b-gold">P2E</span></h3>
-        <p>Parties gratuites contre bots ou amis, mais avec accès aux power-ups achetables en USDT. Nécessite un wallet connecté.</p>
-        <ul>
-          <li>💡 <strong>Hint</strong> — révèle les 3 premières lettres d'un mot valide : <strong>$0,05 USDT</strong></li>
-          <li>❄️ <strong>Time Freeze</strong> — gèle le timer 5 secondes : <strong>$0,10 USDT</strong></li>
-        </ul>
-
-        <span class="sa" id="daily"></span>
-        <h3>📅 Daily League <span class="badge b-gold">P2E</span></h3>
-        <p>Tournoi mondial asynchrone réinitialisé toutes les 24h à <strong>00:00 UTC</strong>. Une tentative par tier par jour. Le top 10 se partage la prize pool.</p>
-        <table class="dt">
-          <thead><tr><th>Tier</th><th>Frais d'entrée</th><th>Format</th><th>Fee plateforme</th><th>Prize Pool</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Standard</strong></td><td style="color:var(--gold)">0,20 $ USDT</td><td>3 manches · 8 cats · 40s</td><td>10%</td><td>90% des entrées</td></tr>
-            <tr><td><strong>Premium</strong></td><td style="color:var(--gold)">0,50 $ USDT</td><td>3 manches · 8 cats · 40s</td><td>10%</td><td>90% des entrées</td></tr>
-          </tbody>
-        </table>
-        <p><strong>Distribution des prix (top 10) :</strong> 1er 30% · 2e 18% · 3e 12% · 4e–5e 5% chacun · 6e–10e 4% chacun.</p>
-
-        <span class="sa" id="duel-mode"></span>
-        <h3>⚔️ Duel Arena <span class="badge b-red">P2E</span></h3>
-        <p>Rooms multijoueur en temps réel (2–8 joueurs). Le créateur fixe la mise USDT, le nombre de joueurs et les manches. <a href="#duel-arena">→ Voir les règles complètes</a></p>
-        <ul>
-          <li>Mise : de <strong>1 $ à 50 $ USDT</strong> (ou personnalisée)</li>
-          <li>Rake plateforme : <strong>5%</strong> — le gagnant reçoit 95% de la pool</li>
-          <li>Escrow smart contract — sans intermédiaire, paiement instantané sur Polygon</li>
-          <li>2–8 joueurs · 1, 3 ou 5 manches</li>
-        </ul>
-        <div class="callout c-blue"><span class="ci">🔐</span><span>Tous les fonds du Duel Arena sont conservés dans un smart contract vérifié. WordRace n'a jamais accès direct à vos USDT pendant une partie.</span></div>
-      </div>
-    </div>
-
-    <!-- POWER-UPS -->
-    <div class="section">
-      <span class="sa" id="powerups"></span>
-      <div class="s-title">⚡ Power-Ups</div>
-      <div class="s-sub">Disponibles en Practice Zone et modes P2E</div>
-      <div class="s-body">
-        <div class="grid2">
-          <div class="card-sm" style="background:var(--limeBg);border-color:rgba(159,232,112,.3)">
-            <div style="font-size:1.5rem;margin-bottom:.35rem">💡</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text)">HINT — INDICE</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--gold);font-weight:700;margin-bottom:.3rem">0,05 $ USDT</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">Révèle les 3 premiers caractères d'un mot valide pour la catégorie choisie. Un usage par manche.</div>
-          </div>
-          <div class="card-sm" style="background:var(--blueBg);border-color:rgba(59,130,246,.2)">
-            <div style="font-size:1.5rem;margin-bottom:.35rem">❄️</div>
-            <div style="font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--text)">TIME FREEZE</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.7rem;color:var(--gold);font-weight:700;margin-bottom:.3rem">0,10 $ USDT</div>
-            <div style="font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)">Gèle le timer de la manche pendant exactement 5 secondes. Seul le joueur acheteur en bénéficie. Un usage par manche.</div>
-          </div>
-        </div>
-        <div class="callout c-gold"><span class="ci">⚠️</span><span>Les achats de power-ups sont définitifs et non remboursables. Ils sont consommés à l'usage, quel que soit le résultat de la manche.</span></div>
-      </div>
-    </div>
-
-    <!-- VALIDATION -->
-    
-    <div class="section">
-      <span class="sa" id="wrc"></span>
-      <div class="s-title">🪙 Crédits WordRace (WRC)</div>
-      <div class="s-sub">Monnaie interne instantanée — zéro délai de transaction</div>
-      <div class="s-body">
-        <p>Les Crédits WordRace (WRC) sont la monnaie interne de la plateforme. Ils permettent aux joueurs d'acheter des power-ups et de payer les frais d'entrée <strong>instantanément</strong>, sans attendre la confirmation d'une transaction blockchain. Les WRC sont pré-achetés en USDT et stockés dans le solde du compte.</p>
-
-        <h3>Taux de Conversion</h3>
-        <p style="font-family:'Space Mono',monospace;font-size:.82rem;background:var(--limeBg);padding:.6rem .9rem;border-radius:.5rem;border:1px solid rgba(159,232,112,.3);color:var(--forest)"><strong>1 WRC = 0,01 $ USDT</strong> (100 WRC = 1,00 $)</p>
-
-        <h3>Packs WRC</h3>
-        <table class="dt">
-          <thead><tr><th>Pack</th><th>WRC Reçus</th><th>Prix (USDT)</th><th>Bonus</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Starter</strong></td><td>100 WRC</td><td>1,00 $</td><td>—</td></tr>
-            <tr><td><strong>Popular</strong></td><td>525 WRC</td><td>5,00 $</td><td>+5% (25 WRC)</td></tr>
-            <tr><td><strong>Value</strong></td><td>1 100 WRC</td><td>10,00 $</td><td>+10% (100 WRC)</td></tr>
-            <tr><td><strong>Pro</strong></td><td>2 875 WRC</td><td>25,00 $</td><td>+15% (375 WRC)</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Coût des Actions en WRC</h3>
-        <table class="dt">
-          <thead><tr><th>Action</th><th>Coût WRC</th><th>Équivalent USDT</th><th>Limite</th></tr></thead>
-          <tbody>
-            <tr><td>💡 Power-up Hint</td><td><strong>5 WRC</strong></td><td>0,05 $</td><td>1/manche · 5/jour</td></tr>
-            <tr><td>❄️ Power-up Time Freeze</td><td><strong>10 WRC</strong></td><td>0,10 $</td><td>1/manche · 5/jour</td></tr>
-            <tr><td>📅 Daily League Standard</td><td><strong>20 WRC</strong></td><td>0,20 $</td><td>1 par tier par jour</td></tr>
-            <tr><td>📅 Daily League Premium</td><td><strong>50 WRC</strong></td><td>0,50 $</td><td>1 par tier par jour</td></tr>
-          </tbody>
-        </table>
-
-        <div class="callout c-gold"><span class="ci">⚠️</span><span>Les achats de WRC sont définitifs et non remboursables. Les WRC n'ont aucune valeur monétaire en dehors de la plateforme WordRace et ne peuvent pas être retirés ou reconvertis en USDT.</span></div>
-        <div class="callout c-lime"><span class="ci">⚡</span><span>Les nouveaux joueurs reçoivent 150 WRC en bonus de bienvenue (équivalent à 1,50 $). Ce bonus est à titre de démonstration et peut être modifié ou supprimé à tout moment.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <span class="sa" id="validation"></span>
-      <div class="s-title">✅ Moteur de Validation</div>
-      <div class="s-sub">Système 3 niveaux · Temps de réponse cible : sous 500ms</div>
-      <div class="s-body">
-        <div class="steps">
-          <div class="step"><div class="sn" style="color:var(--lime)">T1</div><div><div class="st">🔍 Correspondance Exacte (Dictionnaire)</div><div class="sd">Le mot est vérifié dans notre dictionnaire local catégorisé (~600+ mots par catégorie). Temps de réponse : ~80ms. Si trouvé, validation instantanée.</div></div></div>
-          <div class="step"><div class="sn" style="color:var(--gold)">T2</div><div><div class="st">🔧 Fuzzy Match (Distance de Levenshtein)</div><div class="sd">Tolère les fautes de frappe selon la longueur — 0 faute pour 3–5 lettres, 1 pour 6–8 lettres, 2 pour 9+ lettres. Corrige automatiquement vers le mot valide le plus proche. Temps : ~200ms.</div></div></div>
-          <div class="step"><div class="sn" style="color:var(--blue)">T3</div><div><div class="st">🤖 Arbitre IA (Fallback)</div><div class="sd">Pour l'argot, les noms rares ou les mots absents du dictionnaire. Un modèle Claude AI évalue le mot et sa cohérence avec la catégorie. Résultat mis en cache pour éviter les appels futurs. Temps : ~400ms.</div></div></div>
-        </div>
-        <div class="callout c-lime"><span class="ci">✏️</span><span>Quand un mot est auto-corrigé par le Tier 2, le joueur reçoit les points complets. Le mot corrigé est affiché dans les résultats.</span></div>
-      </div>
-    </div>
-
-    <!-- FAIR PLAY -->
-    
-    
-    <div class="section">
-      <span class="sa" id="duel-arena"></span>
-      <div class="s-title">⚔️ Duel Arena</div>
-      <div class="s-sub">Multijoueur temps réel — Escrow Smart Contract Polygon</div>
-      <div class="s-body">
-        <p>Le Duel Arena permet à 2–8 joueurs de s'affronter en temps réel avec une mise USDT. Tous les fonds sont verrouillés dans un smart contract Polygon dès la création de la room et libérés automatiquement au gagnant à la fin de la partie.</p>
-
-        <h3>Fonctionnement</h3>
-        <div class="steps">
-          <div class="step"><div class="sn">1</div><div><div class="st">Créer ou rejoindre une room</div><div class="sd">Définissez la mise (1–50 $ USDT), le nombre de joueurs (2–8) et les manches (1, 3 ou 5). Partagez l'ID de room avec vos adversaires.</div></div></div>
-          <div class="step"><div class="sn">2</div><div><div class="st">Fonds verrouillés en escrow</div><div class="sd">La mise de chaque joueur est prélevée immédiatement et verrouillée dans un smart contract Polygon vérifié. WordRace ne détient jamais les fonds directement.</div></div></div>
-          <div class="step"><div class="sn">3</div><div><div class="st">Jeu — manches de 40 secondes</div><div class="sd">Remplissez 8 catégories commençant par la lettre du tour. Navigation Tab sur ordinateur, défilement sur mobile. Les réponses de l'adversaire sont masquées pendant le jeu.</div></div></div>
-          <div class="step"><div class="sn">4</div><div><div class="st">Paiement automatique</div><div class="sd">Le joueur avec le score le plus élevé reçoit 95% de la prize pool. Le rake de 5% est retenu par WordRace. Le paiement est déclenché automatiquement par le smart contract.</div></div></div>
-        </div>
-
-        <h3>Règles de Mise</h3>
-        <table class="dt">
-          <thead><tr><th>Paramètre</th><th>Options</th></tr></thead>
-          <tbody>
-            <tr><td>Mise par joueur</td><td>$1 · $2 · $5 · $10 · $20 · $50 USDT (ou personnalisée $1–$50)</td></tr>
-            <tr><td>Joueurs par room</td><td>2 · 4 · 6 · 8 (défini par le créateur)</td></tr>
-            <tr><td>Manches</td><td>1 · 3 · 5 (format Best-of)</td></tr>
-            <tr><td>Rake plateforme</td><td>5% de la prize pool totale</td></tr>
-            <tr><td>Réseau</td><td>Polygon USDT (principal) · Solana USDT</td></tr>
-            <tr><td>Paiement</td><td>Automatique via smart contract à la fin</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Politique de Déconnexion</h3>
-        <p>Si un joueur se déconnecte ou change d'onglet pendant un match Duel Arena, son score de manche est soumis immédiatement avec les réponses saisies à ce moment. La partie continue pour les autres joueurs. <strong>Aucun remboursement n'est accordé pour les déconnexions.</strong></p>
-
-        <div class="callout c-red"><span class="ci">⚠️</span><span>Le Duel Arena implique un risque financier réel. Ne misez jamais plus que ce que vous pouvez vous permettre de perdre. Les mises sont non remboursables une fois la partie commencée. L'exécution du smart contract est irréversible.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <span class="sa" id="leaderboard"></span>
-      <div class="s-title">🏆 Leaderboard Global</div>
-      <div class="s-sub">Classements en temps réel — tous les modes de jeu</div>
-      <div class="s-body">
-        <p>Le Leaderboard Global de WordRace suit les performances des joueurs dans tous les modes de jeu en temps réel, mis à jour toutes les 60 secondes.</p>
-
-        <h3>Onglets du Leaderboard</h3>
-        <table class="dt">
-          <thead><tr><th>Onglet</th><th>Contenu</th><th>Reset</th></tr></thead>
-          <tbody>
-            <tr><td><strong>🌍 All Time</strong></td><td>Score cumulé depuis la création du compte</td><td>Jamais</td></tr>
-            <tr><td><strong>📅 Daily League</strong></td><td>Classements du jour (Standard & Premium)</td><td>Quotidien 00:00 UTC</td></tr>
-            <tr><td><strong>⚔️ Duel Arena</strong></td><td>Meilleurs gains nets USDT</td><td>Option mensuelle</td></tr>
-            <tr><td><strong>🆓 Casual</strong></td><td>Meilleurs scores all-time en mode gratuit</td><td>Jamais</td></tr>
-            <tr><td><strong>📆 Semaine</strong></td><td>Scores de la semaine Lun–Dim en cours</td><td>Lundi 00:00 UTC</td></tr>
-            <tr><td><strong>📊 Statistiques</strong></td><td>Analytiques plateforme (lettres, catégories)</td><td>Temps réel</td></tr>
-          </tbody>
-        </table>
-
-        <h3>Intégrité du Leaderboard</h3>
-        <ul>
-          <li>Les joueurs reconnus coupables de triche sont retirés de tous les classements immédiatement après détection.</li>
-          <li>WordRace se réserve le droit d'ajuster les classements en cas de fraude avérée ou d'erreur technique.</li>
-          <li>Les distributions de prix sont calculées à partir du <strong>snapshot final</strong> pris au moment du reset, et non à partir des classements intermédiaires.</li>
-          <li>Les positions du leaderboard <strong>ne sont pas garanties</strong> — elles reflètent la compétition en temps réel et peuvent changer à tout moment.</li>
-        </ul>
-
-        <div class="callout c-blue"><span class="ci">📊</span><span>Le leaderboard est visible publiquement. Le nom d'utilisateur, le score, le win rate et les gains sont affichés à tous les utilisateurs. Le joueur peut rendre son profil privé dans les Paramètres pour masquer ses stats du classement public.</span></div>
-      </div>
-    </div>
-
-    <div class="section">
-      <span class="sa" id="anticheat"></span>
-      <div class="s-title">🛡️ Règles Fair Play & Anti-Cheat</div>
-      <div class="s-sub">WordRace applique une politique de tolérance zéro contre la triche</div>
-      <div class="s-body">
-        <h3>Actions Interdites</h3>
-        <ul>
-          <li><strong>Changement d'onglet :</strong> Quitter l'onglet ou changer d'application pendant une manche est détecté instantanément. 1ère infraction = avertissement. 2ème infraction = manche forfaitée (score = 0).</li>
-          <li><strong>Copier-Coller :</strong> Tous les champs de saisie bloquent les événements de collage. Les tentatives sont enregistrées et peuvent déclencher une vérification.</li>
-          <li><strong>Scripts automatisés / macros :</strong> Le timing des frappes clavier est analysé en temps réel. Une vitesse de frappe incohérente avec le comportement humain entraîne une disqualification immédiate.</li>
-          <li><strong>VPN / manipulation d'IP :</strong> L'utilisation de VPN pour contourner des restrictions régionales ou créer plusieurs comptes est interdite.</li>
-          <li><strong>Comptes multiples :</strong> Chaque joueur est autorisé à un seul compte. Les doublons sont bannis définitivement.</li>
-        </ul>
-        <div class="callout c-red"><span class="ci">🚫</span><span>Les joueurs reconnus coupables de triche dans les modes payants (Daily League, Duel Arena) seront bannis définitivement et tous les fonds associés pourront être confisqués. Aucun appel n'est possible pour les disqualifications détectées par bot.</span></div>
-        <h3>Conséquences</h3>
-        <table class="dt">
-          <thead><tr><th>Infraction</th><th>Sanction</th></tr></thead>
-          <tbody>
-            <tr><td>Changement d'onglet (1ère fois)</td><td>Avertissement toast — manche continue</td></tr>
-            <tr><td>Changement d'onglet (2ème+)</td><td>Manche forfaitée — score = 0</td></tr>
-            <tr><td>Tentative de collage</td><td>Avertissement — enregistré</td></tr>
-            <tr><td>Bot/macro détecté</td><td>Disqualification immédiate</td></tr>
-            <tr><td>Violations répétées</td><td>Bannissement définitif du compte</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- WALLET -->
-    <div class="section">
-      <span class="sa" id="wallet"></span>
-      <div class="s-title">💰 Wallet & USDT</div>
-      <div class="s-sub">Wallets supportés et réseaux blockchain</div>
-      <div class="s-body">
-        <h3>Wallets Compatibles</h3>
-        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin:.75rem 0">
-          <div style="display:flex;align-items:center;gap:.45rem;padding:.55rem .85rem;background:var(--surface2);border-radius:.55rem;border:1px solid var(--border)"><span style="font-size:1.1rem">🦊</span><div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">MetaMask</div><div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">Polygon USDT</div></div></div>
-          <div style="display:flex;align-items:center;gap:.45rem;padding:.55rem .85rem;background:var(--surface2);border-radius:.55rem;border:1px solid var(--border)"><span style="font-size:1.1rem">👻</span><div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">Phantom</div><div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">Solana USDT</div></div></div>
-          <div style="display:flex;align-items:center;gap:.45rem;padding:.55rem .85rem;background:var(--surface2);border-radius:.55rem;border:1px solid var(--border)"><span style="font-size:1.1rem">🔗</span><div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700">WalletConnect</div><div style="font-family:'Space Mono',monospace;font-size:.53rem;color:var(--muted)">Tout wallet compatible</div></div></div>
-        </div>
-        <h3>Réseaux & Frais</h3>
-        <table class="dt">
-          <thead><tr><th>Réseau</th><th>Token</th><th>Frais de gaz moy.</th><th>Confirmation</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Polygon (MATIC)</strong></td><td>USDT (PoS)</td><td>~0,001 $</td><td>~3 secondes</td></tr>
-            <tr><td><strong>Solana</strong></td><td>USDT (SPL)</td><td>~0,0001 $</td><td>~1 seconde</td></tr>
-          </tbody>
-        </table>
-        <div class="callout c-blue"><span class="ci">ℹ️</span><span>Les frais de gaz réseau sont à la charge de l'utilisateur et sont distincts des frais de plateforme WordRace. Polygon est recommandé pour les petits montants.</span></div>
-
-        <span class="sa" id="payouts"></span>
-        <h3>💸 Paiements & Retraits</h3>
-        <ul>
-          <li><strong>Daily League :</strong> Les prix sont distribués automatiquement à 00:00 UTC vers les wallets des gagnants. Aucun retrait manuel nécessaire.</li>
-          <li><strong>Duel Arena :</strong> Le smart contract libère les fonds immédiatement à la fin de la partie. Le gagnant reçoit 95% de la pool.</li>
-          <li><strong>Retrait :</strong> Disponible à tout moment depuis le tableau de bord wallet. Minimum de retrait : 1,00 $ USDT.</li>
-          <li><strong>Délai de traitement :</strong> Les transactions on-chain se confirment en quelques secondes sur Polygon et Solana.</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- CGU -->
-    <div class="section">
-      <span class="sa" id="cgu"></span>
-      <div class="s-title">📄 Conditions Générales d'Utilisation</div>
-      <div class="s-sub">Dernière mise à jour : Mai 2026 · Applicable immédiatement</div>
-      <div class="s-body">
-        <h3>Article 1 — Éligibilité</h3>
-        <p>Vous devez avoir au moins <strong>18 ans</strong> (ou l'âge légal de jeu dans votre juridiction, le plus élevé des deux) pour participer aux modes Play-to-Earn. La Zone Gratuite est accessible à tous. En utilisant WordRace.io, vous confirmez remplir ces conditions.</p>
-
-        <h3>Article 2 — Jeu Basé sur la Compétence</h3>
-        <p>WordRace.io est un <strong>jeu de compétence</strong>. Les résultats dépendent des connaissances en vocabulaire, de la vitesse de frappe et de l'utilisation stratégique des power-ups. Il n'est pas classé comme jeu de hasard dans la plupart des juridictions. Les utilisateurs sont seuls responsables du respect des lois locales relatives aux jeux de compétence en ligne et à l'utilisation des cryptomonnaies.</p>
-
-        <h3>Article 3 — Frais de Plateforme, Duel Arena & Crédits WRC</h3>
-        <p>WordRace prélève les frais suivants : <strong>5% de rake sur le Duel Arena</strong> et <strong>10% de frais sur le total des entrées Daily League</strong>. Ces frais financent les opérations de la plateforme, le développement et les coûts serveur. Tous les frais sont clairement affichés avant tout achat.</p>
-        <p>Les Crédits WordRace (WRC) sont achetés à un taux fixe de <strong>1 WRC = 0,01 $ USDT</strong>. Les WRC sont non remboursables, n'ont aucune valeur monétaire et ne peuvent être ni transférés entre comptes, ni retirés. Les WRC bonus inclus dans les packs sont promotionnels et susceptibles d'être modifiés.</p>
-
-        <h3>Article 4 — Non-Remboursement</h3>
-        <p>Tous les frais d'entrée et achats de power-ups sont <strong>définitifs et non remboursables</strong> une fois la session de jeu commencée. En cas de défaillance technique avérée de notre part, des crédits peuvent être accordés à la seule discrétion de WordRace.</p>
-
-        <h3>Article 5 — Suspension de Compte</h3>
-        <p>WordRace se réserve le droit de suspendre ou de bannir définitivement les comptes qui violent les règles du fair play, se livrent à une fraude, tentent d'exploiter des vulnérabilités techniques ou enfreignent les présentes CGU. Les comptes bannis perdent tout solde non réclamé.</p>
-
-        <h3>Article 6 — Transactions Blockchain</h3>
-        <p>Toutes les transactions USDT sont traitées sur des blockchains publiques (Polygon, Solana). WordRace n'est pas responsable des fonds perdus en raison d'adresses wallet incorrectes, de congestion réseau, de pannes de prestataires wallet, ou d'erreurs commises par l'utilisateur.</p>
-
-        <h3>Article 7 — Limitation de Responsabilité</h3>
-        <p>WordRace.io est fourni "en l'état." Nous ne garantissons pas une disponibilité ininterrompue. La responsabilité maximale pour toute réclamation est limitée au montant déposé dans les 30 jours précédant la réclamation.</p>
-
-        <h3>Article 8 — Modifications</h3>
-        <p>Nous pouvons mettre à jour ces CGU à tout moment. La poursuite de l'utilisation de la plateforme après notification des changements vaut acceptation. Les modifications importantes seront communiquées par email et notification in-app.</p>
-
-        <div class="callout c-red"><span class="ci">⚠️</span><span>WordRace implique un risque financier. Ne misez jamais plus que ce que vous pouvez vous permettre de perdre. Si vous pensez avoir un problème avec le jeu, veuillez consulter un organisme d'aide qualifié.</span></div>
-      </div>
-    </div>
-
-    <!-- CONFIDENTIALITÉ -->
-    <div class="section">
-      <span class="sa" id="confidentialite"></span>
-      <div class="s-title">🔒 Politique de Confidentialité</div>
-      <div class="s-sub">Vos données, notre responsabilité</div>
-      <div class="s-body">
-        <h3>Données Collectées</h3>
-        <ul>
-          <li><strong>Données de compte :</strong> Nom d'utilisateur, email (optionnel), adresse wallet</li>
-          <li><strong>Données de jeu :</strong> Scores par manche, réponses soumises, historique de sessions</li>
-          <li><strong>Données techniques :</strong> Adresse IP, type de navigateur, type d'appareil (pour l'anti-cheat)</li>
-          <li><strong>Timing des frappes clavier :</strong> Données d'intervalles utilisées exclusivement pour la détection de bots — non conservées après analyse</li>
-        </ul>
-        <h3>Données NON Collectées</h3>
-        <ul>
-          <li>Clés privées ou phrases de récupération (ne les partagez jamais avec personne)</li>
-          <li>Informations de carte bancaire</li>
-          <li>Documents personnels sensibles</li>
-        </ul>
-        <h3>Conservation des Données</h3>
-        <p>L'historique des parties est conservé 12 mois. Les données de compte sont conservées jusqu'à la suppression du compte. Les journaux anti-cheat sont conservés 90 jours.</p>
-        <h3>Tiers</h3>
-        <p>Nous utilisons : <strong>Vercel</strong> (hébergement frontend), <strong>Render.com</strong> (backend), <strong>API Claude d'Anthropic</strong> (IA de validation). Aucune donnée n'est vendue à des annonceurs.</p>
-        <div class="callout c-lime"><span class="ci">✅</span><span>WordRace.io n'affiche aucune publicité et ne vend aucune donnée utilisateur à des tiers.</span></div>
-      </div>
-    </div>
-
-    <!-- CONTACT -->
-    <div class="section">
-      <span class="sa" id="contact"></span>
-      <div class="s-title">📬 Contact & Support</div>
-      <div class="s-sub">Nous sommes là pour vous aider</div>
-      <div class="s-body">
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:.6rem;margin:.75rem 0">
-          <div style="background:var(--surface2);padding:.85rem;border-radius:.65rem;border:1px solid var(--border)"><div style="font-size:1.2rem;margin-bottom:.28rem">✉️</div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;margin-bottom:.12rem">Support</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">support@wordrace.io</div></div>
-          <div style="background:var(--surface2);padding:.85rem;border-radius:.65rem;border:1px solid var(--border)"><div style="font-size:1.2rem;margin-bottom:.28rem">🐦</div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;margin-bottom:.12rem">Communauté</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">@WordRaceIO</div></div>
-          <div style="background:var(--surface2);padding:.85rem;border-radius:.65rem;border:1px solid var(--border)"><div style="font-size:1.2rem;margin-bottom:.28rem">📋</div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;margin-bottom:.12rem">Bugs</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">bugs@wordrace.io</div></div>
-          <div style="background:var(--surface2);padding:.85rem;border-radius:.65rem;border:1px solid var(--border)"><div style="font-size:1.2rem;margin-bottom:.28rem">⚖️</div><div style="font-family:'Space Mono',monospace;font-size:.63rem;font-weight:700;margin-bottom:.12rem">Juridique</div><div style="font-family:'Space Mono',monospace;font-size:.57rem;color:var(--muted)">legal@wordrace.io</div></div>
-        </div>
-        <p>Délai de réponse aux tickets de support : <strong>24–48 heures</strong> en jours ouvrés. Pour les problèmes urgents impliquant des fonds perdus, veuillez inclure votre adresse wallet et le hash de transaction.</p>
-        <div class="callout c-purple"><span class="ci">🌐</span><span>Ce document est la version française réservée à l'administration interne. La version anglaise publique est accessible sur <strong>/terms.html</strong>.</span></div>
-      </div>
-    </div>
-
-    <div class="doc-footer">
-      <div style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--text)">© 2026 WordRace.io</div>
-      <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);line-height:1.6;margin-top:.3rem">Construit sur Polygon & Solana · Propulsé par Claude AI · Hébergé sur Vercel & Render<br/>WordRace est un jeu de compétence. Jouez de manière responsable.</div>
-      <div class="df-links">
-        <a class="df-link" href="admin-2026.html">🛡️ Admin Panel</a>
-        <a class="df-link" href="terms.html" target="_blank">🌐 Version EN</a>
-        <a class="df-link" href="index.html">🏠 Site Public</a>
-      </div>
-    </div>
-
-  </main>
 </div>
 
+<!-- MAIN -->
+<div id="main">
+  <div class="topbar">
+    <span class="brand">⚡ WordRace</span>
+    <span class="title">/ Administration CGU</span>
+    <div class="spacer"></div>
+    <a href="/admin-2026">← Panel Admin</a>
+    <a href="/terms" target="_blank" class="preview-link">Voir la page CGU ↗</a>
+    <button class="logout-btn" onclick="doLogout()">Déconnexion</button>
+  </div>
+
+  <div class="container">
+    <div class="page-header">
+      <h1>Éditeur des Conditions Générales d'Utilisation</h1>
+      <p>Modifiez le contenu de la page CGU publique. Les modifications sont déployées automatiquement via Vercel.</p>
+    </div>
+
+    <!-- STATUS -->
+    <div class="card">
+      <div class="card-body" style="padding:16px 24px">
+        <div class="status-bar">
+          <div class="status-dot loading" id="status-dot"></div>
+          <span id="status-text">Chargement du contenu depuis GitHub…</span>
+          <button class="btn btn-secondary" onclick="loadContent()" style="padding:6px 14px;font-size:.8rem">↺ Recharger</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDITOR -->
+    <div class="card">
+      <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('editor',this)">✏️ Éditeur</button>
+        <button class="nav-tab" onclick="switchTab('sections',this)">📋 Sections</button>
+      </div>
+
+      <div class="card-body">
+        <!-- EDITOR TAB -->
+        <div class="tab-panel active" id="tab-editor">
+          <div class="meta-row">
+            <div class="meta-field">
+              <label>Dernière mise à jour :</label>
+              <input type="text" id="last-updated-input" placeholder="May 26, 2026">
+            </div>
+            <a href="/terms" target="_blank" class="preview-link">↗ Aperçu CGU publique</a>
+          </div>
+          <div id="quill-editor"></div>
+        </div>
+
+        <!-- SECTIONS TAB -->
+        <div class="tab-panel" id="tab-sections">
+          <p style="color:var(--muted);font-size:.875rem;margin-bottom:16px">Sections détectées dans le document :</p>
+          <ul class="section-list" id="sections-list">
+            <li style="color:var(--muted);font-style:italic">Chargez d'abord le contenu pour voir les sections.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card-body" style="border-top:1px solid var(--border);padding-top:20px">
+        <div class="actions">
+          <button class="btn btn-primary" id="save-btn" onclick="saveContent()" disabled>
+            💾 Enregistrer &amp; Déployer
+          </button>
+          <button class="btn btn-secondary" onclick="loadContent()">↺ Annuler les modifications</button>
+        </div>
+        <div id="save-result"></div>
+      </div>
+    </div>
+
+    <!-- INFO -->
+    <div class="card" style="background:#6c63ff11;border-color:#6c63ff33">
+      <div class="card-body">
+        <p style="font-size:.85rem;color:#a09aff">
+          <strong>Comment ça marche :</strong>
+          L'éditeur charge le fichier <code>terms.html</code> depuis GitHub, extrait le contenu entre les marqueurs CGU, et vous permet de le modifier avec mise en forme riche. En enregistrant, le fichier est mis à jour sur GitHub et Vercel redéploie automatiquement en quelques secondes.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
-const sections=document.querySelectorAll('.sa');
-const links=document.querySelectorAll('.toc-link');
-window.addEventListener('scroll',()=>{
-  let cur='';
-  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id});
-  links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+cur)l.classList.add('active')});
-});
+// ─── CONFIG ───────────────────────────────────────────────────────────
+const ADMIN_PASSWORD = 'wordrace2026';
+const GITHUB_OWNER   = 'mrad-boop';
+const GITHUB_REPO    = 'wordrace-io';
+const TERMS_FILE     = 'terms.html';
+const MARKER_START   = '<!-- CGU_CONTENT_START -->';
+const MARKER_END     = '<!-- CGU_CONTENT_END -->';
+const DATE_MARKER_ID = 'cgu-last-updated';
+
+// GitHub token — set via prompt or store in sessionStorage
+let GH_TOKEN = '';
+
+// ─── LOGIN ─────────────────────────────────────────────────────────────
+function doLogin(){
+  const val = document.getElementById('pwd-input').value;
+  if(val === ADMIN_PASSWORD){
+    sessionStorage.setItem('wr_admin','1');
+    document.getElementById('login-wall').style.display='none';
+    document.getElementById('main').style.display='block';
+    initEditor();
+  } else {
+    document.getElementById('login-err').style.display='block';
+    document.getElementById('pwd-input').value='';
+    document.getElementById('pwd-input').focus();
+  }
+}
+document.getElementById('pwd-input').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+function doLogout(){
+  sessionStorage.removeItem('wr_admin');
+  sessionStorage.removeItem('gh_token');
+  location.reload();
+}
+if(sessionStorage.getItem('wr_admin')==='1'){
+  document.getElementById('login-wall').style.display='none';
+  document.getElementById('main').style.display='block';
+  window.addEventListener('DOMContentLoaded',initEditor);
+}
+
+// ─── QUILL ─────────────────────────────────────────────────────────────
+let quill;
+function initEditor(){
+  GH_TOKEN = sessionStorage.getItem('gh_token') || '';
+  if(!GH_TOKEN){
+    GH_TOKEN = prompt('Token GitHub (repo scope) :') || '';
+    if(GH_TOKEN) sessionStorage.setItem('gh_token', GH_TOKEN);
+  }
+
+  quill = new Quill('#quill-editor', {
+    theme: 'snow',
+    placeholder: 'Chargement du contenu CGU…',
+    modules:{
+      toolbar:[
+        [{ header:[1,2,3,false] }],
+        ['bold','italic','underline','strike'],
+        [{ color:[] },{ background:[] }],
+        [{ list:'ordered' },{ list:'bullet' }],
+        [{ indent:'-1' },{ indent:'+1' }],
+        ['link','blockquote'],
+        ['clean']
+      ]
+    }
+  });
+
+  loadContent();
+}
+
+// ─── GITHUB API ────────────────────────────────────────────────────────
+let currentSHA = '';
+
+async function ghFetch(path, opts={}){
+  const res = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,{
+    headers:{
+      'Authorization': `token ${GH_TOKEN}`,
+      'Accept':'application/vnd.github.v3+json',
+      ...opts.headers
+    },
+    ...opts
+  });
+  if(!res.ok){
+    const err = await res.json().catch(()=>({message:res.statusText}));
+    throw new Error(err.message||res.statusText);
+  }
+  return res.json();
+}
+
+async function loadContent(){
+  setStatus('loading','Chargement depuis GitHub…');
+  document.getElementById('save-btn').disabled = true;
+  try {
+    const data = await ghFetch(TERMS_FILE);
+    currentSHA = data.sha;
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+
+    // Extract content between markers
+    const si = raw.indexOf(MARKER_START);
+    const ei = raw.indexOf(MARKER_END);
+    if(si===-1||ei===-1) throw new Error('Marqueurs CGU introuvables dans terms.html');
+    const content = raw.slice(si+MARKER_START.length, ei).trim();
+
+    // Extract last-updated date
+    const dm = raw.match(new RegExp(`id="${DATE_MARKER_ID}"[^>]*>([^<]+)<`));
+    if(dm) document.getElementById('last-updated-input').value = dm[1].trim();
+
+    // Load into Quill
+    quill.clipboard.dangerouslyPasteHTML(content);
+
+    setStatus('ok', `Contenu chargé · SHA ${currentSHA.slice(0,7)} · ${TERMS_FILE}`);
+    document.getElementById('save-btn').disabled = false;
+    updateSectionsList();
+  } catch(e){
+    setStatus('err','Erreur : '+e.message);
+    console.error(e);
+  }
+}
+
+async function saveContent(){
+  if(!currentSHA){ setStatus('err','SHA manquant — rechargez d\'abord'); return; }
+  const btn = document.getElementById('save-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Enregistrement…';
+  setStatus('loading','Enregistrement sur GitHub…');
+
+  try {
+    // Get full current file
+    const data = await ghFetch(TERMS_FILE);
+    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+
+    // Build new content from Quill HTML
+    const editorHtml = quill.root.innerHTML;
+    const newDate    = document.getElementById('last-updated-input').value.trim() ||
+                       new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+    // Replace content between markers
+    let updated = raw;
+    const si = updated.indexOf(MARKER_START);
+    const ei = updated.indexOf(MARKER_END);
+    if(si===-1||ei===-1) throw new Error('Marqueurs introuvables');
+    updated = updated.slice(0,si+MARKER_START.length) + '\n' + editorHtml + '\n' + updated.slice(ei);
+
+    // Replace date
+    updated = updated.replace(
+      new RegExp(`(<span id="${DATE_MARKER_ID}"[^>]*>)[^<]+(</span>)`),
+      `$1${newDate}$2`
+    );
+
+    // Encode for GitHub API
+    const encoded = btoa(unescape(encodeURIComponent(updated)));
+
+    await ghFetch(TERMS_FILE, {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        message: `CGU mise à jour — ${newDate}`,
+        content: encoded,
+        sha: data.sha
+      })
+    });
+
+    currentSHA = ''; // force reload SHA on next save
+    setStatus('ok','✓ Contenu enregistré ! Vercel redéploie dans quelques secondes…');
+    showResult('ok','✓ CGU mis à jour avec succès. Vercel redéploie automatiquement (30–60 sec).');
+    // refresh SHA
+    setTimeout(loadContent, 5000);
+  } catch(e){
+    setStatus('err','Erreur : '+e.message);
+    showResult('err','✗ Erreur : '+e.message);
+    console.error(e);
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '💾 Enregistrer &amp; Déployer';
+  }
+}
+
+// ─── UI HELPERS ────────────────────────────────────────────────────────
+function setStatus(state, msg){
+  const dot  = document.getElementById('status-dot');
+  const text = document.getElementById('status-text');
+  dot.className  = 'status-dot ' + state;
+  text.textContent = msg;
+}
+function showResult(type, msg){
+  const el = document.getElementById('save-result');
+  el.className = type;
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(()=>{ el.style.display='none'; }, 8000);
+}
+function switchTab(id, btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='sections') updateSectionsList();
+}
+function updateSectionsList(){
+  const list = document.getElementById('sections-list');
+  const headings = quill.root.querySelectorAll('h2');
+  if(!headings.length){
+    list.innerHTML='<li style="color:var(--muted);font-style:italic">Aucune section h2 détectée.</li>';
+    return;
+  }
+  list.innerHTML='';
+  headings.forEach((h,i)=>{
+    const li = document.createElement('li');
+    li.innerHTML=`<span class="sec-num">${i+1}</span> ${h.textContent}`;
+    li.onclick=()=>{
+      switchTab('editor',document.querySelector('.nav-tab'));
+      const idx = quill.getIndex(Quill.find(h));
+      quill.setSelection(idx,0,'user');
+      quill.scrollIntoView();
+    };
+    list.appendChild(li);
+  });
+}
 </script>
 </body>
 </html>

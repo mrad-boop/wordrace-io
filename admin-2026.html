@@ -659,6 +659,22 @@ function renderDict(){
 function addWord(cat){const inp=document.getElementById('da-'+cat),w=inp.value.trim().toLowerCase();if(!w)return;if(DICT[cat].includes(w)){toast('⚠️ Déjà présent');return}DICT[cat].push(w);DICT[cat].sort();inp.value='';renderDict();toast('✅ "'+w+'" ajouté à '+cat)}
 function rmWord(cat,word,el){if(!confirm('Supprimer "'+word+'" ?'))return;DICT[cat]=DICT[cat].filter(w=>w!==word);el.remove();toast('🗑️ "'+word+'" supprimé')}
 function exportDict(){const b=new Blob([JSON.stringify(DICT,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='wordrace-dictionary.json';a.click();toast('📤 Dictionnaire exporté')}
+function doBatchImport(){
+  const cat=document.getElementById('bi-cat')?.value;
+  const raw=document.getElementById('bi-words')?.value||'';
+  if(!cat||!DICT[cat]){toast('⚠️ Catégorie invalide');return;}
+  const words=raw.split('\n').map(w=>w.trim().toLowerCase()).filter(w=>w.length>0);
+  if(!words.length){toast('⚠️ Aucun mot saisi');return;}
+  let added=0,dupes=0;
+  words.forEach(w=>{
+    if(DICT[cat].includes(w)){dupes++;return;}
+    DICT[cat].push(w);added++;
+  });
+  DICT[cat].sort();
+  closeModal();
+  renderDict();
+  toast('✅ '+added+' mot(s) ajouté(s) à '+cat+(dupes?' · '+dupes+' doublon(s) ignoré(s)':''));
+}
 
 // ─── VALIDATION ENGINE ────────────────────────────────────────
 function lev(a,b){const m=a.length,n=b.length,dp=Array.from({length:m+1},(_,i)=>Array.from({length:n+1},(_,j)=>i===0?j:j===0?i:0));for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);return dp[m][n]}
@@ -713,7 +729,7 @@ function openModal(type){
   const c={
     'add-user':`<div class="modal-title">👤 Ajouter un User</div><div class="form-group"><label class="form-label">Username</label><input class="form-input" placeholder="nom_utilisateur"/></div><div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email"/></div><div class="form-group"><label class="form-label">Statut</label><select class="form-select"><option>active</option><option>suspended</option></select></div><div style="display:flex;gap:.55rem;justify-content:flex-end;margin-top:1rem"><button class="t-btn btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn btn-lime" onclick="closeModal();toast('✅ Utilisateur créé')">Créer</button></div>`,
     'edit-user':`<div class="modal-title">✏️ Modifier User</div><div class="form-group"><label class="form-label">Balance USDT</label><input class="form-input" type="number" placeholder="0.00" step="0.01"/></div><div class="form-group"><label class="form-label">ELO Rating</label><input class="form-input" type="number" placeholder="1000"/></div><div class="form-group"><label class="form-label">Statut</label><select class="form-select"><option>active</option><option>suspended</option><option>banned</option></select></div><div style="display:flex;gap:.55rem;justify-content:flex-end;margin-top:1rem"><button class="t-btn btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn btn-lime" onclick="closeModal();toast('✅ Mis à jour')">Sauvegarder</button></div>`,
-    'batch-import':`<div class="modal-title">📥 Batch Import</div><div class="form-group"><label class="form-label">Catégorie</label><select class="form-select">${Object.keys(DICT).map(c=>`<option>${c}</option>`).join('')}</select></div><div class="form-group"><label class="form-label">Mots (un par ligne)</label><textarea class="form-input" rows="6" placeholder="lion&#10;tigre&#10;panthère..."></textarea></div><div style="display:flex;gap:.55rem;justify-content:flex-end;margin-top:1rem"><button class="t-btn btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn btn-lime" onclick="closeModal();toast('✅ Mots importés')">Importer</button></div>`,
+    'batch-import':`<div class="modal-title">📥 Batch Import</div><div class="form-group"><label class="form-label">Catégorie</label><select class="form-select" id="bi-cat">${Object.keys(DICT).map(c=>`<option>${c}</option>`).join('')}</select></div><div class="form-group"><label class="form-label">Mots (un par ligne)</label><textarea class="form-input" id="bi-words" rows="8" placeholder="lion&#10;tigre&#10;panthère..."></textarea></div><div id="bi-preview" style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--muted);margin-bottom:.5rem"></div><div style="display:flex;gap:.55rem;justify-content:flex-end;margin-top:1rem"><button class="t-btn btn-ghost" onclick="closeModal()">Annuler</button><button class="t-btn btn-lime" onclick="doBatchImport()">Importer</button></div>`,
   };
   document.getElementById('modal-content').innerHTML=c[type]||'';
   document.getElementById('modal').classList.add('show');
