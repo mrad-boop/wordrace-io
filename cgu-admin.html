@@ -1,534 +1,388 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CGU Admin — WordRace</title>
-<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.7/quill.snow.css">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WordRace Admin — CGU Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdn.quilljs.com/1.3.7/quill.snow.css"/>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0f0f13;
-  --surface:#1a1a22;
-  --border:#2a2a38;
-  --accent:#6c63ff;
-  --text:#e8e8f0;
-  --muted:#7a7a95;
-  --danger:#ff4757;
-  --success:#2ed573;
+  --bg:#F8F9F7;--surface:#fff;--surface2:#F0F2EE;--surface3:#E8EBE5;
+  --border:rgba(0,0,0,0.08);--border2:rgba(0,0,0,0.13);
+  --lime:#9FE870;--limeD:#7DD45A;--limeBg:#E8F8DF;
+  --red:#EF4444;--redBg:#FEE2E2;
+  --text:#1A1A1A;--muted:#6B7280;--forest:#163300;
+  --valid:#16A34A;--validBg:#DCFCE7;
+  --gold:#F5C842;--goldBg:#FDF3CC;
 }
-body{
-  font-family:'Calibri','Gill Sans','Gill Sans MT',Calibri,'Trebuchet MS',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-}
+body{background:var(--bg);color:var(--text);font-family:'Calibri','Gill Sans MT','Trebuchet MS',sans-serif;min-height:100vh}
 
-/* LOGIN WALL */
-#login-wall{
-  position:fixed;inset:0;background:var(--bg);
-  display:flex;align-items:center;justify-content:center;
-  z-index:1000;
-}
-.login-box{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:48px 40px;
-  width:360px;
-  text-align:center;
-}
-.login-box .logo{font-size:2rem;font-weight:800;color:var(--accent);margin-bottom:8px}
-.login-box p{color:var(--muted);margin-bottom:32px;font-size:.95rem}
-.login-box input{
-  width:100%;padding:12px 16px;
-  background:#0f0f13;border:1px solid var(--border);border-radius:8px;
-  color:var(--text);font-family:inherit;font-size:1rem;
-  outline:none;margin-bottom:16px;
-  transition:border-color .2s;
-}
-.login-box input:focus{border-color:var(--accent)}
-.login-box button{
-  width:100%;padding:13px;
-  background:var(--accent);border:none;border-radius:8px;
-  color:#fff;font-family:inherit;font-size:1rem;font-weight:700;
-  cursor:pointer;transition:opacity .2s;
-}
-.login-box button:hover{opacity:.85}
-.login-error{color:var(--danger);font-size:.85rem;margin-top:8px;display:none}
+/* ── LOGIN ── */
+#login-screen{display:flex;align-items:center;justify-content:center;min-height:100vh;padding:1rem;background:var(--bg)}
+.login-card{background:var(--surface);border:1px solid var(--border2);border-radius:1.2rem;padding:2.5rem 2rem;max-width:360px;width:100%;box-shadow:0 4px 24px rgba(0,0,0,.08)}
+.login-logo{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--text);text-align:center;margin-bottom:.15rem}
+.login-logo span{color:var(--lime)}
+.login-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);text-align:center;letter-spacing:.12em;text-transform:uppercase;margin-bottom:2rem}
+.login-label{font-family:'Space Mono',monospace;font-size:.56rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.3rem;display:block}
+.login-input{width:100%;padding:.72rem .95rem;border-radius:.55rem;border:1.5px solid var(--border2);background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.83rem;outline:none;margin-bottom:.9rem;transition:border .2s}
+.login-input:focus{border-color:var(--lime)}
+.login-btn{width:100%;padding:.85rem;border-radius:.6rem;border:none;background:var(--lime);color:var(--forest);font-family:'Space Mono',monospace;font-size:.8rem;font-weight:700;cursor:pointer;transition:background .2s;letter-spacing:.05em}
+.login-btn:hover{background:var(--limeD)}
+.login-error{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--red);text-align:center;margin-top:.6rem;display:none;background:var(--redBg);padding:.4rem .7rem;border-radius:.4rem}
 
-/* MAIN */
+/* ── LAYOUT ── */
 #main{display:none}
+.topbar{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:.75rem}
+.tb-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--text)}
+.tb-logo span{color:var(--lime)}
+.tb-sep{color:var(--border2);font-size:.9rem}
+.tb-page{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted)}
+.tb-spacer{flex:1}
+.tb-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);text-decoration:none;padding:.32rem .65rem;border:1px solid var(--border2);border-radius:.4rem;transition:all .15s}
+.tb-link:hover{background:var(--surface2);color:var(--text)}
+.logout-btn{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);background:transparent;border:1px solid var(--border2);border-radius:.4rem;padding:.32rem .65rem;cursor:pointer;transition:all .18s}
+.logout-btn:hover{background:var(--redBg);border-color:var(--red);color:var(--red)}
 
-.topbar{
-  background:var(--surface);
-  border-bottom:1px solid var(--border);
-  padding:16px 32px;
-  display:flex;align-items:center;gap:16px;
-}
-.topbar .brand{font-size:1.2rem;font-weight:800;color:var(--accent)}
-.topbar .title{font-size:.95rem;color:var(--muted)}
-.topbar .spacer{flex:1}
-.topbar a{
-  color:var(--muted);text-decoration:none;font-size:.875rem;
-  padding:6px 14px;border:1px solid var(--border);border-radius:6px;
-  transition:color .2s,border-color .2s;
-}
-.topbar a:hover{color:var(--text);border-color:var(--muted)}
-.topbar .logout-btn{
-  background:none;border:1px solid var(--border);border-radius:6px;
-  color:var(--muted);font-family:inherit;font-size:.875rem;
-  padding:6px 14px;cursor:pointer;transition:color .2s;
-}
-.topbar .logout-btn:hover{color:var(--danger)}
+.content{max-width:1000px;margin:0 auto;padding:1.8rem 1.5rem}
+.page-title{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;color:var(--text);letter-spacing:.03em;margin-bottom:.2rem}
+.page-sub{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--muted);margin-bottom:1.5rem}
 
-.container{max-width:1100px;margin:0 auto;padding:32px 24px}
+/* ── CARDS ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:.9rem;overflow:hidden;margin-bottom:1.1rem;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.card-head{padding:.75rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.6rem;background:var(--surface)}
+.card-title{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;color:var(--text);letter-spacing:.04em}
+.card-body{padding:1.1rem}
 
-.page-header{margin-bottom:28px}
-.page-header h1{font-size:1.6rem;font-weight:700;margin-bottom:4px}
-.page-header p{color:var(--muted);font-size:.9rem}
-
-.card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:12px;
-  overflow:hidden;
-  margin-bottom:24px;
-}
-.card-header{
-  padding:16px 24px;
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:12px;
-}
-.card-header h2{font-size:1rem;font-weight:600}
-.card-header .badge{
-  font-size:.75rem;padding:3px 10px;
-  background:#6c63ff22;color:var(--accent);
-  border-radius:20px;border:1px solid #6c63ff44;
-}
-.card-body{padding:24px}
-
-/* STATUS BAR */
-.status-bar{
-  display:flex;align-items:center;gap:12px;
-  padding:12px 20px;
-  background:#0f0f13;
-  border-radius:8px;
-  margin-bottom:20px;
-  font-size:.85rem;
-}
-.status-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--muted);flex-shrink:0;
-}
-.status-dot.ok{background:var(--success)}
-.status-dot.err{background:var(--danger)}
-.status-dot.loading{background:#ffa502;animation:pulse 1s infinite}
+/* ── STATUS BAR ── */
+.status-bar{display:flex;align-items:center;gap:.7rem;font-family:'Space Mono',monospace;font-size:.62rem}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.status-dot.ok{background:var(--valid)}
+.status-dot.err{background:var(--red)}
+.status-dot.loading{background:var(--gold);animation:pulse 1s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 #status-text{color:var(--muted);flex:1}
+.t-btn{padding:.35rem .72rem;border-radius:.42rem;font-family:'Space Mono',monospace;font-size:.6rem;font-weight:700;border:none;cursor:pointer;transition:all .15s;letter-spacing:.04em}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border2)}.btn-ghost:hover{background:var(--surface2);color:var(--text)}
+.btn-lime{background:var(--lime);color:var(--forest)}.btn-lime:hover{background:var(--limeD)}
 
-/* QUILL OVERRIDE */
-.ql-toolbar.ql-snow{
-  background:#1a1a22!important;
-  border:1px solid var(--border)!important;
-  border-radius:8px 8px 0 0;
-}
-.ql-container.ql-snow{
-  background:#0f0f13!important;
-  border:1px solid var(--border)!important;
-  border-top:none!important;
-  border-radius:0 0 8px 8px;
-  font-family:'Calibri','Gill Sans',sans-serif!important;
-  font-size:1rem;
-}
-.ql-editor{
-  min-height:420px;
-  color:#e8e8f0!important;
-  font-family:'Calibri','Gill Sans',sans-serif!important;
-  font-size:1rem!important;
-  line-height:1.7!important;
-}
-.ql-editor.ql-blank::before{color:#4a4a62!important}
-.ql-snow .ql-stroke{stroke:#7a7a95!important}
-.ql-snow .ql-fill{fill:#7a7a95!important}
-.ql-snow .ql-picker{color:#7a7a95!important}
-.ql-snow .ql-picker-options{background:#1a1a22!important;border-color:var(--border)!important}
-.ql-snow .ql-picker-item:hover,.ql-snow .ql-picker-item.ql-selected{color:var(--text)!important}
-.ql-snow button:hover .ql-stroke,.ql-snow button.ql-active .ql-stroke{stroke:#6c63ff!important}
-.ql-snow button:hover .ql-fill,.ql-snow button.ql-active .ql-fill{fill:#6c63ff!important}
-.ql-snow button:hover,.ql-snow button.ql-active{color:#6c63ff!important}
-.ql-editor h1,.ql-editor h2,.ql-editor h3{color:#e8e8f0!important;margin:1.2em 0 .4em}
-.ql-editor p{margin:.5em 0}
-.ql-editor a{color:#6c63ff}
-.ql-editor ul,.ql-editor ol{padding-left:1.5em}
-
-/* ACTIONS */
-.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-.btn{
-  padding:11px 24px;border-radius:8px;font-family:inherit;font-size:.9rem;font-weight:600;
-  cursor:pointer;border:none;transition:opacity .2s,transform .1s;display:inline-flex;align-items:center;gap:8px;
-}
-.btn:hover{opacity:.85}
-.btn:active{transform:scale(.98)}
-.btn-primary{background:var(--accent);color:#fff}
-.btn-secondary{background:var(--border);color:var(--text)}
-.btn-danger{background:var(--danger);color:#fff}
-.btn:disabled{opacity:.4;cursor:not-allowed}
-
-/* SAVE STATUS */
-#save-result{
-  margin-top:16px;padding:12px 18px;border-radius:8px;
-  font-size:.875rem;display:none;
-}
-#save-result.ok{background:#2ed57320;color:#2ed573;border:1px solid #2ed57340}
-#save-result.err{background:#ff475720;color:#ff4757;border:1px solid #ff475740}
-
-/* LAST UPDATED */
-.meta-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:20px}
-.meta-field{display:flex;align-items:center;gap:10px;font-size:.875rem}
-.meta-field label{color:var(--muted)}
-.meta-field input{
-  padding:7px 12px;background:#0f0f13;border:1px solid var(--border);
-  border-radius:6px;color:var(--text);font-family:inherit;font-size:.875rem;outline:none;
-}
-.meta-field input:focus{border-color:var(--accent)}
-
-/* PREVIEW */
-.preview-link{
-  color:var(--accent);font-size:.875rem;text-decoration:none;
-  display:inline-flex;align-items:center;gap:6px;
-}
-.preview-link:hover{opacity:.8}
-
-/* NAV TABS */
-.nav-tabs{display:flex;gap:2px;padding:0 24px;border-bottom:1px solid var(--border)}
-.nav-tab{
-  padding:12px 18px;font-size:.875rem;font-family:inherit;
-  background:none;border:none;cursor:pointer;color:var(--muted);
-  border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s;
-}
-.nav-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.nav-tab:hover:not(.active){color:var(--text)}
-
+/* ── TABS ── */
+.tabs{display:flex;gap:2px;padding:0 1.1rem;border-bottom:1px solid var(--border);background:var(--surface)}
+.tab{font-family:'Space Mono',monospace;font-size:.62rem;padding:.65rem .9rem;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;color:var(--muted);transition:color .15s}
+.tab.active{color:var(--forest);border-bottom-color:var(--lime);font-weight:700}
+.tab:hover:not(.active){color:var(--text)}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
-/* SECTIONS helper */
-.section-list{list-style:none}
-.section-list li{
-  padding:10px 14px;border-radius:8px;font-size:.875rem;
-  display:flex;align-items:center;gap:10px;cursor:pointer;
-  transition:background .15s;
+/* ── META ROW ── */
+.meta-row{display:flex;align-items:center;gap:1.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.meta-label{font-family:'Space Mono',monospace;font-size:.54rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.25rem;display:block}
+.meta-input{padding:.38rem .65rem;border:1.5px solid var(--border2);border-radius:.45rem;background:var(--bg);color:var(--text);font-family:'Space Mono',monospace;font-size:.72rem;outline:none;transition:border .2s}
+.meta-input:focus{border-color:var(--lime)}
+.preview-link{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--valid);text-decoration:none;display:inline-flex;align-items:center;gap:.3rem;margin-top:.25rem}
+.preview-link:hover{opacity:.75}
+
+/* ── QUILL OVERRIDES — match admin theme ── */
+.ql-toolbar.ql-snow{
+  background:var(--surface2)!important;
+  border:1px solid var(--border2)!important;
+  border-radius:.55rem .55rem 0 0!important;
+  font-family:'Space Mono',monospace;
 }
-.section-list li:hover{background:#ffffff08}
-.section-list li .sec-num{
-  width:24px;height:24px;border-radius:50%;background:#6c63ff22;
-  color:var(--accent);font-size:.75rem;font-weight:700;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+.ql-container.ql-snow{
+  background:var(--bg)!important;
+  border:1px solid var(--border2)!important;
+  border-top:none!important;
+  border-radius:0 0 .55rem .55rem!important;
 }
+.ql-editor{
+  min-height:380px;
+  font-family:'Calibri','Gill Sans MT',sans-serif!important;
+  font-size:1rem!important;
+  color:var(--text)!important;
+  line-height:1.7!important;
+}
+.ql-editor.ql-blank::before{color:var(--muted)!important;font-style:italic}
+.ql-editor h1,.ql-editor h2,.ql-editor h3{color:var(--text)!important;margin:1em 0 .35em}
+.ql-editor p{margin:.4em 0}
+.ql-editor a{color:var(--valid)}
+.ql-snow .ql-stroke{stroke:var(--muted)!important}
+.ql-snow .ql-fill{fill:var(--muted)!important}
+.ql-snow .ql-picker{color:var(--muted)!important}
+.ql-snow .ql-picker-options{background:var(--surface)!important;border-color:var(--border2)!important}
+.ql-snow button:hover .ql-stroke,.ql-snow button.ql-active .ql-stroke{stroke:var(--forest)!important}
+.ql-snow button:hover,.ql-snow button.ql-active{color:var(--forest)!important}
+
+/* ── ACTIONS ── */
+.actions{display:flex;gap:.6rem;flex-wrap:wrap;padding-top:1rem;border-top:1px solid var(--border)}
+.action-btn{padding:.55rem 1.1rem;border-radius:.5rem;font-family:'Space Mono',monospace;font-size:.65rem;font-weight:700;cursor:pointer;border:none;transition:all .18s;letter-spacing:.04em;display:inline-flex;align-items:center;gap:.35rem}
+.action-btn.primary{background:var(--lime);color:var(--forest)}.action-btn.primary:hover{background:var(--limeD)}
+.action-btn.secondary{background:transparent;color:var(--muted);border:1px solid var(--border2)}.action-btn.secondary:hover{background:var(--surface2);color:var(--text)}
+.action-btn:disabled{opacity:.4;cursor:not-allowed}
+
+/* ── SAVE RESULT ── */
+#save-result{display:none;margin-top:.8rem;padding:.65rem .9rem;border-radius:.5rem;font-family:'Space Mono',monospace;font-size:.62rem}
+#save-result.ok{background:var(--validBg);color:var(--valid);border:1px solid rgba(22,163,74,.25)}
+#save-result.err{background:var(--redBg);color:var(--red);border:1px solid rgba(239,68,68,.25)}
+
+/* ── SECTIONS LIST ── */
+.sec-list{list-style:none}
+.sec-list li{display:flex;align-items:center;gap:.7rem;padding:.48rem .65rem;border-radius:.42rem;font-family:'Space Mono',monospace;font-size:.65rem;cursor:pointer;transition:background .13s}
+.sec-list li:hover{background:var(--surface2)}
+.sec-num{width:22px;height:22px;border-radius:50%;background:var(--limeBg);color:var(--forest);font-size:.55rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ── INFO BOX ── */
+.info-box{background:var(--limeBg);border:1px solid rgba(159,232,112,.35);border-radius:.7rem;padding:.9rem 1.1rem;font-family:'Space Mono',monospace;font-size:.62rem;color:var(--forest);line-height:1.6}
+.info-box code{background:rgba(22,51,0,.08);padding:.06rem .28rem;border-radius:.25rem;font-size:.6rem}
+
+/* ── TOAST ── */
+#cgu-toast{display:none;position:fixed;bottom:1.8rem;right:1.5rem;background:var(--surface);border:1.5px solid var(--lime);color:var(--text);padding:.68rem 1.1rem;border-radius:.6rem;font-family:'Space Mono',monospace;font-size:.65rem;z-index:999;box-shadow:0 8px 20px rgba(0,0,0,.1);max-width:320px}
 </style>
 </head>
 <body>
 
-<!-- LOGIN WALL -->
-<div id="login-wall">
-  <div class="login-box">
-    <div class="logo">⚡ WordRace</div>
-    <p>Administration — Accès restreint</p>
-    <input type="password" id="pwd-input" placeholder="Mot de passe admin" autocomplete="off">
-    <button onclick="doLogin()">Connexion</button>
-    <div class="login-error" id="login-err">Mot de passe incorrect</div>
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">WORD<span>RACE</span>.IO</div>
+    <div class="login-sub">CGU Editor · Accès Restreint</div>
+    <label class="login-label">Mot de passe</label>
+    <input class="login-input" id="pwd" type="password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">🔐 Accéder</button>
+    <div class="login-error" id="login-err">❌ Mot de passe incorrect</div>
   </div>
 </div>
 
 <!-- MAIN -->
 <div id="main">
   <div class="topbar">
-    <span class="brand">⚡ WordRace</span>
-    <span class="title">/ Administration CGU</span>
-    <div class="spacer"></div>
-    <a href="/admin-2026">← Panel Admin</a>
-    <a href="/terms" target="_blank" class="preview-link">Voir la page CGU ↗</a>
-    <button class="logout-btn" onclick="doLogout()">Déconnexion</button>
+    <div class="tb-logo">WORD<span>RACE</span>.IO</div>
+    <span class="tb-sep">/</span>
+    <span class="tb-page">CGU Editor</span>
+    <div class="tb-spacer"></div>
+    <a href="/admin-2026" class="tb-link">← Panel Admin</a>
+    <a href="/terms" target="_blank" class="tb-link">Voir CGU publique ↗</a>
+    <button class="logout-btn" onclick="doLogout()">🚪 Déconnexion</button>
   </div>
 
-  <div class="container">
-    <div class="page-header">
-      <h1>Éditeur des Conditions Générales d'Utilisation</h1>
-      <p>Modifiez le contenu de la page CGU publique. Les modifications sont déployées automatiquement via Vercel.</p>
-    </div>
+  <div class="content">
+    <div class="page-title">Éditeur CGU</div>
+    <div class="page-sub">Modifiez les Conditions Générales d'Utilisation. Le déploiement est automatique via Vercel.</div>
 
     <!-- STATUS -->
     <div class="card">
-      <div class="card-body" style="padding:16px 24px">
+      <div class="card-body" style="padding:.8rem 1.1rem">
         <div class="status-bar">
           <div class="status-dot loading" id="status-dot"></div>
           <span id="status-text">Chargement du contenu depuis GitHub…</span>
-          <button class="btn btn-secondary" onclick="loadContent()" style="padding:6px 14px;font-size:.8rem">↺ Recharger</button>
+          <button class="t-btn btn-ghost" onclick="loadContent()">↺ Recharger</button>
         </div>
       </div>
     </div>
 
-    <!-- EDITOR -->
+    <!-- EDITOR CARD -->
     <div class="card">
-      <div class="nav-tabs">
-        <button class="nav-tab active" onclick="switchTab('editor',this)">✏️ Éditeur</button>
-        <button class="nav-tab" onclick="switchTab('sections',this)">📋 Sections</button>
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab('editor',this)">✏️ Éditeur</button>
+        <button class="tab" onclick="switchTab('sections',this)">📋 Sections</button>
       </div>
 
-      <div class="card-body">
-        <!-- EDITOR TAB -->
-        <div class="tab-panel active" id="tab-editor">
+      <!-- EDITOR TAB -->
+      <div class="tab-panel active" id="tab-editor">
+        <div class="card-body">
           <div class="meta-row">
-            <div class="meta-field">
-              <label>Dernière mise à jour :</label>
-              <input type="text" id="last-updated-input" placeholder="May 26, 2026">
+            <div>
+              <span class="meta-label">Dernière mise à jour</span>
+              <input class="meta-input" id="last-updated-input" placeholder="May 26, 2026"/>
             </div>
-            <a href="/terms" target="_blank" class="preview-link">↗ Aperçu CGU publique</a>
+            <div style="padding-top:.5rem">
+              <a href="/terms" target="_blank" class="preview-link">↗ Aperçu CGU publique</a>
+            </div>
           </div>
           <div id="quill-editor"></div>
         </div>
-
-        <!-- SECTIONS TAB -->
-        <div class="tab-panel" id="tab-sections">
-          <p style="color:var(--muted);font-size:.875rem;margin-bottom:16px">Sections détectées dans le document :</p>
-          <ul class="section-list" id="sections-list">
-            <li style="color:var(--muted);font-style:italic">Chargez d'abord le contenu pour voir les sections.</li>
-          </ul>
+        <div class="card-body" style="padding-top:0">
+          <div class="actions">
+            <button class="action-btn primary" id="save-btn" onclick="saveContent()" disabled>💾 Enregistrer &amp; Déployer</button>
+            <button class="action-btn secondary" onclick="loadContent()">↺ Annuler</button>
+          </div>
+          <div id="save-result"></div>
         </div>
       </div>
 
-      <div class="card-body" style="border-top:1px solid var(--border);padding-top:20px">
-        <div class="actions">
-          <button class="btn btn-primary" id="save-btn" onclick="saveContent()" disabled>
-            💾 Enregistrer &amp; Déployer
-          </button>
-          <button class="btn btn-secondary" onclick="loadContent()">↺ Annuler les modifications</button>
+      <!-- SECTIONS TAB -->
+      <div class="tab-panel" id="tab-sections">
+        <div class="card-body">
+          <p style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--muted);margin-bottom:.8rem">Sections h2 détectées dans le document :</p>
+          <ul class="sec-list" id="sections-list">
+            <li style="color:var(--muted)">Chargez d'abord le contenu pour voir les sections.</li>
+          </ul>
         </div>
-        <div id="save-result"></div>
       </div>
     </div>
 
     <!-- INFO -->
-    <div class="card" style="background:#6c63ff11;border-color:#6c63ff33">
-      <div class="card-body">
-        <p style="font-size:.85rem;color:#a09aff">
-          <strong>Comment ça marche :</strong>
-          L'éditeur charge le fichier <code>terms.html</code> depuis GitHub, extrait le contenu entre les marqueurs CGU, et vous permet de le modifier avec mise en forme riche. En enregistrant, le fichier est mis à jour sur GitHub et Vercel redéploie automatiquement en quelques secondes.
-        </p>
-      </div>
+    <div class="info-box">
+      <strong>Comment ça marche :</strong> L'éditeur charge <code>terms.html</code> depuis GitHub, extrait le contenu entre les marqueurs <code>&lt;!-- CGU_CONTENT_START --&gt;</code> et <code>&lt;!-- CGU_CONTENT_END --&gt;</code>, et vous permet de le modifier. En enregistrant, Vercel redéploie automatiquement en 30–60 sec.
     </div>
   </div>
 </div>
 
+<div id="cgu-toast"></div>
+
 <script src="admin-session.js"></script>
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
 <script>
-// ─── CONFIG ───────────────────────────────────────────────────────────
+// ─── CONFIG ───────────────────────────────────────────────────
 const GITHUB_OWNER   = 'mrad-boop';
 const GITHUB_REPO    = 'wordrace-io';
 const TERMS_FILE     = 'terms.html';
 const MARKER_START   = '<!-- CGU_CONTENT_START -->';
 const MARKER_END     = '<!-- CGU_CONTENT_END -->';
 const DATE_MARKER_ID = 'cgu-last-updated';
-
 let GH_TOKEN = '';
 
-// ─── LOGIN ─────────────────────────────────────────────────────────────
-function showCGUAdmin(){ document.getElementById('login-wall').style.display='none'; document.getElementById('main').style.display='block'; if(!quill) initEditor(); }
-function showCGULogin(){ document.getElementById('main').style.display='none'; document.getElementById('login-wall').style.display='flex'; }
+// ─── SESSION ──────────────────────────────────────────────────
+function showCGUAdmin(){ document.getElementById('login-screen').style.display='none'; document.getElementById('main').style.display='block'; if(!quill) initEditor(); }
+function showCGULogin(){ document.getElementById('main').style.display='none'; document.getElementById('login-screen').style.display='flex'; }
 function onAdminLogout(){ showCGULogin(); }
 
 WRAdminSession.guard(showCGUAdmin, showCGULogin);
 
 function doLogin(){
-  const val = document.getElementById('pwd-input').value;
-  if(WRAdminSession.login(val)){
+  if(WRAdminSession.login(document.getElementById('pwd').value)){
     showCGUAdmin();
   } else {
-    document.getElementById('login-err').style.display='block';
-    document.getElementById('pwd-input').value='';
-    document.getElementById('pwd-input').focus();
+    const e=document.getElementById('login-err'); e.style.display='block';
+    document.getElementById('pwd').value='';
+    setTimeout(()=>e.style.display='none',3000);
   }
 }
-document.getElementById('pwd-input').addEventListener('keydown',e=>{ if(e.key==='Enter') doLogin(); });
+document.getElementById('pwd').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
 function doLogout(){ sessionStorage.removeItem('gh_token'); WRAdminSession.logout(); }
 
-// ─── QUILL ─────────────────────────────────────────────────────────────
+// ─── QUILL ────────────────────────────────────────────────────
 let quill;
 function initEditor(){
-  GH_TOKEN = sessionStorage.getItem('gh_token') || '';
+  GH_TOKEN = sessionStorage.getItem('gh_token')||'';
   if(!GH_TOKEN){
-    GH_TOKEN = prompt('Token GitHub (repo scope) :') || '';
+    GH_TOKEN = prompt('Token GitHub (scope: repo) :') || '';
     if(GH_TOKEN) sessionStorage.setItem('gh_token', GH_TOKEN);
   }
-
   quill = new Quill('#quill-editor', {
-    theme: 'snow',
-    placeholder: 'Chargement du contenu CGU…',
+    theme:'snow',
+    placeholder:'Chargement du contenu CGU…',
     modules:{
       toolbar:[
-        [{ header:[1,2,3,false] }],
+        [{header:[1,2,3,false]}],
         ['bold','italic','underline','strike'],
-        [{ color:[] },{ background:[] }],
-        [{ list:'ordered' },{ list:'bullet' }],
-        [{ indent:'-1' },{ indent:'+1' }],
+        [{color:[]},{background:[]}],
+        [{list:'ordered'},{list:'bullet'}],
+        [{indent:'-1'},{indent:'+1'}],
         ['link','blockquote'],
         ['clean']
       ]
     }
   });
-
   loadContent();
 }
 
-// ─── GITHUB API ────────────────────────────────────────────────────────
+// ─── GITHUB API ───────────────────────────────────────────────
 let currentSHA = '';
 
 async function ghFetch(path, opts={}){
   const res = await fetch(`https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`,{
-    headers:{
-      'Authorization': `token ${GH_TOKEN}`,
-      'Accept':'application/vnd.github.v3+json',
-      ...opts.headers
-    },
+    headers:{'Authorization':'token '+GH_TOKEN,'Accept':'application/vnd.github.v3+json',...(opts.headers||{})},
     ...opts
   });
-  if(!res.ok){
-    const err = await res.json().catch(()=>({message:res.statusText}));
-    throw new Error(err.message||res.statusText);
-  }
+  if(!res.ok){ const e=await res.json().catch(()=>({message:res.statusText})); throw new Error(e.message||res.statusText); }
   return res.json();
 }
 
 async function loadContent(){
   setStatus('loading','Chargement depuis GitHub…');
-  document.getElementById('save-btn').disabled = true;
+  document.getElementById('save-btn').disabled=true;
   try {
     const data = await ghFetch(TERMS_FILE);
     currentSHA = data.sha;
     const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-
-    // Extract content between markers
-    const si = raw.indexOf(MARKER_START);
-    const ei = raw.indexOf(MARKER_END);
+    const si=raw.indexOf(MARKER_START), ei=raw.indexOf(MARKER_END);
     if(si===-1||ei===-1) throw new Error('Marqueurs CGU introuvables dans terms.html');
     const content = raw.slice(si+MARKER_START.length, ei).trim();
-
-    // Extract last-updated date
     const dm = raw.match(new RegExp(`id="${DATE_MARKER_ID}"[^>]*>([^<]+)<`));
     if(dm) document.getElementById('last-updated-input').value = dm[1].trim();
-
-    // Load into Quill
     quill.clipboard.dangerouslyPasteHTML(content);
-
-    setStatus('ok', `Contenu chargé · SHA ${currentSHA.slice(0,7)} · ${TERMS_FILE}`);
-    document.getElementById('save-btn').disabled = false;
-    updateSectionsList();
+    setStatus('ok','Contenu chargé · SHA '+currentSHA.slice(0,7)+' · '+TERMS_FILE);
+    document.getElementById('save-btn').disabled=false;
+    updateSections();
   } catch(e){
     setStatus('err','Erreur : '+e.message);
-    console.error(e);
   }
 }
 
 async function saveContent(){
-  if(!currentSHA){ setStatus('err','SHA manquant — rechargez d\'abord'); return; }
-  const btn = document.getElementById('save-btn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Enregistrement…';
+  if(!currentSHA){ setStatus('err','SHA manquant — rechargez'); return; }
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true; btn.textContent='⏳ Enregistrement…';
   setStatus('loading','Enregistrement sur GitHub…');
-
   try {
-    // Get full current file
-    const data = await ghFetch(TERMS_FILE);
-    const raw = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
-
-    // Build new content from Quill HTML
-    const editorHtml = quill.root.innerHTML;
-    const newDate    = document.getElementById('last-updated-input').value.trim() ||
-                       new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-
-    // Replace content between markers
-    let updated = raw;
-    const si = updated.indexOf(MARKER_START);
-    const ei = updated.indexOf(MARKER_END);
+    const data   = await ghFetch(TERMS_FILE);
+    const raw    = decodeURIComponent(escape(atob(data.content.replace(/\n/g,''))));
+    const newDate= document.getElementById('last-updated-input').value.trim() ||
+                   new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    let updated  = raw;
+    const si=updated.indexOf(MARKER_START), ei=updated.indexOf(MARKER_END);
     if(si===-1||ei===-1) throw new Error('Marqueurs introuvables');
-    updated = updated.slice(0,si+MARKER_START.length) + '\n' + editorHtml + '\n' + updated.slice(ei);
-
-    // Replace date
-    updated = updated.replace(
-      new RegExp(`(<span id="${DATE_MARKER_ID}"[^>]*>)[^<]+(</span>)`),
-      `$1${newDate}$2`
-    );
-
-    // Encode for GitHub API
-    const encoded = btoa(unescape(encodeURIComponent(updated)));
-
-    await ghFetch(TERMS_FILE, {
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        message: `CGU mise à jour — ${newDate}`,
-        content: encoded,
-        sha: data.sha
-      })
-    });
-
-    currentSHA = ''; // force reload SHA on next save
-    setStatus('ok','✓ Contenu enregistré ! Vercel redéploie dans quelques secondes…');
-    showResult('ok','✓ CGU mis à jour avec succès. Vercel redéploie automatiquement (30–60 sec).');
-    // refresh SHA
-    setTimeout(loadContent, 5000);
+    updated = updated.slice(0,si+MARKER_START.length)+'\n'+quill.root.innerHTML+'\n'+updated.slice(ei);
+    updated = updated.replace(new RegExp(`(<span id="${DATE_MARKER_ID}"[^>]*>)[^<]+(</span>)`),'$1'+newDate+'$2');
+    await ghFetch(TERMS_FILE,{method:'PUT',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({message:'CGU mise à jour — '+newDate,content:btoa(unescape(encodeURIComponent(updated))),sha:data.sha})});
+    currentSHA='';
+    setStatus('ok','✓ Enregistré ! Vercel redéploie dans 30–60 sec…');
+    showResult('ok','✓ CGU mis à jour. Vercel redéploie automatiquement.');
+    setTimeout(loadContent,5000);
   } catch(e){
     setStatus('err','Erreur : '+e.message);
     showResult('err','✗ Erreur : '+e.message);
-    console.error(e);
   } finally {
-    btn.disabled = false;
-    btn.innerHTML = '💾 Enregistrer &amp; Déployer';
+    btn.disabled=false; btn.innerHTML='💾 Enregistrer &amp; Déployer';
   }
 }
 
-// ─── UI HELPERS ────────────────────────────────────────────────────────
-function setStatus(state, msg){
-  const dot  = document.getElementById('status-dot');
-  const text = document.getElementById('status-text');
-  dot.className  = 'status-dot ' + state;
-  text.textContent = msg;
+// ─── UI ───────────────────────────────────────────────────────
+function setStatus(state,msg){
+  document.getElementById('status-dot').className='status-dot '+state;
+  document.getElementById('status-text').textContent=msg;
 }
-function showResult(type, msg){
-  const el = document.getElementById('save-result');
-  el.className = type;
-  el.textContent = msg;
-  el.style.display = 'block';
-  setTimeout(()=>{ el.style.display='none'; }, 8000);
+function showResult(type,msg){
+  const el=document.getElementById('save-result');
+  el.className=type; el.textContent=msg; el.style.display='block';
+  setTimeout(()=>el.style.display='none',8000);
 }
-function switchTab(id, btn){
+function switchTab(id,btn){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
-  if(id==='sections') updateSectionsList();
+  if(id==='sections') updateSections();
 }
-function updateSectionsList(){
-  const list = document.getElementById('sections-list');
-  const headings = quill.root.querySelectorAll('h2');
-  if(!headings.length){
-    list.innerHTML='<li style="color:var(--muted);font-style:italic">Aucune section h2 détectée.</li>';
-    return;
-  }
+function updateSections(){
+  const list=document.getElementById('sections-list');
+  if(!quill){ return; }
+  const headings=quill.root.querySelectorAll('h2');
+  if(!headings.length){ list.innerHTML='<li style="color:var(--muted)">Aucune section h2 détectée.</li>'; return; }
   list.innerHTML='';
   headings.forEach((h,i)=>{
-    const li = document.createElement('li');
-    li.innerHTML=`<span class="sec-num">${i+1}</span> ${h.textContent}`;
-    li.onclick=()=>{
-      switchTab('editor',document.querySelector('.nav-tab'));
-      const idx = quill.getIndex(Quill.find(h));
-      quill.setSelection(idx,0,'user');
-      quill.scrollIntoView();
-    };
+    const li=document.createElement('li');
+    li.innerHTML=`<span class="sec-num">${i+1}</span>${h.textContent}`;
     list.appendChild(li);
   });
+}
+function toast(msg){
+  const t=document.getElementById('cgu-toast');
+  t.textContent=msg; t.style.display='block';
+  clearTimeout(toast._t); toast._t=setTimeout(()=>t.style.display='none',3000);
 }
 </script>
 </body>
