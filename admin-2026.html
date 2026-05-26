@@ -513,10 +513,6 @@ tr:hover td{background:var(--surface2)}
       </div>
     </div>
 
-  </div><!-- end main -->
-</div><!-- end admin -->
-
-<!-- MODAL -->
     <!-- CGU EDITOR -->
     <div class="panel" id="panel-cgu">
       <div class="tbl-wrap" style="margin-bottom:1rem">
@@ -525,7 +521,7 @@ tr:hover td{background:var(--surface2)}
           <div class="tbl-actions">
             <input class="t-search" id="cgu-token" type="password" placeholder="ghp_xxxxxxxxxxxx" style="width:220px" oninput="sessionStorage.setItem('gh_token',this.value)"/>
             <button class="t-btn btn-lime" onclick="cguLoad()">↺ Charger CGU</button>
-            <a href="/terms" target="_blank" class="t-btn btn-ghost" style="text-decoration:none">↗ Voir page CGU</a>
+            <a href="/terms" target="_blank" class="t-btn btn-ghost" style="text-decoration:none">↗ Voir CGU</a>
           </div>
         </div>
         <div style="padding:.65rem 1.1rem;display:flex;align-items:center;gap:.6rem;font-family:'Space Mono',monospace;font-size:.62rem">
@@ -537,23 +533,19 @@ tr:hover td{background:var(--surface2)}
         <div class="tbl-head">
           <div class="tbl-title">✏️ Contenu des CGU</div>
           <div class="tbl-actions">
-            <div style="display:flex;align-items:center;gap:.5rem">
-              <span style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Dernière MàJ :</span>
-              <input class="t-search" id="cgu-date" value="May 26, 2026" style="width:130px"/>
-            </div>
+            <span style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--muted);letter-spacing:.06em">Dernière MàJ :</span>
+            <input class="t-search" id="cgu-date" value="May 26, 2026" style="width:130px"/>
           </div>
         </div>
-        <div style="padding:1rem">
-          <div id="cgu-quill-editor"></div>
-        </div>
+        <div style="padding:1rem"><div id="cgu-quill-editor"></div></div>
         <div style="padding:.8rem 1.1rem;border-top:1px solid var(--border);display:flex;gap:.5rem">
           <button class="t-btn btn-lime" id="cgu-save-btn" onclick="cguSave()" disabled>💾 Enregistrer &amp; Déployer</button>
           <button class="t-btn btn-ghost" onclick="cguLoad()">↺ Annuler</button>
         </div>
         <div id="cgu-result" style="display:none;margin:.5rem 1.1rem .8rem;padding:.55rem .8rem;border-radius:.45rem;font-family:'Space Mono',monospace;font-size:.6rem"></div>
       </div>
-      <div style="background:var(--limeBg);border:1px solid rgba(159,232,112,.35);border-radius:.7rem;padding:.8rem 1rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);line-height:1.7">
-        <strong>Comment ça marche :</strong> Entrez votre token GitHub (scope <code style="background:rgba(22,51,0,.1);padding:.05rem .25rem;border-radius:.2rem">repo</code>) → Chargez → Modifiez → Enregistrez. Vercel redéploie automatiquement en 30–60 sec.
+      <div style="background:var(--limeBg);border:1px solid rgba(159,232,112,.35);border-radius:.7rem;padding:.8rem 1rem;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--forest);line-height:1.7;margin-top:1rem">
+        <strong>Token GitHub requis</strong> (scope <code style="background:rgba(22,51,0,.1);padding:.05rem .25rem;border-radius:.2rem">repo</code>) pour lire/écrire <code style="background:rgba(22,51,0,.1);padding:.05rem .25rem;border-radius:.2rem">terms.html</code>. Vercel redéploie automatiquement après sauvegarde.
       </div>
     </div>
 
@@ -577,6 +569,9 @@ tr:hover td{background:var(--surface2)}
         <tbody id="support-tb"></tbody></table>
       </div>
     </div>
+
+  </div><!-- end main -->
+</div><!-- end admin -->
 
 <div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal-card" id="modal-content"></div>
